@@ -26,20 +26,27 @@ namespace Assets
 
             // Walk Anim
             inputHorizontal = Input.GetAxisRaw("Horizontal");
-            if (inputHorizontal != 0)
+            if (inputHorizontal != 0 && isGroundClass.isGrounded)
             {
                 anim.SetTrigger("Walking");
             }
             else { anim.ResetTrigger("Walking"); }
 
             // Jump Anim
-            if (Input.GetKeyDown(KeyCode.Space) && isGroundClass.isGrounded)
+            //if (Input.GetKeyDown(KeyCode.Space) && isGroundClass.isGrounded)
+            //{
+            //    anim.SetBool("Jump", true);
+            //}
+            //else if (Input.GetKeyUp(KeyCode.Space))
+            //{ anim.SetBool("Jump", false); }
+
+            if (Input.GetButton("Jump") && isGroundClass.isGrounded)
             {
                 anim.SetBool("Jump", true);
             }
-
-            else if (Input.GetKeyUp(KeyCode.Space))
+            else if (Input.GetButtonUp("Jump"))
             { anim.SetBool("Jump", false); }
+
             #region isJumpingComment
             //private bool isJumping = false; // 점프 모션이 실행 중인지 여부
 
