@@ -58,14 +58,14 @@ public class EnemyScr : MonoBehaviour
             if (hit.collider != null)
             {
                 // 충돌이 발생한 경우
-                Debug.Log("**Enemy** Hit Collider: " + hit.collider.name);
-                Debug.Log("**Enemy** Hit Distance: " + hit.distance);
+                //Debug.Log("**Enemy** Hit Collider: " + hit.collider.name);
+                //Debug.Log("**Enemy** Hit Distance: " + hit.distance);
                 enemyIsGrounded = true;
             }
             else
             {   // 충돌이 발생하지 않은 경우
                 enemyIsGrounded = false;
-                Debug.Log("**Enemy** No Ground Detected");
+                //Debug.Log("**Enemy** No Ground Detected");
             }
     }
     // 코루틴
