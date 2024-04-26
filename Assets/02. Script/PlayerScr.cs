@@ -7,7 +7,8 @@ using System;
 namespace Assets
 {
     public class PlayerScr : MonoBehaviour
-    {   
+    {
+        public ObjectPoolManager projectilePool;
         private Rigidbody2D rb;
         private Vector2 currentVelocity;
         private PlayerAnimScr playerAnimScr;
@@ -15,23 +16,24 @@ namespace Assets
         private LayerMask groundLayer; // Ground 레이어를 가진 오브젝트와의 충돌을 감지
         private SpriteRenderer spriteRenderer;
         private float inputHorizontal;
+
         [SerializeField] private Projectile projectilePrefab;
-        [SerializeField] private Transform launchOffset;
+        [SerializeField] private Transform launchOffsetL;
+        [SerializeField] private Transform launchOffsetR;
         [SerializeField] private float moveSpeed = 13f;
         [SerializeField] private float jumpForce = 45f;
         [SerializeField] private float coyoteTime = 0.1f; // 코요태 점프 타임
         [SerializeField] private float coyoteTimer = 0f; // 코요태 점프 타이머
         [SerializeField] private float attackDistance;
-        
+
         private bool deadWait; // 사망 시 다음 동작 지연
         private bool respawnOrDead; // 플레이어 사망 유형(리스폰 or 게임오버) 판정
         internal bool isGrounded; // 지면 판정
 
 
-        
         //코요태타임점프(코루틴을 사용한 지연 점프)
         private bool isCoroutineActive = false;
-        
+
 
         void Start()
         {
@@ -61,22 +63,25 @@ namespace Assets
         void Walk()
         {
             currentVelocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
-                // 플레이어 스프라이트는 기본 오른쪽 방향
-                // 뒤집어야될 순간은 왼쪽 방향으로 움직일 때 
-                if (inputHorizontal < 0 && !respawnOrDead)
-                {
-                    rb.velocity = currentVelocity;
-                    spriteRenderer.flipX = true;
-                }
-                else if (inputHorizontal > 0 && !respawnOrDead)
-                {
-                    rb.velocity = currentVelocity;
-                    spriteRenderer.flipX = false;
-                }
-                else
-                {
-                    rb.velocity = new Vector2(0f, rb.velocity.y);
-                }
+            // 플레이어 스프라이트는 기본 오른쪽 방향
+            // 뒤집어야될 순간은 왼쪽 방향으로 움직일 때 
+            if (inputHorizontal < 0 && !respawnOrDead)
+            {
+                rb.velocity = currentVelocity;
+                spriteRenderer.flipX = true;
+                //projectileFlipX = true;
+            }
+            else if (inputHorizontal > 0 && !respawnOrDead)
+            {
+                rb.velocity = currentVelocity;
+                spriteRenderer.flipX = false;
+                //projectileFlipX = false;
+            }
+            else
+            {
+                rb.velocity = new Vector2(0f, rb.velocity.y);
+                //projectileFlipX = false;
+            }
         }
         void Jump()
         {
@@ -84,12 +89,23 @@ namespace Assets
             if (Input.GetButton("Jump") && isGrounded)
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
-        void Launch() {
+        void Launch()
+        {
             // 플레이어는 자신이 공격 당한 상태 외엔 공격 가능
             // hurt() 판정으로 확인하기 
-            if(Input.GetKeyDown(KeyCode.Z)) {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
                 Debug.Log("Projectile Launch");
-                Instantiate(projectilePrefab, launchOffset.position, transform.rotation);
+                if (spriteRenderer.flipX) {
+                Instantiate(projectilePrefab, launchOffsetL.position, transform.rotation);
+                } else
+                Instantiate(projectilePrefab, launchOffsetR.position, transform.rotation);
+
+                //GameObject projectile = projectilePool.GetProjectile();
+                //projectile.transform.position = launchOffset.position;
+                //projectile.transform.rotation = transform.rotation;
+                //projectile.SetActive(true);
+
                 //StartCoroutine(DestoryProjectile());
                 //OnAttack?.Invoke(); // 공격 시 이벤트 호출
             }
