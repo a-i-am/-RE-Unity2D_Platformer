@@ -18,19 +18,8 @@ public class InventoryUI : MonoBehaviour
     {
         inven = Inventory.instance;
         slots = slotHolder.GetComponentsInChildren<Slot>();
-        //inven.onSlotCountChange += SlotChange;
-
-        // Null 체크 후 이벤트 핸들러 등록
-        if (inven != null)
-        {
-            // 이벤트에 이벤트 핸들러 추가
-            inven.onSlotCountChange += SlotChange;
-        }
-        else
-        {
-            Debug.LogError("Inventory instance is null.");
-        }
-
+        inven.onSlotCountChange += SlotChange;
+        inven.onChangeItem += RedrawSlotUI;
         inventoryPanel.SetActive(activeInventory);
     }
 
@@ -38,6 +27,8 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
+            slots[i].slotnum = i;
+
             if (i < inven.SlotCnt)
                 slots[i].GetComponent<Button>().interactable = true;
             else
@@ -57,4 +48,18 @@ public class InventoryUI : MonoBehaviour
     {
         inven.SlotCnt++;
     }
+    
+    void RedrawSlotUI()
+    {
+        for(int i=0;i<slots.Length;i++)
+        {
+            slots[i].RemoveSlot();
+        }
+        for(int i=0; i<inven.items.Count;i++)
+        {
+            slots[i].item = inven.items[i];
+            slots[i].UpdateSlotUI();
+        }
+    }
+
 }
