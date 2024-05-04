@@ -10,13 +10,16 @@ public class EnemyAnimScr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (transform.position != null)
-        //{
-        //    anim.SetBool("Walking", true);
-        //}
     }
     public void WalkAnimation(bool shouldWalk)
     {
         anim.SetBool("Walking", shouldWalk);
     }
+
+    public void HurtAnimation()
+    {
+        anim.SetTrigger("Hurt");
+    }
+
+
 }

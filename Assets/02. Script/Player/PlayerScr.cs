@@ -95,30 +95,17 @@ namespace Assets
             // hurt() 판정으로 확인하기 
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                Debug.Log("Projectile Launch");
-                if (spriteRenderer.flipX) {
-                Instantiate(projectilePrefab, launchOffsetL.position, transform.rotation);
-                } else
-                Instantiate(projectilePrefab, launchOffsetR.position, transform.rotation);
+                //Debug.Log("Projectile Launch");
+                if (spriteRenderer.flipX)
+                {
+                    Instantiate(projectilePrefab, launchOffsetL.position, transform.rotation);
+                }
+                else
+                    Instantiate(projectilePrefab, launchOffsetR.position, transform.rotation);
 
-                //GameObject projectile = projectilePool.GetProjectile();
-                //projectile.transform.position = launchOffset.position;
-                //projectile.transform.rotation = transform.rotation;
-                //projectile.SetActive(true);
 
-                //StartCoroutine(DestoryProjectile());
-                //OnAttack?.Invoke(); // 공격 시 이벤트 호출
             }
         }
-
-        //IEnumerator DestoryProjectile(){
-        //    Debug.Log("DestoryProjectile");
-        //    yield return new WaitForSeconds(3f);
-        //    //DestroyImmediate(projectilePrefab, true);
-        //    //Destroy(projectilePrefab);
-        //}
-
-
 
         // 코요태타임점프 코루틴
         IEnumerator CoyoteTimeJump()

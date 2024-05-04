@@ -1,0 +1,140 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+
+public class EnemyScr : MonoBehaviour
+{
+    [SerializeField] private float followInterval = 0.1f; // 따라가는 간격
+    [SerializeField] private float chaseDistance = 15f;
+    [SerializeField] private float moveSpeed = 5f; // 몬스터의 이동 속도
+    [SerializeField] private float chaseSpeed; // 몬스터가 플레이어를 빨리 쫓아갈 때 속도
+    [SerializeField] private int health = 3; // 몬스터의 체력
+
+    [SerializeField] private Transform player; // 플레이어의 Transform을 저장하는 변수
+    [SerializeField] private LayerMask groundLayer; // 땅을 나타내는 레이어
+
+    private bool enemyIsGrounded;
+    private bool enemyIsHurted = false;
+    private EnemyAnimScr enemyAnimScr;
+    private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rbEnemy;
+    void Start()
+    {
+        rbEnemy = GetComponent<Rigidbody2D>();
+        enemyAnimScr = GetComponent<EnemyAnimScr>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        // 충돌한 GameObject의 Rigidbody2D 컴포넌트를 가져옴
+
+        //player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+
+        // StartCoroutine을 사용하여 코루틴 시작
+        StartCoroutine(FollowPlayer());
+    }
+
+    // Update is called once per frame
+    void Update()
+    { }
+
+    void FixedUpdate()
+    {
+        EnemyRay();
+        OffCollider();
+    }
+
+    void OffCollider()
+    {
+        if (enemyIsGrounded == false)
+        {
+            gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+    }
+
+    void EnemyRay()
+    {
+        // 캐릭터의 아래에 있는 Collider의 절반 크기만큼의 레이를 쏘아서 땅과 충돌하는지 여부를 검사
+        Vector2 raycastStart = new Vector2(transform.position.x, GetComponent<Collider2D>().bounds.center.y - 1f);
+        RaycastHit2D hit = Physics2D.Raycast(raycastStart, Vector2.down, 3f, LayerMask.GetMask("groundLayer"));
+        Debug.DrawRay(raycastStart, Vector2.down * 3f, Color.red); // 레이를 시각적으로 표시
+                                                                   //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 50f, groundLayer);
+        if (hit.collider != null)
+        {
+            // 충돌이 발생한 경우
+            //Debug.Log("**Enemy** Hit Collider: " + hit.collider.name);
+            //Debug.Log("**Enemy** Hit Distance: " + hit.distance);
+            enemyIsGrounded = true;
+        }
+        else
+        {   // 충돌이 발생하지 않은 경우
+            enemyIsGrounded = false;
+            //Debug.Log("**Enemy** No Ground Detected");
+        }
+    }
+    // 코루틴
+    // 0.1초 마다 플레이어 방향으로 X축 이동
+    IEnumerator FollowPlayer()
+    {
+        while (!enemyIsHurted)
+        {
+            // 몬스터의 이동 방향 설정
+            // 플레이어가 적의 오른쪽에 있는지 여부를 확인 후, 스프라이트 뒤집기
+            spriteRenderer.flipX = (player.position.x > transform.position.x);
+            
+            if (Vector2.Distance(transform.position, player.position) < chaseDistance)
+            {
+                moveSpeed = chaseSpeed; // 일정 거리 이하면 추적 속도로 변경
+            }
+
+            rbEnemy.velocity = new Vector2((player.position.x < transform.position.x ? -1 : 1) * moveSpeed, rbEnemy.velocity.y);
+            //if (rbEnemy.velocity)
+            //{
+            //    rbEnemy.velocity = Vector2.left * moveSpeed;
+            //    Debug.Log("몬스터 왼쪽으로 가는 중");
+            //}
+            //else if(player.position.x > transform.position.x)
+            //{
+            //    rbEnemy.velocity = Vector2.right * moveSpeed;
+            //    Debug.Log("몬스터 오른쪽으로 가는 중");
+            //}
+
+            // 걷기 애니메이션 실행 조건 설정
+            if (rbEnemy.velocity.magnitude > 0)
+            {
+                enemyAnimScr.WalkAnimation(true);
+            }
+            else
+            {
+                enemyAnimScr.WalkAnimation(false);
+            }
+
+            yield return new WaitForSeconds(followInterval);
+        }
+    }
+
+    public void TakeDamage()
+    {
+        enemyIsHurted = true;
+        StartCoroutine(ResetHurtedStateAfterDelay(2.0f)); // 2초 후에 enemyIsHurted를 false로 변경
+        enemyAnimScr.HurtAnimation();
+        health--;
+        if (health <= 0)
+        {
+            Die(); // 체력이 0 이하일 경우 몬스터 삭제
+        }
+    }
+    IEnumerator ResetHurtedStateAfterDelay(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime); // delayTime(초) 후까지 대기
+
+        // delayTime(초) 후에 실행될 명령
+        enemyIsHurted = false;
+        StartCoroutine(FollowPlayer());
+    }
+
+
+    void Die()
+    {
+        Destroy(gameObject);
+    }
+}

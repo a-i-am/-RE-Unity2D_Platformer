@@ -3,13 +3,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    private EnemyAnimScr enemyAnimScr;
     private PlayerScr player;
     private Vector2 direction = Vector2.right; // 발사체 기본 방향(R)
+
     [SerializeField] private float speed = 4.5f;
     void Start()
     {
@@ -46,11 +49,27 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        EnemyScr enemy = collision.gameObject.GetComponent<EnemyScr>();
         if (collision.gameObject.CompareTag("Enemy"))
         {
             gameObject.SetActive(false);
-            Destroy(collision.gameObject);
+            enemy.TakeDamage();
+            //Destroy(collision.gameObject);
         }
+        
+
     }
+
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    EnemyScr enemy = other.GetComponent<EnemyScr>(); // 충돌한 오브젝트가 몬스터인지 확인
+
+    //    if (enemy != null)
+    //    {
+    //        enemy.TakeDamage(); // 몬스터의 TakeDamage() 호출
+    //    }
+
+    //    Destroy(gameObject); // 발사체 삭제
+    //}
 
 }
