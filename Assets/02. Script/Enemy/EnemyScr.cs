@@ -7,7 +7,8 @@ using UnityEngine;
 public class EnemyScr : MonoBehaviour
 {
     [SerializeField] private float followInterval = 0.1f; // 따라가는 간격
-    [SerializeField] private float chaseDistance = 15f;
+    [SerializeField] private float chaseDistance = 8f;
+    [SerializeField] private float moveDistance = 15f;
     [SerializeField] private float moveSpeed = 5f; // 몬스터의 이동 속도
     [SerializeField] private float chaseSpeed; // 몬스터가 플레이어를 빨리 쫓아갈 때 속도
     [SerializeField] private int health = 3; // 몬스터의 체력
@@ -80,23 +81,11 @@ public class EnemyScr : MonoBehaviour
             // 몬스터의 이동 방향 설정
             // 플레이어가 적의 오른쪽에 있는지 여부를 확인 후, 스프라이트 뒤집기
             spriteRenderer.flipX = (player.position.x > transform.position.x);
-            
             if (Vector2.Distance(transform.position, player.position) < chaseDistance)
-            {
                 moveSpeed = chaseSpeed; // 일정 거리 이하면 추적 속도로 변경
-            }
+            if (Vector2.Distance(transform.position, player.position) < moveDistance)
+                rbEnemy.velocity = new Vector2((player.position.x < transform.position.x ? -1 : 1) * moveSpeed, rbEnemy.velocity.y);
 
-            rbEnemy.velocity = new Vector2((player.position.x < transform.position.x ? -1 : 1) * moveSpeed, rbEnemy.velocity.y);
-            //if (rbEnemy.velocity)
-            //{
-            //    rbEnemy.velocity = Vector2.left * moveSpeed;
-            //    Debug.Log("몬스터 왼쪽으로 가는 중");
-            //}
-            //else if(player.position.x > transform.position.x)
-            //{
-            //    rbEnemy.velocity = Vector2.right * moveSpeed;
-            //    Debug.Log("몬스터 오른쪽으로 가는 중");
-            //}
 
             // 걷기 애니메이션 실행 조건 설정
             if (rbEnemy.velocity.magnitude > 0)
@@ -115,8 +104,8 @@ public class EnemyScr : MonoBehaviour
     public void TakeDamage()
     {
         enemyIsHurted = true;
-        StartCoroutine(ResetHurtedStateAfterDelay(2.0f)); // 2초 후에 enemyIsHurted를 false로 변경
         enemyAnimScr.HurtAnimation();
+        StartCoroutine(ResetHurtedStateAfterDelay(2.0f)); // 2초 후에 enemyIsHurted를 false로 변경
         health--;
         if (health <= 0)
         {
