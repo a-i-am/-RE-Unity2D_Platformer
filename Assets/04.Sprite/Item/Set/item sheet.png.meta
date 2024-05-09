@@ -417,7 +417,7 @@ TextureImporter:
       213: -4354886367351317457
     second: item sheet_137
   externalObjects: {}
-  serializedVersion: 13
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -434,12 +434,10 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -478,8 +476,6 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  swizzle: 50462976
-  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -491,7 +487,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -504,33 +499,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -3444,147 +3412,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      item sheet_0: 233525931979144026
-      item sheet_1: -7186672017022009425
-      item sheet_10: 3222482034351413556
-      item sheet_100: 663262082158111156
-      item sheet_101: 2679481709635434437
-      item sheet_102: 7076468627497983057
-      item sheet_103: 3960211239355942466
-      item sheet_104: -5861344422572281506
-      item sheet_105: -7283749310219422094
-      item sheet_106: 1101994763200857679
-      item sheet_107: -4195211453870651442
-      item sheet_108: -6709293499672725987
-      item sheet_109: 1507483848160018102
-      item sheet_11: 5495322467729782178
-      item sheet_110: -8603491751308034519
-      item sheet_111: -3465838321306391607
-      item sheet_112: 3817308366178990709
-      item sheet_113: -38084549161504042
-      item sheet_114: 2224440398269957082
-      item sheet_115: 182494973335673064
-      item sheet_116: 3880703834189937159
-      item sheet_117: 4711410310618798660
-      item sheet_118: -874444957611645326
-      item sheet_119: -7247860889366899105
-      item sheet_12: 7700386378072408273
-      item sheet_120: 7576351874202018130
-      item sheet_121: -6005374697073319659
-      item sheet_122: -1110043294282870289
-      item sheet_123: 4768177103988633957
-      item sheet_124: -1317994831624016333
-      item sheet_125: -1468303999051936484
-      item sheet_126: 3804732008948567171
-      item sheet_127: -7006454801451720830
-      item sheet_128: 7417223871923810540
-      item sheet_129: -5621100807978757354
-      item sheet_13: -1096311878161122636
-      item sheet_130: 4875798347394930202
-      item sheet_131: -5451213892477378005
-      item sheet_132: -5167869110530370322
-      item sheet_133: -5711125249976658892
-      item sheet_134: -6686615468099308550
-      item sheet_135: 1723076197154163972
-      item sheet_136: 6569230858773178835
-      item sheet_137: -4354886367351317457
-      item sheet_14: -3051635539441258797
-      item sheet_15: -1578157660979318167
-      item sheet_16: 3398503776686594580
-      item sheet_17: -6213188761786804113
-      item sheet_18: 2842425133008470342
-      item sheet_19: -3429879169035749795
-      item sheet_2: -6912903801493134846
-      item sheet_20: 6971239461848907454
-      item sheet_21: -2064617329760805735
-      item sheet_22: 1950633210279662954
-      item sheet_23: 8518360833381710166
-      item sheet_24: -7469912871049709332
-      item sheet_25: 9127318240235524212
-      item sheet_26: 9142753462594557634
-      item sheet_27: -1015125629426829255
-      item sheet_28: 8643430060328880035
-      item sheet_29: -1810591873495607956
-      item sheet_3: -6534608540699652889
-      item sheet_30: 3115431097983170440
-      item sheet_31: -8519292645571899890
-      item sheet_32: 6767171477313354722
-      item sheet_33: 9218473232071014982
-      item sheet_34: 7373723956971839837
-      item sheet_35: 6744535852659830362
-      item sheet_36: -121172662176190568
-      item sheet_37: 697348166759817456
-      item sheet_38: -6934080772182649613
-      item sheet_39: -1395856233244305850
-      item sheet_4: -2368258300328625363
-      item sheet_40: 8013096194817760677
-      item sheet_41: 1445090820444278384
-      item sheet_42: -4422152860466831629
-      item sheet_43: -1917337933439617379
-      item sheet_44: 4104817493142461176
-      item sheet_45: -4315134989694040949
-      item sheet_46: 2634751688832880195
-      item sheet_47: -3936300791184696328
-      item sheet_48: -783864143322262274
-      item sheet_49: -3898316167669009491
-      item sheet_5: -6536339108446018522
-      item sheet_50: -1232141687420190137
-      item sheet_51: -287618988788173093
-      item sheet_52: -718810570560542075
-      item sheet_53: -5528425964883702569
-      item sheet_54: 8951015602442456492
-      item sheet_55: 8937570538679047237
-      item sheet_56: -8299255277457623012
-      item sheet_57: 5189645793423938661
-      item sheet_58: 7478814514647168703
-      item sheet_59: 7015946789420284337
-      item sheet_6: -2580637788796125380
-      item sheet_60: -4869279976226709875
-      item sheet_61: -1935176933326408132
-      item sheet_62: 2668195643540536168
-      item sheet_63: 7481886161634726735
-      item sheet_64: -5791178908436920992
-      item sheet_65: -8607821781588032794
-      item sheet_66: 7972723891036163472
-      item sheet_67: 1237773309061971611
-      item sheet_68: -1765582964869139442
-      item sheet_69: -3704691649040865252
-      item sheet_7: -2041632720195514231
-      item sheet_70: 4378051303940534475
-      item sheet_71: 5092942758525236383
-      item sheet_72: -8495765607706361400
-      item sheet_73: -6081276270981637636
-      item sheet_74: 2112487241217243630
-      item sheet_75: 5605387162954890974
-      item sheet_76: -8231716446488950064
-      item sheet_77: -5913915636923040051
-      item sheet_78: -5639969312129929382
-      item sheet_79: 1651846186010446207
-      item sheet_8: 2070133041707840856
-      item sheet_80: -6293790439814051398
-      item sheet_81: 2439476593876612705
-      item sheet_82: -7989122110202764068
-      item sheet_83: 612394120603711931
-      item sheet_84: 4230410995420519801
-      item sheet_85: -249943232408304098
-      item sheet_86: -156433210830299
-      item sheet_87: -1469946979748618829
-      item sheet_88: -4023507862393475183
-      item sheet_89: -2845106545905036881
-      item sheet_9: 8897248224901063204
-      item sheet_90: 4371070964678680542
-      item sheet_91: 193944037018386305
-      item sheet_92: -1328495455792786673
-      item sheet_93: 8214808395620114635
-      item sheet_94: 5336046632526963329
-      item sheet_95: 6966578522451340286
-      item sheet_96: 6417105589034665379
-      item sheet_97: -2783321408970658191
-      item sheet_98: 7540288637598380749
-      item sheet_99: 4405150708397493488
-  mipmapLimitGroupName: 
+  spritePackingTag: 
   pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
