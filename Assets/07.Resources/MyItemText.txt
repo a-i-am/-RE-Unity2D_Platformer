@@ -1,1 +1,1 @@
-하이
+[{"tabName":"Item","type":"absorption","name":"HpPotion(S)","explain":"작은 회복 물약","number":"HP +100","isUsing":false},{"tabName":"Item","type":"Goods","name":"Scroll","explain":"지도 아이템","number":"1","isUsing":false},{"tabName":"Item","type":"Equipment","name":"Wand","explain":"지팡이","number":"1","isUsing":false}]

@@ -1,4 +1,3 @@
-Healing	HpPotion(S)	HpPotion(S) 설명	1	FALSE
-Money	Gold Coin	100원	1	FALSE
+absorption	HpPotion(S)	작은 회복 물약	HP +100	FALSE
 Goods	Scroll	지도 아이템	1	FALSE
-Weapon	Wand	지팡이	1	FALSE
+Equipment	Wand	지팡이	1	FALSE

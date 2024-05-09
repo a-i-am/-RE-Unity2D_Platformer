@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour {
         // 게임 새 시작시 isGameOver false
         isGameOver = false;
     }
+    //public void TabClick(string tabName)
+    //{
 
-
+    //}
 }
