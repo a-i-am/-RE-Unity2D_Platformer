@@ -222,7 +222,7 @@ TextureImporter:
       213: -7470111027993495038
     second: potions_16x16_72
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -239,10 +239,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -281,6 +283,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -292,6 +296,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -304,6 +309,33 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1852,9 +1884,82 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      potions_16x16_0: 5727839991886579005
+      potions_16x16_1: -7929095765842607696
+      potions_16x16_10: 5188699083147486024
+      potions_16x16_11: -5668853824555886966
+      potions_16x16_12: -5122677856453087165
+      potions_16x16_13: 2916457065080744890
+      potions_16x16_14: 279630081695636730
+      potions_16x16_15: -3898690404181544581
+      potions_16x16_16: 2925333833337870984
+      potions_16x16_17: 8034320021801939157
+      potions_16x16_18: 6266328934515066849
+      potions_16x16_19: -504638937321428081
+      potions_16x16_2: 1267535694310399895
+      potions_16x16_20: 1860811640454850674
+      potions_16x16_21: 3620489727877526912
+      potions_16x16_22: 6191511901218596081
+      potions_16x16_23: 5758583640682923344
+      potions_16x16_24: 6311292008249900409
+      potions_16x16_25: -1944157393624661483
+      potions_16x16_26: 2832585033966900990
+      potions_16x16_27: -4946077604216315297
+      potions_16x16_28: -4660791481467152889
+      potions_16x16_29: 2201731145813757950
+      potions_16x16_3: -2138636282362709331
+      potions_16x16_30: -7374661971658389436
+      potions_16x16_31: -7637501508710520923
+      potions_16x16_32: 6893727080565449984
+      potions_16x16_33: 7529853990566350099
+      potions_16x16_34: 8727888060058690489
+      potions_16x16_35: 3812172739541189066
+      potions_16x16_36: -1755010297977513201
+      potions_16x16_37: -319883847674816138
+      potions_16x16_38: 938989981068231192
+      potions_16x16_39: -2494813290743699960
+      potions_16x16_4: -8667635099040233055
+      potions_16x16_40: -9222656082138838742
+      potions_16x16_41: 4868859902187071097
+      potions_16x16_42: 561780857948063352
+      potions_16x16_43: -2305525971371217749
+      potions_16x16_44: 8668454830729892887
+      potions_16x16_45: -5524161429001749481
+      potions_16x16_46: 40209945285782842
+      potions_16x16_47: -974441697458772696
+      potions_16x16_48: -4962017912890982093
+      potions_16x16_49: 8843973141441895681
+      potions_16x16_5: -2117614756698374546
+      potions_16x16_50: -4077971989964723612
+      potions_16x16_51: 4350046371162665826
+      potions_16x16_52: 5336417968639906380
+      potions_16x16_53: -1082846253929647308
+      potions_16x16_54: -1111122297273579094
+      potions_16x16_55: -6385963015500622165
+      potions_16x16_56: 8170031409824738379
+      potions_16x16_57: -2708920829004654292
+      potions_16x16_58: -2861858037543226027
+      potions_16x16_59: -2686521699934318782
+      potions_16x16_6: -4795767543758008774
+      potions_16x16_60: -6604825673425458958
+      potions_16x16_61: 6705775162563887
+      potions_16x16_62: -2216967410237052177
+      potions_16x16_63: 3685094594740037399
+      potions_16x16_64: 1627179779048305428
+      potions_16x16_65: -2125265113089258201
+      potions_16x16_66: -6468409778124338801
+      potions_16x16_67: -4979595856058486623
+      potions_16x16_68: -2411291409446922343
+      potions_16x16_69: 1822493021011465698
+      potions_16x16_7: 4010805067897932907
+      potions_16x16_70: 2770121988507771383
+      potions_16x16_71: 409612318253620424
+      potions_16x16_72: -7470111027993495038
+      potions_16x16_8: -4489377114912447744
+      potions_16x16_9: 8573875639166218165
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
