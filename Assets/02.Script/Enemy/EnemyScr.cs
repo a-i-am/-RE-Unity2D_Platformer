@@ -125,5 +125,6 @@ public class EnemyScr : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+
     }
 }
