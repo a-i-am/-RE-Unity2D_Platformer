@@ -1,9 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft;
 using Newtonsoft.Json;
 using System.IO;
+using UnityEngine.UI;
 
 [System.Serializable] // 데이터 직렬화(순서대로 Inspector에 표시해줌)
 public class Item
@@ -19,7 +19,13 @@ public class ItemDatabase : MonoBehaviour
 {
     public static ItemDatabase instance;
     public TextAsset itemDBText; // ItemDatabase
-    public List<Item> allItemList, myItemList;
+    public List<Item> allItemList, myItemList, curItemList;
+    public string curType = "Item";
+    public GameObject[] InvenSlot, ItemInfo;
+    public Image[] tabImage;
+    public Sprite tabIdleSprite, tabSelectSprite;
+
+
 
     void Start()
     {
@@ -41,6 +47,28 @@ public class ItemDatabase : MonoBehaviour
         instance = this;
     }
 
+    public void TabClick(string tabName)
+    {
+        // 현재 아이템 리스트에 클릭한 타입만 추가
+        curType = tabName;
+        curItemList = myItemList.FindAll(x => x.type == tabName);
+        
+        // 슬롯과 텍스트 보이기
+        for (int i = 0; i < InvenSlot.Length; i++)
+        {
+            InvenSlot[i].SetActive(i < curItemList.Count);
+            //ItemInfo[i].GetComponentInChildren<Text>().text = i < curItemList.Count ? curItemList[i].Name : "";
+        }
+
+        int tabNum = 0;
+        switch (tabName)
+        {
+            case "Character": tabNum = 0; break;
+            case "Item": tabNum = 1; break;
+        }
+        for (int i = 0; i < tabImage.Length; i++)
+            tabImage[i].sprite = i == tabNum ? tabSelectSprite : tabIdleSprite;
+    }
     void Save()
     {
         string jdata = JsonConvert.SerializeObject(allItemList); // JSON으로 리스트를 string으로 변환
@@ -53,5 +81,7 @@ public class ItemDatabase : MonoBehaviour
     {
         string jdata = File.ReadAllText(Application.dataPath + "/07.Resources/MyItemText.txt");
         myItemList = JsonConvert.DeserializeObject<List<Item>>(jdata);
+
+        TabClick(curType);
     }
 }
