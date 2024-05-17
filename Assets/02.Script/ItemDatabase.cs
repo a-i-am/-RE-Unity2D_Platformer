@@ -5,42 +5,66 @@ using Newtonsoft.Json;
 using System.IO;
 using UnityEngine.UI;
 
-[System.Serializable] // 데이터 직렬화(순서대로 Inspector에 표시해줌)
+[System.Serializable] // 데이터 직렬화(리스트 순서대로 Inspector에 표시해줌)
+public class Character
+{
+    public Character(string _type, string _name, string _explain, string _number, bool _isUsing, string _tabName = "Character")
+    { tabName = _tabName; type = _type; name = _name; explain = _explain; number = _number; isUsing = _isUsing; }
+
+    public string tabName, type, name, explain, number; // string이어야 JSON 파싱 시 잘 된다고 함
+    public bool isUsing;
+}
+
+[System.Serializable] // 데이터 직렬화(리스트 순서대로 Inspector에 표시해줌)
 public class Item
 {
     public Item(string _type, string _name, string _explain, string _number, bool _isUsing, string _tabName = "Item")
     { tabName = _tabName; type = _type; name = _name; explain = _explain; number = _number; isUsing = _isUsing; }
-    
+
     public string tabName, type, name, explain, number; // string이어야 JSON 파싱 시 잘 된다고 함
     public bool isUsing;
-    
+
 }
+
+
+
 public class ItemDatabase : MonoBehaviour
 {
     public static ItemDatabase instance;
-    public TextAsset itemDBText; // ItemDatabase
+    public TextAsset itemDBText, characterDBText;
+    //public TextAsset ; // CharacterDatabase
+    public List<Character> allCharacterList, myCharacterList, curCharacterList;
     public List<Item> allItemList, myItemList, curItemList;
-    public string curType = "Item";
-    public GameObject[] InvenSlot, ItemInfo;
+    public string curType = "Character";
+    public GameObject[] InvenSlot, ItemInfo, CharacterInfo;
     public Image[] tabImage;
     public Sprite tabIdleSprite, tabSelectSprite;
-
-
 
     void Start()
     {
         // 라인 끝 공백을 제외하고 텍스트를 읽음
         // 개행문자(\n)을 구분자로 데이터 분할
-        string[] line = itemDBText.text.Substring(0, itemDBText.text.Length - 1).Split('\n');
+        string[] characterLine = characterDBText.text.Substring(0, characterDBText.text.Length - 1).Split('\n');
         //print(line.Length);
-        for (int i = 0; i < line.Length; i++)
+        for (int i = 0; i < characterLine.Length; i++)
         {
-            string[] row = line[i].Split('\t');
+            string[] row = characterLine[i].Split('\t');
+            allCharacterList.Add(new Character(row[0], row[1], row[2], row[3], row[4] == "TRUE"));
+        }
+
+        string[] itemLine = itemDBText.text.Substring(0, itemDBText.text.Length - 1).Split('\n');
+        //print(line.Length);
+        for (int i = 0; i < itemLine.Length; i++)
+        {
+            string[] row = itemLine[i].Split('\t');
             allItemList.Add(new Item(row[0], row[1], row[2], row[3], row[4] == "TRUE"));
         }
-        Save();
-        Load();
-    }   
+
+        CharacterSave();
+        CharacterLoad();
+        ItemSave();
+        ItemLoad();
+    }
 
     private void Awake()
     {
@@ -52,12 +76,22 @@ public class ItemDatabase : MonoBehaviour
         // 현재 아이템 리스트에 클릭한 타입만 추가
         curType = tabName;
         curItemList = myItemList.FindAll(x => x.type == tabName);
-        
-        // 슬롯과 텍스트 보이기
-        for (int i = 0; i < InvenSlot.Length; i++)
+        curCharacterList = myCharacterList.FindAll(x => x.type == tabName);
+
+        // Character 리스트 슬롯과 텍스트 보이기
+        for (int i_Character = 0; i_Character < InvenSlot.Length; i_Character++)
         {
-            InvenSlot[i].SetActive(i < curItemList.Count);
-            //ItemInfo[i].GetComponentInChildren<Text>().text = i < curItemList.Count ? curItemList[i].Name : "";
+            InvenSlot[i_Character].SetActive(i_Character < curCharacterList.Count);
+
+            //ItemInfo[i_Character].GetComponentInChildren<Text>().text = i < curItemList.Count ? curItemList[i].Name : "";
+        }
+
+        // Item 리스트 슬롯과 텍스트 보이기
+        for (int i_item = 0; i_item < InvenSlot.Length; i_item++)
+        {
+            InvenSlot[i_item].SetActive(i_item < curCharacterList.Count);
+
+            //ItemInfo[i_item].GetComponentInChildren<Text>().text = i < curItemList.Count ? curItemList[i].Name : "";
         }
 
         int tabNum = 0;
@@ -65,11 +99,28 @@ public class ItemDatabase : MonoBehaviour
         {
             case "Character": tabNum = 0; break;
             case "Item": tabNum = 1; break;
+            default: tabNum = 2; break; // case조건들에 전부 해당하지 않는 경우
         }
+        
         for (int i = 0; i < tabImage.Length; i++)
             tabImage[i].sprite = i == tabNum ? tabSelectSprite : tabIdleSprite;
     }
-    void Save()
+
+    void CharacterSave()
+    {
+        string jdata = JsonConvert.SerializeObject(allCharacterList); // JSON으로 리스트를 string으로 변환
+        //print(jdata);
+        File.WriteAllText(Application.dataPath + "/07.Resources/MyCharacterText.txt", jdata);
+        //print(Application.dataPath);
+    }
+
+    void CharacterLoad()
+    {
+        string jdata = File.ReadAllText(Application.dataPath + "/07.Resources/MyCharacterText.txt");
+        myCharacterList = JsonConvert.DeserializeObject<List<Character>>(jdata);
+    }
+
+    void ItemSave()
     {
         string jdata = JsonConvert.SerializeObject(allItemList); // JSON으로 리스트를 string으로 변환
         //print(jdata);
@@ -77,11 +128,13 @@ public class ItemDatabase : MonoBehaviour
         //print(Application.dataPath);
     }
 
-    void Load()
+    void ItemLoad()
     {
         string jdata = File.ReadAllText(Application.dataPath + "/07.Resources/MyItemText.txt");
         myItemList = JsonConvert.DeserializeObject<List<Item>>(jdata);
 
         TabClick(curType);
     }
+
+
 }

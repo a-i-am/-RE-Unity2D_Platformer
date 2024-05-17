@@ -23,7 +23,6 @@ public class UI : MonoBehaviour
             if (curHp > 0) { curHp -= 10;}
             else { curHp = 0; }
         }
-
         HandleHp();
     }
 
