@@ -1,27 +1,35 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine;
 
-//public class FieldItems : MonoBehaviour
-//{
-//    public Item item;
-//    public SpriteRenderer image;
+public class FieldItems : MonoBehaviour
+{
+    public Item.CharacterData field_character;
+    public Item.ItemData field_item;
+    public Item item;
+    public SpriteRenderer image;
 
-//    public void SetItem(Item _item)
-//    {
-//        item.itemName = _item.itemName;
-//        item.itemImage = _item.itemImage;
-//        item.itemType = _item.itemType;
-//        item.efts = _item.efts;
+    public void SetItem(Item.ItemData _item)
+    {
+        field_item = _item;
+        image.sprite = _item.itemImage;
+    }
 
-//        image.sprite = item.itemImage;
-//    }
-//    public Item GetItem()
-//    {
-//        return item;
-//    }
-//    public void DestroyItem()
-//    {
-//        Destroy(gameObject);
-//    }
-//}
+    public void SetRandomItem()
+    {
+        List<Item.ItemData> itemDB = ItemDatabase.instance.itemDB;
+        if (itemDB.Count > 0)
+        {
+            SetItem(itemDB[UnityEngine.Random.Range(0, itemDB.Count)]);
+        }
+    }
+
+    public Item.ItemData GetItem()
+    {
+        return field_item;
+    }
+
+    public void DestroyItem()
+    {
+        Destroy(gameObject);
+    }
+}

@@ -2,16 +2,16 @@
 //using System.Collections.Generic;
 //using UnityEngine;
 
-//public class ItemDatabase : MonoBehaviour
+//public class ItemDatabase2 : MonoBehaviour
 //{
-//    public static ItemDatabase instance;
-//    public TextAsset itemDBText;
+//    public static ItemDatabase2 instance;
+//    //public TextAsset itemDBText;
 
 //    private void Awake()
 //    {
 //        instance = this;
 //    }
-//    public List<Item> itemDB = new List<Item>();
+//    public List<Item.ItemData> itemDB = new List<Item.ItemData>();
 //    [Space(20)]
 //    public GameObject fieldItemPrefab;
 //    public Vector3[] pos;

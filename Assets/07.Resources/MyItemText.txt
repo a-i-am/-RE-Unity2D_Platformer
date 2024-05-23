@@ -1,1 +1,50 @@
-[{"tabName":"Item","type":"absorption","name":"HpPotion(S)","explain":"작은 회복 물약","number":"HP +100","isUsing":false},{"tabName":"Item","type":"Goods","name":"Scroll","explain":"지도 아이템","number":"1","isUsing":false},{"tabName":"Item","type":"Equipment","name":"Wand","explain":"지팡이","number":"1","isUsing":false}]
+[
+  {
+    "tabName": "Item",
+    "type": "absorption",
+    "name": "HpPotion(S)",
+    "explain": "작은 회복 물약",
+    "number": "HP +100",
+    "itemImage": null
+  },
+  {
+    "tabName": "Item",
+    "type": "Goods",
+    "name": "Scroll",
+    "explain": "지도 아이템",
+    "number": "1",
+    "itemImage": null
+  },
+  {
+    "tabName": "Item",
+    "type": "Equipment",
+    "name": "Wand1",
+    "explain": "지팡이1",
+    "number": "1",
+    "itemImage": null
+  },
+  {
+    "tabName": "Item",
+    "type": "Equipment",
+    "name": "Wand2",
+    "explain": "지팡이2",
+    "number": "1",
+    "itemImage": null
+  },
+  {
+    "tabName": "Item",
+    "type": "Equipment",
+    "name": "Wand3",
+    "explain": "지팡이3",
+    "number": "1",
+    "itemImage": null
+  },
+  {
+    "tabName": "Item",
+    "type": "Equipment",
+    "name": "Wand4",
+    "explain": "지팡이4",
+    "number": "1",
+    "itemImage": null
+  }
+]

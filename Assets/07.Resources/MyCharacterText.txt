@@ -1,1 +1,11 @@
-[{"tabName":"Character","type":"Enemy","name":"Bub","explain":"Bub 설명","number":"1","isUsing":false}]
+[
+  {
+    "tabName": "Character",
+    "type": "Enemy",
+    "name": "Bub",
+    "explain": "Bub 설명",
+    "number": "1",
+    "isUsing": false,
+    "characterImage": null
+  }
+]

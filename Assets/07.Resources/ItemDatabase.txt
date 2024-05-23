@@ -1,3 +1,6 @@
 absorption	HpPotion(S)	작은 회복 물약	HP +100	FALSE
 Goods	Scroll	지도 아이템	1	FALSE
-Equipment	Wand	지팡이	1	FALSE
+Equipment	Wand1	지팡이1	1	FALSE
+Equipment	Wand2	지팡이2	1	FALSE
+Equipment	Wand3	지팡이3	1	FALSE
+Equipment	Wand4	지팡이4	1	FALSE
