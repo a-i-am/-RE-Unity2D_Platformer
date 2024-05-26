@@ -6,6 +6,7 @@
     "explain": "Bub 설명",
     "number": "1",
     "isUsing": false,
-    "characterImage": null
+    "characterImage": null,
+    "abilities": null
   }
 ]

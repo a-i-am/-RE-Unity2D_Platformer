@@ -7,15 +7,18 @@ using UnityEngine.UI;
 
 public class ItemDatabase : MonoBehaviour
 {
-    public GameObject chInvenSlotUI;
+    public GameObject characterInvenSlotUI;
     public GameObject itemInvenSlotUI;
+    public GameObject characterSlotNumText;
+    public GameObject itemSlotNumText;
+
 
     public static ItemDatabase instance;
     public TextAsset itemDBText, characterDBText;
 
-    public List<Item.CharacterData> allCharacterList = new List<Item.CharacterData>();
-    public List<Item.CharacterData> myCharacterList = new List<Item.CharacterData>();
-    public List<Item.CharacterData> curCharacterList = new List<Item.CharacterData>();
+    public List<Character.CharacterData> allCharacterList = new List<Character.CharacterData>();
+    public List<Character.CharacterData> myCharacterList = new List<Character.CharacterData>();
+    public List<Character.CharacterData> curCharacterList = new List<Character.CharacterData>();
 
     public List<Item.ItemData> allItemList = new List<Item.ItemData>();
     public List<Item.ItemData> myItemList = new List<Item.ItemData>();
@@ -37,7 +40,6 @@ public class ItemDatabase : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             GameObject go = Instantiate(fieldItemPrefab, pos[i], Quaternion.identity);
-            //go.GetComponent<FieldItems>().SetItem(itemDB[Random.Range(0, 5)]);
             FieldItems fieldItems = go.GetComponent<FieldItems>();
             fieldItems.SetRandomItem();
         }
@@ -48,7 +50,7 @@ public class ItemDatabase : MonoBehaviour
         for (int i = 0; i < characterLine.Length; i++)
         {
             string[] row = characterLine[i].Split('\t');
-            allCharacterList.Add(new Item.CharacterData(row[0], row[1], row[2], row[3], row[4] == "TRUE"));
+            allCharacterList.Add(new Character.CharacterData(row[0], row[1], row[2], row[3], row[4] == "TRUE"));
         }
 
         string[] itemLine = itemDBText.text.Substring(0, itemDBText.text.Length - 1).Split('\n');
@@ -58,8 +60,6 @@ public class ItemDatabase : MonoBehaviour
             string[] row = itemLine[i].Split('\t');
             allItemList.Add(new Item.ItemData(row[0], row[1], row[2], row[3], row[4] == "TRUE"));
         }
-
-        //SyncAllItemListWithItemDB();
 
         CharacterSave();
         CharacterLoad();
@@ -105,31 +105,32 @@ public class ItemDatabase : MonoBehaviour
             for (int i = 0; i < tabImage.Length; i++)
             tabImage[i].sprite = i == tabNum ? tabSelectSprite : tabIdleSprite;
 
-
         switch (tabNum)
         {
             case 0:
-                chInvenSlotUI.SetActive(true);
                 itemInvenSlotUI.SetActive(false);
+                itemSlotNumText.SetActive(false);
+                characterInvenSlotUI.SetActive(true);
+                characterSlotNumText.SetActive(true);
+
                 break;
             case 1:
-                chInvenSlotUI.SetActive(false);
+                characterInvenSlotUI.SetActive(false);
+                characterSlotNumText.SetActive(false);
                 itemInvenSlotUI.SetActive(true);
+                itemSlotNumText.SetActive(true);
+
                 break;
             default:
-                chInvenSlotUI.SetActive(false);
+                characterInvenSlotUI.SetActive(false);
                 itemInvenSlotUI.SetActive(false);
+                characterSlotNumText.SetActive(false);
+                itemSlotNumText.SetActive(false);
+
                 break;
         }
 
     }
-
-
-    //void SyncAllItemListWithItemDB()
-    //{
-    //    itemDB.Clear();
-    //    itemDB.AddRange(allItemList);
-    //}
 
     void CharacterSave()
     {
@@ -142,7 +143,7 @@ public class ItemDatabase : MonoBehaviour
     void CharacterLoad()
     {
         string jdata = File.ReadAllText(Application.dataPath + "/07.Resources/MyCharacterText.txt");
-        myCharacterList = JsonConvert.DeserializeObject<List<Item.CharacterData>>(jdata);
+        myCharacterList = JsonConvert.DeserializeObject<List<Character.CharacterData>>(jdata);
         TabClick(curType); // 맨 처음 선택되어있는 메인 탭(캐릭터탭)
     }
 

@@ -6,33 +6,56 @@ using UnityEngine.UI;
 
 public class Slot : MonoBehaviour, IPointerUpHandler
 {
-    //public ItemData slot_item;
     public int slotnum;
-    public Item.ItemData item;
-    public Image itemIcon;
 
-    public void UpdateSlotUI()
+    public Item.ItemData itemData;
+    public Character.CharacterData characterData;
+    public Image itemIcon;
+    public Image characterIcon;
+
+    public void UpdateItemSlotUI()
     {
-        //itemIcon.sprite = slot_item.itemImage;
-        itemIcon.sprite = item.itemImage;
+        itemIcon.sprite = itemData.itemImage;
         itemIcon.gameObject.SetActive(true);
 
     }
-    public void RemoveSlot()
+
+    public void UpdateCharacterSlotUI()
+    {
+        characterIcon.sprite = characterData.characterImage;
+        characterIcon.gameObject.SetActive(true);
+
+    }
+
+    public void RemoveItemSlot()
     {
         //slot_item = null;
-        item = null;
+        itemData = null;
         itemIcon.gameObject.SetActive(false);
+    }
+
+
+    public void RemoveCharacterSlot()
+    {
+        //slot_item = null;
+        characterData = null;
+        characterIcon.gameObject.SetActive(false);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        //bool isUse = slot_item.Use();
-        //bool isUse = item.Use();
-        //if (isUse)
+        bool itemIsUse = itemData.UseItem();
+        //bool characterIsUse = characterData.UseCharacter();
+
+        if (itemIsUse)
+        {
+            Inventory.instance.RemoveItem(slotnum);
+        }
+        //if (characterIsUse)
         //{
-        //    Inventory.instance.RemoveItem(slotnum);
+        //    Inventory.instance.RemoveCharacter(slotnum);
         //}
+
     }
 }
 

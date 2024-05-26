@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class FieldItems : MonoBehaviour
 {
-    public Item.CharacterData field_character;
+    public Character.CharacterData field_character;
     public Item.ItemData field_item;
-    public Item item;
     public SpriteRenderer image;
 
     public void SetItem(Item.ItemData _item)
     {
         field_item = _item;
         image.sprite = _item.itemImage;
+
     }
 
     public void SetRandomItem()
