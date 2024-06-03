@@ -7,11 +7,12 @@ using UnityEngine.UI;
 
 public class ItemDatabase : MonoBehaviour
 {
+
+
     public GameObject characterInvenSlotUI;
     public GameObject itemInvenSlotUI;
     public GameObject characterSlotNumText;
     public GameObject itemSlotNumText;
-
 
     public static ItemDatabase instance;
     public TextAsset itemDBText, characterDBText;
@@ -30,6 +31,8 @@ public class ItemDatabase : MonoBehaviour
     public Sprite tabIdleSprite, tabSelectSprite;
 
     public List<Item.ItemData> itemDB = new List<Item.ItemData>();
+    public List<Character.CharacterData> characterDB = new List<Character.CharacterData>();
+
     [Space(25)]
     public GameObject fieldItemPrefab;
     public Vector3[] pos;
@@ -37,20 +40,31 @@ public class ItemDatabase : MonoBehaviour
     void Start()
     {
         // 필드에 아이템 리스트 중 랜덤 생성
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 7; i++) // 생성할 아이템 개수만큼 반복 // 인스펙터에 Pos 개수 및 생성 위치 작성 필요
         {
             GameObject go = Instantiate(fieldItemPrefab, pos[i], Quaternion.identity);
             FieldItems fieldItems = go.GetComponent<FieldItems>();
             fieldItems.SetRandomItem();
         }
+
         // 라인 끝 공백을 제외하고 텍스트를 읽음
         // 개행문자(\n)을 구분자로 데이터 분할
         string[] characterLine = characterDBText.text.Substring(0, characterDBText.text.Length - 1).Split('\n');
-        //print(line.Length);
         for (int i = 0; i < characterLine.Length; i++)
         {
             string[] row = characterLine[i].Split('\t');
-            allCharacterList.Add(new Character.CharacterData(row[0], row[1], row[2], row[3], row[4] == "TRUE"));
+            Sprite characterImage = Resources.Load<Sprite>(row[5]); // 캐릭터 이미지 경로에서 스프라이트 로드
+            GameObject characterPrefab = Resources.Load<GameObject>(row[6]); // 캐릭터 프리팹 경로에서 로드
+
+            allCharacterList.Add(new Character.CharacterData(
+                row[0],  // type
+                row[1],  // name
+                row[2],  // explain
+                row[3],  // number
+                row[4] == "TRUE",  // isUsing
+                characterImage,  // characterImage
+                characterPrefab  // characterPrefab
+            ));
         }
 
         string[] itemLine = itemDBText.text.Substring(0, itemDBText.text.Length - 1).Split('\n');
@@ -58,13 +72,16 @@ public class ItemDatabase : MonoBehaviour
         for (int i = 0; i < itemLine.Length; i++)
         {
             string[] row = itemLine[i].Split('\t');
-            allItemList.Add(new Item.ItemData(row[0], row[1], row[2], row[3], row[4] == "TRUE"));
+            allItemList.Add(new Item.ItemData(row[0], row[1], row[2], row[3], row[4] == "TRUE", row[5]));
         }
 
         CharacterSave();
         CharacterLoad();
         ItemSave();
         ItemLoad();
+
+        // TabClick 메서드 호출하여 초기 탭 설정
+        TabClick("Character");
     }
 
     private void Awake()

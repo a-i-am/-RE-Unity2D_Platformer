@@ -2,7 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CharacterAbility : MonoBehaviour
+[CreateAssetMenu(menuName = "ItemEft/MobSpawner/CharacterAbility")]
+public abstract class CharacterAbility : ItemEffect
 {
-    public abstract bool ExecuteRole();
+    public override bool ExecuteRole()
+    {
+
+        return true;
+    }
 }

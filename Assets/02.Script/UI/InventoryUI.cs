@@ -14,8 +14,8 @@ public class InventoryUI : MonoBehaviour
     public TextMeshProUGUI characterSlotNumText;
     bool activeInventory = false;
 
-    public Slot[] itemSlots;
-    public Slot[] characterSlots;
+    public ItemSlot[] itemSlots;
+    public CharacterSlot[] characterSlots;
     
     public Transform itemSlotHolder;
     public Transform characterSlotHolder;
@@ -23,8 +23,8 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         inven = Inventory.instance;
-        itemSlots = itemSlotHolder.GetComponentsInChildren<Slot>();
-        characterSlots = characterSlotHolder.GetComponentsInChildren<Slot>();
+        itemSlots = itemSlotHolder.GetComponentsInChildren<ItemSlot>();
+        characterSlots = characterSlotHolder.GetComponentsInChildren<CharacterSlot>();
 
         inven.onItemSlotCountChange += ItemSlotChange;
         inven.onCharacterSlotCountChange += CharacterSlotChange;
@@ -38,14 +38,14 @@ public class InventoryUI : MonoBehaviour
     void FixedUpdate()
     {
         itemSlotNumText.text = string.Format("{0} / {1}", inven.acquiredItems, itemSlots.Length);
-        characterSlotNumText.text = string.Format("{0} / {1}", 0, characterSlots.Length);
+        characterSlotNumText.text = string.Format("{0} / {1}", inven.acquiredCharacters, characterSlots.Length);
     }
 
     private void ItemSlotChange(int val)
     {
         for (int i = 0; i < itemSlots.Length; i++)
         {
-            itemSlots[i].slotnum = i;
+            itemSlots[i].itemSlotnum = i;
 
             if (i < inven.ItemSlotCnt)
                 itemSlots[i].GetComponent<Button>().interactable = true;
@@ -58,7 +58,7 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < characterSlots.Length; i++)
         {
-            characterSlots[i].slotnum = i;
+            characterSlots[i].characterSlotnum = i;
 
             if (i < inven.CharacterSlotCnt)
                 characterSlots[i].GetComponent<Button>().interactable = true;

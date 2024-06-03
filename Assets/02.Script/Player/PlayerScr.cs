@@ -59,6 +59,10 @@ namespace Assets
             KeepPlayerOnGround();
             UpdateCoyoteTimer();
         }
+        public SpriteRenderer SpriteRenderer
+        {
+            get { return spriteRenderer; }
+        }
 
         void Walk()
         {
@@ -193,5 +197,6 @@ namespace Assets
                 // 만약 목숨이 0개라면(GameOverDeath)
             }
         }
+
     }
 }

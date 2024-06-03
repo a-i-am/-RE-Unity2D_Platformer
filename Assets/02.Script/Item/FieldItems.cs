@@ -11,7 +11,6 @@ public class FieldItems : MonoBehaviour
     {
         field_item = _item;
         image.sprite = _item.itemImage;
-
     }
 
     public void SetRandomItem()

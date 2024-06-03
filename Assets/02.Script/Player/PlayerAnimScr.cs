@@ -32,14 +32,6 @@ namespace Assets
             }
             else { anim.ResetTrigger("Walking"); }
 
-            // Jump Anim
-            //if (Input.GetKeyDown(KeyCode.Space) && isGroundClass.isGrounded)
-            //{
-            //    anim.SetBool("Jump", true);
-            //}
-            //else if (Input.GetKeyUp(KeyCode.Space))
-            //{ anim.SetBool("Jump", false); }
-
             if (Input.GetButton("Jump") && isGroundClass.isGrounded)
             {
                 anim.SetBool("Jump", true);

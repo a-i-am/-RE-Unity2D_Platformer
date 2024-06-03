@@ -1,3 +1,4 @@
+using Assets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,16 +25,21 @@ public class Inventory : MonoBehaviour
     public delegate void OnCharacterSlotCountChange(int val);
     public OnItemSlotCountChange onItemSlotCountChange;
     public OnCharacterSlotCountChange onCharacterSlotCountChange;
-    
+
     public delegate void OnChangeItem();
     public OnChangeItem onChangeItem;
     public delegate void OnChangeCharacter();
     public OnChangeCharacter onChangeCharacter;
     public List<Character.CharacterData> inventory_characters = new List<Character.CharacterData>();
     public List<Item.ItemData> inventory_items = new List<Item.ItemData>();
-    
+
+    // 인벤토리 캐릭터(몹), 아이템 보유(획득)수량 표시
+    public int acquiredCharacters = 0;
     public int acquiredItems = 0;
+
     public InventoryUI invenUI;
+    public EnemyScr enemyScr;
+    public PlayerScr playerScr;
 
     private int itemSlotCnt;
     private int characterSlotCnt;
@@ -59,11 +65,13 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        //ItemSlotCnt = 8;
-        //CharacterSlotCnt = 4;
+        playerScr = GameObject.FindWithTag("Player").GetComponent<PlayerScr>();
         ItemSlotCnt = invenUI.itemSlots.Length;
         CharacterSlotCnt = invenUI.characterSlots.Length;
-
+    }
+    private void Update()
+    {
+        DetectEnemy();
     }
 
     public bool AddItem(Item.ItemData _item) // ItemData _item
@@ -79,9 +87,9 @@ public class Inventory : MonoBehaviour
 
     }
 
-    public bool AddCharacter(Character.CharacterData _character) // ItemData _item
+    public bool AddCharacter(Character.CharacterData _character)
     {
-        if (inventory_characters.Count < ItemSlotCnt)
+        if (inventory_characters.Count < CharacterSlotCnt)
         {
             inventory_characters.Add(_character);
             if (onChangeCharacter != null)
@@ -104,9 +112,6 @@ public class Inventory : MonoBehaviour
         onChangeCharacter.Invoke();
     }
 
-
-
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("FieldItem"))
@@ -118,5 +123,34 @@ public class Inventory : MonoBehaviour
                 fieldItems.DestroyItem();
             }
         }
+
     }
+    private void DetectEnemy()
+    {
+        // 플레이어의 앞 방향으로 레이캐스트를 발사하여 적을 감지합니다.
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, transform.right, 5f, LayerMask.GetMask("Enemy"));
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, -transform.right, 5f, LayerMask.GetMask("Enemy"));
+
+        RaycastHit2D hit = hitRight.collider != null ? hitRight : hitLeft.collider != null ? hitLeft : new RaycastHit2D();
+
+        if (hit.collider != null)
+        {
+            EnemyScr enemy = hit.collider.GetComponent<EnemyScr>();
+            if (enemy != null && enemy.enemyIsFainted)
+            {
+                if (Input.GetKeyDown(KeyCode.C)) // Collect
+                {
+                    AddCharacter(enemy.GetCharacter());
+                    Debug.Log("캐릭터 획득!");
+                    enemy.DestroyCharacter();
+                    acquiredCharacters++;
+                    // 몹 오브젝트를 풀에 반환 후 필드의 Enemy는 삭제
+                    //ObjectPoolManager.instance.ReturnMob(gameObject);
+                }
+            }
+        }
+    }
+
+
+
 }

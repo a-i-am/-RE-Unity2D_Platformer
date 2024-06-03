@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.Pool;
+using UnityEngine.TextCore.Text;
 
 public class ObjectPoolManager : MonoBehaviour
 {
+    public static ObjectPoolManager instance;
+
     [SerializeField] private GameObject projectilePrefab; // 오브젝트 풀링할 프리팹
     [SerializeField] private int initialPoolSize = 10; // 초기 풀 크기
     [SerializeField] private float despawnTime = 5f; // 삭제 대기 시간
 
     private List<GameObject> pooledProjectiles;
+    private Dictionary<string, List<GameObject>> pooledMob;
+    
     private bool isInitialized = false; // 초기화 여부를 나타내는 변수
 
     // Start is called before the first frame update
@@ -25,6 +32,7 @@ public class ObjectPoolManager : MonoBehaviour
     {
         // 초기 풀 설정
         pooledProjectiles = new List<GameObject>();
+        pooledMob = new Dictionary<string, List<GameObject>>();
 
         // 초기 풀 크기만큼 발사체를 생성하여 리스트에 추가하고 비활성화 상태로 설정
         for (int i = 0; i < initialPoolSize; i++)
@@ -33,11 +41,55 @@ public class ObjectPoolManager : MonoBehaviour
             pooledProjectile.SetActive(false);
             pooledProjectiles.Add(pooledProjectile);
         }
+        #region 몹 풀링1 
 
+        //// 초기 풀 크기만큼 캐릭터를 생성하여 리스트에 추가하고 비활성화 상태로 설정
+        //foreach (Character.CharacterData characterData in ItemDatabase.instance.characterDB)
+        //{
+        //    List<GameObject> mobPool = new List<GameObject>();
+
+        //    for (int i = 0; i < initialPoolSize; i++)
+        //    {
+        //        GameObject mob = Instantiate(characterData.characterPrefab);
+        //        mob.SetActive(false);
+        //        mobPool.Add(mob);
+        //    }
+        //    pooledMob[characterData.name] = mobPool;
+        //}
+        #endregion
         isInitialized = true; // 초기화 완료
     }
+    #region 몹 풀링2 
+    //public GameObject GetMob(string characterName)
+    //{
+    //    if (pooledMob.ContainsKey(characterName))
+    //    {
+    //        foreach (GameObject mob in pooledMob[characterName]) 
+    //        {
+    //            if(!mob.activeInHierarchy)
+    //            {
+    //                mob.SetActive(true);
+    //                return mob;
+    //            }
+    //        }
+
+    //        GameObject newMob = Instantiate(ItemDatabase.instance.characterDB.Find(m => m.name == characterName).characterPrefab);
+    //        pooledMob[characterName].Add(newMob);
+    //        newMob.SetActive(true);
+    //        return newMob;
+    //    }
+    //    Debug.LogWarning("No such monster found in the pool.");
+    //    return null;
+    //}
+    //public void ReturnMob(GameObject mob)
+    //{
+    //    mob.SetActive(false);
+    //}
+
 
     // 비활성화된 발사체를 가져오는 함수
+
+    #endregion
     public GameObject GetProjectile()
     {
         foreach (GameObject pooledProjectile in pooledProjectiles)
@@ -68,7 +120,6 @@ public class ObjectPoolManager : MonoBehaviour
         }
     }
 
-
     // 발사체 삭제 함수
     private void DespawnProjectile()
     {
@@ -86,12 +137,5 @@ public class ObjectPoolManager : MonoBehaviour
             pooledProjectiles.Remove(projectileToDespawn);
             Destroy(projectileToDespawn);
         }
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

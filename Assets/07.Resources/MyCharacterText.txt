@@ -5,8 +5,6 @@
     "name": "Bub",
     "explain": "Bub 설명",
     "number": "1",
-    "isUsing": false,
-    "characterImage": null,
-    "abilities": null
+    "isUsing": false
   }
 ]

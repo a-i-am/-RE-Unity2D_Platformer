@@ -11,9 +11,9 @@ public class EnemyAnimScr : MonoBehaviour
     void Update()
     {
     }
-    public void WalkAnimation(bool shouldWalk)
+    public void WalkAnimation(bool isWalk)
     {
-        anim.SetBool("Walking", shouldWalk);
+        anim.SetBool("IsWalk", isWalk);
     }
 
     public void HurtAnimation()
@@ -21,5 +21,9 @@ public class EnemyAnimScr : MonoBehaviour
         anim.SetTrigger("Hurt");
     }
 
+    public void FaintAnimation(bool isFaint)
+    {
+        anim.SetBool("IsFaint", isFaint);
+    }
 
 }

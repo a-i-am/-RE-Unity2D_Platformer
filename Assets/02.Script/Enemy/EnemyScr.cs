@@ -2,10 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
 
 public class EnemyScr : MonoBehaviour
 {
+    public Character.CharacterData characterData; // 캐릭터(몹) 데이터
+    public SpriteRenderer image;
+
+    public void SetCharacter(Character.CharacterData _character)
+    {
+        characterData = _character;
+        image.sprite = _character.characterImage;
+    }
+
+    public Character.CharacterData GetCharacter()
+    {
+        return characterData;
+    }
+
+    public void DestroyCharacter()
+    {
+        Destroy(gameObject);
+    }
+
+    //public void Initialize(Character.CharacterData data)
+    //{
+    //    characterData = data;
+    //}
+
     [SerializeField] private float followInterval = 0.1f; // 따라가는 간격
     [SerializeField] private float chaseDistance = 8f;
     [SerializeField] private float moveDistance = 15f;
@@ -18,11 +43,14 @@ public class EnemyScr : MonoBehaviour
 
     private bool enemyIsGrounded;
     private bool enemyIsHurted = false;
+    public bool enemyIsFainted;
     private EnemyAnimScr enemyAnimScr;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rbEnemy;
     void Start()
     {
+        // Player 오브젝트를 찾아서 player에 할당
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         rbEnemy = GetComponent<Rigidbody2D>();
         enemyAnimScr = GetComponent<EnemyAnimScr>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -76,28 +104,36 @@ public class EnemyScr : MonoBehaviour
     // 0.1초 마다 플레이어 방향으로 X축 이동
     IEnumerator FollowPlayer()
     {
-        while (!enemyIsHurted)
+        while (!enemyIsHurted && !enemyIsFainted)
         {
             // 몬스터의 이동 방향 설정
             // 플레이어가 적의 오른쪽에 있는지 여부를 확인 후, 스프라이트 뒤집기
             spriteRenderer.flipX = (player.position.x > transform.position.x);
-            if (Vector2.Distance(transform.position, player.position) < chaseDistance)
-                moveSpeed = chaseSpeed; // 일정 거리 이하면 추적 속도로 변경
-            if (Vector2.Distance(transform.position, player.position) < moveDistance)
-                rbEnemy.velocity = new Vector2((player.position.x < transform.position.x ? -1 : 1) * moveSpeed, rbEnemy.velocity.y);
 
+                
+            if (Vector2.Distance(transform.position, player.position) < moveDistance)
+            {
+                rbEnemy.velocity = new Vector2((player.position.x < transform.position.x ? -1 : 1) * moveSpeed, rbEnemy.velocity.y);
+                enemyAnimScr.WalkAnimation(true);
+                
+                if (Vector2.Distance(transform.position, player.position) < chaseDistance)
+                {
+                    moveSpeed = chaseSpeed; // 일정 거리 이하면 추적 속도로 변경
+                    enemyAnimScr.WalkAnimation(true);
+                }
+            }
+            else enemyAnimScr.WalkAnimation(false);
+            yield return new WaitForSeconds(followInterval);
 
             // 걷기 애니메이션 실행 조건 설정
-            if (rbEnemy.velocity.magnitude > 0)
-            {
-                enemyAnimScr.WalkAnimation(true);
-            }
-            else
-            {
-                enemyAnimScr.WalkAnimation(false);
-            }
+            //if (rbEnemy.velocity.magnitude > 0)
+            //{
 
-            yield return new WaitForSeconds(followInterval);
+            //        //}
+            //else
+            //{
+
+            //}
         }
     }
 
@@ -105,26 +141,28 @@ public class EnemyScr : MonoBehaviour
     {
         enemyIsHurted = true;
         enemyAnimScr.HurtAnimation();
-        StartCoroutine(ResetHurtedStateAfterDelay(2.0f)); // 2초 후에 enemyIsHurted를 false로 변경
+        StartCoroutine(ResetHurtedStateAfterDelay(0.5f)); // 0.5초 후에 enemyIsHurted를 false로 변경
         health--;
         if (health <= 0)
         {
-            Die(); // 체력이 0 이하일 경우 몬스터 삭제
+            Faint(); // 체력이 0 이하일 경우 몬스터 삭제
         }
     }
     IEnumerator ResetHurtedStateAfterDelay(float delayTime)
     {
         yield return new WaitForSeconds(delayTime); // delayTime(초) 후까지 대기
-
         // delayTime(초) 후에 실행될 명령
         enemyIsHurted = false;
         StartCoroutine(FollowPlayer());
     }
 
-
-    void Die()
+    // Enemy 녹다운
+    void Faint()
     {
-        Destroy(gameObject);
-
+        Physics2D.IgnoreLayerCollision(6, 7); // Enemy(6)과 Player(7) 충돌 무시
+        enemyIsFainted = true;
+        //enemyIsHurted = false;
+        enemyAnimScr.FaintAnimation(true);
+        Debug.Log("Enemy Knock Down-!!");
     }
 }

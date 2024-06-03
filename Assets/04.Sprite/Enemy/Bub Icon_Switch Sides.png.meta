@@ -129,7 +129,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Idle (16 x 16) \uC88C\uC6B0\uBC18\uC804_0"
+      name: Bub Icon_Switch Sides_0
       rect:
         serializedVersion: 2
         x: 2
@@ -143,14 +143,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8eedc06274d51ebe0800000000000000
-      internalID: -1449775044874150168
+      spriteID: 7fe36048502eea34aa73c91bcc728d9d
+      internalID: 605954464
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Idle (16 x 16) \uC88C\uC6B0\uBC18\uC804_1"
+      name: Bub Icon_Switch Sides_1
       rect:
         serializedVersion: 2
         x: 18
@@ -164,8 +164,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71314972af2b8ca70800000000000000
-      internalID: 8847518255444923159
+      spriteID: d290cc44c9357cf4d8cc34bdb6b2c943
+      internalID: 1356151239
       vertices: []
       indices: 
       edges: []
@@ -181,8 +181,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "Idle (16 x 16) \uC88C\uC6B0\uBC18\uC804_0": -1449775044874150168
-      "Idle (16 x 16) \uC88C\uC6B0\uBC18\uC804_1": 8847518255444923159
+      Bub Icon_Switch Sides_0: 605954464
+      Bub Icon_Switch Sides_1: 1356151239
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
