@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 3f49f3b59ddb10c4689b5538dc749a10
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - characterInvenSlotUI: {instanceID: 0}
+  - itemInvenSlotUI: {instanceID: 0}
+  - characterSlotNumText: {instanceID: 0}
+  - itemSlotNumText: {instanceID: 0}
+  - itemDBText: {fileID: 4900000, guid: 5f094ad6a6a32f04bacdd37d61e9da22, type: 3}
+  - characterDBText: {fileID: 4900000, guid: 80f74175ad1178241ba46643a752c7ee, type: 3}
+  - tabIdleSprite: {instanceID: 0}
+  - tabSelectSprite: {instanceID: 0}
+  - fieldItemPrefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

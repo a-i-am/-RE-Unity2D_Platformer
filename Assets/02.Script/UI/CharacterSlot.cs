@@ -1,44 +1,111 @@
+using Assets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CharacterSlot : MonoBehaviour, IPointerClickHandler
+public class CharacterSlot : MonoBehaviour, IPointerUpHandler, IPointerClickHandler
 {
     public int characterSlotnum;
     public Character.CharacterData characterData;
     public Image characterIcon;
+    public Transform player;
+
+    FollowerSpawn followerSpawns;
+    //List<FollowerSpawn> sortedSpawns;
+    //public int spawnsOrder;
+
+    // ì†Œí™˜ëœ ëª¹ë“¤ì˜ ìœ„ì¹˜ë¥¼ ì €ì¥í•  ë¦¬ìŠ¤íŠ¸
+    //public List<Vector3> List_spawnPositions = new List<Vector3>();
+    //private int lastSpawnedIndex = 0; // ë§ˆì§€ë§‰ìœ¼ë¡œ Spawn()ì´ í˜¸ì¶œëœ ì˜¤ë¸Œì íŠ¸ì˜ ë²ˆí˜¸ë¥¼ ì €ì¥
+
+    private void Start()
+    {
+        // FollowerSpawn ìŠ¤í¬ë¦½íŠ¸ë¥¼ í¬í•¨í•œ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìŠµë‹ˆë‹¤.
+        followerSpawns = FindObjectOfType<FollowerSpawn>();
+        // ì˜¤ë¸Œì íŠ¸ì˜ ì´ë¦„ê³¼ ë§¤í•‘ë˜ëŠ” ì¸ë±ìŠ¤ë¥¼ ì •ë ¬ëœ ë¦¬ìŠ¤íŠ¸ë¡œ ë§Œë“­ë‹ˆë‹¤.
+        //sortedSpawns = new List<FollowerSpawn>();
+        //spawnsOrder = sortedSpawns.Count + 1;
+
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        //firstSpawnPosition = Inventory.instance.playerScr.transform.position + Vector3.left * 5f;
+        //lastSpawnPosition = firstSpawnPosition;
+        //Physics2D.IgnoreLayerCollision(9, 9); // Mob(9) ë¼ë¦¬ì˜ ì¶©ëŒ ë¬´ì‹œ
+    }
 
     public void UpdateCharacterSlotUI()
     {
-        characterIcon.sprite = characterData.characterImage;
-        characterIcon.gameObject.SetActive(true);
-
+        if (characterData != null)
+        {
+            characterIcon.sprite = characterData.characterImage;
+            characterIcon.gameObject.SetActive(true);
+        }
     }
+
     public void RemoveCharacterSlot()
     {
         characterData = null;
         characterIcon.gameObject.SetActive(false);
     }
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        bool characterIsUse = characterData.UseCharacter();
 
+        if (characterIsUse)
+        {
+            Inventory.instance.RemoveItem(characterSlotnum);
+            Inventory.instance.acquiredCharacters--;
+            
+        }
+
+    }
     public void OnPointerClick(PointerEventData eventData)
     {
-        //bool characterIsUse = characterData.UseCharacter();
+        if (followerSpawns == null)
+        {
+            Debug.LogError("followerSpawns is null");
+            return;
+        }
+        
+        CharacterSlot characterSlot = GetComponent<CharacterSlot>();
+        if (characterSlot != null)
+        {
+            // CharacterSlot ì»´í¬ë„ŒíŠ¸ì˜ characterDataì— ì ‘ê·¼í•˜ì—¬ ì²˜ë¦¬
+            Character.CharacterData characterData = characterSlot.characterData;
+            followerSpawns.Spawn(characterData);
+            Inventory.instance.RemoveCharacter(characterSlotnum);
+        }
+        
+        //    foreach (FollowerSpawn followerSpawn in followerSpawns)
+        //if (sortedSpawns.Count > 5) return;
 
-        Debug.Log("Ä³¸¯ÅÍ »ç¿ë!!!");
-        SpawnCharacterInField();
-        Inventory.instance.RemoveCharacter(characterSlotnum);
-        //if (characterIsUse) { }
+
+        //// followerSpawns
+        //// sortedSpawns
+        //{
+        //    if (followerSpawn.gameObject.name == "MobSpawnPosition_"+spawnsOrder)
+        //    {
+        //        Debug.Log("MobSpawnPosition_ê²€ìƒ‰");       
+        //        sortedSpawns.Add(followerSpawn);
+        //        // ë‹¤ìŒ ì˜¤ë¸Œì íŠ¸ì˜ Spawn() ë©”ì„œë“œë¥¼ í˜¸ì¶œí•©ë‹ˆë‹¤.
+        //        if (sortedSpawns.Count > 0)
+        //        {
+        //            sortedSpawns[lastSpawnedIndex].Spawn();
+        //            lastSpawnedIndex++;
+        //            Debug.Log("Spawn() í˜¸ì¶œ");
+        //            //lastSpawnedIndex = (lastSpawnedIndex + 1) % sortedSpawns.Count;
+        //        }
+        //    }
+        //}
+
+
     }
 
-    private void SpawnCharacterInField()
-    {
-        // ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡¸¦ ±âÁØÀ¸·Î ÀÏÁ¤ °Å¸® ¾Õ¿¡ Ä³¸¯ÅÍ¸¦ ¼ÒÈ¯ÇÕ´Ï´Ù.
-        Vector3 spawnPosition = Inventory.instance.playerScr.transform.position + Vector3.left * 5f;
-        Instantiate(characterData.characterPrefab, spawnPosition, Quaternion.identity);
-        // °¡Àå ÃÖ±Ù¿¡ ¼ÒÈ¯ÇÑ ¸÷ÀÇ À§Ä¡ = spawnPosition
-        // ¼ÒÈ¯ÇÑ ¸÷ÀÇ ¼ö¸¦ º¯¼ö·Î ¹İº¹¹® µ¹·Á¼­ pawnPositionº¸´Ù -Nf ¸¸Å­ ¿ŞÂÊ¿¡ ¼ÒÈ¯ 
-    }
+    //void RemoveSpawnSlot()
+    //{
+    //    //lastSpawnedIndex--;
+    //} 
 
 }

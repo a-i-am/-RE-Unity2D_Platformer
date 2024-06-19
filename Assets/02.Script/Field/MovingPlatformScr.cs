@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MovingPlatformScr : MonoBehaviour
 {
-    [SerializeField] private Transform startPos; // ¹ßÆÇ ½ÃÀÛÁöÁ¡
-    [SerializeField] private Transform endPos; // ¹ßÆÇ ³¡ ÁöÁ¡
-    [SerializeField] private Transform desPos; // ¹ßÆÇ ÀüÈ¯(µµÂø)ÁöÁ¡
-    [SerializeField] private float speed; // ¹ßÆÇ ÀÌµ¿¼Óµµ
+    [SerializeField] private Transform startPos; // ë°œíŒ ì‹œì‘ì§€ì 
+    [SerializeField] private Transform endPos; // ë°œíŒ ë ì§€ì 
+    [SerializeField] private Transform desPos; // ë°œíŒ ì „í™˜(ë„ì°©)ì§€ì 
+    [SerializeField] private float speed; // ë°œíŒ ì´ë™ì†ë„
 
     void Start()
     {

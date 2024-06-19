@@ -4,32 +4,42 @@ using System.Runtime.CompilerServices;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.U2D.Animation;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class EnemyScr : MonoBehaviour
 {
+
     public Character.CharacterData characterData; // 캐릭터(몹) 데이터
-    public SpriteRenderer image;
+    //public SpriteRenderer image;
 
     public void SetCharacter(Character.CharacterData _character)
     {
         characterData = _character;
-        image.sprite = _character.characterImage;
+        //image.sprite = _character.characterImage;
     }
 
     public Character.CharacterData GetCharacter()
     {
+        if (characterData == null)
+        {
+            Debug.LogError("GetCharacter returned null");
+        }
+        else if (characterData.characterPrefab == null)
+        {
+            Debug.LogError("GetCharacter returned a character with a null prefab");
+        }
         return characterData;
+    }
+
+    public GameObject GetCharacterPrefab()
+    {
+        return characterData.characterPrefab;
     }
 
     public void DestroyCharacter()
     {
         Destroy(gameObject);
     }
-
-    //public void Initialize(Character.CharacterData data)
-    //{
-    //    characterData = data;
-    //}
 
     [SerializeField] private float followInterval = 0.1f; // 따라가는 간격
     [SerializeField] private float chaseDistance = 8f;
@@ -54,17 +64,16 @@ public class EnemyScr : MonoBehaviour
         rbEnemy = GetComponent<Rigidbody2D>();
         enemyAnimScr = GetComponent<EnemyAnimScr>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        // 충돌한 GameObject의 Rigidbody2D 컴포넌트를 가져옴
-
-        //player = GameObject.FindWithTag("Player").GetComponent<Transform>();
-
+        Physics2D.IgnoreLayerCollision(6, 6);
         // StartCoroutine을 사용하여 코루틴 시작
         StartCoroutine(FollowPlayer());
     }
 
     // Update is called once per frame
     void Update()
-    { }
+    { 
+
+    }
 
     void FixedUpdate()
     {
@@ -159,10 +168,14 @@ public class EnemyScr : MonoBehaviour
     // Enemy 녹다운
     void Faint()
     {
-        Physics2D.IgnoreLayerCollision(6, 7); // Enemy(6)과 Player(7) 충돌 무시
+        // 현재 오브젝트의 레이어를 9번(Mob)으로 변경합니다.
+        gameObject.layer = 9;
+        Physics2D.IgnoreLayerCollision(9, 7); // Mob(9)과 Player(7) 충돌 무시
+        Physics2D.IgnoreLayerCollision(9, 8); // Mob(9)과 Attack(8) 충돌 무시 
+        Physics2D.IgnoreLayerCollision(9, 6); // Mob(9)과 Enemy(6)  충돌 무시
         enemyIsFainted = true;
-        //enemyIsHurted = false;
         enemyAnimScr.FaintAnimation(true);
+        //enemyIsHurted = false;
         Debug.Log("Enemy Knock Down-!!");
     }
 }

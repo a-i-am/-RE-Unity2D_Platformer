@@ -4,16 +4,16 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable] // µ¥ÀÌÅÍ Á÷·ÄÈ­(¸®½ºÆ® ¼ø¼­´ë·Î Inspector¿¡ Ç¥½ÃÇØÁÜ)
+[System.Serializable] // ë°ì´í„° ì§ë ¬í™”(ë¦¬ìŠ¤íŠ¸ ìˆœì„œëŒ€ë¡œ Inspectorì— í‘œì‹œí•´ì¤Œ)
 public class Character
 {
-    public Character.CharacterData characterData; // ¸÷(Ä³¸¯ÅÍ) µ¥ÀÌÅÍ
+    public Character.CharacterData characterData; // ëª¹(ìºë¦­í„°) ë°ì´í„°
     public void Initialize(Character.CharacterData data)
     {
         characterData = data;
     }
 
-    [System.Serializable] // µ¥ÀÌÅÍ Á÷·ÄÈ­(¸®½ºÆ® ¼ø¼­´ë·Î Inspector¿¡ Ç¥½ÃÇØÁÜ)
+    [System.Serializable] // ë°ì´í„° ì§ë ¬í™”(ë¦¬ìŠ¤íŠ¸ ìˆœì„œëŒ€ë¡œ Inspectorì— í‘œì‹œí•´ì¤Œ)
     public class CharacterData
     {
         public CharacterData(string _type, string _name, string _explain, string _number, bool _isUsing, Sprite _characterImage, GameObject _characterPrefab, string _tabName = "Character")
@@ -27,18 +27,21 @@ public class Character
           characterPrefab = _characterPrefab;
         }
 
-        public string tabName, type, name, explain, number; // stringÀÌ¾î¾ß JSON ÆÄ½Ì ½Ã Àß µÈ´Ù°í ÇÔ
+        public string tabName, type, name, explain, number; // stringì´ì–´ì•¼ JSON íŒŒì‹± ì‹œ ì˜ ëœë‹¤ê³  í•¨
         public bool isUsing;
         public Sprite characterImage;
         public GameObject characterPrefab;
-        public List<CharacterAbility> abilities;
+        public List<FollowerUser> sets;
         public bool UseCharacter()
         {
             isUsing = false;
-            foreach (CharacterAbility ability in abilities)
+            
+            foreach (FollowerUser set in sets)
             {
-                isUsing = ability.ExecuteRole();
+                isUsing = set.ExecuteRole();
+                Debug.Log("ExecuteRole!!");
             }
+
             return isUsing;
         }
     }

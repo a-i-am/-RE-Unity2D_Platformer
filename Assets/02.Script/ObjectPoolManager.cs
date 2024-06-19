@@ -8,42 +8,47 @@ using UnityEngine.TextCore.Text;
 public class ObjectPoolManager : MonoBehaviour
 {
     public static ObjectPoolManager instance;
-
-    [SerializeField] private GameObject projectilePrefab; // ¿ÀºêÁ§Æ® Ç®¸µÇÒ ÇÁ¸®ÆÕ
-    [SerializeField] private int initialPoolSize = 10; // ÃÊ±â Ç® Å©±â
-    [SerializeField] private float despawnTime = 5f; // »èÁ¦ ´ë±â ½Ã°£
+    [SerializeField] private GameObject projectilePrefab; // ì˜¤ë¸Œì íŠ¸ í’€ë§í•  í”„ë¦¬íŒ¹
+    [SerializeField] private int initialPoolSize = 10; // ì´ˆê¸° í’€ í¬ê¸°
+    [SerializeField] private float despawnTime = 5f; // ì‚­ì œ ëŒ€ê¸° ì‹œê°„
+    private GameObject pooledProjectileParent;
 
     private List<GameObject> pooledProjectiles;
-    private Dictionary<string, List<GameObject>> pooledMob;
-    
-    private bool isInitialized = false; // ÃÊ±âÈ­ ¿©ºÎ¸¦ ³ªÅ¸³»´Â º¯¼ö
+    //private Dictionary<string, List<GameObject>> pooledMob;
+
+    private bool isInitialized = false; // ì´ˆê¸°í™” ì—¬ë¶€ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ë³€ìˆ˜
 
     // Start is called before the first frame update
     void Start()
     {
-        if (!isInitialized) // ÃÊ±âÈ­µÇÁö ¾Ê¾ÒÀ» ¶§¸¸ ÃÊ±âÈ­ ÁøÇà
+
+        if (!isInitialized) // ì´ˆê¸°í™”ë˜ì§€ ì•Šì•˜ì„ ë•Œë§Œ ì´ˆê¸°í™” ì§„í–‰
         {
             InitializePool();
         }
     }
 
-    // Ç® ÃÊ±âÈ­ ÇÔ¼ö
+    // í’€ ì´ˆê¸°í™” í•¨ìˆ˜
     private void InitializePool()
     {
-        // ÃÊ±â Ç® ¼³Á¤
+        // ì´ˆê¸° í’€ ì„¤ì •
         pooledProjectiles = new List<GameObject>();
-        pooledMob = new Dictionary<string, List<GameObject>>();
+        GameObject pooledProjectileParent = new GameObject("Pooled_Projectile");
+        //pooledMob = new Dictionary<string, List<GameObject>>();
 
-        // ÃÊ±â Ç® Å©±â¸¸Å­ ¹ß»çÃ¼¸¦ »ı¼ºÇÏ¿© ¸®½ºÆ®¿¡ Ãß°¡ÇÏ°í ºñÈ°¼ºÈ­ »óÅÂ·Î ¼³Á¤
+        // ì´ˆê¸° í’€ í¬ê¸°ë§Œí¼ ë°œì‚¬ì²´ë¥¼ ìƒì„±í•˜ì—¬ ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€í•˜ê³  ë¹„í™œì„±í™” ìƒíƒœë¡œ ì„¤ì •
         for (int i = 0; i < initialPoolSize; i++)
         {
             GameObject pooledProjectile = Instantiate(projectilePrefab, Vector3.zero, Quaternion.identity);
             pooledProjectile.SetActive(false);
+            pooledProjectile.transform.parent = pooledProjectileParent.transform; // í’€ë§ ì˜¤ë¸Œì íŠ¸ ê·¸ë£¹í™”
             pooledProjectiles.Add(pooledProjectile);
-        }
-        #region ¸÷ Ç®¸µ1 
 
-        //// ÃÊ±â Ç® Å©±â¸¸Å­ Ä³¸¯ÅÍ¸¦ »ı¼ºÇÏ¿© ¸®½ºÆ®¿¡ Ãß°¡ÇÏ°í ºñÈ°¼ºÈ­ »óÅÂ·Î ¼³Á¤
+            Destroy(pooledProjectileParent, 3.0f);
+        }
+        #region ëª¹ í’€ë§1 
+
+        //// ì´ˆê¸° í’€ í¬ê¸°ë§Œí¼ ìºë¦­í„°ë¥¼ ìƒì„±í•˜ì—¬ ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€í•˜ê³  ë¹„í™œì„±í™” ìƒíƒœë¡œ ì„¤ì •
         //foreach (Character.CharacterData characterData in ItemDatabase.instance.characterDB)
         //{
         //    List<GameObject> mobPool = new List<GameObject>();
@@ -57,9 +62,9 @@ public class ObjectPoolManager : MonoBehaviour
         //    pooledMob[characterData.name] = mobPool;
         //}
         #endregion
-        isInitialized = true; // ÃÊ±âÈ­ ¿Ï·á
+        isInitialized = true; // ì´ˆê¸°í™” ì™„ë£Œ
     }
-    #region ¸÷ Ç®¸µ2 
+    #region ëª¹ í’€ë§2 
     //public GameObject GetMob(string characterName)
     //{
     //    if (pooledMob.ContainsKey(characterName))
@@ -87,7 +92,7 @@ public class ObjectPoolManager : MonoBehaviour
     //}
 
 
-    // ºñÈ°¼ºÈ­µÈ ¹ß»çÃ¼¸¦ °¡Á®¿À´Â ÇÔ¼ö
+    // ë¹„í™œì„±í™”ëœ ë°œì‚¬ì²´ë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜
 
     #endregion
     public GameObject GetProjectile()
@@ -96,46 +101,50 @@ public class ObjectPoolManager : MonoBehaviour
         {
             if (!pooledProjectile.activeInHierarchy)
             {
-                Debug.Log("ºñÈ°¼ºÈ­ ¹ß»çÃ¼ °¡Á®¿È");
+                Debug.Log("ë¹„í™œì„±í™” ë°œì‚¬ì²´ ê°€ì ¸ì˜´");
                 pooledProjectile.SetActive(true);
-                Invoke("DespawnProjectile", despawnTime); // ÀÏÁ¤ ½Ã°£ ÈÄ¿¡ ¹ß»çÃ¼ »èÁ¦ ¿¹¾à
+                Invoke("DespawnProjectile", despawnTime); // ì¼ì • ì‹œê°„ í›„ì— ë°œì‚¬ì²´ ì‚­ì œ ì˜ˆì•½
                 return pooledProjectile;
             }
         }
-        // ¸¸¾à ºñÈ°¼ºÈ­µÈ ¹ß»çÃ¼°¡ ¾øÀ¸¸é °æ°í¸¦ Ç¥½ÃÇÏ°í nullÀ» ¹İÈ¯
-        Debug.LogWarning("Ç®¿¡ ºñÈ°¼ºÈ­µÈ ¹ß»çÃ¼°¡ ¾ø½À´Ï´Ù. ÃÊ±â Ç® Å©±â¸¦ ´Ã·ÁÁÖ¼¼¿ä.");
+        // ë§Œì•½ ë¹„í™œì„±í™”ëœ ë°œì‚¬ì²´ê°€ ì—†ìœ¼ë©´ ê²½ê³ ë¥¼ í‘œì‹œí•˜ê³  nullì„ ë°˜í™˜
+        Debug.LogWarning("í’€ì— ë¹„í™œì„±í™”ëœ ë°œì‚¬ì²´ê°€ ì—†ìŠµë‹ˆë‹¤. ì´ˆê¸° í’€ í¬ê¸°ë¥¼ ëŠ˜ë ¤ì£¼ì„¸ìš”.");
         return null;
     }
 
-    // ¹ß»çÃ¼¸¦ Ç®¿¡ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+    // ë°œì‚¬ì²´ë¥¼ í’€ì— ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
     public void ReturnProjectile(GameObject projectile)
     {
         if (pooledProjectiles.Contains(projectile))
         {
-            projectile.SetActive(false); // ¹ß»çÃ¼¸¦ ºñÈ°¼ºÈ­ÇÕ´Ï´Ù.
+            projectile.SetActive(false); // ë°œì‚¬ì²´ë¥¼ ë¹„í™œì„±í™”í•©ë‹ˆë‹¤.
         }
         else
         {
-            Debug.LogWarning("ÀÌ Ç®¿¡´Â ÇØ´ç ¹ß»çÃ¼°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogWarning("ì´ í’€ì—ëŠ” í•´ë‹¹ ë°œì‚¬ì²´ê°€ ì—†ìŠµë‹ˆë‹¤.");
         }
     }
 
-    // ¹ß»çÃ¼ »èÁ¦ ÇÔ¼ö
-    private void DespawnProjectile()
+    // ë°œì‚¬ì²´ ì‚­ì œ í•¨ìˆ˜
+    private IEnumerator DespawnProjectile(GameObject projectile)
     {
-        GameObject projectileToDespawn = null;
-        foreach (GameObject projectile in pooledProjectiles)
-        {
-            if (projectile.activeInHierarchy)
-            {
-                projectileToDespawn = projectile;
-                break;
-            }
-        }
-        if (projectileToDespawn != null)
-        {
-            pooledProjectiles.Remove(projectileToDespawn);
-            Destroy(projectileToDespawn);
-        }
+        yield return new WaitForSeconds(despawnTime);
+        ReturnProjectile(projectile);
+
+        #region ì´ë¯¸ ReturnProjectileì—ì„œ ì²˜ë¦¬ì¤‘ì„
+        //GameObject projectileToDespawn = null;
+        //foreach (GameObject projectile in pooledProjectiles)
+        //{
+        //    if (projectile.activeInHierarchy)
+        //    {
+        //        projectileToDespawn = projectile;
+        //        break;
+        //    }
+        //}
+        //if (projectileToDespawn != null)
+        //{
+        //    pooledProjectiles.Remove(projectileToDespawn);
+        //    Destroy(projectileToDespawn);
+        #endregion
     }
 }

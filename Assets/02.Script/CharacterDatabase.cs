@@ -5,14 +5,14 @@
 //using System.IO;
 //using UnityEngine.UI;
 
-//[System.Serializable] // µ¥ÀÌÅÍ Á÷·ÄÈ­(¼ø¼­´ë·Î Inspector¿¡ Ç¥½ÃÇØÁÜ)
+//[System.Serializable] // ë°ì´í„° ì§ë ¬í™”(ìˆœì„œëŒ€ë¡œ Inspectorì— í‘œì‹œí•´ì¤Œ)
 
 //public class Character
 //{
 //    public Character(string _type, string _name, string _explain, string _number, bool _isUsing, string _tabName = "Character")
 //    { tabName = _tabName; type = _type; name = _name; explain = _explain; number = _number; isUsing = _isUsing; }
 
-//    public string tabName, type, name, explain, number; // stringÀÌ¾î¾ß JSON ÆÄ½Ì ½Ã Àß µÈ´Ù°í ÇÔ
+//    public string tabName, type, name, explain, number; // stringì´ì–´ì•¼ JSON íŒŒì‹± ì‹œ ì˜ ëœë‹¤ê³  í•¨
 //    public bool isUsing;
 //}
 
@@ -28,8 +28,8 @@
 
 //    void Start()
 //    {
-//        // ¶óÀÎ ³¡ °ø¹éÀ» Á¦¿ÜÇÏ°í ÅØ½ºÆ®¸¦ ÀĞÀ½
-//        // °³Çà¹®ÀÚ(\n)À» ±¸ºĞÀÚ·Î µ¥ÀÌÅÍ ºĞÇÒ
+//        // ë¼ì¸ ë ê³µë°±ì„ ì œì™¸í•˜ê³  í…ìŠ¤íŠ¸ë¥¼ ì½ìŒ
+//        // ê°œí–‰ë¬¸ì(\n)ì„ êµ¬ë¶„ìë¡œ ë°ì´í„° ë¶„í• 
 //        string[] line = characterDBText.text.Substring(0, characterDBText.text.Length - 1).Split('\n');
 //        //print(line.Length);
 //        for (int i = 0; i < line.Length; i++)
@@ -48,11 +48,11 @@
 
 //    public void TabClick(string tabName)
 //    {
-//        // ÇöÀç ¾ÆÀÌÅÛ ¸®½ºÆ®¿¡ Å¬¸¯ÇÑ Å¸ÀÔ¸¸ Ãß°¡
+//        // í˜„ì¬ ì•„ì´í…œ ë¦¬ìŠ¤íŠ¸ì— í´ë¦­í•œ íƒ€ì…ë§Œ ì¶”ê°€
 //        curType = tabName;
 //        curCharacterList = myCharacterList.FindAll(x => x.type == tabName);
 
-//        // ½½·Ô°ú ÅØ½ºÆ® º¸ÀÌ±â
+//        // ìŠ¬ë¡¯ê³¼ í…ìŠ¤íŠ¸ ë³´ì´ê¸°
 //        for (int i = 0; i < InvenSlot.Length; i++)
 //        {
 //            InvenSlot[i].SetActive(i < curCharacterList.Count);
@@ -70,7 +70,7 @@
 //    }
 //    void Save()
 //    {
-//        string jdata = JsonConvert.SerializeObject(allItemList); // JSONÀ¸·Î ¸®½ºÆ®¸¦ stringÀ¸·Î º¯È¯
+//        string jdata = JsonConvert.SerializeObject(allItemList); // JSONìœ¼ë¡œ ë¦¬ìŠ¤íŠ¸ë¥¼ stringìœ¼ë¡œ ë³€í™˜
 //        //print(jdata);
 //        File.WriteAllText(Application.dataPath + "/07.Resources/MyCharacterText.txt", jdata);
 //        //print(Application.dataPath);
