@@ -9,17 +9,16 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private EnemyAnimScr enemyAnimScr;
     private PlayerScr player;
-    private Vector2 direction = Vector2.right; // ¹ß»çÃ¼ ±âº» ¹æÇâ(R)
+    private Vector2 direction = Vector2.right; // ë°œì‚¬ì²´ ê¸°ë³¸ ë°©í–¥(R)
 
     [SerializeField] private float speed = 4.5f;
     void Start()
     {
-        player = FindObjectOfType<PlayerScr>(); // Player °´Ã¼ Ã£±â
+        player = FindObjectOfType<PlayerScr>(); // Player ê°ì²´ ì°¾ê¸°
         
-        // ¹ß»çÃ¼¿¡ ¼Óµµ Àû¿ë
-        Rigidbody2D rbAmmo = GetComponent<Rigidbody2D>(); // °­Ã¼ Åº(¹ß»çÃ¼)
+        // ë°œì‚¬ì²´ì— ì†ë„ ì ìš©
+        Rigidbody2D rbAmmo = GetComponent<Rigidbody2D>(); // ê°•ì²´ íƒ„(ë°œì‚¬ì²´)
         rbAmmo.velocity = direction * speed;
         
         if (player.GetComponent<SpriteRenderer>().flipX)
@@ -50,26 +49,33 @@ public class Projectile : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         EnemyScr enemy = collision.gameObject.GetComponent<EnemyScr>();
+        // "groundLayer" ë ˆì´ì–´ì˜ ë ˆì´ì–´ ë²ˆí˜¸ë¥¼ ë¯¸ë¦¬ ê°€ì ¸ì˜µë‹ˆë‹¤.
+        int groundLayer = LayerMask.NameToLayer("groundLayer");
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            gameObject.SetActive(false);
             enemy.TakeDamage();
+            Destroy(gameObject);
             //Destroy(collision.gameObject);
         }
-        
+
+        if(collision.gameObject.layer == groundLayer)
+        {
+            //gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
 
     }
 
     //private void OnTriggerEnter2D(Collider2D other)
     //{
-    //    EnemyScr enemy = other.GetComponent<EnemyScr>(); // Ãæµ¹ÇÑ ¿ÀºêÁ§Æ®°¡ ¸ó½ºÅÍÀÎÁö È®ÀÎ
+    //    EnemyScr enemy = other.GetComponent<EnemyScr>(); // ì¶©ëŒí•œ ì˜¤ë¸Œì íŠ¸ê°€ ëª¬ìŠ¤í„°ì¸ì§€ í™•ì¸
 
     //    if (enemy != null)
     //    {
-    //        enemy.TakeDamage(); // ¸ó½ºÅÍÀÇ TakeDamage() È£Ãâ
+    //        enemy.TakeDamage(); // ëª¬ìŠ¤í„°ì˜ TakeDamage() í˜¸ì¶œ
     //    }
 
-    //    Destroy(gameObject); // ¹ß»çÃ¼ »èÁ¦
+    //    Destroy(gameObject); // ë°œì‚¬ì²´ ì‚­ì œ
     //}
 
 }

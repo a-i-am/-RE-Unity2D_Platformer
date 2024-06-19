@@ -32,6 +32,7 @@ public class InventoryUI : MonoBehaviour
         inven.onChangeItem += RedrawItemSlotUI;
         inven.onChangeCharacter += RedrawCharacterSlotUI;
 
+
         inventoryPanel.SetActive(activeInventory);
     }
 

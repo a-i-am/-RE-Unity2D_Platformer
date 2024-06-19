@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.TextCore.Text;
 using static Inventory;
 
 public class Inventory : MonoBehaviour
@@ -23,6 +24,7 @@ public class Inventory : MonoBehaviour
 
     public delegate void OnItemSlotCountChange(int val);
     public delegate void OnCharacterSlotCountChange(int val);
+    
     public OnItemSlotCountChange onItemSlotCountChange;
     public OnCharacterSlotCountChange onCharacterSlotCountChange;
 
@@ -33,12 +35,12 @@ public class Inventory : MonoBehaviour
     public List<Character.CharacterData> inventory_characters = new List<Character.CharacterData>();
     public List<Item.ItemData> inventory_items = new List<Item.ItemData>();
 
-    // ÀÎº¥Åä¸® Ä³¸¯ÅÍ(¸÷), ¾ÆÀÌÅÛ º¸À¯(È¹µæ)¼ö·® Ç¥½Ã
+    // ì¸ë²¤í† ë¦¬ ìºë¦­í„°(ëª¹), ì•„ì´í…œ ë³´ìœ (íšë“)ìˆ˜ëŸ‰ í‘œì‹œ
     public int acquiredCharacters = 0;
     public int acquiredItems = 0;
 
     public InventoryUI invenUI;
-    public EnemyScr enemyScr;
+    public EnemyScr enemy;
     public PlayerScr playerScr;
 
     private int itemSlotCnt;
@@ -71,7 +73,7 @@ public class Inventory : MonoBehaviour
     }
     private void Update()
     {
-        DetectEnemy();
+        DetectMob();
     }
 
     public bool AddItem(Item.ItemData _item) // ItemData _item
@@ -92,6 +94,7 @@ public class Inventory : MonoBehaviour
         if (inventory_characters.Count < CharacterSlotCnt)
         {
             inventory_characters.Add(_character);
+            
             if (onChangeCharacter != null)
                 onChangeCharacter.Invoke();
             return true;
@@ -108,8 +111,13 @@ public class Inventory : MonoBehaviour
 
     public void RemoveCharacter(int _index)
     {
-        inventory_characters.RemoveAt(_index);
-        onChangeCharacter.Invoke();
+        if (_index >= 0 && _index < inventory_characters.Count)
+        {
+            inventory_characters.RemoveAt(_index);
+            onChangeCharacter.Invoke();
+        }
+        else Debug.LogError("Index out of range: " + _index);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -125,31 +133,34 @@ public class Inventory : MonoBehaviour
         }
 
     }
-    private void DetectEnemy()
+
+    private void DetectMob()
     {
-        // ÇÃ·¹ÀÌ¾îÀÇ ¾Õ ¹æÇâÀ¸·Î ·¹ÀÌÄ³½ºÆ®¸¦ ¹ß»çÇÏ¿© ÀûÀ» °¨ÁöÇÕ´Ï´Ù.
-        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, transform.right, 5f, LayerMask.GetMask("Enemy"));
-        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, -transform.right, 5f, LayerMask.GetMask("Enemy"));
+        // í”Œë ˆì´ì–´ì˜ ì• ë°©í–¥ìœ¼ë¡œ ë ˆì´ìºìŠ¤íŠ¸ë¥¼ ë°œì‚¬í•˜ì—¬ ì ì„ ê°ì§€í•©ë‹ˆë‹¤.
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, transform.right, 5f, LayerMask.GetMask("Mob"));
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, -transform.right, 5f, LayerMask.GetMask("Mob"));
 
         RaycastHit2D hit = hitRight.collider != null ? hitRight : hitLeft.collider != null ? hitLeft : new RaycastHit2D();
 
         if (hit.collider != null)
         {
-            EnemyScr enemy = hit.collider.GetComponent<EnemyScr>();
+            enemy = hit.collider.GetComponent<EnemyScr>();
             if (enemy != null && enemy.enemyIsFainted)
             {
                 if (Input.GetKeyDown(KeyCode.C)) // Collect
                 {
                     AddCharacter(enemy.GetCharacter());
-                    Debug.Log("Ä³¸¯ÅÍ È¹µæ!");
+                    Debug.Log("ìºë¦­í„° íšë“!");
                     enemy.DestroyCharacter();
                     acquiredCharacters++;
-                    // ¸÷ ¿ÀºêÁ§Æ®¸¦ Ç®¿¡ ¹İÈ¯ ÈÄ ÇÊµåÀÇ Enemy´Â »èÁ¦
+                    // ëª¹ ì˜¤ë¸Œì íŠ¸ë¥¼ í’€ì— ë°˜í™˜ í›„ í•„ë“œì˜ EnemyëŠ” ì‚­ì œ
                     //ObjectPoolManager.instance.ReturnMob(gameObject);
                 }
             }
         }
     }
+
+
 
 
 

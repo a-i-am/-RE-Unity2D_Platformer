@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable] // µ¥ÀÌÅÍ Á÷·ÄÈ­(¼ø¼­´ë·Î Inspector¿¡ Ç¥½ÃÇØÁÜ)
+[System.Serializable] // ë°ì´í„° ì§ë ¬í™”(ìˆœì„œëŒ€ë¡œ Inspectorì— í‘œì‹œí•´ì¤Œ)
 public class Item
 {
-    [System.Serializable] // µ¥ÀÌÅÍ Á÷·ÄÈ­(¸®½ºÆ® ¼ø¼­´ë·Î Inspector¿¡ Ç¥½ÃÇØÁÜ)
+    [System.Serializable] // ë°ì´í„° ì§ë ¬í™”(ë¦¬ìŠ¤íŠ¸ ìˆœì„œëŒ€ë¡œ Inspectorì— í‘œì‹œí•´ì¤Œ)
     public class ItemData
     {
         //public SpriteRenderer image;
         public ItemData(string _type, string _name, string _explain, string _number, bool _isUsing, string _tabName = "Item")
         { tabName = _tabName; type = _type; name = _name; explain = _explain; number = _number; isUsing = _isUsing; }
 
-        public string tabName, type, name, explain, number; // stringÀÌ¾î¾ß JSON ÆÄ½Ì ½Ã Àß µÈ´Ù°í ÇÔ
+        public string tabName, type, name, explain, number; // stringì´ì–´ì•¼ JSON íŒŒì‹± ì‹œ ì˜ ëœë‹¤ê³  í•¨
         private bool isUsing;
         public Sprite itemImage;
-        public List<ItemEffect> efts;
+        public List<ItemEffect> efts; 
 
         public bool UseItem()
         {

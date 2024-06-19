@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using System.IO;
 using UnityEngine.UI;
 
-public class ItemDatabase : MonoBehaviour
+public class InventoryDatabase : MonoBehaviour
 {
 
 
@@ -14,7 +14,7 @@ public class ItemDatabase : MonoBehaviour
     public GameObject characterSlotNumText;
     public GameObject itemSlotNumText;
 
-    public static ItemDatabase instance;
+    public static InventoryDatabase instance;
     public TextAsset itemDBText, characterDBText;
 
     public List<Character.CharacterData> allCharacterList = new List<Character.CharacterData>();
@@ -39,22 +39,22 @@ public class ItemDatabase : MonoBehaviour
 
     void Start()
     {
-        // ÇÊµå¿¡ ¾ÆÀÌÅÛ ¸®½ºÆ® Áß ·£´ı »ı¼º
-        for (int i = 0; i < 7; i++) // »ı¼ºÇÒ ¾ÆÀÌÅÛ °³¼ö¸¸Å­ ¹İº¹ // ÀÎ½ºÆåÅÍ¿¡ Pos °³¼ö ¹× »ı¼º À§Ä¡ ÀÛ¼º ÇÊ¿ä
+        // í•„ë“œì— ì•„ì´í…œ ë¦¬ìŠ¤íŠ¸ ì¤‘ ëœë¤ ìƒì„±
+        for (int i = 0; i < 7; i++) // ìƒì„±í•  ì•„ì´í…œ ê°œìˆ˜ë§Œí¼ ë°˜ë³µ // ì¸ìŠ¤í™í„°ì— Pos ê°œìˆ˜ ë° ìƒì„± ìœ„ì¹˜ ì‘ì„± í•„ìš”
         {
             GameObject go = Instantiate(fieldItemPrefab, pos[i], Quaternion.identity);
             FieldItems fieldItems = go.GetComponent<FieldItems>();
             fieldItems.SetRandomItem();
         }
 
-        // ¶óÀÎ ³¡ °ø¹éÀ» Á¦¿ÜÇÏ°í ÅØ½ºÆ®¸¦ ÀĞÀ½
-        // °³Çà¹®ÀÚ(\n)À» ±¸ºĞÀÚ·Î µ¥ÀÌÅÍ ºĞÇÒ
+        // ë¼ì¸ ë ê³µë°±ì„ ì œì™¸í•˜ê³  í…ìŠ¤íŠ¸ë¥¼ ì½ìŒ
+        // ê°œí–‰ë¬¸ì(\n)ì„ êµ¬ë¶„ìë¡œ ë°ì´í„° ë¶„í• 
         string[] characterLine = characterDBText.text.Substring(0, characterDBText.text.Length - 1).Split('\n');
         for (int i = 0; i < characterLine.Length; i++)
         {
             string[] row = characterLine[i].Split('\t');
-            Sprite characterImage = Resources.Load<Sprite>(row[5]); // Ä³¸¯ÅÍ ÀÌ¹ÌÁö °æ·Î¿¡¼­ ½ºÇÁ¶óÀÌÆ® ·Îµå
-            GameObject characterPrefab = Resources.Load<GameObject>(row[6]); // Ä³¸¯ÅÍ ÇÁ¸®ÆÕ °æ·Î¿¡¼­ ·Îµå
+            Sprite characterImage = Resources.Load<Sprite>(row[5]); // ìºë¦­í„° ì´ë¯¸ì§€ ê²½ë¡œì—ì„œ ìŠ¤í”„ë¼ì´íŠ¸ ë¡œë“œ
+            GameObject characterPrefab = Resources.Load<GameObject>(row[6]); // ìºë¦­í„° í”„ë¦¬íŒ¹ ê²½ë¡œì—ì„œ ë¡œë“œ
 
             allCharacterList.Add(new Character.CharacterData(
                 row[0],  // type
@@ -68,19 +68,24 @@ public class ItemDatabase : MonoBehaviour
         }
 
         string[] itemLine = itemDBText.text.Substring(0, itemDBText.text.Length - 1).Split('\n');
-        //print(line.Length);
+        //print(itemLine.Length);
         for (int i = 0; i < itemLine.Length; i++)
         {
             string[] row = itemLine[i].Split('\t');
-            allItemList.Add(new Item.ItemData(row[0], row[1], row[2], row[3], row[4] == "TRUE", row[5]));
+            allItemList.Add(new Item.ItemData(
+                row[0],
+                row[1],
+                row[2],
+                row[3],
+                row[4] == "FALSE"));
         }
 
-        CharacterSave();
-        CharacterLoad();
         ItemSave();
         ItemLoad();
+        CharacterSave();
+        CharacterLoad();
 
-        // TabClick ¸Ş¼­µå È£ÃâÇÏ¿© ÃÊ±â ÅÇ ¼³Á¤
+        // TabClick ë©”ì„œë“œ í˜¸ì¶œí•˜ì—¬ ì´ˆê¸° íƒ­ ì„¤ì •
         TabClick("Character");
     }
 
@@ -91,19 +96,19 @@ public class ItemDatabase : MonoBehaviour
 
     public void TabClick(string tabName)
     {
-        // ÇöÀç ¾ÆÀÌÅÛ ¸®½ºÆ®¿¡ Å¬¸¯ÇÑ Å¸ÀÔ¸¸ Ãß°¡
+        // í˜„ì¬ ì•„ì´í…œ ë¦¬ìŠ¤íŠ¸ì— í´ë¦­í•œ íƒ€ì…ë§Œ ì¶”ê°€
         curType = tabName;
         curItemList = myItemList.FindAll(x => x.type == tabName);
         curCharacterList = myCharacterList.FindAll(x => x.type == tabName);
 
-        // Character ¸®½ºÆ® ½½·Ô°ú ÅØ½ºÆ® º¸ÀÌ±â
+        // Character ë¦¬ìŠ¤íŠ¸ ìŠ¬ë¡¯ê³¼ í…ìŠ¤íŠ¸ ë³´ì´ê¸°
         for (int i_Character = 0; i_Character < InvenSlot.Length; i_Character++)
         {
             InvenSlot[i_Character].SetActive(i_Character < curCharacterList.Count);
             //ItemInfo[i_Character].GetComponentInChildren<Text>().text = i < curItemList.Count ? curItemList[i].Name : "";
         }
 
-        // Item ¸®½ºÆ® ½½·Ô°ú ÅØ½ºÆ® º¸ÀÌ±â
+        // Item ë¦¬ìŠ¤íŠ¸ ìŠ¬ë¡¯ê³¼ í…ìŠ¤íŠ¸ ë³´ì´ê¸°
         for (int i_item = 0; i_item < InvenSlot.Length; i_item++)
         {
             InvenSlot[i_item].SetActive(i_item < curCharacterList.Count);
@@ -116,7 +121,7 @@ public class ItemDatabase : MonoBehaviour
         {
             case "Character": tabNum = 0; break;
             case "Item": tabNum = 1; break;
-            default: tabNum = 2; break; // caseÁ¶°Çµé¿¡ ÀüºÎ ÇØ´çÇÏÁö ¾Ê´Â °æ¿ì
+            default: tabNum = 2; break; // caseì¡°ê±´ë“¤ì— ì „ë¶€ í•´ë‹¹í•˜ì§€ ì•ŠëŠ” ê²½ìš°
         }
 
             for (int i = 0; i < tabImage.Length; i++)
@@ -151,8 +156,8 @@ public class ItemDatabase : MonoBehaviour
 
     void CharacterSave()
     {
-        string jdata = JsonConvert.SerializeObject(allCharacterList, Formatting.Indented); // JSONÀ¸·Î ¸®½ºÆ®¸¦ stringÀ¸·Î º¯È¯
-        //print(jdata);
+        string jdata = JsonConvert.SerializeObject(allCharacterList, Formatting.Indented); // JSONìœ¼ë¡œ ë¦¬ìŠ¤íŠ¸ë¥¼ stringìœ¼ë¡œ ë³€í™˜
+        print(jdata);
         File.WriteAllText(Application.dataPath + "/07.Resources/MyCharacterText.txt", jdata);
         //print(Application.dataPath);
     }
@@ -161,13 +166,12 @@ public class ItemDatabase : MonoBehaviour
     {
         string jdata = File.ReadAllText(Application.dataPath + "/07.Resources/MyCharacterText.txt");
         myCharacterList = JsonConvert.DeserializeObject<List<Character.CharacterData>>(jdata);
-        TabClick(curType); // ¸Ç Ã³À½ ¼±ÅÃµÇ¾îÀÖ´Â ¸ŞÀÎ ÅÇ(Ä³¸¯ÅÍÅÇ)
+        TabClick(curType); // ë§¨ ì²˜ìŒ ì„ íƒë˜ì–´ìˆëŠ” ë©”ì¸ íƒ­(ìºë¦­í„°íƒ­)
     }
-
     void ItemSave()
     {
-        string jdata = JsonConvert.SerializeObject(allItemList, Formatting.Indented); // JSONÀ¸·Î ¸®½ºÆ®¸¦ stringÀ¸·Î º¯È¯
-        //print(jdata);
+        string jdata = JsonConvert.SerializeObject(allItemList, Formatting.Indented); // JSONìœ¼ë¡œ ë¦¬ìŠ¤íŠ¸ë¥¼ stringìœ¼ë¡œ ë³€í™˜
+        print(jdata);
         File.WriteAllText(Application.dataPath + "/07.Resources/MyItemText.txt", jdata);
         //print(Application.dataPath);
     }
@@ -177,6 +181,7 @@ public class ItemDatabase : MonoBehaviour
         string jdata = File.ReadAllText(Application.dataPath + "/07.Resources/MyItemText.txt");
         myItemList = JsonConvert.DeserializeObject<List<Item.ItemData>>(jdata);
     }
+
 
 
 }

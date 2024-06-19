@@ -26,4 +26,8 @@ public class EnemyAnimScr : MonoBehaviour
         anim.SetBool("IsFaint", isFaint);
     }
 
+    public void RespawnAnimation()
+    {
+        anim.SetTrigger("isRespawn");
+    }
 }

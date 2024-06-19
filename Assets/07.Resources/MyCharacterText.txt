@@ -1,10 +1,13 @@
 [
   {
     "tabName": "Character",
-    "type": "Enemy",
+    "type": "Character",
     "name": "Bub",
     "explain": "Bub 설명",
     "number": "1",
-    "isUsing": false
+    "isUsing": false,
+    "characterImage": null,
+    "characterPrefab": null,
+    "sets": null
   }
 ]
