@@ -31,14 +31,14 @@ public class Character
         public bool isUsing;
         public Sprite characterImage;
         public GameObject characterPrefab;
-        public List<FollowerUser> sets;
+        public List<FollowerEffect> efts;
         public bool UseCharacter()
         {
             isUsing = false;
             
-            foreach (FollowerUser set in sets)
+            foreach (FollowerEffect eft in efts)
             {
-                isUsing = set.ExecuteRole();
+                isUsing = eft.ExecuteRole();
                 Debug.Log("ExecuteRole!!");
             }
 

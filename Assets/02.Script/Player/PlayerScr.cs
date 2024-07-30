@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Assets;
 using System;
+using UnityEngine.WSA;
 
 namespace Assets
 {
@@ -30,7 +31,9 @@ namespace Assets
 
         private bool deadWait; // 사망 시 다음 동작 지연
         private bool respawnOrDead; // 플레이어 사망 유형(리스폰 or 게임오버) 판정
+        private bool canLaunch = true; // Launch 메서드 호출 가능 여부
         internal bool isGrounded; // 지면 판정
+        internal bool isAttacking; 
 
 
         //코요태타임점프(코루틴을 사용한 지연 점프)
@@ -52,12 +55,12 @@ namespace Assets
             inputHorizontal = Input.GetAxisRaw("Horizontal");
             Jump();
             Launch();
+            CheckGrounded(); // 캐릭터의 땅과의 충돌 여부를 검사하는 메소드 호출
         }
 
         void FixedUpdate()
         {
             Walk();
-            CheckGrounded(); // 캐릭터의 땅과의 충돌 여부를 검사하는 메소드 호출
             KeepPlayerOnGround();
             UpdateCoyoteTimer();
         }
@@ -71,13 +74,13 @@ namespace Assets
             currentVelocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
             // 플레이어 스프라이트는 기본 오른쪽 방향
             // 뒤집어야될 순간은 왼쪽 방향으로 움직일 때 
-            if (inputHorizontal < 0 && !respawnOrDead)
+            if (!isAttacking && inputHorizontal < 0 && !respawnOrDead)
             {
                 rb.velocity = currentVelocity;
                 spriteRenderer.flipX = true;
                 //projectileFlipX = true;
             }
-            else if (inputHorizontal > 0 && !respawnOrDead)
+            else if (!isAttacking && inputHorizontal > 0 && !respawnOrDead)
             {
                 rb.velocity = currentVelocity;
                 spriteRenderer.flipX = false;
@@ -95,27 +98,65 @@ namespace Assets
             if (Input.GetButton("Jump") && isGrounded)
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
+
+        //void CurrentAttack(string currentAttackState)
+        //{
+        //    switch (currentAttackState)
+        //    {
+        //        case "Launch":
+        //            Launch();
+        //            break;
+        //    }
+        //}
+
+
         void Launch()
         {
             // 플레이어는 자신이 공격 당한 상태 외엔 공격 가능
             // hurt() 판정으로 확인하기 
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetKeyDown(KeyCode.Z) && canLaunch)
             {
-                GameObject projectile;
-                //Debug.Log("Projectile Launch");
-                if (spriteRenderer.flipX)
+                if (!isGrounded)
                 {
-                    projectile = Instantiate(projectilePrefab, launchOffsetL.position, transform.rotation);
-                    // 3초 후에 발사체 삭제
-                    //Destroy(projectilePrefab, 3.0f);
+                    playerAnimScr.AerialLaunchAnimation();
+                    Invoke("InstantiateProjectile", 0.4f); // 0.4초 후에 발사체 생성
                 }
                 else
-                    projectile = Instantiate(projectilePrefab, launchOffsetR.position, transform.rotation);
-                // 3초 후에 발사체 삭제
-                Destroy(projectile, 3.0f);
+                {
+                    playerAnimScr.LaunchAnimation();
+                    Invoke("InstantiateProjectile", 0.2f); // 0.2초 후에 발사체 생성
+                }
 
+                canLaunch = false; // Launch 메서드 일시적으로 호출 불가능하게 설정
+                isAttacking = true;
 
+                // 3초 후에 LaunchExit 메서드 호출
+                Invoke("LaunchExit", 0.7f);
+                // 1초 후에 Launch 메서드 다시 호출 가능하게 설정
+                Invoke("ResetLaunch", 1.0f);
             }
+        }
+
+        void InstantiateProjectile()
+        {
+            GameObject projectile;
+            if (spriteRenderer.flipX)
+                projectile = Instantiate(projectilePrefab, launchOffsetL.position, transform.rotation);
+            else
+                projectile = Instantiate(projectilePrefab, launchOffsetR.position, transform.rotation);
+
+            // 3초 후에 발사체 삭제
+            Destroy(projectile, 3.0f);
+        }
+
+        void LaunchExit()
+        {
+            isAttacking = false;
+        }
+
+        void ResetLaunch()
+        {
+            canLaunch = true; // Launch 메서드 호출 가능하게 설정
         }
 
         // 코요태타임점프 코루틴
@@ -151,7 +192,7 @@ namespace Assets
                 isGrounded = false;
             }
 
-            Debug.DrawRay(raycastStart, Vector2.down * 3.0f, Color.green); // 레이를 시각적으로 표시
+            Debug.DrawRay(raycastStart, Vector2.down * 0.2f, Color.green); // 레이를 시각적으로 표시
 
             //Debug.Log("isGrounded: " + isGrounded);
         }

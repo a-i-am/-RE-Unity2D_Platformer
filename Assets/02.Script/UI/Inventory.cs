@@ -38,6 +38,7 @@ public class Inventory : MonoBehaviour
     // 인벤토리 캐릭터(몹), 아이템 보유(획득)수량 표시
     public int acquiredCharacters = 0;
     public int acquiredItems = 0;
+    public int pickupMobCount = 0;
 
     public InventoryUI invenUI;
     public EnemyScr enemy;
@@ -76,9 +77,7 @@ public class Inventory : MonoBehaviour
         DetectMob();
     }
 
-    private void FixedUpdate()
-    {
-    }
+
     public bool AddItem(Item.ItemData _item) // ItemData _item
     {
         if (inventory_items.Count < ItemSlotCnt)
@@ -153,7 +152,7 @@ public class Inventory : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.C)) // Collect
                 {
                     AddCharacter(enemy.GetCharacter());
-
+                    pickupMobCount += 1;
                     Debug.Log("캐릭터 획득!");
                     enemy.DestroyCharacter();
                     acquiredCharacters++;

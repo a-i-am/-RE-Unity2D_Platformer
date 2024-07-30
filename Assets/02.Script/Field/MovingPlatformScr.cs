@@ -11,6 +11,7 @@ public class MovingPlatformScr : MonoBehaviour
 
     void Start()
     {
+
         transform.position = startPos.position;
         desPos = endPos;
     }

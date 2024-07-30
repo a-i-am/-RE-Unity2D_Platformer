@@ -6,12 +6,7 @@ public class FollowerSpawn : MonoBehaviour
 {
     //[SerializeField] float spawnDistance = 5f;
     [SerializeField] List<GameObject> spawnObjectList;
-    public Transform front;
-    public Queue<Vector2> frontPos;
-    public Vector2 followerPos;
-    public int followDelay = 12;
     Transform player;
-    Vector3 spawnPos;
 
     void Start()
     {
@@ -19,7 +14,6 @@ public class FollowerSpawn : MonoBehaviour
 
     void Awake()
     {
-        frontPos = new Queue<Vector2>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -75,31 +69,5 @@ public class FollowerSpawn : MonoBehaviour
                 break;
             }
         }
-
-
-        //if (spawnPosList.Count > 5) return;
-        //int spawnPosOrder = spawnPosList.Count + 1;
-        //spawnPos = player.transform.position + Vector3.left * spawnDistance * spawnPosOrder;
-        ////characterData = Inventory.instance.enemy.GetCharacter();
-
-        ////bool hasFollowerChild = false;
-
-        //for (int i = 0; i < player.childCount; i++)
-        //{
-        //    Transform child = player.GetChild(i);
-        //    Debug.Log("자식 오브젝트를 가져옵니다.");
-
-        //    //if (child.CompareTag("Follower"))
-        //    if (child.name == "MobSpawnPosition_" + spawnPosOrder)
-        //    {
-        //        Debug.Log("몹 소환!!!");
-        //        GameObject FollowerPrefab = Instantiate(Inventory.instance.enemy.characterData.characterPrefab);
-        //        //FollowerPrefab.transform.SetParent(parent.transform);
-        //        FollowerPrefab.name = "Follower " + spawnPosOrder;
-        //        spawnPosList.Add(spawnPos);
-        //        //hasFollowerChild = true;
-        //        //break;
-        //    }
-        //}
     }
 }

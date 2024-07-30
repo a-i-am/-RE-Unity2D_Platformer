@@ -8,10 +8,11 @@ namespace Assets
     {
         private Animator anim;
         private float inputHorizontal;
-        
+        PlayerScr player;
         void Awake()
         {
             anim = GetComponentInChildren<Animator>();
+            player = GetComponent<PlayerScr>();
         }
         #region MoveSpeedComment
         //public float MoveSpeed
@@ -22,17 +23,15 @@ namespace Assets
         #endregion
         void Update()
         {
-            var isGroundClass = GetComponent<PlayerScr>();
-
             // Walk Anim
             inputHorizontal = Input.GetAxisRaw("Horizontal");
-            if (inputHorizontal != 0 && isGroundClass.isGrounded)
+            if (!player.isAttacking && inputHorizontal != 0 && player.isGrounded)
             {
                 anim.SetTrigger("Walking");
             }
             else { anim.ResetTrigger("Walking"); }
 
-            if (Input.GetButton("Jump") && isGroundClass.isGrounded)
+            if (Input.GetButton("Jump") && player.isGrounded)
             {
                 anim.SetBool("Jump", true);
             }
@@ -57,5 +56,19 @@ namespace Assets
             anim.SetBool("DeadJump", fallDead);
         }
 
+        public void LaunchAnimation()
+        {
+            if (Input.GetKeyDown(KeyCode.Z)){
+                anim.SetTrigger("Launch");
+            }
+        }
+
+        public void AerialLaunchAnimation()
+        {
+            if (!player.isGrounded)
+            {
+                anim.SetTrigger("AerialLaunch");
+            }
+        }
     }
 }
