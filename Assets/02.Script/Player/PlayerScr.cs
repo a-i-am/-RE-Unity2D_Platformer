@@ -9,14 +9,15 @@ namespace Assets
 {
     public class PlayerScr : MonoBehaviour
     {
+        public ParticleSystem CastingSpellEffect;
         public ObjectPoolManager projectilePool;
         private Rigidbody2D rb;
         private Vector2 currentVelocity;
         private PlayerAnimScr playerAnimScr;
-
         private LayerMask groundLayer; // Ground 레이어를 가진 오브젝트와의 충돌을 감지
         private SpriteRenderer spriteRenderer;
         private float inputHorizontal;
+        private float keyHoldTime = 0f;
 
         //[SerializeField] private Projectile projectilePrefab;
         [SerializeField] private GameObject projectilePrefab;
@@ -24,6 +25,7 @@ namespace Assets
         [SerializeField] private Transform launchOffsetR;
         [SerializeField] private float moveSpeed = 13f;
         [SerializeField] private float jumpForce = 45f;
+
         [SerializeField] private float coyoteTime = 0.1f; // 코요태 점프 타임
         [SerializeField] private float coyoteTimer = 0f; // 코요태 점프 타이머
         [SerializeField] private float attackDistance;
@@ -33,7 +35,7 @@ namespace Assets
         private bool respawnOrDead; // 플레이어 사망 유형(리스폰 or 게임오버) 판정
         private bool canLaunch = true; // Launch 메서드 호출 가능 여부
         internal bool isGrounded; // 지면 판정
-        internal bool isAttacking; 
+        internal bool isAttacking;
 
 
         //코요태타임점프(코루틴을 사용한 지연 점프)
@@ -48,6 +50,7 @@ namespace Assets
             rb = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             playerAnimScr = GetComponent<PlayerAnimScr>();
+            CastingSpellEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
         }
 
         void Update()
@@ -63,6 +66,7 @@ namespace Assets
             Walk();
             KeepPlayerOnGround();
             UpdateCoyoteTimer();
+            CastingSpell();
         }
         public SpriteRenderer SpriteRenderer
         {
@@ -113,8 +117,7 @@ namespace Assets
         void Launch()
         {
             // 플레이어는 자신이 공격 당한 상태 외엔 공격 가능
-            // hurt() 판정으로 확인하기 
-            if (Input.GetKeyDown(KeyCode.Z) && canLaunch)
+            if (Input.GetKeyDown(KeyCode.Z) && canLaunch && !Input.GetKey(KeyCode.X))
             {
                 if (!isGrounded)
                 {
@@ -135,6 +138,7 @@ namespace Assets
                 // 1초 후에 Launch 메서드 다시 호출 가능하게 설정
                 Invoke("ResetLaunch", 1.0f);
             }
+
         }
 
         void InstantiateProjectile()
@@ -159,6 +163,33 @@ namespace Assets
             canLaunch = true; // Launch 메서드 호출 가능하게 설정
         }
 
+        void CastingSpell()
+        {
+            if (Input.GetKey(KeyCode.X))
+            {
+                if (!CastingSpellEffect.isPlaying)
+                {
+                    playerAnimScr.CastingSpellAnimation(true);
+                    CastingSpellEffect.Play();
+                }
+            }
+            else if (CastingSpellEffect.isPlaying)
+            {
+                playerAnimScr.CastingSpellAnimation(false);
+                CastingSpellEffect.Stop();
+            }
+            //if (Input.GetKey(KeyCode.X) && !CastingSpellEffect.isPlaying)
+            //{
+            //    playerAnimScr.CastingSpellAnimation(true);
+            //    CastingSpellEffect.Play();
+            //}
+            //else
+            //{
+            //    playerAnimScr.CastingSpellAnimation(false);
+            //    CastingSpellEffect.Stop();
+            //}
+        }
+
         // 코요태타임점프 코루틴
         IEnumerator CoyoteTimeJump()
         {
@@ -172,6 +203,7 @@ namespace Assets
                 StartCoroutine(CoyoteTimeJump());
             }
         }
+
         internal void CheckGrounded()
         {
             // 캐릭터의 아래에 있는 Collider의 절반 크기만큼의 레이를 쏘아서 땅과 충돌하는지 여부를 검사
@@ -244,7 +276,7 @@ namespace Assets
                 gameObject.GetComponent<Collider2D>().enabled = false;
                 // 만약 목숨이 0개라면(GameOverDeath)
             }
-        }
+        } 
 
     }
 }

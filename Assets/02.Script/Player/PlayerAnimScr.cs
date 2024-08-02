@@ -51,9 +51,9 @@ namespace Assets
         }
 
         // DeadJump Anim(GameOver action 1)
-        public void DeadJumpAnimation(bool fallDead)
+        public void DeadJumpAnimation(bool isFallDead)
         {
-            anim.SetBool("DeadJump", fallDead);
+            anim.SetBool("DeadJump", isFallDead);
         }
 
         public void LaunchAnimation()
@@ -69,6 +69,19 @@ namespace Assets
             {
                 anim.SetTrigger("AerialLaunch");
             }
+        }
+
+        public void CastingSpellAnimation(bool isCastingSpell)
+        {
+            anim.SetBool("CastingSpell", isCastingSpell);
+            //if(!player.isAttacking && Input.GetKey(KeyCode.X))
+            //{
+            //    anim.SetTrigger("CastingSpell");
+            //}
+            //else if (Input.GetKeyUp(KeyCode.X)) 
+            //{ anim.ResetTrigger("CastingSpell"); }
+
+
         }
     }
 }
