@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 56f50ad309c2ad944a1a5eab8f743abb
+guid: b1d5fe7c11c9a2f468d854006a16e317
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,133 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Spike-FX_0
-      rect:
-        serializedVersion: 2
-        x: 28
-        y: 80
-        width: 10
-        height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5330c796a756b2247abb0e94692efea8
-      internalID: -1893866402
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spike-FX_1
-      rect:
-        serializedVersion: 2
-        x: 79
-        y: 79
-        width: 30
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: da0cc5681bcbada49b797bc308069b1d
-      internalID: -260682067
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spike-FX_2
-      rect:
-        serializedVersion: 2
-        x: 140
-        y: 81
-        width: 37
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2cad233812b726f42bbaec5b918bbbcf
-      internalID: 475536304
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spike-FX_3
-      rect:
-        serializedVersion: 2
-        x: 202
-        y: 81
-        width: 39
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee38bb329a1ae4145b915aac69c0c4ef
-      internalID: 819289944
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spike-FX_4
-      rect:
-        serializedVersion: 2
-        x: 267
-        y: 81
-        width: 39
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fe8255a11ec085f458e2f7b2efa2cc8d
-      internalID: -522702547
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spike-FX_5
-      rect:
-        serializedVersion: 2
-        x: 330
-        y: 81
-        width: 39
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 200fcc6c26c7dec47b788e8d2e257b69
-      internalID: -1755655295
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spike-FX_6
+      name: Spike-FX(L)_0
       rect:
         serializedVersion: 2
         x: 27
@@ -263,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a91d0ee8a42ef514ca1d8f27d1740e09
-      internalID: 1217706777
+      spriteID: 2c0358f78ed369a4e84a3e7e35ded0fc
+      internalID: -1760288409
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spike-FX_7
+      name: Spike-FX(L)_1
       rect:
         serializedVersion: 2
         x: 84
@@ -284,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04f90a55f4a1f984cb7cb2f8f93e7006
-      internalID: -143282964
+      spriteID: bf2ed7e55fde35c4c9aba53538bd69d6
+      internalID: 131745477
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spike-FX_8
+      name: Spike-FX(L)_2
       rect:
         serializedVersion: 2
         x: 144
@@ -305,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99c6b6461396e6442bc37e321e29af28
-      internalID: -29173057
+      spriteID: fedca6769ec30ce4d8636a69d962cf9b
+      internalID: 1906671390
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spike-FX_9
+      name: Spike-FX(L)_3
       rect:
         serializedVersion: 2
         x: 208
@@ -326,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63a22674383b41644a2176e4edae46f1
-      internalID: 1046752839
+      spriteID: 4a704593ae7e2bf4a95d6bbf9e74fc12
+      internalID: -1555634715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spike-FX_10
+      name: Spike-FX(L)_4
       rect:
         serializedVersion: 2
         x: 271
@@ -347,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1d720c6354e29a4191fd7d8d812993b
-      internalID: -1593893744
+      spriteID: cfc7bcace6d4133478359f5fd9c9af30
+      internalID: -513129852
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spike-FX_11
+      name: Spike-FX(L)_5
       rect:
         serializedVersion: 2
         x: 336
@@ -368,8 +242,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8ae401c6f6864f41be750f3efcebaf5
-      internalID: 1075203779
+      spriteID: 711c3b266672ce349815f930095a8b44
+      internalID: -97411984
       vertices: []
       indices: 
       edges: []
@@ -377,7 +251,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 60838c230d5bfb346b7c0e47d70bc544
+    spriteID: fe8b2968ce3e01948b1ae7758ff28ed4
     internalID: 0
     vertices: []
     indices: 
@@ -385,18 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Spike-FX_0: -1893866402
-      Spike-FX_1: -260682067
-      Spike-FX_10: -1593893744
-      Spike-FX_11: 1075203779
-      Spike-FX_2: 475536304
-      Spike-FX_3: 819289944
-      Spike-FX_4: -522702547
-      Spike-FX_5: -1755655295
-      Spike-FX_6: 1217706777
-      Spike-FX_7: -143282964
-      Spike-FX_8: -29173057
-      Spike-FX_9: 1046752839
+      Spike-FX(L)_0: -1760288409
+      Spike-FX(L)_1: 131745477
+      Spike-FX(L)_2: 1906671390
+      Spike-FX(L)_3: -1555634715
+      Spike-FX(L)_4: -513129852
+      Spike-FX(L)_5: -97411984
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
