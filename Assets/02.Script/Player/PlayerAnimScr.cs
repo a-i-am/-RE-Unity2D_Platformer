@@ -25,7 +25,7 @@ namespace Assets
         {
             // Walk Anim
             inputHorizontal = Input.GetAxisRaw("Horizontal");
-            if (!player.isAttacking && inputHorizontal != 0 && player.isGrounded)
+            if (!player.isCastingSpell && !player.isAttacking && inputHorizontal != 0 && player.isGrounded)
             {
                 anim.SetTrigger("Walking");
             }

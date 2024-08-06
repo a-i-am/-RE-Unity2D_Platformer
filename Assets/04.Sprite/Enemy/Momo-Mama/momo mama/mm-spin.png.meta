@@ -1,19 +1,7 @@
 fileFormatVersion: 2
-guid: d520fb93044df964690ee4a3de31c19c
+guid: c986595e2a69d154785a34fe0c0d6147
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -6104551238558647709
-    second: Casting_Spell_(32 x 32)_0
-  - first:
-      213: 4673131932831552926
-    second: Casting_Spell_(32 x 32)_1
-  - first:
-      213: -4742112648835774252
-    second: Casting_Spell_(32 x 32)_2
-  - first:
-      213: -4771219881485868360
-    second: Casting_Spell_(32 x 32)_3
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +39,7 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -77,7 +65,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -135,85 +123,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Casting_Spell_(32 x 32)_0
+      name: mm-spin_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
+        x: 5
+        y: 15
+        width: 55
+        height: 36
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa4bb206e621ff44db5b518c504aaa34
-      internalID: -6104551238558647709
+      spriteID: be9da77fb8ca982428328a093fd399f6
+      internalID: 159857389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Casting_Spell_(32 x 32)_1
+      name: mm-spin_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
+        x: 71
+        y: 15
+        width: 54
+        height: 36
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8d9dd7e9684ad74aa636e7c34b71ac8
-      internalID: 4673131932831552926
+      spriteID: a32082dc08a4dfe45a5139bd0d42710d
+      internalID: 241404147
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Casting_Spell_(32 x 32)_2
+      name: mm-spin_2
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
+        x: 133
+        y: 15
+        width: 55
+        height: 36
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 362ec8c1575961a49a9b445243bf27e9
-      internalID: -4742112648835774252
+      spriteID: ac5576f4b64b87a458c36022fe85c45d
+      internalID: -492518081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Casting_Spell_(32 x 32)_3
+      name: mm-spin_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
+        x: 196
+        y: 15
+        width: 54
+        height: 36
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fafce826a9d33344d8087beb8f5abef2
-      internalID: -4771219881485868360
+      spriteID: 0c4cc232ffabec040a0341ee8e17dfef
+      internalID: -586094433
       vertices: []
       indices: 
       edges: []
@@ -221,7 +209,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 5397b77e0838fc140846b89b3b43ee87
     internalID: 0
     vertices: []
     indices: 
@@ -229,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Casting_Spell_(32 x 32)_0: -6104551238558647709
-      Casting_Spell_(32 x 32)_1: 4673131932831552926
-      Casting_Spell_(32 x 32)_2: -4742112648835774252
-      Casting_Spell_(32 x 32)_3: -4771219881485868360
+      mm-spin_0: 159857389
+      mm-spin_1: 241404147
+      mm-spin_2: -492518081
+      mm-spin_3: -586094433
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

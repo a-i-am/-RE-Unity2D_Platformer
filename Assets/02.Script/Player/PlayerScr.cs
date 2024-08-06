@@ -34,6 +34,7 @@ namespace Assets
         private bool deadWait; // 사망 시 다음 동작 지연
         private bool respawnOrDead; // 플레이어 사망 유형(리스폰 or 게임오버) 판정
         private bool canLaunch = true; // Launch 메서드 호출 가능 여부
+        internal bool isCastingSpell;
         internal bool isGrounded; // 지면 판정
         internal bool isAttacking;
 
@@ -78,13 +79,13 @@ namespace Assets
             currentVelocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
             // 플레이어 스프라이트는 기본 오른쪽 방향
             // 뒤집어야될 순간은 왼쪽 방향으로 움직일 때 
-            if (!isAttacking && inputHorizontal < 0 && !respawnOrDead)
+            if (!isCastingSpell && !isAttacking && inputHorizontal < 0 && !respawnOrDead)
             {
                 rb.velocity = currentVelocity;
                 spriteRenderer.flipX = true;
                 //projectileFlipX = true;
             }
-            else if (!isAttacking && inputHorizontal > 0 && !respawnOrDead)
+            else if (!isCastingSpell && !isAttacking && inputHorizontal > 0 && !respawnOrDead)
             {
                 rb.velocity = currentVelocity;
                 spriteRenderer.flipX = false;
@@ -171,12 +172,14 @@ namespace Assets
                 {
                     playerAnimScr.CastingSpellAnimation(true);
                     CastingSpellEffect.Play();
+                    isCastingSpell = true;
                 }
             }
             else if (CastingSpellEffect.isPlaying)
             {
                 playerAnimScr.CastingSpellAnimation(false);
                 CastingSpellEffect.Stop();
+                isCastingSpell = false;
             }
             //if (Input.GetKey(KeyCode.X) && !CastingSpellEffect.isPlaying)
             //{
