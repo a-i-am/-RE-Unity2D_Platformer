@@ -35,8 +35,13 @@ public class CameraFlowScr : MonoBehaviour
     }
 
     void Update() {
-        if (target.gameObject != null) {
-            targetPos.Set(target.transform.position.x, 
+
+    }
+    private void FixedUpdate()
+    {
+        if (target.gameObject != null)
+        {
+            targetPos.Set(target.transform.position.x,
                           target.transform.position.y, transform.position.z);
             transform.position = Vector3.Lerp(transform.position,
                 targetPos, speed * Time.deltaTime);
@@ -48,6 +53,8 @@ public class CameraFlowScr : MonoBehaviour
                                          transform.position.z);
         }
     }
+
+
     // Update is called once per frame
     private void LateUpdate()
     {

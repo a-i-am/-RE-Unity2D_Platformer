@@ -104,7 +104,6 @@ namespace Assets
             if (Input.GetButton("Jump") && isGrounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                Debug.Log("점프");
             }
         }
 
@@ -124,13 +123,19 @@ namespace Assets
             // hurt() 판정으로 확인하기 
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                //Debug.Log("Projectile Launch");
+                GameObject projectile;
+                Debug.Log("Projectile Launch");
                 if (spriteRenderer.flipX)
                 {
-                    Instantiate(projectilePrefab, launchOffsetL.position, transform.rotation);
+                    projectile = Instantiate(projectilePrefab, launchOffsetL.position, transform.rotation);
                 }
                 else
-                    Instantiate(projectilePrefab, launchOffsetR.position, transform.rotation);
+                    projectile = Instantiate(projectilePrefab, launchOffsetR.position, transform.rotation);
+
+                // 3초 후에 발사체 삭제 
+                Destroy(projectile, 3.0f);
+
+
             }
         }
 
