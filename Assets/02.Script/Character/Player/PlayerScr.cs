@@ -104,7 +104,6 @@ namespace Assets
             if (Input.GetButton("Jump") && isGrounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                Debug.Log("점프");
             }
         }
 
