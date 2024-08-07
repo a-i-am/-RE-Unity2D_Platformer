@@ -59,6 +59,7 @@ namespace Assets
             inputHorizontal = Input.GetAxisRaw("Horizontal");
             Jump();
             Launch();
+            ResetLaunch();
             CheckGrounded(); // 캐릭터의 땅과의 충돌 여부를 검사하는 메소드 호출
         }
 
@@ -101,7 +102,10 @@ namespace Assets
         {
             //if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             if (Input.GetButton("Jump") && isGrounded)
+            {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                Debug.Log("점프");
+            }
         }
 
         //void CurrentAttack(string currentAttackState)
@@ -114,49 +118,20 @@ namespace Assets
         //    }
         //}
 
-
         void Launch()
         {
             // 플레이어는 자신이 공격 당한 상태 외엔 공격 가능
-            if (Input.GetKeyDown(KeyCode.Z) && canLaunch && !Input.GetKey(KeyCode.X))
+            // hurt() 판정으로 확인하기 
+            if (Input.GetKeyDown(KeyCode.Z))
             {
-                if (!isGrounded)
+                //Debug.Log("Projectile Launch");
+                if (spriteRenderer.flipX)
                 {
-                    playerAnimScr.AerialLaunchAnimation();
-                    Invoke("InstantiateProjectile", 0.4f); // 0.4초 후에 발사체 생성
+                    Instantiate(projectilePrefab, launchOffsetL.position, transform.rotation);
                 }
                 else
-                {
-                    playerAnimScr.LaunchAnimation();
-                    Invoke("InstantiateProjectile", 0.2f); // 0.2초 후에 발사체 생성
-                }
-
-                canLaunch = false; // Launch 메서드 일시적으로 호출 불가능하게 설정
-                isAttacking = true;
-
-                // 3초 후에 LaunchExit 메서드 호출
-                Invoke("LaunchExit", 0.7f);
-                // 1초 후에 Launch 메서드 다시 호출 가능하게 설정
-                Invoke("ResetLaunch", 1.0f);
+                    Instantiate(projectilePrefab, launchOffsetR.position, transform.rotation);
             }
-
-        }
-
-        void InstantiateProjectile()
-        {
-            GameObject projectile;
-            if (spriteRenderer.flipX)
-                projectile = Instantiate(projectilePrefab, launchOffsetL.position, transform.rotation);
-            else
-                projectile = Instantiate(projectilePrefab, launchOffsetR.position, transform.rotation);
-
-            // 3초 후에 발사체 삭제
-            Destroy(projectile, 3.0f);
-        }
-
-        void LaunchExit()
-        {
-            isAttacking = false;
         }
 
         void ResetLaunch()

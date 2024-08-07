@@ -58,7 +58,8 @@ namespace Assets
 
         public void LaunchAnimation()
         {
-            if (Input.GetKeyDown(KeyCode.Z)){
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
                 anim.SetTrigger("Launch");
             }
         }

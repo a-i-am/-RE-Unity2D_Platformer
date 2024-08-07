@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/05.Prefabs/CastingSpellEffect.prefab.meta
 guid: 60b1a9d1e3b1d9e4cb439f9f3642534f
+========
+guid: ab0c8c9fb0f09694aa39c4067c381b6d
+>>>>>>>> ddf17c8957e6739cf2b8a4761afd889f809bbfa9:Assets/05.Prefabs/Follower_Bub.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

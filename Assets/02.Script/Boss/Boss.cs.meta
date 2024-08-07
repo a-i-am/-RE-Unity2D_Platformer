@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/02.Script/Follower/Boss/Boss.cs.meta
+guid: a7e7024294b26114abd32887cc8b32fe
+========
+guid: d4c686bd1789cde44a18611dc4abdfca
+>>>>>>>> ddf17c8957e6739cf2b8a4761afd889f809bbfa9:Assets/02.Script/Follower/FollowerSpawner.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
