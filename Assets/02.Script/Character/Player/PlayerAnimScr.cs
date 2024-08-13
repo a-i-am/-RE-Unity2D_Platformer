@@ -74,6 +74,7 @@ namespace Assets
 
         public void CastingSpellAnimation(bool isCastingSpell)
         {
+
             anim.SetBool("CastingSpell", isCastingSpell);
             //if(!player.isAttacking && Input.GetKey(KeyCode.X))
             //{

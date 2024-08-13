@@ -156,6 +156,8 @@ public class EnemyScr : MonoBehaviour
         {
             Faint(); // 체력이 0 이하일 경우 몬스터 삭제
         }
+
+
     }
     IEnumerator ResetHurtedStateAfterDelay(float delayTime)
     {
@@ -168,6 +170,7 @@ public class EnemyScr : MonoBehaviour
     // Enemy 녹다운
     void Faint()
     {
+        // 레이어보단 is trigger 로 온오프 시키는게 나을듯. 추후 변경 예정
         // 현재 오브젝트의 레이어를 9번(Mob)으로 변경합니다.
         gameObject.layer = 9;
         Physics2D.IgnoreLayerCollision(9, 7); // Mob(9)과 Player(7) 충돌 무시

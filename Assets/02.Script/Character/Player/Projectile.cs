@@ -9,7 +9,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private int GroundLayer = 8; // "groundLayer"의 레이어 번호 (필요에 따라 수정)
     private int MobLayer = 9;    // "Mob" 레이어의 번호
     private PlayerScr player;
     private Vector2 direction = Vector2.right; // 발사체 기본 방향(R)
@@ -50,6 +49,9 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        Physics2D.IgnoreLayerCollision(7, 8); // Player(7)과 Attack(8) 충돌 무시 
+        Physics2D.IgnoreLayerCollision(9, 8); // Mob(9)과 Attack(8) 충돌 무시
+
         GameObject collidedObject = collision.gameObject;
         string collisionTag = collidedObject.tag;
         int collisionLayer = collidedObject.layer;
@@ -62,14 +64,15 @@ public class Projectile : MonoBehaviour
             {
                 enemy.TakeDamage();
             }
-            Destroy(gameObject);
         }
-        // 충돌한 오브젝트가 Mob 레이어가 아니고 Player와 Enemy 태그가 아닐 때
-        else if (collisionLayer != MobLayer && collisionTag != "Player")
-        {
-            Destroy(gameObject);
-        }
+                Destroy(gameObject);
     }
+}
+        //// 충돌한 오브젝트가 Mob 레이어가 아니고 Player와 Enemy 태그가 아닐 때
+        //else if (collisionLayer != MobLayer && collisionTag != "Player")
+        //{
+        //    Destroy(gameObject);
+        //}
 
     //private void OnTriggerEnter2D(Collider2D other)
     //{
@@ -82,5 +85,3 @@ public class Projectile : MonoBehaviour
 
     //    Destroy(gameObject); // 발사체 삭제
     //}
-
-}

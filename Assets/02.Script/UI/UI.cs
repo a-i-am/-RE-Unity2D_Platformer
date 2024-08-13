@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour
 {
     Inventory inven;
-    public PlayerScr playerScr;
+    private PlayerScr playerScr;
     [SerializeField] TextMeshProUGUI pickupMobCountText;
     [SerializeField] private Slider hpBar;
     [SerializeField] private Image circularSpellGauge;
