@@ -5,6 +5,7 @@ using static UnityEditor.PlayerSettings;
 
 public class Follower : MonoBehaviour
 {
+    public bool isSineActive = true; // Sine 애니메이션 활성화 여부
     //[SerializeField] float telDistance = 20f;
     //[SerializeField] float teleportDelay = 3f;
     [SerializeField] float moveSpeed = 1f;
@@ -19,16 +20,17 @@ public class Follower : MonoBehaviour
     float endPos;
     float direction;
     float sineY;
-    //Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
     Transform player;
     Animator anim;
     LayerMask groundLayer;
     Vector3 pos;
+    Collider2D lastGroundCollider; // 마지막으로 닿은 땅의 Collider 정보를 저장할 변수
+
+
 
     void Awake()
     {
-        //rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
@@ -46,28 +48,33 @@ public class Follower : MonoBehaviour
     void Update()
     {
         inputHorizontal = Input.GetAxis("Horizontal");
-        spriteRenderer.flipX = (transform.position.x < player.position.x);
-        direction = transform.position.x < player.position.x ? 1 : -1;
+        
+        if (inputHorizontal < 0)
+            spriteRenderer.flipX = false;
+        else
+            spriteRenderer.flipX = true;
+
             Sine();
-        //if (Mathf.Approximately(inputHorizontal, 0f))
-        //{
-        //}
     }
 
     void FixedUpdate()
     {
-        //ResetStartY();
+        ResetStartY();
+    }
+
+    public void SetSineActive(bool active)
+    {
+        isSineActive = active;
     }
 
     void Sine()
     {
+        if(isSineActive) 
+        {
         sineY = startY + Mathf.Sin(Time.time * frequency) * amplitude;
-        //rb.MovePosition(targetPosition);
         transform.position = new Vector2(transform.position.x, sineY); // Sine()에서 계산된 Y축 위치 사용
-
-
+        }
     }
-
 
     void ResetStartY()
     {
@@ -78,8 +85,15 @@ public class Follower : MonoBehaviour
 
         if (hit.collider != null) // && 닿은 오브젝트의 태그가 movingPlatform이 아닌 경우에만!
         {
-            startY = hit.point.y + 5f;
+            if(hit.collider != lastGroundCollider) // 현재 닿아있는 땅이 이전 땅과 다를 경우에만 실행
+            {
+                lastGroundCollider = hit.collider; // 현재 닿아있는 땅을 업데이트
+                startY = hit.point.y + 5f;
+            }
+            
         }
     }
+
+
 
 }

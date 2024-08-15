@@ -13,6 +13,7 @@ using static UnityEngine.UI.Image;
 
 public class MobGroupMoving : MonoBehaviour
 {
+    public bool isSineActive = true; // Sine 애니메이션 활성화 여부
     float amplitude = 0.1f; // sine 파동의 높이
     float frequency = 1.0f; // sine 파동의 주기
     float startY;
@@ -24,11 +25,8 @@ public class MobGroupMoving : MonoBehaviour
     [SerializeField] float sineSpeed = 3.2f;
     [SerializeField] Transform veryFront;
     [SerializeField] Transform veryBack;
-
     float sineY;
-    //bool canSine;
     bool canTeleport;
-    //Rigidbody2D rb;
     Transform player;
     Animator anim;
     LayerMask groundLayer;
@@ -53,14 +51,9 @@ public class MobGroupMoving : MonoBehaviour
     void Update()
     {
         inputHorizontal = Input.GetAxis("Horizontal");
-        // 좌우 이동 처리
+        Sine();
         MoveHorizontally();
 
-            Sine();
-        // 좌우 이동 입력이 없을 때만 Sine() 함수 호출
-        //if (Mathf.Approximately(inputHorizontal, 0f))
-        {
-        }
     }
 
     private void FixedUpdate()
@@ -68,6 +61,12 @@ public class MobGroupMoving : MonoBehaviour
         if (canTeleport)
             TeleportToPlayer();
     }
+
+    public void SetSineActive(bool active)
+    {
+        isSineActive = active;
+    }
+
     void MoveHorizontally()
     {
         // 현재 개체와 플레이어 간의 거리 계산
@@ -88,15 +87,12 @@ public class MobGroupMoving : MonoBehaviour
 
     void Sine()
     {
-        sineY = startY + Mathf.Sin(Time.time * frequency) * amplitude;
-        //rb.MovePosition(new Vector2(rb.position.x, sineY)); // Sine()에서 계산된 Y축 위치 사용
-        transform.position = new Vector2(transform.position.x, sineY); // Sine()에서 계산된 Y축 위치 사용
+        if(isSineActive)
+        {
+            sineY = startY + Mathf.Sin(Time.time * frequency) * amplitude;
+            transform.position = new Vector2(transform.position.x, sineY); // Sine()에서 계산된 Y축 위치 사용
+        }
     }
-
-
-
-
-
 
     void TeleportToPlayer()
     {
@@ -109,7 +105,6 @@ public class MobGroupMoving : MonoBehaviour
     IEnumerator EnableTeleportAfterDelay()
     {
         yield return new WaitForSeconds(teleportDelay);
-
         canTeleport = true;
     }
 }

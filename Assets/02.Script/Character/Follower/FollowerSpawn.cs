@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowerSpawn : MonoBehaviour
 {
-    [SerializeField] List<GameObject> spawnObjectList;
+    [SerializeField] public List<GameObject> spawnObjectList;
     public CharacterSlot slot;
     public Transform front;
     public Queue<Vector2> frontPos;
@@ -45,9 +45,6 @@ public class FollowerSpawn : MonoBehaviour
             return;
         }
 
-        Debug.Log("Spawn 밑작업");
-        print(spawnObjectList.Count);
-
         for (int i = 0; i < spawnObjectList.Count; i++)
         {
             if (spawnObjectList[i] == null)
@@ -55,16 +52,34 @@ public class FollowerSpawn : MonoBehaviour
                 Debug.LogWarning($"spawnObjectList[{i}] is null");
                 continue;
             }
-            Debug.Log($"Checking spawnObjectList[{i}] with child count: {spawnObjectList[i].transform.childCount}");
 
             if (spawnObjectList[i].transform.childCount == 0)
             {
-                Debug.Log("Spawn 조건 통과!");
                 GameObject follower = Instantiate(characterData.characterPrefab, spawnObjectList[i].transform);
                 follower.name = "Follower " + i;
-                Debug.Log("팔로워 소환!!!");
+
+                FollowerAttack_Dash followerAttack = follower.GetComponent<FollowerAttack_Dash>();
+                if (followerAttack != null)
+                {
+                    followerAttack.followerSpawn = this;
+                    followerAttack.spawnIndex = i;
+                    Debug.Log($"팔로워 {i}가 스폰 위치 {i}에 소환되었습니다.");
+                }
                 break;
             }
         }
+    }
+
+    public Transform GetSpawnChildTransform(int spawnIndex, int childIndex)
+    {
+        if (spawnIndex >= 0 && spawnIndex < spawnObjectList.Count)
+        {
+            GameObject parentObject = spawnObjectList[spawnIndex];
+            if (parentObject.transform.childCount > 0)
+            {
+                return parentObject.transform.GetChild(childIndex);
+            }
+        }
+        return null;
     }
 }

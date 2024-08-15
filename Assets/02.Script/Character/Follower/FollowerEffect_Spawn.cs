@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(menuName = "FollowerEft/Attack")]
-public class FollowerSpawnEffect : FollowerEffect
+public class FollowerEffect_Spawn : FollowerEffect
 {
     public override bool ExecuteRole()
     {
