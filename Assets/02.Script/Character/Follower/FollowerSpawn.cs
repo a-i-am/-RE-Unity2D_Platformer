@@ -70,14 +70,15 @@ public class FollowerSpawn : MonoBehaviour
         }
     }
 
-    public Transform GetSpawnChildTransform(int spawnIndex, int childIndex)
+    public Transform GetSpawnChildTransform(int spawnIndex)
     {
         if (spawnIndex >= 0 && spawnIndex < spawnObjectList.Count)
         {
             GameObject parentObject = spawnObjectList[spawnIndex];
             if (parentObject.transform.childCount > 0)
             {
-                return parentObject.transform.GetChild(childIndex);
+                return parentObject.transform;
+                //return parentObject.transform.GetChild(childIndex);
             }
         }
         return null;

@@ -21,11 +21,7 @@ public class FollowerAttack_Dash : MonoBehaviour
     public FollowerSpawn followerSpawn;
     public Follower follower; // Follower 스크립트 참조
     public MobGroupMoving mobGroupMoving; // MobGroupMoving 스크립트 참조
-
-    void Start()
-    {
-    }
-
+    
     private void Awake()
     {
         maxAttackTime = Random.Range(3, 6);
@@ -67,19 +63,16 @@ public class FollowerAttack_Dash : MonoBehaviour
     }
 
 
-
     IEnumerator DashAttackRoutine()
     {
-        //isDashing = true;
-
-        Transform spawnTransform = followerSpawn.GetSpawnChildTransform(spawnIndex, 0);
+        Transform spawnTransform = followerSpawn.GetSpawnChildTransform(spawnIndex);
         if (spawnTransform != null)
         {
             dashStartPosition = spawnTransform.position;
         }
         else
         {
-            dashStartPosition = transform.position; // 유효한 자식 트랜스폼이 없으면 현재 위치 사용
+            dashStartPosition = spawnTransform.position; 
         }
 
         currentVelocity = targetDirection.normalized * dashSpeed;
@@ -102,19 +95,13 @@ public class FollowerAttack_Dash : MonoBehaviour
         // 원래 위치로 부드럽게 돌아가기
         if (spawnTransform != null)
         {
-            //transform.position = spawnTransform.position;
             while ((transform.position - spawnTransform.position).sqrMagnitude > 0.01f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, spawnTransform.position, moveSpeed * Time.deltaTime);
                 yield return null;
             }
         }
-        //else
-        //{
-        //    transform.position = dashStartPosition; // 유효한 자식 트랜스폼이 없으면 대시 시작 위치로
-        //}
-
-        // Sine 애니메이션 다시 활성화
+        // Sine() 다시 활성화
         if (follower != null) follower.SetSineActive(true);
         if (mobGroupMoving != null) mobGroupMoving.SetSineActive(true);
 
@@ -128,29 +115,6 @@ public class FollowerAttack_Dash : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
-
-
-    //void DashAttack()
-    //{
-    //    // 현재 스폰 위치의 자식 트랜스폼을 가져오기
-    //    Transform spawnTransform = followerSpawn.GetSpawnChildTransform(spawnIndex, 0);
-
-    //    if (spawnTransform != null)
-    //    {
-    //        dashStartPosition = spawnTransform.position;
-    //    }
-    //    else
-    //    {
-    //        dashStartPosition = transform.position; // 유효한 자식 트랜스폼이 없으면 현재 위치 사용
-    //    }
-
-    //    currentVelocity = targetDirection.normalized * dashSpeed;
-
-    //    // Sine 애니메이션 멈추기
-    //    if (follower != null) follower.SetSineActive(false);
-    //    if (mobGroupMoving != null) mobGroupMoving.SetSineActive(false);
-    //}
-
     void ResetMove()
     {
         currentVelocity = targetDirection.normalized * moveSpeed;
