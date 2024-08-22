@@ -1,122 +1,76 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowerAttack_Dash : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float dashSpeed = 15f;
-    [SerializeField] float dashDuration = 0.5f;
-    [SerializeField] float returnDelay = 0.1f;
-    [SerializeField] float detectionRange = 10f;
+    [SerializeField] float dashSpeed = 2f;
+    [SerializeField] float returnDelay = 3f;
+    public float attackRange = 10f;
+    public float attackCooldown = 2f;
 
-    float attackTime;
-    float maxAttackTime;
-    bool isDashing;
-    private Vector2 dashStartPosition;
-    private Vector2 targetDirection;
-    private Vector2 currentVelocity;
-
-    public int spawnIndex; // 현재 사용할 spawnObjectList의 인덱스
     public FollowerSpawn followerSpawn;
-    public Follower follower; // Follower 스크립트 참조
-    public MobGroupMoving mobGroupMoving; // MobGroupMoving 스크립트 참조
-    
+    public MobGroupMoving mobGroupMoving;
+
+    public int spawnIndex;
+    private GameObject currentTarget;
+    private static List<GameObject> occupiedTargets = new List<GameObject>();
+
+    public bool isDashing = false;
+    Vector3 targetPosition;
+
     private void Awake()
     {
-        maxAttackTime = Random.Range(3, 6);
+        mobGroupMoving = gameObject.GetComponentInParent<MobGroupMoving>();
+        followerSpawn = gameObject.GetComponentInParent<FollowerSpawn>();
     }
 
-    void Update()
+    private void Update()
     {
-        if (!isDashing)
+        if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.transform.position) > attackRange)
         {
-            DetectTarget();
+            FindNewTarget();
 
-            if (targetDirection != Vector2.zero)
+            if (!isDashing && currentTarget != null)
             {
-                currentVelocity = targetDirection.normalized * moveSpeed;
-                transform.Translate(currentVelocity * Time.deltaTime, Space.World);
-            }
-
-            attackTime += Time.deltaTime;
-
-            if (attackTime >= maxAttackTime && targetDirection != Vector2.zero)
-            {
-                StartCoroutine(DashAttackRoutine());
+                Dash();
             }
         }
     }
 
-    void DetectTarget()
+    void FindNewTarget()
     {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, detectionRange);
-        foreach (Collider2D collider in hitColliders)
+        GameObject[] targetEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        float closestDistance = float.MaxValue;
+
+        foreach (GameObject target in targetEnemies)
         {
-            if (collider.CompareTag("Enemy") || collider.CompareTag("Boss"))
+            if (!occupiedTargets.Contains(target))
             {
-                targetDirection = collider.transform.position - transform.position;
-                return;
+                float distance = Vector3.Distance(transform.position, target.transform.position);
+                if (distance <= attackRange && distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    currentTarget = target;
+                }
             }
         }
-        targetDirection = Vector2.zero;
+
+        if (currentTarget != null && !occupiedTargets.Contains(currentTarget))
+        {
+            occupiedTargets.Add(currentTarget);
+        }
     }
 
-
-    IEnumerator DashAttackRoutine()
+    void Dash()
     {
-        Transform spawnTransform = followerSpawn.GetSpawnChildTransform(spawnIndex);
-        if (spawnTransform != null)
+        if (currentTarget != null)
         {
-            dashStartPosition = spawnTransform.position;
+            Debug.Log("dash");
+            isDashing = true;
+            targetPosition = currentTarget.transform.position;
+            transform.position = targetPosition;
         }
-        else
-        {
-            dashStartPosition = spawnTransform.position; 
-        }
-
-        currentVelocity = targetDirection.normalized * dashSpeed;
-
-        // Sine 애니메이션 멈추기
-        if (follower != null) follower.SetSineActive(false);
-        if (mobGroupMoving != null) mobGroupMoving.SetSineActive(false);
-
-        // 대시 시작
-        float elapsedTime = 0f;
-        while (elapsedTime < dashDuration)
-        {
-            transform.Translate(currentVelocity * Time.deltaTime, Space.World);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(returnDelay);
-
-        // 원래 위치로 부드럽게 돌아가기
-        if (spawnTransform != null)
-        {
-            while ((transform.position - spawnTransform.position).sqrMagnitude > 0.01f)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, spawnTransform.position, moveSpeed * Time.deltaTime);
-                yield return null;
-            }
-        }
-        // Sine() 다시 활성화
-        if (follower != null) follower.SetSineActive(true);
-        if (mobGroupMoving != null) mobGroupMoving.SetSineActive(true);
-
-        maxAttackTime = Random.Range(3, 6);
-        isDashing = false;
-        attackTime = 0;
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
-    }
-    void ResetMove()
-    {
-        currentVelocity = targetDirection.normalized * moveSpeed;
     }
 }

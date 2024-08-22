@@ -19,18 +19,6 @@ public class FollowerSpawn : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-    }
-
-    void FixedUpdate()
-    {
-    }
-
     public void Spawn(Character.CharacterData characterData)
     {
         if (spawnObjectList == null)
@@ -64,6 +52,7 @@ public class FollowerSpawn : MonoBehaviour
                     followerAttack.followerSpawn = this;
                     followerAttack.spawnIndex = i;
                     Debug.Log($"팔로워 {i}가 스폰 위치 {i}에 소환되었습니다.");
+
                 }
                 break;
             }

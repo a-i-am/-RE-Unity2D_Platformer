@@ -13,53 +13,43 @@ using static UnityEngine.UI.Image;
 
 public class MobGroupMoving : MonoBehaviour
 {
-    public bool isSineActive = true; // Sine 애니메이션 활성화 여부
-    float amplitude = 0.1f; // sine 파동의 높이
-    float frequency = 1.0f; // sine 파동의 주기
+    public bool isSineActive = false; // Sine 애니메이션 활성화 여부
     float startY;
-    float inputHorizontal;
-    [SerializeField] float distance = 5f;
-    [SerializeField] float moveSpeed = 15f;
-    [SerializeField] float telDistance;
-    [SerializeField] float teleportDelay = 3f; // 텔레포트 지연 시간 변수 추가
+    
+    [SerializeField] float moveDistance;
+    [SerializeField] float moveSpeed;
+    [SerializeField] float amplitude = 2f; // sine 파동의 높이
+    [SerializeField] float frequency = 1.0f; // sine 파동의 주기
     [SerializeField] float sineSpeed = 3.2f;
-    [SerializeField] Transform veryFront;
-    [SerializeField] Transform veryBack;
+
     float sineY;
     bool canTeleport;
     Transform player;
     Animator anim;
     LayerMask groundLayer;
-
+    Collider2D lastGroundCollider; // 마지막으로 닿은 땅의 Collider 정보를 저장할 변수
     void Start()
     {
-        //startY = rb.position.y;
         startY = transform.position.y;
 
     }
     void Awake()
     {
-        //rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
         groundLayer = LayerMask.GetMask("groundLayer");
         player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        StartCoroutine(EnableTeleportAfterDelay()); // 지연 후 텔레포트 활성화 코루틴 시작
+        Physics2D.IgnoreLayerCollision(7, 9); // Mob(9)과 Player(7) 충돌 무시
     }
 
     void Update()
     {
-        inputHorizontal = Input.GetAxis("Horizontal");
         Sine();
-        MoveHorizontally();
-
+        FollowPlayer();
     }
 
     private void FixedUpdate()
     {
-        if (canTeleport)
-            TeleportToPlayer();
+        ResetStartY();
     }
 
     public void SetSineActive(bool active)
@@ -67,44 +57,50 @@ public class MobGroupMoving : MonoBehaviour
         isSineActive = active;
     }
 
-    void MoveHorizontally()
+    void FollowPlayer()
     {
-        // 현재 개체와 플레이어 간의 거리 계산
-        float distanceToPlayer = Mathf.Abs(transform.position.x - player.position.x);
+        if (Mathf.Abs(transform.position.x - player.position.x) > moveDistance)
+            transform.Translate(new Vector2(-1, 0) * Time.deltaTime * moveSpeed);
+        DirectionFollower();
+    }
 
-        // 좌우 입력에 따라 이동
-        float moveX = inputHorizontal * moveSpeed * Time.deltaTime;
-
-        // 이동 후 개체와 플레이어 간의 거리 계산
-        float newDistanceToPlayer = Mathf.Abs((transform.position.x + moveX) - player.position.x);
-
-        // 이동 후 거리가 허용 범위를 초과하면 이동을 제한
-        if (newDistanceToPlayer <= distance)
+    void DirectionFollower()
+    {
+        //  몹 그룹이 플레이어 왼쪽에 있을 때
+        // 오브젝트 위치 좌우반전
+        if(transform.position.x - player.position.x < 0)
         {
-            transform.position = new Vector2(transform.position.x + moveX, transform.position.y);
+            transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
         }
     }
 
     void Sine()
     {
-        if(isSineActive)
+        if (isSineActive)
         {
             sineY = startY + Mathf.Sin(Time.time * frequency) * amplitude;
-            transform.position = new Vector2(transform.position.x, sineY); // Sine()에서 계산된 Y축 위치 사용
+            transform.position = new Vector2(transform.position.x, sineY);
         }
     }
 
-    void TeleportToPlayer()
+    void ResetStartY()
     {
-        if (Vector2.Distance(player.position, transform.position) > telDistance)
+        // 캐릭터의 아래에 있는 Collider의 절반 크기만큼의 레이를 쏘아서 땅과 충돌하는지 여부를 검사
+        Vector2 raycastStart = new Vector2(player.transform.position.x, player.transform.position.y - 2f);
+        RaycastHit2D hit = Physics2D.Raycast(raycastStart, Vector2.down, 0.2f, LayerMask.GetMask("groundLayer"));
+        Debug.DrawRay(raycastStart, Vector2.down * 0.2f, Color.magenta); // 레이를 시각적으로 표시
+
+        if (hit.collider != null) // && 닿은 오브젝트의 태그가 movingPlatform이 아닌 경우에만!
         {
-            transform.position = player.position;
+            if (hit.collider != lastGroundCollider) // 현재 닿아있는 땅이 이전 땅과 다를 경우에만 실행
+            {
+                lastGroundCollider = hit.collider; // 현재 닿아있는 땅을 업데이트
+                startY = hit.point.y + 5f;
+            }
         }
-    }
-
-    IEnumerator EnableTeleportAfterDelay()
-    {
-        yield return new WaitForSeconds(teleportDelay);
-        canTeleport = true;
     }
 }

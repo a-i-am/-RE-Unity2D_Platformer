@@ -11,9 +11,9 @@ public class EnemyAnimScr : MonoBehaviour
     void Update()
     {
     }
-    public void WalkAnimation(bool isWalk)
+    public void WalkAnimation(int walkSpeed)
     {
-        anim.SetBool("IsWalk", isWalk);
+        anim.SetInteger("WalkSpeed", walkSpeed);
     }
 
     public void HurtAnimation()
@@ -28,6 +28,6 @@ public class EnemyAnimScr : MonoBehaviour
 
     public void RespawnAnimation()
     {
-        anim.SetTrigger("isRespawn");
+        anim.SetTrigger("IsRespawn");
     }
 }
