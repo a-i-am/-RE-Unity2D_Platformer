@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class FollowerSpawn : MonoBehaviour
 {
-    [SerializeField] public List<GameObject> spawnObjectList;
-    public CharacterSlot slot;
-    public Transform front;
-    public Queue<Vector2> frontPos;
-    public Vector2 followerPos;
-    public int followDelay = 12;
-    Transform playerTransform;
-    Vector3 spawnPos;
+    public List<GameObject> spawnObjectList;
+    //public CharacterSlot slot;
+    //Transform playerTransform;
 
     void Awake()
     {
-        frontPos = new Queue<Vector2>();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        //playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     public void Spawn(Character.CharacterData characterData)
@@ -46,30 +40,30 @@ public class FollowerSpawn : MonoBehaviour
                 GameObject follower = Instantiate(characterData.characterPrefab, spawnObjectList[i].transform);
                 follower.name = "Follower " + i;
 
-                FollowerAttack_Dash followerAttack = follower.GetComponent<FollowerAttack_Dash>();
-                if (followerAttack != null)
-                {
-                    followerAttack.followerSpawn = this;
-                    followerAttack.spawnIndex = i;
-                    Debug.Log($"팔로워 {i}가 스폰 위치 {i}에 소환되었습니다.");
+                //FollowerAttack_Dash followerAttack = follower.GetComponent<FollowerAttack_Dash>();
+                //if (followerAttack != null)
+                //{
+                //    followerAttack.followerSpawn = this;
+                //    followerAttack.spawnIndex = i;
+                //    Debug.Log($"팔로워 {i}가 스폰 위치 {i}에 소환되었습니다.");
 
-                }
+                //}
                 break;
             }
         }
     }
 
-    public Transform GetSpawnChildTransform(int spawnIndex)
-    {
-        if (spawnIndex >= 0 && spawnIndex < spawnObjectList.Count)
-        {
-            GameObject parentObject = spawnObjectList[spawnIndex];
-            if (parentObject.transform.childCount > 0)
-            {
-                return parentObject.transform;
-                //return parentObject.transform.GetChild(childIndex);
-            }
-        }
-        return null;
-    }
+    //public Transform GetSpawnChildTransform(int spawnIndex)
+    //{
+    //    if (spawnIndex >= 0 && spawnIndex < spawnObjectList.Count)
+    //    {
+    //        GameObject parentObject = spawnObjectList[spawnIndex];
+    //        if (parentObject.transform.childCount > 0)
+    //        {
+    //            return parentObject.transform;
+    //            //return parentObject.transform.GetChild(childIndex);
+    //        }
+    //    }
+    //    return null;
+    //}
 }

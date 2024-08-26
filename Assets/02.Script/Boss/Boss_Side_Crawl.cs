@@ -11,7 +11,7 @@ public class Boss_Side_Crawl : StateMachineBehaviour
     Rigidbody2D rb;
     Boss boss;
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    // OnStateEnter는 전환이 시작되고 상태 시스템이 이 상태를 평가하기 시작할 때 호출됩니다.
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -19,7 +19,7 @@ public class Boss_Side_Crawl : StateMachineBehaviour
         boss = animator.GetComponent<Boss>();
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    // OnStateUpdate는 OnStateEnter와 OnStateExit 콜백 사이의 각 업데이트 프레임에서 호출됩니다
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         boss.LookAtPlayer();
@@ -30,16 +30,16 @@ public class Boss_Side_Crawl : StateMachineBehaviour
 
         if (Vector3.Distance(player.position, rb.position) <= attackRange)
         {
-            Debug.Log("Boss mm Atack!");
-            animator.SetTrigger("Attack");
+            //Debug.Log("Boss mm Atack!");
+            //animator.SetTrigger("Chomp");
         }
 
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    // OnStateExit는 전환이 끝나고 상태 머신이 이 상태 평가를 마치면 호출됩니다.
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("Attack");
+        //animator.ResetTrigger("Chomp");
     }
 
 
