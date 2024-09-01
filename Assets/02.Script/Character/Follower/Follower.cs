@@ -70,7 +70,7 @@ public class Follower : MonoBehaviour
         {
             // Assign a color to each follower
             objectColorMap[obj] = colors[colorIndex % colors.Length];
-            //originalPositions[obj] = gameObject.GetComponent<Follower>().returnPos.position; // Follower의 원래 위치 저장
+            originalPositions[obj] = gameObject.GetComponent<Follower>().returnPos.position; // Follower의 원래 위치 저장
             colorIndex++;
         }
     }
@@ -97,7 +97,11 @@ public class Follower : MonoBehaviour
             seq.Append(follower.transform.DOMove(targetPosition, dashDuration))
                .AppendInterval(0.5f)
                .Append(follower.transform.DOMove(originalPosition, dashDuration))
-               .OnComplete(() => isDashing = false) // Reset the dashing state
+               .OnComplete(() =>  
+               {
+                   mobGroupMoving.isSineActive = true; // Reset the sine wave movement state
+                   isDashing = false;  // Reset the dashing state
+               })
                .Play();
         }
         #endregion

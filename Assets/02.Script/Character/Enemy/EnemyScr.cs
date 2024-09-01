@@ -35,7 +35,7 @@ public class EnemyScr : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    [SerializeField] private int nextMove;
+    private int nextMove;
     [SerializeField] private float moveSpeed = 5f; // 몬스터의 이동 속도
     [SerializeField] private float chaseDistance = 8f;
     [SerializeField] private float stopDistance = 2f;
@@ -59,7 +59,8 @@ public class EnemyScr : MonoBehaviour
         rbEnemy = GetComponent<Rigidbody2D>();
         enemyAnimScr = GetComponent<EnemyAnimScr>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Physics2D.IgnoreLayerCollision(6, 6);
+        Physics2D.IgnoreLayerCollision(6, 6); // Enemy 끼리 충돌 방지
+        Physics2D.IgnoreLayerCollision(6, 7); // Enemy 끼리 충돌 방지
         Invoke("Think", 5);
     }
 
@@ -71,7 +72,7 @@ public class EnemyScr : MonoBehaviour
             rbEnemy.velocity = new Vector2(moveSpeed * nextMove, rbEnemy.velocity.y);
             GroundCheckRay();
             SpeedUpForChasePlayer();
-            
+  
         }
     }
 
@@ -130,6 +131,8 @@ public class EnemyScr : MonoBehaviour
     {
         enemyIsHurted = true;
         enemyAnimScr.HurtAnimation();
+
+
         health--;
         if (health <= 0)
         {
