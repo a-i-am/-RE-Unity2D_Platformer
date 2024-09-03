@@ -4,6 +4,7 @@ using UnityEngine;
 using Assets;
 using System;
 using UnityEngine.WSA;
+using System.Xml.Serialization;
 
 namespace Assets
 {
@@ -18,12 +19,18 @@ namespace Assets
         private SpriteRenderer spriteRenderer;
         private float inputHorizontal;
         private float keyHoldTime = 0f;
+        private bool isDash;
 
         //[SerializeField] private Projectile projectilePrefab;
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private Transform launchOffsetL;
         [SerializeField] private Transform launchOffsetR;
-        [SerializeField] private float moveSpeed = 13f;
+
+         private float dashTime;
+         private float defaultSpeed;
+        [SerializeField] private float defaultTime;
+        [SerializeField] private float walkSpeed = 13f;
+        [SerializeField] private float dashSpeed;
         [SerializeField] private float jumpForce = 45f;
 
         [SerializeField] private float coyoteTime = 0.1f; // 코요태 점프 타임
@@ -37,7 +44,11 @@ namespace Assets
         internal bool isCastingSpell;
         internal bool isGrounded; // 지면 판정
         internal bool isAttacking;
-
+        
+        bool canDash;
+        public Ghost ghost;
+        public float dashCooldown; // 대시 후 대시가 다시 가능해지는 시간 (초 단위)
+        private float lastDashTime = 0.0f; // 마지막 대시 입력 시간을 기록하는 변수
 
         //코요태타임점프(코루틴을 사용한 지연 점프)
         private bool isCoroutineActive = false;
@@ -61,12 +72,25 @@ namespace Assets
             Launch();
             ResetLaunch();
             CheckGrounded(); // 캐릭터의 땅과의 충돌 여부를 검사하는 메소드 호출
+
+            if (Input.GetKeyDown(KeyCode.C) && Time.time >= lastDashTime + dashCooldown)
+            {
+                canDash = true;
+                lastDashTime = Time.time; // 현재 시간을 기록
+            }
+            else 
+            { 
+                //canDash = false;
+                ghost.makeGhost = false;
+            }
+                    
         }
 
         void FixedUpdate()
         {
             Walk();
-            KeepPlayerOnGround();
+            Dash();
+            //KeepPlayerOnGround();
             UpdateCoyoteTimer();
             CastingSpell();
         }
@@ -77,7 +101,7 @@ namespace Assets
 
         void Walk()
         {
-            currentVelocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
+            currentVelocity = new Vector2(inputHorizontal * walkSpeed, rb.velocity.y);
             // 플레이어 스프라이트는 기본 오른쪽 방향
             // 뒤집어야될 순간은 왼쪽 방향으로 움직일 때 
             if (!isCastingSpell && !isAttacking && inputHorizontal < 0 && !respawnOrDead)
@@ -107,6 +131,35 @@ namespace Assets
             }
         }
 
+        void Dash()
+        {
+            if (canDash)
+            {
+                isDash = true;
+            }
+            if (dashTime <= 0)
+            {
+                rb.velocity = currentVelocity;
+                if (isDash)
+                    dashTime = defaultTime;
+            }
+            else
+            {
+                dashTime -= Time.deltaTime;
+
+                if (spriteRenderer.flipX)
+                {
+                    ghost.makeGhost = true;
+                    rb.velocity = new Vector2(dashSpeed * -1, rb.velocity.y);
+                }
+                else {
+                    ghost.makeGhost = true;
+                    rb.velocity = new Vector2(dashSpeed * 1, rb.velocity.y);
+                }
+            }
+            isDash = false;
+            canDash = false;
+        }
         void Launch()
         {
             // 플레이어는 자신이 공격 당한 상태 외엔 공격 가능
@@ -223,14 +276,14 @@ namespace Assets
 
             //Debug.Log("isGrounded: " + isGrounded);
         }
-        void KeepPlayerOnGround()
-        {
-            if (isGrounded)
-            {
-                // 땅과 충돌하고 있을 때만 높이 조절
-                rb.position = new Vector2(rb.position.x, rb.position.y - 0.1f);
-            }
-        }
+        //void KeepPlayerOnGround()
+        //{
+        //    if (isGrounded)
+        //    {
+        //        // 땅과 충돌하고 있을 때만 높이 조절
+        //        rb.position = new Vector2(rb.position.x, rb.position.y - 0.1f);
+        //    }
+        //}
         void UpdateCoyoteTimer()
         {
             if (isGrounded)

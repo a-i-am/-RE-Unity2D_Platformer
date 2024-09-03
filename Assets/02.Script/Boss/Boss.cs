@@ -83,7 +83,7 @@ public class Boss : MonoBehaviour
             GushOut();
         }
 
-        if (gushOutTimer >= 10f && chompTimer >= 10f)
+        if (gushOutTimer >= 15f && chompTimer >= 15f)
         {
             gushOutEffect.Stop();
             Spin();
