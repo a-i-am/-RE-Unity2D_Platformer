@@ -78,11 +78,10 @@ namespace Assets
                 canDash = true;
                 lastDashTime = Time.time; // 현재 시간을 기록
             }
-            else 
-            { 
-                //canDash = false;
-                ghost.makeGhost = false;
-            }
+            //else 
+            //{
+            //    ghost.makeGhost = false;
+            //}
                     
         }
 
@@ -139,6 +138,7 @@ namespace Assets
             }
             if (dashTime <= 0)
             {
+                ghost.makeGhost = false;
                 rb.velocity = currentVelocity;
                 if (isDash)
                     dashTime = defaultTime;

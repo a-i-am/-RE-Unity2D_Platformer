@@ -15,7 +15,7 @@ public class Boss : MonoBehaviour
     public float spinTimer = 0f;
     public float turnTimer = 0f;
     //private float spinCoolDown = 1.5f;
-
+    public float spinSpeed;
 
     public Transform player;
     public bool isFlipped = false;
@@ -93,7 +93,6 @@ public class Boss : MonoBehaviour
 
     void Spin()
     {
-        float spinSpeed = 50f;
         //isTurn = false;
         isSpinning = true;
         anim.SetBool("Spin", true);
@@ -108,8 +107,8 @@ public class Boss : MonoBehaviour
         rbBoss.velocity = new Vector2(spinDirection * spinSpeed, rbBoss.position.y);
 
         // 속도 제한
-        if (rbBoss.velocity.magnitude > 50f)
-            rbBoss.velocity = rbBoss.velocity.normalized * 50f;
+        if (rbBoss.velocity.magnitude > spinSpeed)
+            rbBoss.velocity = rbBoss.velocity.normalized * spinSpeed;
 
         if (spinTimer >= 5f) // Spin 5초 이상 지나면
         {

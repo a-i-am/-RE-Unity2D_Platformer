@@ -149,7 +149,7 @@ public class Inventory : MonoBehaviour
             enemy = hit.collider.GetComponent<EnemyScr>();
             if (enemy != null && enemy.enemyIsFainted)
             {
-                if (Input.GetKeyDown(KeyCode.C)) // Collect
+                if (Input.GetKeyDown(KeyCode.V)) // Collect
                 {
                     AddCharacter(enemy.GetCharacter());
                     pickupMobCount += 1;
