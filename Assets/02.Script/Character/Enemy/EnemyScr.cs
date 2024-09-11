@@ -60,6 +60,7 @@ public class EnemyScr : MonoBehaviour
         enemyAnimScr = GetComponent<EnemyAnimScr>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         Physics2D.IgnoreLayerCollision(6, 6); // Enemy 끼리 충돌 방지
+        Physics2D.IgnoreLayerCollision(6, 7); // Enemy 와 Player 충돌 방지
         Invoke("Think", 5);
     }
 
@@ -130,6 +131,7 @@ public class EnemyScr : MonoBehaviour
     {
         enemyIsHurted = true;
         enemyAnimScr.HurtAnimation();
+
 
         health--;
         if (health <= 0)

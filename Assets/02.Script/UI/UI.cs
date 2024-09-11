@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour
 {
     private PlayerScr playerScr;
-    
+
     // Inventory
     Inventory inven;
 
@@ -45,7 +45,7 @@ public class UI : MonoBehaviour
     [SerializeField] float currentChargeValue = 0;
     [SerializeField] double canChargeMaxValue = 0.25;
     [SerializeField] float gaugeChargeSpeed = 25;
-    
+
 
     //[SerializeField] private Slider hpBar;
     //private float maxHp = 100;
@@ -81,14 +81,14 @@ public class UI : MonoBehaviour
     {
         //content.fillAmount = hpFillAmount;
         //hpContent.fillAmount = Map(100, 0, 100, 0, 1);
-        if(hpFillAmount != hpContent.fillAmount)
+        if (hpFillAmount != hpContent.fillAmount)
         {
             //hpContent.fillAmount = hpFillAmount;
             hpContent.fillAmount = Mathf.Lerp(hpContent.fillAmount, hpFillAmount, Time.deltaTime * lerpSpeed);
 
         }
 
-        if(lerpColors)
+        if (lerpColors)
         {
             hpContent.color = Color.Lerp(lowColor, fullColor, hpFillAmount);
         }

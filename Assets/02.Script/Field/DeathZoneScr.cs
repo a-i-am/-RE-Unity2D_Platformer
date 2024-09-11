@@ -28,7 +28,13 @@ public class DeathZoneScr : MonoBehaviour
         //GameObject[] gameObjects;
         //gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
 
-        if (collision.gameObject.CompareTag("Enemy")) {
+        //if (collision.gameObject.CompareTag("Enemy")) {
+        //    foreach (GameObject enemy in gameObjects)
+        //        Destroy(enemy);
+        //}
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
             Destroy(collision.gameObject);
             Debug.Log("적이 삭제되었습니다!");
         }

@@ -74,6 +74,7 @@ namespace Assets
 
         public void CastingSpellAnimation(bool isCastingSpell)
         {
+
             anim.SetBool("CastingSpell", isCastingSpell);
             //if(!player.isAttacking && Input.GetKey(KeyCode.X))
             //{
@@ -81,11 +82,8 @@ namespace Assets
             //}
             //else if (Input.GetKeyUp(KeyCode.X)) 
             //{ anim.ResetTrigger("CastingSpell"); }
+
+
         }
-        public void HurtAnimation()
-        {
-            anim.SetTrigger("Hurt");
-        }
-    
     }
 }

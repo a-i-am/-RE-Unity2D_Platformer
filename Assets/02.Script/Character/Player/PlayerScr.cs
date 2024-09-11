@@ -158,6 +158,8 @@ namespace Assets
                 {
                     ghost.makeGhost = true;
                     rb.velocity = new Vector2(dashSpeed * -1, rb.velocity.y);
+
+
                 }
                 else
                 {
@@ -167,6 +169,7 @@ namespace Assets
             }
             isDash = false;
             canDash = false;
+
         }
         void Launch()
         {

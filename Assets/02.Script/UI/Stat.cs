@@ -12,7 +12,7 @@ public class Stat
     //public float MaxVal { get => maxVal; set => maxVal = value; }
 
     public float CurrentVal
-    { 
+    {
         get
         {
             return currentVal;
