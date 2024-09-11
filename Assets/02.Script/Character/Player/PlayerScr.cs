@@ -15,19 +15,23 @@ namespace Assets
         private Rigidbody2D rb;
         private Vector2 currentVelocity;
         private PlayerAnimScr playerAnimScr;
-        private LayerMask groundLayer; // Ground 레이어를 가진 오브젝트와의 충돌을 감지
         private SpriteRenderer spriteRenderer;
-        private float inputHorizontal;
+        private LayerMask groundLayer; // Ground 레이어를 가진 오브젝트와의 충돌을 감지
         private float keyHoldTime = 0f;
+        private float inputHorizontal;
         private bool isDash;
+        private bool isHurted;
+
+
+        [SerializeField] private Stat health;
 
         //[SerializeField] private Projectile projectilePrefab;
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private Transform launchOffsetL;
         [SerializeField] private Transform launchOffsetR;
 
-         private float dashTime;
-         private float defaultSpeed;
+        private float dashTime;
+        private float defaultSpeed;
         [SerializeField] private float defaultTime;
         [SerializeField] private float walkSpeed = 13f;
         [SerializeField] private float dashSpeed;
@@ -44,7 +48,8 @@ namespace Assets
         internal bool isCastingSpell;
         internal bool isGrounded; // 지면 판정
         internal bool isAttacking;
-        
+        Vector2 attackedVelocity = Vector2.zero;
+
         bool canDash;
         public Ghost ghost;
         public float dashCooldown; // 대시 후 대시가 다시 가능해지는 시간 (초 단위)
@@ -63,6 +68,12 @@ namespace Assets
             spriteRenderer = GetComponent<SpriteRenderer>();
             playerAnimScr = GetComponent<PlayerAnimScr>();
             CastingSpellEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
+            //col2D = GetComponent<CapsuleCollider2D>();
+        }
+
+        void Awake()
+        {
+            health.Initialize();
         }
 
         void Update()
@@ -72,24 +83,20 @@ namespace Assets
             Launch();
             ResetLaunch();
             CheckGrounded(); // 캐릭터의 땅과의 충돌 여부를 검사하는 메소드 호출
+            Hurt();
 
             if (Input.GetKeyDown(KeyCode.C) && Time.time >= lastDashTime + dashCooldown)
             {
                 canDash = true;
                 lastDashTime = Time.time; // 현재 시간을 기록
             }
-            //else 
-            //{
-            //    ghost.makeGhost = false;
-            //}
-                    
         }
 
         void FixedUpdate()
         {
+            //KeepPlayerOnGround();
             Walk();
             Dash();
-            //KeepPlayerOnGround();
             UpdateCoyoteTimer();
             CastingSpell();
         }
@@ -152,7 +159,8 @@ namespace Assets
                     ghost.makeGhost = true;
                     rb.velocity = new Vector2(dashSpeed * -1, rb.velocity.y);
                 }
-                else {
+                else
+                {
                     ghost.makeGhost = true;
                     rb.velocity = new Vector2(dashSpeed * 1, rb.velocity.y);
                 }
@@ -164,27 +172,27 @@ namespace Assets
         {
             // 플레이어는 자신이 공격 당한 상태 외엔 공격 가능
             // hurt() 판정으로 확인하기 
-                if (Input.GetKeyDown(KeyCode.Z) && !Input.GetKey(KeyCode.X) && !isAttacking && canLaunch)
+            if (Input.GetKeyDown(KeyCode.Z) && !Input.GetKey(KeyCode.X) && !isAttacking && canLaunch)
+            {
+                if (!isGrounded)
                 {
-                    if (!isGrounded)
-                    {
-                        playerAnimScr.AerialLaunchAnimation();
-                        Invoke("InstantiateProjectile", 0.4f); // 0.4초 후에 발사체 생성
-                    }
-                    else
-                    {
-                        playerAnimScr.LaunchAnimation();
-                        Invoke("InstantiateProjectile", 0.2f); // 0.2초 후에 발사체 생성
-                    }
-
-                    canLaunch = false; // Launch 메서드 일시적으로 호출 불가능하게 설정
-                    isAttacking = true;
-
-                    // 3초 후에 LaunchExit 메서드 호출
-                    Invoke("LaunchExit", 0.7f);
-                    // 1초 후에 Launch 메서드 다시 호출 가능하게 설정
-                    Invoke("ResetLaunch", 1.0f);
+                    playerAnimScr.AerialLaunchAnimation();
+                    Invoke("InstantiateProjectile", 0.4f); // 0.4초 후에 발사체 생성
                 }
+                else
+                {
+                    playerAnimScr.LaunchAnimation();
+                    Invoke("InstantiateProjectile", 0.2f); // 0.2초 후에 발사체 생성
+                }
+
+                canLaunch = false; // Launch 메서드 일시적으로 호출 불가능하게 설정
+                isAttacking = true;
+
+                // 3초 후에 LaunchExit 메서드 호출
+                Invoke("LaunchExit", 0.7f);
+                // 1초 후에 Launch 메서드 다시 호출 가능하게 설정
+                Invoke("ResetLaunch", 1.0f);
+            }
         }
 
         void InstantiateProjectile()
@@ -298,6 +306,14 @@ namespace Assets
 
         // 플레이어의 죽음
         //GameManager.Instance.gameOverDele += OnDeath;
+
+
+        void Hurt()
+        {
+
+        }
+
+
         public void OnDeath() // OnDeath로 플레이어 죽음 하나로 묶음 => gameOverDele & OnDeath() 불러오기  
         {
             // 1)데스존에 빠짐 2)체력 쓰러짐
@@ -324,7 +340,7 @@ namespace Assets
                 gameObject.GetComponent<Collider2D>().enabled = false;
                 // 만약 목숨이 0개라면(GameOverDeath)
             }
-        } 
+        }
 
     }
 }

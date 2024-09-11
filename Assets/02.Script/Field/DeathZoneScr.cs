@@ -25,26 +25,14 @@ public class DeathZoneScr : MonoBehaviour
             #endregion
         }
 
-        GameObject[] gameObjects;
-        gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        //GameObject[] gameObjects;
+        //gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
 
         if (collision.gameObject.CompareTag("Enemy")) {
-            foreach (GameObject enemy in gameObjects)
-                Destroy(enemy);
+            Destroy(collision.gameObject);
+            Debug.Log("적이 삭제되었습니다!");
         }
     }
-
-
-    #region OnCollisionExit2DComment
-
-    //void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Character"))
-    //    {
-
-    //    }
-    //}
-    #endregion
 }
 
 
