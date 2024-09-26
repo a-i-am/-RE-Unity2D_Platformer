@@ -25,11 +25,6 @@ namespace Assets
         {
             // Walk Anim
             inputHorizontal = Input.GetAxisRaw("Horizontal");
-            if (!player.isCastingSpell && !player.isAttacking && inputHorizontal != 0 && player.isGrounded)
-            {
-                anim.SetTrigger("Walking");
-            }
-            else { anim.ResetTrigger("Walking"); }
 
             if (Input.GetButton("Jump") && player.isGrounded)
             {
@@ -49,6 +44,17 @@ namespace Assets
             //}
             #endregion
         }
+
+
+        public void WalkAnimation(bool IsWalk)
+        {
+            if (player.isGrounded)
+            {
+                //anim.SetTrigger("Walking");
+                anim.SetBool("IsWalk", IsWalk);
+            }
+        }
+
 
         // DeadJump Anim(GameOver action 1)
         public void DeadJumpAnimation(bool isFallDead)

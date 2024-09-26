@@ -5,12 +5,15 @@ using Assets;
 using System;
 using UnityEngine.WSA;
 using System.Xml.Serialization;
+using Unity.Burst.CompilerServices;
+using UnityEditorInternal;
 
 namespace Assets
 {
     public class PlayerScr : MonoBehaviour
     {
         public ParticleSystem CastingSpellEffect;
+
         public ObjectPoolManager projectilePool;
         private Rigidbody2D rb;
         private Vector2 currentVelocity;
@@ -20,7 +23,6 @@ namespace Assets
         private float keyHoldTime = 0f;
         private float inputHorizontal;
         private bool isDash;
-        private bool isHurted;
 
 
         [SerializeField] private Stat health;
@@ -36,20 +38,20 @@ namespace Assets
         [SerializeField] private float walkSpeed = 13f;
         [SerializeField] private float dashSpeed;
         [SerializeField] private float jumpForce = 45f;
-
         [SerializeField] private float coyoteTime = 0.1f; // 코요태 점프 타임
         [SerializeField] private float coyoteTimer = 0f; // 코요태 점프 타이머
         [SerializeField] private float attackDistance;
+        [SerializeField] private float bumpRayLength;
+        [SerializeField] private float bumpRayOffset;
 
-
+        private bool isLaunch;
+        private bool isDamaged;
         private bool deadWait; // 사망 시 다음 동작 지연
         private bool respawnOrDead; // 플레이어 사망 유형(리스폰 or 게임오버) 판정
         private bool canLaunch = true; // Launch 메서드 호출 가능 여부
         internal bool isCastingSpell;
         internal bool isGrounded; // 지면 판정
         internal bool isAttacking;
-        Vector2 attackedVelocity = Vector2.zero;
-
         bool canDash;
         public Ghost ghost;
         public float dashCooldown; // 대시 후 대시가 다시 가능해지는 시간 (초 단위)
@@ -78,12 +80,13 @@ namespace Assets
 
         void Update()
         {
+
             inputHorizontal = Input.GetAxisRaw("Horizontal");
             Jump();
             Launch();
             ResetLaunch();
             CheckGrounded(); // 캐릭터의 땅과의 충돌 여부를 검사하는 메소드 호출
-            Hurt();
+            //OnDamaged();
 
             if (Input.GetKeyDown(KeyCode.C) && Time.time >= lastDashTime + dashCooldown)
             {
@@ -99,6 +102,7 @@ namespace Assets
             Dash();
             UpdateCoyoteTimer();
             CastingSpell();
+
         }
         public SpriteRenderer SpriteRenderer
         {
@@ -112,12 +116,14 @@ namespace Assets
             // 뒤집어야될 순간은 왼쪽 방향으로 움직일 때 
             if (!isCastingSpell && !isAttacking && inputHorizontal < 0 && !respawnOrDead)
             {
+                playerAnimScr.WalkAnimation(true);
                 rb.velocity = currentVelocity;
                 spriteRenderer.flipX = true;
                 //projectileFlipX = true;
             }
             else if (!isCastingSpell && !isAttacking && inputHorizontal > 0 && !respawnOrDead)
             {
+                playerAnimScr.WalkAnimation(true);
                 rb.velocity = currentVelocity;
                 spriteRenderer.flipX = false;
                 //projectileFlipX = false;
@@ -125,9 +131,10 @@ namespace Assets
             else
             {
                 rb.velocity = new Vector2(0f, rb.velocity.y);
+                playerAnimScr.WalkAnimation(false);
                 //projectileFlipX = false;
             }
-        }
+       }
         void Jump()
         {
             //if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
@@ -158,8 +165,6 @@ namespace Assets
                 {
                     ghost.makeGhost = true;
                     rb.velocity = new Vector2(dashSpeed * -1, rb.velocity.y);
-
-
                 }
                 else
                 {
@@ -169,14 +174,14 @@ namespace Assets
             }
             isDash = false;
             canDash = false;
-
         }
         void Launch()
         {
             // 플레이어는 자신이 공격 당한 상태 외엔 공격 가능
             // hurt() 판정으로 확인하기 
-            if (Input.GetKeyDown(KeyCode.Z) && !Input.GetKey(KeyCode.X) && !isAttacking && canLaunch)
+            if (Input.GetKeyDown(KeyCode.Z) && !Input.GetKey(KeyCode.X) && inputHorizontal == 0 && !isAttacking && canLaunch)
             {
+                isLaunch = true;
                 if (!isGrounded)
                 {
                     playerAnimScr.AerialLaunchAnimation();
@@ -196,6 +201,7 @@ namespace Assets
                 // 1초 후에 Launch 메서드 다시 호출 가능하게 설정
                 Invoke("ResetLaunch", 1.0f);
             }
+            else isLaunch = false;
         }
 
         void InstantiateProjectile()
@@ -222,7 +228,7 @@ namespace Assets
 
         void CastingSpell()
         {
-            if (Input.GetKey(KeyCode.X))
+            if (Input.GetKey(KeyCode.X) && inputHorizontal == 0)
             {
                 if (!CastingSpellEffect.isPlaying && isGrounded)
                 {
@@ -237,6 +243,8 @@ namespace Assets
                 CastingSpellEffect.Stop();
                 isCastingSpell = false;
             }
+
+
             //if (Input.GetKey(KeyCode.X) && !CastingSpellEffect.isPlaying)
             //{
             //    playerAnimScr.CastingSpellAnimation(true);
@@ -266,10 +274,10 @@ namespace Assets
         internal void CheckGrounded()
         {
             // 캐릭터의 아래에 있는 Collider의 절반 크기만큼의 레이를 쏘아서 땅과 충돌하는지 여부를 검사
-            Vector2 raycastStart = new Vector2(transform.position.x, GetComponent<Collider2D>().bounds.center.y - 1f);
-            RaycastHit2D hit = Physics2D.Raycast(raycastStart, Vector2.down, 0.2f, LayerMask.GetMask("groundLayer"));
+            Vector2 groundRay = new Vector2(transform.position.x, GetComponent<Collider2D>().bounds.center.y - 1f);
+            RaycastHit2D groundHit = Physics2D.Raycast(groundRay, Vector2.down, 0.2f, LayerMask.GetMask("groundLayer"));
 
-            if (hit.collider != null)
+            if (groundHit.collider != null)
             {
                 // 충돌이 발생한 경우
                 //Debug.Log("Hit Collider: " + hit.collider.name);
@@ -283,7 +291,7 @@ namespace Assets
                 isGrounded = false;
             }
 
-            Debug.DrawRay(raycastStart, Vector2.down * 0.2f, Color.green); // 레이를 시각적으로 표시
+            Debug.DrawRay(groundRay, Vector2.down * 0.2f, Color.green); // 레이를 시각적으로 표시
 
             //Debug.Log("isGrounded: " + isGrounded);
         }
@@ -310,12 +318,33 @@ namespace Assets
         // 플레이어의 죽음
         //GameManager.Instance.gameOverDele += OnDeath;
 
-
-        void Hurt()
+        void OffDamaged()
         {
-
+            Physics2D.IgnoreLayerCollision(6, 7, false); // Enemy 와 Player 충돌 기능 복구
+            spriteRenderer.color = new Color(1, 1, 1, 1);
+            isDamaged = false;
         }
 
+
+        void OnCollisionStay2D(Collision2D collision)
+        {
+            if (isDamaged) return;
+            // 적과 충돌했을 때
+            int bumpForceDirc = transform.position.x - collision.transform.position.x > 0 ? 1 : -1;
+            if (collision.gameObject.tag == "Enemy") 
+            {
+                health.CurrentVal -= 10;
+                isDamaged = true;
+
+                //rb.AddForce(new Vector2(bumpForceDirc, 0) * 50, ForceMode2D.Impulse);
+                rb.velocity = new Vector2(bumpForceDirc * 40, 20);
+
+                spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+                Physics2D.IgnoreLayerCollision(6, 7, true); // Enemy 와 Player 충돌 기능 복구
+                Invoke("OffDamaged", 3f);
+
+            }
+        }
 
         public void OnDeath() // OnDeath로 플레이어 죽음 하나로 묶음 => gameOverDele & OnDeath() 불러오기  
         {

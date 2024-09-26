@@ -10,10 +10,11 @@ public class Ghost : MonoBehaviour
     public GameObject ghost;
     public bool makeGhost = false;
     // Use this for initialization
-
+    private SpriteRenderer spriteRenderer;
     void Start()
     {
         ghostDelaySeconds = ghostDelay;
+        spriteRenderer = GetComponent<SpriteRenderer>();  // SpriteRenderer 컴포넌트 참조
     }
 
     // Update is called once per frame
@@ -30,7 +31,10 @@ public class Ghost : MonoBehaviour
                 //Generate a ghost
                 GameObject currentGhost = Instantiate(ghost, transform.position, transform.rotation);
                 Sprite currentSprite = GetComponent<SpriteRenderer>().sprite;
-                currentGhost.transform.localScale = this.transform.localScale;
+
+                //currentGhost.transform.localScale = this.transform.localScale;
+                currentGhost.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
+
                 currentGhost.GetComponent<SpriteRenderer>().sprite = currentSprite;
                 ghostDelaySeconds = ghostDelay;
                 Destroy(currentGhost, 1.5f);

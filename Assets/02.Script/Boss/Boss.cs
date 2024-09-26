@@ -64,7 +64,7 @@ public class Boss : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GroundCheckRay();
+        //GroundCheckRay();
         LookAtPlayer();
         //followDirection = (player.position - transform.position).normalized;\
         followDirection = player.position.x < transform.position.x ? -1f : 1f;
@@ -110,7 +110,7 @@ public class Boss : MonoBehaviour
         if (rbBoss.velocity.magnitude > spinSpeed)
             rbBoss.velocity = rbBoss.velocity.normalized * spinSpeed;
 
-        if (spinTimer >= 5f) // Spin 5초 이상 지나면
+        if (spinTimer >= 10f) // Spin 5초 이상 지나면
         {
             anim.SetBool("Spin", false);
             isSpinning = false;
@@ -125,22 +125,41 @@ public class Boss : MonoBehaviour
             isSpinDirectionSet = false;
         }
     }
-    void GroundCheckRay()
-    {
-        // 앞에 땅이 있는지 체크
-        Vector2 frontCheck = new Vector2(rbBoss.position.x + 3f * spinDirection, rbBoss.position.y);
-        Debug.DrawRay(frontCheck, Vector2.down * 4f, Color.blue); // 레이를 시각적으로 표시
-        rayHit = Physics2D.Raycast(frontCheck, Vector2.down, 4f, LayerMask.GetMask("groundLayer"));
 
-        //// 앞에 땅 없으면 방향 전환
-        if (rayHit.collider == null)
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "SpinDirectionReset")
         {
+            Debug.Log("SpinDirectionReset");
             spinDirection *= -1;
-            //Spin();
-            //isTurn = true;
-            //StopSpin();
         }
     }
+    //void GroundCheckRay()
+    //{
+    //    // 앞에 땅이 있는지 체크
+    //    Vector2 frontCheck = new Vector2(rbBoss.position.x + 3f * spinDirection, rbBoss.position.y);
+
+    //    if(spinDirection == -1f)
+    //    {
+    //        rayHit = Physics2D.Raycast(frontCheck, Vector2.left, 4f, LayerMask.GetMask("groundLayer"));
+    //        Debug.DrawRay(frontCheck, Vector2.left * 4f, Color.blue); // 레이를 시각적으로 표시
+    //    }
+    //    else 
+    //    {
+    //        rayHit = Physics2D.Raycast(frontCheck, Vector2.right, 4f, LayerMask.GetMask("groundLayer"));
+    //        Debug.DrawRay(frontCheck, Vector2.right * 4f, Color.blue); // 레이를 시각적으로 표시
+    //    }
+
+    //    //// 앞에 땅 없으면 방향 전환
+    //    if (rayHit.collider == null)
+    //    {
+    //        spinDirection *= -1;
+    //        //Spin();
+    //        //isTurn = true;
+    //        //StopSpin();
+    //    }
+    //}
 
     //void StopSpin()
     //{
