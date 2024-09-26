@@ -1,0 +1,1460 @@
+fileFormatVersion: 2
+guid: 7d2360d2f398ec14299d03ad8d4f539f
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MediumStar_64x64_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 9
+        width: 47
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 273087ff180c47e4480c47ec0fc55b11
+      internalID: -556347073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_1
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 6
+        width: 49
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e1d9d267d0cd7543abd69be3431bc68
+      internalID: -405584624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_2
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 6
+        width: 47
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2af9df961025534428d539a6ec4a7a94
+      internalID: -1756152169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_3
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 4
+        width: 52
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27d12fcd28650c345be23135d9db55bc
+      internalID: 157824356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_4
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 2
+        width: 54
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ecbe72055f9bf242a05f24adb223ecf
+      internalID: 284587289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_5
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 4
+        width: 57
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e544eb0f0b3c7643a637b8c6755ba27
+      internalID: -2043267338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_6
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 2
+        width: 52
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31d2713e24be51b45a08175f59ad25bf
+      internalID: 816381457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_7
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 2
+        width: 54
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 889ef6c48b91e3241bd6dda874bdcade
+      internalID: 902768618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_8
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 4
+        width: 58
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59505b0c4c5c2374088f08ecc5346d7c
+      internalID: -952553407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_9
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 2
+        width: 51
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 818fbb5b67d6a214d9b2b9fe2d69d83c
+      internalID: 1098152509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_10
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 4
+        width: 52
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 734728fe6e57f19469ccc75be6a62a00
+      internalID: -402765891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_11
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 2
+        width: 56
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30d7a1274b71b8141b05cd42dd2446d6
+      internalID: -2105199405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_12
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 6
+        width: 60
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8de8db82631820343adbdca96f930a22
+      internalID: -639214937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_13
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 6
+        width: 58
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aa51c92b808e9349b85891ae9fab107
+      internalID: -623092673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_14
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 4
+        width: 58
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eb1c183a0915c34f9ea48bdea2d524c
+      internalID: -1513180575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_15
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 2
+        width: 49
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c1139c7e14ab344783aef0a076348f2
+      internalID: 1211312244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_16
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 4
+        width: 51
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7deea7c488011394ab365541befb6a04
+      internalID: 612390642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_17
+      rect:
+        serializedVersion: 2
+        x: 1093
+        y: 2
+        width: 54
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16d3160f5d096334587beab2f39f49d1
+      internalID: -783521658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_18
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 4
+        width: 58
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b09fccf5cc2a0fa44b9a96decc096889
+      internalID: -696600837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_19
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 2
+        width: 51
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 391da586cbcb71941acf0ec1792fa636
+      internalID: 1507250049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_20
+      rect:
+        serializedVersion: 2
+        x: 1286
+        y: 2
+        width: 53
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 389e42ad0a89fec498135b2907fa0c35
+      internalID: -1248013606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_21
+      rect:
+        serializedVersion: 2
+        x: 1348
+        y: 4
+        width: 58
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0b9f418f5026944aae22b0683858a79
+      internalID: -2071638193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_22
+      rect:
+        serializedVersion: 2
+        x: 1419
+        y: 2
+        width: 42
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a24df3fe991bd72438c23803b425a85f
+      internalID: 865847047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_23
+      rect:
+        serializedVersion: 2
+        x: 1483
+        y: 6
+        width: 45
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76afcb2df789c1347bacd18dee86c5b0
+      internalID: 1235277065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_24
+      rect:
+        serializedVersion: 2
+        x: 1545
+        y: 6
+        width: 49
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 191f985fbba415b4a954b2fc419ed0f2
+      internalID: 48765488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_25
+      rect:
+        serializedVersion: 2
+        x: 1607
+        y: 11
+        width: 52
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76194ffe4c8f02246b0bfc8d918c4052
+      internalID: -219718888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_26
+      rect:
+        serializedVersion: 2
+        x: 1669
+        y: 9
+        width: 54
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78a1495e10021364d99872057600da82
+      internalID: -1834150364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_27
+      rect:
+        serializedVersion: 2
+        x: 1731
+        y: 9
+        width: 58
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e6bc0f1a68fe4440a13ae72812571d9
+      internalID: 392513723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_28
+      rect:
+        serializedVersion: 2
+        x: 1796
+        y: 8
+        width: 56
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01b28d77ecc2b4c4faf2ec563290cccb
+      internalID: -217890634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_29
+      rect:
+        serializedVersion: 2
+        x: 1860
+        y: 6
+        width: 58
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 263091a05dd61f24e9b0fd73e0e64007
+      internalID: -987804713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_30
+      rect:
+        serializedVersion: 2
+        x: 1927
+        y: 4
+        width: 51
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9236ec8ae12cc34583e49302f33fefb
+      internalID: 154231101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_31
+      rect:
+        serializedVersion: 2
+        x: 1991
+        y: 9
+        width: 53
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fa8f6ac92026d149bbb8217ce987799
+      internalID: -765279115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_32
+      rect:
+        serializedVersion: 2
+        x: 2053
+        y: 6
+        width: 56
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 310ddf9994f7c6949ace8cfc5180e93a
+      internalID: 1362396118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_33
+      rect:
+        serializedVersion: 2
+        x: 2121
+        y: 6
+        width: 48
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 879315d09f385984bbcf234d67a77c6b
+      internalID: 846779176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_34
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 6
+        width: 49
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aa58fa0ef90fc547bf02f1bc8edb66c
+      internalID: 981749644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_35
+      rect:
+        serializedVersion: 2
+        x: 2248
+        y: 6
+        width: 49
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ff4399ef2290f749904d7ccbe4aeeb6
+      internalID: 1382157875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_36
+      rect:
+        serializedVersion: 2
+        x: 2314
+        y: 4
+        width: 45
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eb792a2a7e158d409df562a7b2b24f1
+      internalID: -1000097150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_37
+      rect:
+        serializedVersion: 2
+        x: 2376
+        y: 4
+        width: 50
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd5623c9a7a1e854ca0fd6f3b826b261
+      internalID: -1149313426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_38
+      rect:
+        serializedVersion: 2
+        x: 2439
+        y: 2
+        width: 51
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccd985c2a7572d94787c93e650985169
+      internalID: -792153392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_39
+      rect:
+        serializedVersion: 2
+        x: 2501
+        y: 2
+        width: 55
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1289a2e18ae91094881422ff335713b9
+      internalID: 440789126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_40
+      rect:
+        serializedVersion: 2
+        x: 2563
+        y: 11
+        width: 58
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84c7c89938b05d640a6c1d6617bf9095
+      internalID: 1659666482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_41
+      rect:
+        serializedVersion: 2
+        x: 2631
+        y: 9
+        width: 52
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8ddb290fbb2da54c98024aae7b7674c
+      internalID: 611555681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_42
+      rect:
+        serializedVersion: 2
+        x: 2694
+        y: 8
+        width: 55
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f0f9b58bade67340939fab7fcd30e0d
+      internalID: -2004169342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_43
+      rect:
+        serializedVersion: 2
+        x: 2756
+        y: 9
+        width: 58
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eddb42c5c86f05647a37e8f8653f0113
+      internalID: 1594453367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_44
+      rect:
+        serializedVersion: 2
+        x: 2822
+        y: 6
+        width: 52
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 023126b8ec79cc1488e8198bf812544f
+      internalID: 651314185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_45
+      rect:
+        serializedVersion: 2
+        x: 2886
+        y: 6
+        width: 54
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ef6bd1b6d1ae834e9b0562c22ce3c81
+      internalID: -1791824102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_46
+      rect:
+        serializedVersion: 2
+        x: 2947
+        y: 4
+        width: 59
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b45b5c9f308c58c4190b8165baeb48fa
+      internalID: -758131774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_47
+      rect:
+        serializedVersion: 2
+        x: 3021
+        y: 2
+        width: 39
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20b50b64ef989854b95dbe3a53df4c42
+      internalID: 6874486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_48
+      rect:
+        serializedVersion: 2
+        x: 3084
+        y: 2
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 086ad66ef6133c64786952d9ec8d620e
+      internalID: -1390231526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_49
+      rect:
+        serializedVersion: 2
+        x: 3148
+        y: 4
+        width: 41
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e798e64e7b1923b4b913b18af0a5192b
+      internalID: 232541633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_50
+      rect:
+        serializedVersion: 2
+        x: 3210
+        y: 4
+        width: 45
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de68f2395ff40b04a92a08c3a778f5ec
+      internalID: 1086313636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_51
+      rect:
+        serializedVersion: 2
+        x: 3272
+        y: 9
+        width: 49
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38eae3cfeb56962409008c3bf6661adc
+      internalID: 464146750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_52
+      rect:
+        serializedVersion: 2
+        x: 3336
+        y: 6
+        width: 50
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd816dc13dabbf948adfa39ba3482ff3
+      internalID: 2014146168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_53
+      rect:
+        serializedVersion: 2
+        x: 3399
+        y: 6
+        width: 53
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbc7213efeb1ce041a839462fd2da9dc
+      internalID: -1052359156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_54
+      rect:
+        serializedVersion: 2
+        x: 3461
+        y: 8
+        width: 56
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bb73bea473f9234c9c7da7e0710c9a1
+      internalID: -17361328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_55
+      rect:
+        serializedVersion: 2
+        x: 3527
+        y: 6
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cce4b2d263fdc14e909defa2c3e4c9a
+      internalID: -1149152318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_56
+      rect:
+        serializedVersion: 2
+        x: 3589
+        y: 4
+        width: 56
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1ee494a51f1a204f9938b542ec78037
+      internalID: 2016104549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_57
+      rect:
+        serializedVersion: 2
+        x: 3651
+        y: 9
+        width: 60
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6ea0a5686f58c042aacade3fd16b693
+      internalID: -799945898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_58
+      rect:
+        serializedVersion: 2
+        x: 3718
+        y: 9
+        width: 53
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 944ceb1c66ca1834d90317c6c2afccdb
+      internalID: 268367886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MediumStar_64x64_59
+      rect:
+        serializedVersion: 2
+        x: 3780
+        y: 9
+        width: 58
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cad12f0847b19fd45a800b9cf8d234ed
+      internalID: 2089100582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      MediumStar_64x64_0: -556347073
+      MediumStar_64x64_1: -405584624
+      MediumStar_64x64_10: -402765891
+      MediumStar_64x64_11: -2105199405
+      MediumStar_64x64_12: -639214937
+      MediumStar_64x64_13: -623092673
+      MediumStar_64x64_14: -1513180575
+      MediumStar_64x64_15: 1211312244
+      MediumStar_64x64_16: 612390642
+      MediumStar_64x64_17: -783521658
+      MediumStar_64x64_18: -696600837
+      MediumStar_64x64_19: 1507250049
+      MediumStar_64x64_2: -1756152169
+      MediumStar_64x64_20: -1248013606
+      MediumStar_64x64_21: -2071638193
+      MediumStar_64x64_22: 865847047
+      MediumStar_64x64_23: 1235277065
+      MediumStar_64x64_24: 48765488
+      MediumStar_64x64_25: -219718888
+      MediumStar_64x64_26: -1834150364
+      MediumStar_64x64_27: 392513723
+      MediumStar_64x64_28: -217890634
+      MediumStar_64x64_29: -987804713
+      MediumStar_64x64_3: 157824356
+      MediumStar_64x64_30: 154231101
+      MediumStar_64x64_31: -765279115
+      MediumStar_64x64_32: 1362396118
+      MediumStar_64x64_33: 846779176
+      MediumStar_64x64_34: 981749644
+      MediumStar_64x64_35: 1382157875
+      MediumStar_64x64_36: -1000097150
+      MediumStar_64x64_37: -1149313426
+      MediumStar_64x64_38: -792153392
+      MediumStar_64x64_39: 440789126
+      MediumStar_64x64_4: 284587289
+      MediumStar_64x64_40: 1659666482
+      MediumStar_64x64_41: 611555681
+      MediumStar_64x64_42: -2004169342
+      MediumStar_64x64_43: 1594453367
+      MediumStar_64x64_44: 651314185
+      MediumStar_64x64_45: -1791824102
+      MediumStar_64x64_46: -758131774
+      MediumStar_64x64_47: 6874486
+      MediumStar_64x64_48: -1390231526
+      MediumStar_64x64_49: 232541633
+      MediumStar_64x64_5: -2043267338
+      MediumStar_64x64_50: 1086313636
+      MediumStar_64x64_51: 464146750
+      MediumStar_64x64_52: 2014146168
+      MediumStar_64x64_53: -1052359156
+      MediumStar_64x64_54: -17361328
+      MediumStar_64x64_55: -1149152318
+      MediumStar_64x64_56: 2016104549
+      MediumStar_64x64_57: -799945898
+      MediumStar_64x64_58: 268367886
+      MediumStar_64x64_59: 2089100582
+      MediumStar_64x64_6: 816381457
+      MediumStar_64x64_7: 902768618
+      MediumStar_64x64_8: -952553407
+      MediumStar_64x64_9: 1098152509
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
