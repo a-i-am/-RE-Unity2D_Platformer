@@ -24,7 +24,6 @@ namespace Assets
         private float inputHorizontal;
         private bool isDash;
 
-
         [SerializeField] private Stat health;
 
         //[SerializeField] private Projectile projectilePrefab;
@@ -326,12 +325,13 @@ namespace Assets
         }
 
 
-        void OnCollisionStay2D(Collision2D collision)
+        void OnCollisionStay2D(Collision2D other)
         {
             if (isDamaged) return;
             // 적과 충돌했을 때
-            int bumpForceDirc = transform.position.x - collision.transform.position.x > 0 ? 1 : -1;
-            if (collision.gameObject.tag == "Enemy") 
+            int bumpForceDirc = transform.position.x - other.transform.position.x > 0 ? 1 : -1;
+            
+            if (other.gameObject.tag == "Enemy") 
             {
                 health.CurrentVal -= 10;
                 isDamaged = true;
@@ -340,11 +340,35 @@ namespace Assets
                 rb.velocity = new Vector2(bumpForceDirc * 40, 20);
 
                 spriteRenderer.color = new Color(1, 1, 1, 0.4f);
-                Physics2D.IgnoreLayerCollision(6, 7, true); // Enemy 와 Player 충돌 기능 복구
+                Physics2D.IgnoreLayerCollision(6, 7, true); // 충돌하고 3초 동안은 무적
                 Invoke("OffDamaged", 3f);
-
             }
         }
+
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (isDamaged) return;
+
+            // 파티클의 부모 오브젝트가 플레이어와 충돌했을 때
+            if (other.gameObject.CompareTag("Attack")) // Attack로 태그 설정
+            {
+                Debug.Log("파티클 효과와 충돌");
+
+                // 충돌 시 작동할 로직
+                health.CurrentVal -= 10;
+                isDamaged = true;
+
+                int bumpForceDirc = transform.position.x - other.transform.position.x > 0 ? 1 : -1;
+                rb.velocity = new Vector2(bumpForceDirc * 40, 20);
+
+                spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+                Physics2D.IgnoreLayerCollision(6, 7, true); // Enemy 와 Player 충돌 기능 복구
+                Invoke("OffDamaged", 3f);
+            }
+        }
+
+
+
 
         public void OnDeath() // OnDeath로 플레이어 죽음 하나로 묶음 => gameOverDele & OnDeath() 불러오기  
         {

@@ -9,14 +9,15 @@ public class Boss : MonoBehaviour
 {
     public ParticleSystem gushOutEffect;
     public float speed;
-    public float stopDistance;
+    public float followDistance;
+    public float gushoutDistance;
     public float gushOutTimer = 0f;
     public float chompTimer = 0f;
     public float spinTimer = 0f;
     public float turnTimer = 0f;
     //private float spinCoolDown = 1.5f;
     public float spinSpeed;
-
+    public GameObject gushOutEffectObj;
     public Transform player;
     public bool isFlipped = false;
 
@@ -25,6 +26,8 @@ public class Boss : MonoBehaviour
     private bool bossIsFainted;
 
     private bool isSpinning = false;
+
+    
     private bool isSpinDirectionSet = false; // 스핀 방향 설정여부 확인
     //Vector2 followDirection;
     float followDirection;
@@ -59,7 +62,6 @@ public class Boss : MonoBehaviour
             spinTimer += Time.deltaTime;
         }
 
-        //StopSpin();
     }
 
     private void FixedUpdate()
@@ -69,7 +71,7 @@ public class Boss : MonoBehaviour
         //followDirection = (player.position - transform.position).normalized;\
         followDirection = player.position.x < transform.position.x ? -1f : 1f;
 
-        if (!isSpinning && Vector3.Distance(player.position, rbBoss.position) >= stopDistance)
+        if (!isSpinning && Vector3.Distance(player.position, rbBoss.position) >= followDistance)
         {
             speed = 8f;
             anim.SetBool("GushOut", false);
@@ -77,18 +79,35 @@ public class Boss : MonoBehaviour
             if (!isSpinning)
                 Follow();
         }
-        else if (!isSpinning && Vector3.Distance(player.position, rbBoss.position) <= stopDistance)
+        else if (!isSpinning && Vector3.Distance(player.position, rbBoss.position) <= followDistance &&
+            Vector3.Distance(player.position, rbBoss.position) >= gushoutDistance)
         {
             anim.SetBool("Chomp", false);
             GushOut();
         }
 
-        if (gushOutTimer >= 15f && chompTimer >= 15f)
+        if (gushOutTimer >= 10f && chompTimer >= 10f)
         {
             gushOutEffect.Stop();
+            gushOutEffectObj.gameObject.SetActive(false);
             Spin();
         }
     }
+
+    //void FollowStop()
+    //{
+    //    RaycastHit2D playerDetectHit
+    //        = Physics2D.Raycast(transform.position, transform.forward, 5f, LayerMask.GetMask("Player"));
+
+    //    // Ray 그리기
+    //    Debug.DrawRay(transform.position, transform.forward * 5f, Color.red);
+
+    //    if (playerDetectHit.collider != null)
+    //    {
+    //        isPlayer = true;
+    //    }
+    //    else { isPlayer = false; }
+    //}
 
 
     void Spin()
@@ -110,7 +129,7 @@ public class Boss : MonoBehaviour
         if (rbBoss.velocity.magnitude > spinSpeed)
             rbBoss.velocity = rbBoss.velocity.normalized * spinSpeed;
 
-        if (spinTimer >= 10f) // Spin 5초 이상 지나면
+        if (spinTimer >= 5f) // Spin 5초 이상 지나면
         {
             anim.SetBool("Spin", false);
             isSpinning = false;
@@ -193,9 +212,12 @@ public class Boss : MonoBehaviour
                 Debug.Log("Boss GushOut!");
                 rbBoss.velocity = rbBoss.velocity.normalized * 30f;
             }
+
             anim.SetBool("GushOut", true);
+            gushOutEffectObj.gameObject.SetActive(true);
             gushOutEffect.Play();
         }
+
     }
 
     void Chomp()
@@ -203,6 +225,7 @@ public class Boss : MonoBehaviour
         if (chompTimer < 10f)
         {
             gushOutEffect.Stop();
+            gushOutEffectObj.gameObject.SetActive(false);
             anim.SetBool("Chomp", true);
         }
     }

@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class InventoryDatabase : MonoBehaviour
 {
-
-
     public GameObject characterInvenSlotUI;
     public GameObject itemInvenSlotUI;
     public GameObject characterSlotNumText;
