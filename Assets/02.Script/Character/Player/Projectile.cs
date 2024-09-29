@@ -53,11 +53,11 @@ public class Projectile : MonoBehaviour
         Physics2D.IgnoreLayerCollision(9, 8); // Mob(9)과 Attack(8) 충돌 무시
 
         GameObject collidedObject = collision.gameObject;
-        string collisionTag = collidedObject.tag;
+        //string collisionTag = collidedObject.tag;
         int collisionLayer = collidedObject.layer;
 
         // 적과 충돌했을 때
-        if (collisionTag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
             EnemyScr enemy = collidedObject.GetComponent<EnemyScr>();
             if (enemy != null)

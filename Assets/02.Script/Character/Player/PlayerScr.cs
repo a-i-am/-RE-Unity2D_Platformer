@@ -368,8 +368,6 @@ namespace Assets
         }
 
 
-
-
         public void OnDeath() // OnDeath로 플레이어 죽음 하나로 묶음 => gameOverDele & OnDeath() 불러오기  
         {
             // 1)데스존에 빠짐 2)체력 쓰러짐

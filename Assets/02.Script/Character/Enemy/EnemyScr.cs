@@ -35,7 +35,10 @@ public class EnemyScr : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    
+    
     private int nextMove;
+    
     [SerializeField] private float moveSpeed = 5f; // 몬스터의 이동 속도
     [SerializeField] private float chaseDistance = 8f;
     [SerializeField] private float stopDistance = 2f;
@@ -44,7 +47,7 @@ public class EnemyScr : MonoBehaviour
 
     [SerializeField] private Transform player; // 플레이어의 Transform을 저장하는 변수
     [SerializeField] private LayerMask groundLayer; // 땅을 나타내는 레이어
-
+    [SerializeField] private ParticleSystem dashHitVFX;
     //private bool enemyIsGrounded;
     private bool enemyIsHurted = false;
     public bool enemyIsFainted;
@@ -54,6 +57,7 @@ public class EnemyScr : MonoBehaviour
     RaycastHit2D rayHit;
     void Start()
     {
+        dashHitVFX = GetComponentInChildren<ParticleSystem>();
         // Player 오브젝트를 찾아서 player에 할당
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rbEnemy = GetComponent<Rigidbody2D>();
@@ -80,7 +84,6 @@ public class EnemyScr : MonoBehaviour
     {
         // Set Next Active
         nextMove = Random.Range(-1, 2);
-        
         enemyAnimScr.WalkAnimation(nextMove);
 
         // Flip Sprite
@@ -151,15 +154,29 @@ public class EnemyScr : MonoBehaviour
         }
     }
 
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Follower") && !enemyIsFainted)
+        {
+            TakeDamage();
+            dashHitVFX.Play();
+
+        }
+    }
+
+
+
     // Enemy 녹다운
     void Faint()
     {
-        // 레이어보단 is trigger 로 온오프 시키는게 나을듯. 추후 변경 예정
-        // 현재 오브젝트의 레이어를 9번(Mob)으로 변경합니다.
-        gameObject.layer = 9;
-        Physics2D.IgnoreLayerCollision(9, 7); // Fainted(9)과 Player(7) 충돌 무시
-        Physics2D.IgnoreLayerCollision(9, 8); // Fainted(9)과 Attack(8) 충돌 무시 
-        Physics2D.IgnoreLayerCollision(9, 6); // Fainted(9)과 Enemy(6)  충돌 무시
+        // 현재 오브젝트의 레이어를 10번(Fainted(10))으로 변경합니다.
+        gameObject.layer = 10;
+        gameObject.tag = "Fainted";
+
+        Physics2D.IgnoreLayerCollision(10, 7); // Fainted(10)과 Player(7) 충돌 무시
+        Physics2D.IgnoreLayerCollision(10, 8); // Fainted(10)과 Attack(8) 충돌 무시 
+        Physics2D.IgnoreLayerCollision(10, 6); // Fainted(10)과 Enemy(6)  충돌 무시
         enemyIsFainted = true;
         enemyAnimScr.FaintAnimation(true);
         //enemyIsHurted = false;

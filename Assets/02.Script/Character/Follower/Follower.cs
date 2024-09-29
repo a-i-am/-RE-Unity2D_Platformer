@@ -5,24 +5,15 @@ using UnityEngine;
 
 public class Follower : MonoBehaviour
 {
-    // watch & follow
-    //public Vector3 followPos;
-    //public int followDelay;
-    //public Transform front;
-    //public Queue<Vector3> frontPos;
-
-    // follow to player
-    //[SerializeField] float moveDistance;
-    //[SerializeField] float moveSpeed;
-
     // Dash & Return
     [SerializeField] float detectionRange;
-    [SerializeField] float dashDuration;
+    [SerializeField] float dashDuration; // dash 속도 조절
+
     private MobGroupMoving mobGroupMoving;
-    private bool isDashing = false;
     public Transform returnPos; // 인스펙터에서 각 Follower의 returnPos 할당
     private Dictionary<GameObject, Vector3> originalPositions; // Follower들의 원래 위치 저장
 
+    public bool isDashing = false;
     public float attackRange = 5f;
     Animator anim;
     LayerMask groundLayer;
@@ -43,7 +34,9 @@ public class Follower : MonoBehaviour
     {
         mobGroupMoving = gameObject.GetComponentInParent<MobGroupMoving>();
         selfObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Follower"));  // 자신들의 태그
+
         targetObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));  // Enemy 태그에 해당하는 개체들의 태그
+
         selfKDTree = new KDTree();
         targetKDTree = new KDTree();
         targetedObjects = new HashSet<GameObject>();
@@ -95,6 +88,9 @@ public class Follower : MonoBehaviour
 
             Sequence seq = DOTween.Sequence();
             seq.Append(follower.transform.DOMove(targetPosition, dashDuration))
+                   //.AppendCallback(() =>
+                   //{
+                   //})
                .AppendInterval(0.5f)
                .Append(follower.transform.DOMove(originalPosition, dashDuration))
                .OnComplete(() =>  
@@ -103,10 +99,10 @@ public class Follower : MonoBehaviour
                    isDashing = false;  // Reset the dashing state
                })
                .Play();
+
         }
         #endregion
     }
-
 
     void OnDrawGizmos()
     {
@@ -155,6 +151,10 @@ public class Follower : MonoBehaviour
         foreach (var target in targetObjects)
         {
             if (target == null) continue; // target이 null인지 확인
+
+            // Enemy의 Fainted 상태를 확인
+            EnemyScr enemyScript = target.GetComponent<EnemyScr>();
+            if (enemyScript != null && enemyScript.enemyIsFainted) continue;  // Fainted 상태이면 타겟팅하지 않음
 
             float distance = Vector2.Distance(position, target.transform.position);
 
