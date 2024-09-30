@@ -14,19 +14,13 @@ public class UI : MonoBehaviour
 
     [Header("HP")]
     // HP
-    [SerializeField]
-    private Image hpContent;
+    [SerializeField] private Image hpContent;
     private float hpFillAmount;
 
-    [SerializeField]
-    private float lerpSpeed;
-
-    [SerializeField]
-    private Color fullColor;
-    [SerializeField]
-    private Color lowColor;
-    [SerializeField]
-    private bool lerpColors;
+    [SerializeField] private float lerpSpeed;
+    [SerializeField] private Color fullColor;
+    [SerializeField] private Color lowColor;
+    [SerializeField] private bool lerpColors;
 
     public float MaxValue { get; set; }
 
@@ -43,33 +37,48 @@ public class UI : MonoBehaviour
     [SerializeField] TextMeshProUGUI pickupMobCountText;
     [SerializeField] private Image circularSpellGauge;
     [SerializeField] float currentChargeValue = 0;
-    [SerializeField] double canChargeMaxValue = 0.25;
     [SerializeField] float gaugeChargeSpeed = 25;
 
+    // 단계별 스킬 프리팹들
+    private GameObject skillPrefab;
+    [SerializeField] private GameObject skillPrefabLevel1;
+    [SerializeField] private GameObject skillPrefabLevel2;
+    [SerializeField] private GameObject skillPrefabLevel3;
+    [SerializeField] private GameObject skillPrefabLevel4;
 
-    //[SerializeField] private Slider hpBar;
-    //private float maxHp = 100;
-    //private float curHp = 100;
-    //float imsi;
+    private double canChargeMaxValue = 1.0; // 최대 게이지 값
+
+    private GameObject originalProjectilePrefab; // 원래 projectilePrefab
+    private GameObject currentProjectilePrefab; // 현재 사용 중인 projectilePrefab
+    public float skillDuration = 5f; // 스킬 지속 시간
+
+
 
     void Start()
     {
         inven = Inventory.instance;
         playerScr = GameObject.FindWithTag("Player").GetComponent<PlayerScr>();
-        //hpBar.value = (float)curHp / (float)maxHp;
 
         if (lerpColors)
         {
             hpContent.color = fullColor;
         }
+
+        // 초기화
+        originalProjectilePrefab = playerScr.projectilePrefab; // 원래 projectilePrefab 초기화
     }
 
     void Update()
     {
-        //ReduceHP();
-        //HandleHp();
         HandleHpBar();
         ChargeSpellGauge();
+
+
+        // 스킬 사용 체크
+        if (Input.GetKeyUp(KeyCode.X))
+        {
+            CastSpell();
+        }
     }
 
     void FixedUpdate()
@@ -99,32 +108,11 @@ public class UI : MonoBehaviour
         return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     }
 
-    //private void HandleHp()
-    //{
-    //    imsi = (float)curHp / (float)maxHp;
-    //    hpBar.value = Mathf.Lerp(hpBar.value, imsi, Time.deltaTime * 10);
-    //    //hpBar.value = (float)curHp / (float)maxHp;
-    //    //hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 10);
-    //}
-
-    //private void ReduceHP()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        if (curHp > 0) { curHp -= 10; }
-    //        else { curHp = 0; }
-    //    }
-    //}
-
-
     private void ChargeSpellGauge()
     {
         if (Input.GetKey(KeyCode.X) && circularSpellGauge.fillAmount <= canChargeMaxValue)
         {
             currentChargeValue += gaugeChargeSpeed * Time.deltaTime;
-            // (예정)
-            // 획득한 MobCount가 30, 50, 100 이상이면 각각
-            // canChargeMaxValue = 0.5, 0.75, 1 할당(Switch문)
         }
         else
         {
@@ -132,9 +120,64 @@ public class UI : MonoBehaviour
         }
 
         circularSpellGauge.fillAmount = currentChargeValue / 100;
-        //spellGaugeLevel_1
-        // 만약 GetKeyUp ,, 키 눌렀다가 뗌 &&  몹 카운트 조건 만족 시 스킬 발동
-        // 
+    }
+
+
+    private void CastSpell()
+    {
+        skillPrefab = null;
+
+        if(circularSpellGauge.fillAmount >= 0.25f && circularSpellGauge.fillAmount < 0.5f)
+        {
+            // 1단계 스킬
+            skillPrefab = skillPrefabLevel1;
+        }
+        else if (circularSpellGauge.fillAmount >= 0.5f && circularSpellGauge.fillAmount < 0.75f)
+        {
+            // 2단계 스킬
+            skillPrefab = skillPrefabLevel2;
+        }
+        else if (circularSpellGauge.fillAmount >= 0.75f && circularSpellGauge.fillAmount < 0.1f)
+        {
+            // 3단계 스킬
+            skillPrefab = skillPrefabLevel3;
+        }
+        else if (circularSpellGauge.fillAmount >= 0.1f)
+        {
+            // 4단계 스킬 (궁극기)
+            skillPrefab = skillPrefabLevel4;
+        }
+
+        if(skillPrefab != null)
+        {
+            // 스킬 발동 후 게이지 초기화
+            currentChargeValue = 0;
+            circularSpellGauge.fillAmount = 0;
+
+            if (skillPrefab.GetComponent<Projectile>() != null)
+            {
+                UseProjectileSkill(skillPrefab);
+            }
+        }
+
+    }
+    private void UseProjectileSkill(GameObject newProjectilePrefab)
+    {
+        // 현재 projectilePrefab을 원래의 것으로 저장
+        currentProjectilePrefab = newProjectilePrefab;
+
+        // projectilePrefab을 동적으로 등록된 프리팹으로 변경
+        playerScr.projectilePrefab = currentProjectilePrefab;
+        // 코루틴을 호출하여 일정 시간 후에 원래의 projectilePrefab으로 되돌리기
+        StartCoroutine(ResetProjectile(skillDuration));
+    }
+
+    private IEnumerator ResetProjectile(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // 원래 projectilePrefab으로 되돌리기
+        playerScr.projectilePrefab = originalProjectilePrefab;
     }
 
 }

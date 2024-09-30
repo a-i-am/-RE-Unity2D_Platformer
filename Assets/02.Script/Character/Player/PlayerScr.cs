@@ -27,7 +27,8 @@ namespace Assets
         [SerializeField] private Stat health;
 
         //[SerializeField] private Projectile projectilePrefab;
-        [SerializeField] private GameObject projectilePrefab;
+
+        public GameObject projectilePrefab;
         [SerializeField] private Transform launchOffsetL;
         [SerializeField] private Transform launchOffsetR;
 
@@ -195,9 +196,9 @@ namespace Assets
                 canLaunch = false; // Launch 메서드 일시적으로 호출 불가능하게 설정
                 isAttacking = true;
 
-                // 3초 후에 LaunchExit 메서드 호출
+                // 초 후에 LaunchExit 메서드 호출
                 Invoke("LaunchExit", 0.7f);
-                // 1초 후에 Launch 메서드 다시 호출 가능하게 설정
+                // 초 후에 Launch 메서드 다시 호출 가능하게 설정
                 Invoke("ResetLaunch", 1.0f);
             }
             else isLaunch = false;
