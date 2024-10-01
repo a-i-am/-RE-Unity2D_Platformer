@@ -29,6 +29,9 @@ namespace Assets
         //[SerializeField] private Projectile projectilePrefab;
 
         public GameObject projectilePrefab;
+        public GameObject playerAOEPrefab;
+        public bool isUseAOE = false;
+
         [SerializeField] private Transform launchOffsetL;
         [SerializeField] private Transform launchOffsetR;
 
@@ -70,8 +73,9 @@ namespace Assets
             spriteRenderer = GetComponent<SpriteRenderer>();
             playerAnimScr = GetComponent<PlayerAnimScr>();
             CastingSpellEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
-            //col2D = GetComponent<CapsuleCollider2D>();
-        }
+
+        //col2D = GetComponent<CapsuleCollider2D>();
+    }
 
         void Awake()
         {
@@ -102,6 +106,7 @@ namespace Assets
             Dash();
             UpdateCoyoteTimer();
             CastingSpell();
+            UseAOESkill();
 
         }
         public SpriteRenderer SpriteRenderer
@@ -148,6 +153,7 @@ namespace Assets
         {
             if (canDash)
             {
+                isDash = true;
                 isDash = true;
             }
             if (dashTime <= 0)
@@ -207,11 +213,18 @@ namespace Assets
         void InstantiateProjectile()
         {
             GameObject projectile;
-            if (spriteRenderer.flipX)
+            
+            if (SpriteRenderer.flipX)
+            {
                 projectile = Instantiate(projectilePrefab, launchOffsetL.position, transform.rotation);
+                projectile.GetComponent<Projectile>().SetDirection(Vector2.left);
+            }
             else
+            {
                 projectile = Instantiate(projectilePrefab, launchOffsetR.position, transform.rotation);
-
+                projectile.GetComponent<Projectile>().SetDirection(Vector2.right);
+            }
+            
             // 3초 후에 발사체 삭제
             Destroy(projectile, 3.0f);
         }
@@ -224,6 +237,17 @@ namespace Assets
         void ResetLaunch()
         {
             canLaunch = true; // Launch 메서드 호출 가능하게 설정
+        }
+
+
+        void UseAOESkill()
+        {
+            if(playerAOEPrefab != null && !isUseAOE)
+            {
+               isUseAOE = true;
+               Instantiate(playerAOEPrefab, transform.position, transform.rotation);
+               Debug.Log("스킬 발동 확인");
+            }
         }
 
         void CastingSpell()
@@ -243,18 +267,6 @@ namespace Assets
                 CastingSpellEffect.Stop();
                 isCastingSpell = false;
             }
-
-
-            //if (Input.GetKey(KeyCode.X) && !CastingSpellEffect.isPlaying)
-            //{
-            //    playerAnimScr.CastingSpellAnimation(true);
-            //    CastingSpellEffect.Play();
-            //}
-            //else
-            //{
-            //    playerAnimScr.CastingSpellAnimation(false);
-            //    CastingSpellEffect.Stop();
-            //}
         }
 
         // 코요태타임점프 코루틴

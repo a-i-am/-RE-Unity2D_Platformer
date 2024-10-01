@@ -48,9 +48,14 @@ public class UI : MonoBehaviour
 
     private double canChargeMaxValue = 1.0; // 최대 게이지 값
 
-    private GameObject originalProjectilePrefab; // 원래 projectilePrefab
+    // Projectile : 발사체
+    private GameObject originalProjectilePrefab; // 기본공격용 projectilePrefab
     private GameObject currentProjectilePrefab; // 현재 사용 중인 projectilePrefab
-    public float skillDuration = 5f; // 스킬 지속 시간
+
+    // AOE : Area of Effect // 범위 공격
+    private GameObject currentAOEPrefab; // 현재 사용 중인 AOEPrefab
+
+    public float skillDuration = 15f; // 스킬 지속 시간
 
 
 
@@ -119,7 +124,8 @@ public class UI : MonoBehaviour
             currentChargeValue -= gaugeChargeSpeed * Time.deltaTime;
         }
 
-        circularSpellGauge.fillAmount = currentChargeValue / 100;
+        if(circularSpellGauge.fillAmount >= 0)
+            circularSpellGauge.fillAmount = currentChargeValue / 100;
     }
 
 
@@ -137,10 +143,11 @@ public class UI : MonoBehaviour
             // 2단계 스킬
             skillPrefab = skillPrefabLevel2;
         }
-        else if (circularSpellGauge.fillAmount >= 0.75f && circularSpellGauge.fillAmount < 0.1f)
+        else if (circularSpellGauge.fillAmount >= 0.75f && circularSpellGauge.fillAmount < 1.0f)
         {
             // 3단계 스킬
             skillPrefab = skillPrefabLevel3;
+            Debug.Log("iam 3");
         }
         else if (circularSpellGauge.fillAmount >= 0.1f)
         {
@@ -154,23 +161,34 @@ public class UI : MonoBehaviour
             currentChargeValue = 0;
             circularSpellGauge.fillAmount = 0;
 
-            if (skillPrefab.GetComponent<Projectile>() != null)
-            {
-                UseProjectileSkill(skillPrefab);
-            }
+            //if (skillPrefab.GetComponent<Projectile>() != null)
+            //{
+                UseSkill(skillPrefab);
+            //}
         }
 
     }
-    private void UseProjectileSkill(GameObject newProjectilePrefab)
+    private void UseSkill(GameObject newSkillPrefab)
     {
+        // 스킬 1,2는 발사체 스킬
         // 현재 projectilePrefab을 원래의 것으로 저장
-        currentProjectilePrefab = newProjectilePrefab;
-
-        // projectilePrefab을 동적으로 등록된 프리팹으로 변경
-        playerScr.projectilePrefab = currentProjectilePrefab;
-        // 코루틴을 호출하여 일정 시간 후에 원래의 projectilePrefab으로 되돌리기
-        StartCoroutine(ResetProjectile(skillDuration));
+        if(newSkillPrefab == skillPrefabLevel1 || newSkillPrefab == skillPrefabLevel2)
+        {
+            currentProjectilePrefab = newSkillPrefab;
+            playerScr.projectilePrefab = currentProjectilePrefab;
+            // projectilePrefab을 동적으로 등록된 프리팹으로 변경
+            // 코루틴을 호출하여 일정 시간 후에 원래의 projectilePrefab으로 되돌리기
+            StartCoroutine(ResetProjectile(skillDuration));
+        }
+        // 스킬 3, 4
+        else
+        {
+            currentAOEPrefab = newSkillPrefab;
+            playerScr.playerAOEPrefab = currentAOEPrefab;
+            StartCoroutine(ResetAOE(skillDuration));
+        } 
     }
+
 
     private IEnumerator ResetProjectile(float delay)
     {
@@ -180,4 +198,11 @@ public class UI : MonoBehaviour
         playerScr.projectilePrefab = originalProjectilePrefab;
     }
 
+
+    private IEnumerator ResetAOE(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        playerScr.playerAOEPrefab = null;
+        playerScr.isUseAOE = false;
+    }
 }
