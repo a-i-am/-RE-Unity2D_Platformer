@@ -41,8 +41,8 @@ public class Inventory : MonoBehaviour
     public int pickupMobCount = 0;
 
     public InventoryUI invenUI;
-    public EnemyScr enemy;
-    public PlayerScr playerScr;
+    private EnemyScr enemy;
+    private PlayerScr playerScr;
 
     private int itemSlotCnt;
     private int characterSlotCnt;
@@ -139,8 +139,8 @@ public class Inventory : MonoBehaviour
     private void DetectMob()
     {
         // 플레이어의 앞 방향으로 레이캐스트를 발사하여 적을 감지합니다.
-        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, transform.right, 5f, LayerMask.GetMask("Mob"));
-        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, -transform.right, 5f, LayerMask.GetMask("Mob"));
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, transform.right, 5f, LayerMask.GetMask("Fainted"));
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, -transform.right, 5f, LayerMask.GetMask("Fainted"));
 
         RaycastHit2D hit = hitRight.collider != null ? hitRight : hitLeft.collider != null ? hitLeft : new RaycastHit2D();
 

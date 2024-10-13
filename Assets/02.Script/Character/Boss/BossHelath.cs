@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BossHelath : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         

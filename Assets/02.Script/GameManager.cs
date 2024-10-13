@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour {
         if (_instance == null)
             {
                 _instance = FindObjectOfType<GameManager>();
+                // _instance = this;
                 DontDestroyOnLoad(_instance.gameObject.transform.root.gameObject);
                 // 입력 매개변수가 0개 
                 //GameManager.Instance.gameOverDele += () => { GameManager.Instance.isDead = true; };
@@ -48,9 +50,17 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void Awake(){}
+    private void Awake()
+    {
+    }
+    
     void Update() { }
 
+
+
+
+
+    // 게임 오버 & 리플레이 로직(델리게이트)
     public void GameOverDeath()
     {
         // 게임 오버 조건(목숨 0) -> gameOverDele delegate => 게임 오버 상태 true

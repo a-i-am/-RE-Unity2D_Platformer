@@ -24,6 +24,7 @@ namespace Assets
         private float inputHorizontal;
         private bool isDash;
 
+        // Stat 클래스 인스턴스를 health 라는 이름으로 가져옴
         [SerializeField] private Stat health;
 
         //[SerializeField] private Projectile projectilePrefab;

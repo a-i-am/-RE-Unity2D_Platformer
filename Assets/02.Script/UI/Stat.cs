@@ -6,11 +6,13 @@ using System;
 [Serializable]
 public class Stat
 {
-    [SerializeField] private UI bar;
+    [SerializeField] private UI playerHP;
+    //[SerializeField] private UI bossHP;
+
     [SerializeField] private float maxVal;
     [SerializeField] private float currentVal;
     //public float MaxVal { get => maxVal; set => maxVal = value; }
-
+    
     public float CurrentVal
     {
         get
@@ -22,7 +24,8 @@ public class Stat
         {
             //this.currentVal = value;
             this.currentVal = Mathf.Clamp(value, 0, MaxVal);
-            bar.Value = currentVal;
+            playerHP.Value = currentVal;
+            //bossHP.Value = currentVal;
         }
 
     }
@@ -36,7 +39,10 @@ public class Stat
         set
         {
             this.maxVal = value;
-            bar.MaxValue = maxVal;
+            playerHP.MaxValue = maxVal;
+            //bossHP.MaxValue = maxVal;
+
+
         }
     }
 

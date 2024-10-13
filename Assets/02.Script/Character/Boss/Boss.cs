@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+    //[SerializeField] private Stat health;
+
     public ParticleSystem gushOutEffect;
     public float speed;
     public float followDistance;
@@ -21,13 +23,10 @@ public class Boss : MonoBehaviour
     public Transform player;
     public bool isFlipped = false;
 
-    [SerializeField] private int health = 100; // 몬스터의 체력
     private bool bossIsHurted = false;
     private bool bossIsFainted;
 
-    private bool isSpinning = false;
-
-    
+    private bool isSpinning = false;    
     private bool isSpinDirectionSet = false; // 스핀 방향 설정여부 확인
     //Vector2 followDirection;
     float followDirection;
@@ -153,6 +152,10 @@ public class Boss : MonoBehaviour
             Debug.Log("SpinDirectionReset");
             spinDirection *= -1;
         }
+        //if (collision.gameObject.tag == "Attack")
+        //{
+        //    TakeDamage();
+        //}
     }
     //void GroundCheckRay()
     //{
@@ -253,8 +256,8 @@ public class Boss : MonoBehaviour
     {
         //bossIsHurted = true;
         //anim.SetBool("Hurt", true);
-        //health--;
-        //if (health <= 0)
+        //health.CurrentVal -= 10; ;
+        //if (health.CurrentVal <= 0)
         //{
         //    Faint(); // 체력이 0 이하일 경우 몬스터 삭제
         //}

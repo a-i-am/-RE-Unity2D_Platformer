@@ -87,7 +87,7 @@ public class Projectile : MonoBehaviour
 
             case ProjectileType.Lasting:
                 // 폭발성 발사체에 대한 처리
-                Destroy(gameObject, 3f);
+                Destroy(gameObject);
                 break;
 
             case ProjectileType.Poisonous:

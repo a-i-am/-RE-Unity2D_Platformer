@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -34,16 +34,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -52,9 +52,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -121,18 +121,1830 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_2
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 1216
+        width: 64
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0b932204f4344f4787bd15906a0b667
+      internalID: 981318105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_5
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 992
+        width: 186
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -79, y: -112}
+        - {x: -79, y: -58}
+        - {x: -92, y: 19}
+        - {x: -91, y: 112}
+        - {x: 93, y: 112}
+        - {x: 93, y: -112}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d886a3947baefb64a87cf7cb08c29c75
+      internalID: 880526108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_6
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 896
+        width: 255
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f55b6f0180b93cf43a358537b2de5879
+      internalID: 769382311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_7
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 864
+        width: 93
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -46.5, y: 46}
+        - {x: -46.5, y: 93}
+        - {x: -17.5, y: 93}
+        - {x: -17.5, y: 48}
+        - {x: -18.5, y: 47}
+      - - {x: 24.5, y: 46}
+        - {x: 24.5, y: 112}
+        - {x: 41.5, y: 112}
+        - {x: 41.5, y: 46}
+      - - {x: -18.5, y: 47}
+        - {x: -18.5, y: 47}
+        - {x: -18.5, y: 47}
+        - {x: -18.5, y: 47}
+      - - {x: -46.5, y: -112}
+        - {x: -46.5, y: -95}
+        - {x: -44.5, y: -93}
+        - {x: -16.5, y: -93}
+        - {x: -16.5, y: -112}
+      - - {x: 22.5, y: -112}
+        - {x: 22.5, y: -92}
+        - {x: 42.5, y: -92}
+        - {x: 42.5, y: -112}
+      - - {x: 46.5, y: -69}
+        - {x: 18.5, y: -90}
+        - {x: 16.5, y: -100}
+        - {x: 16.5, y: -112}
+        - {x: -1.5, y: -112}
+        - {x: -14.5, y: -112}
+        - {x: -14.5, y: -94}
+        - {x: -15.5, y: -90}
+        - {x: -46.5, y: -57}
+        - {x: -46.5, y: -30}
+        - {x: -34.5, y: -14}
+        - {x: -26.5, y: 21}
+        - {x: -27.5, y: 42}
+        - {x: -16.5, y: 44}
+        - {x: -15.5, y: 112}
+        - {x: 0.5, y: 112}
+        - {x: 16.5, y: 112}
+        - {x: 20.5, y: 46}
+        - {x: 26.5, y: 26}
+        - {x: 26.5, y: 17}
+        - {x: 33.5, y: -13}
+        - {x: 46.5, y: -32}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0587a9f00a7180438c128012f7f2c25
+      internalID: -9060372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_8
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 864
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcf20ea08a4b91e46bf0322c0dd7a351
+      internalID: -1863305579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_9
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 864
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f3e065444151f8448ceebc16e365fd8
+      internalID: -527591605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_10
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 864
+        width: 18
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57d66bb951af0ea4a984fe6122a8f372
+      internalID: -1959822060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_11
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 882
+        width: 96
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38103448bf99d6b40a42efdb22185499
+      internalID: -1777129922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_12
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 864
+        width: 29
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99ef4e8d3eedc564fa1dddc710517174
+      internalID: 461864780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_13
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 864
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c132b6e3509dc14a96a88c9a24d3d49
+      internalID: 893329222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_14
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 864
+        width: 18
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7573ad2128013ae4bbe1740f71c282dc
+      internalID: 1439058817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_15
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 864
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f7b25f9ae927ad41943ff815f2b7395
+      internalID: 679791630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_16
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 864
+        width: 19
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4587dbaf31d7054b87a8e7be9b7c4fb
+      internalID: -1132465439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_17
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 864
+        width: 28
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7f45d026439ef646b9a3d56e2802d1e
+      internalID: -951030268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_18
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 864
+        width: 25
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15111e5dad805314a8ae6d8c2e80e205
+      internalID: 1072177727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_19
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 672
+        width: 255
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21b75fe86d762ee448f0b6eb026cf53a
+      internalID: -1232948792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 800
+        width: 95
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80c00e2746da54d4aa19e0d69cbae543
+      internalID: -1957951881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_21
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 800
+        width: 94
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18e167ac4841adb48a22d78e612dc98c
+      internalID: 282073263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_22
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 832
+        width: 39
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c33bd173dad2b8744b540851f0fe9b85
+      internalID: 620513994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_23
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 832
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91fe3d2fcf235974992e63754d259f96
+      internalID: -230120168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_24
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 832
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61e0dd1cbdaeaa949a70256c3ed9befc
+      internalID: -2055710741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_25
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 832
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 601732c1c18633344ac21d95cc55c9f3
+      internalID: 2094290170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_26
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 800
+        width: 133
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cbf1d8abf1a53f4eafc13ce5da69cbd
+      internalID: -1365266771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_27
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 800
+        width: 47
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85fc5c1fb8334814fb2faa655b6ab95f
+      internalID: 1863908861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_28
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 800
+        width: 39
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35a4e073ac444064e8af839c96fbb4e6
+      internalID: 211863682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_29
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 800
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8655bcec9918c704280e750325a61298
+      internalID: -718708799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_30
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 800
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23cc85936525cf745a60484b4e843211
+      internalID: -2086242671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_31
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 800
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff22d90c1649321428e19d1a366e951b
+      internalID: -780572373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_33
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 768
+        width: 19
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79e200fcf83f0c240a879100d7d263cb
+      internalID: 999960089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_34
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 768
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 475b9034372ef9a41bd706d0cdba31e6
+      internalID: 1896399886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_35
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 704
+        width: 88
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6749ac92f18206040b3b566d6bbb3884
+      internalID: -987809137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_36
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 672
+        width: 93
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 428c7fc93632a9040904d14cd6cec624
+      internalID: 1148904562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_38
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 640
+        width: 56
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a436ea61a96922f4a8d776eb30713547
+      internalID: 189022793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_39
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 448
+        width: 255
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df7688864b4f3cf43a105eedc404a53f
+      internalID: -602439570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_40
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 384
+        width: 94
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 19, y: -96}
+        - {x: -16, y: -96}
+        - {x: -44, y: -88}
+        - {x: -47, y: -74}
+        - {x: -47, y: -47}
+        - {x: -34, y: -7}
+        - {x: -25, y: 22}
+        - {x: -19, y: 29}
+        - {x: -11, y: 73}
+        - {x: -1, y: 96}
+        - {x: 6, y: 96}
+        - {x: 17, y: 56}
+        - {x: 18, y: 28}
+        - {x: 30, y: -3}
+        - {x: 33, y: -39}
+        - {x: 47, y: -44}
+        - {x: 47, y: -91}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7760b107e4e9d848a90692b140b8872
+      internalID: -1452915040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_44
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 224
+        width: 255
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b747c54f43fd3e84e89f9cbe0170dfaf
+      internalID: -1511247459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_48
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 128
+        width: 27
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fef9422ff3794514c848ea53ab8e53e3
+      internalID: -1078030502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_49
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 128
+        width: 11
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6040ade30056cd478c7877bacfe8378
+      internalID: -101407148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_0
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 894
+        width: 96
+        height: 193
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 33, y: 32.5}
+        - {x: 20, y: 32.5}
+        - {x: 20, y: 37.5}
+        - {x: 21, y: 94.5}
+        - {x: 46, y: 94.5}
+        - {x: 48, y: 32.5}
+      - - {x: 9, y: -96.5}
+        - {x: -1, y: -96.5}
+        - {x: -9, y: -96.5}
+        - {x: -48, y: -72.5}
+        - {x: -48, y: -35.5}
+        - {x: -24, y: 19.5}
+        - {x: -15, y: 30.5}
+        - {x: -11, y: 96.5}
+        - {x: 1, y: 96.5}
+        - {x: 15, y: 96.5}
+        - {x: 18, y: 44.5}
+        - {x: 18, y: 29.5}
+        - {x: 22, y: 25.5}
+        - {x: 32, y: 14.5}
+        - {x: 48, y: -42.5}
+        - {x: 48, y: -74.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1754c02cb1e0144896c83bde8c53535
+      internalID: -1643935683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 1053
+        width: 31
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 479e414747ee0b34f9702c636879c9ee
+      internalID: -1809217619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_3
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 1149
+        width: 24
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29e69edc734c4234ca23d6af48a8ca35
+      internalID: -1962504930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_4
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 1149
+        width: 26
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 735a97ad03697ad4baffe8ae5801c91d
+      internalID: 594200016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_32
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 1149
+        width: 19
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50e53784bc2b9494d9617798c717f00a
+      internalID: -850334355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_37
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 1117
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b7893e7b9965094da7f6159208e54b6
+      internalID: 859819352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_41
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 1117
+        width: 29
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a914f8678834bff46ba87db5a8478a38
+      internalID: -325833806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_42
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 1116
+        width: 28
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be56a8b0f696c744589392ee5d6fd72f
+      internalID: -6296538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_43
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 1084
+        width: 31
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cc665c1fff6f364094c126b0f2f6d21
+      internalID: -1759782084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_45
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 1084
+        width: 52
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e3d22785f6959d48b3f618d7de5d0a7
+      internalID: -388028178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_46
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 1056
+        width: 38
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fcce7c768f5f3b459c80e02dcdcf749
+      internalID: -1271345149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_47
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 1056
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 959d05856d09aaf45b6c6f41c509727b
+      internalID: -1495495267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_50
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 894
+        width: 95
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35dfb5d036b2fb048b682bd4ec1acf0d
+      internalID: -1614453374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_51
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 893
+        width: 32
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f89054efaa6ea9147ac77713a92af779
+      internalID: 2039742544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_52
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 893
+        width: 59
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 491dca68650c4b34fbdb72869f2a7392
+      internalID: 379910248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_53
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 894
+        width: 47
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c3ff290688488340920d4128eed2a3e
+      internalID: 2068546097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_54
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 764
+        width: 26
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a1939283d3d52a4dab2eb1f67fafbc1
+      internalID: -56848516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_55
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 768
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0358924e32380443b5b461fada3bd48
+      internalID: -352500510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 95
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24067903a32304d4889b5cf33633eac4
+      internalID: -1824072405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_57
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 768
+        width: 86
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -43, y: -9}
+        - {x: -43, y: -1}
+        - {x: -43, y: 6}
+        - {x: -25, y: 4}
+        - {x: -24, y: -3}
+        - {x: -24, y: -9}
+      - - {x: -8, y: -9}
+        - {x: -8, y: 9}
+        - {x: 8, y: 9}
+        - {x: 8, y: -9}
+      - - {x: 21, y: -9}
+        - {x: 24, y: -1}
+        - {x: 42, y: -1}
+        - {x: 43, y: -9}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b70730415d1713488c4f254ec369f5d
+      internalID: 2018675548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_58
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 766
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1b27e5806a00d2499ad93bed220c3de
+      internalID: -2103030950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_59
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 634
+        width: 26
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 812f3065c3d4e0640a6a1d85e296ac51
+      internalID: -868582742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_60
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 635
+        width: 29
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3a7f62b938dbdd4ba31b67b2ce418bc
+      internalID: 785386000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_61
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 637
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfce90771d6c3624fafe0887fac4ec10
+      internalID: -116201142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_62
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 603
+        width: 29
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e579ab989a127544821945c580b90d6
+      internalID: 8748407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_63
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 606
+        width: 28
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e074e3f1341cff84186f5e6d307b8869
+      internalID: 1794086067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_64
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 606
+        width: 29
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 219c3a5e50024944bbf72ed0504d45a9
+      internalID: -539817411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_65
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 575
+        width: 29
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ee3af78ad0a4f54182a45f28ad88506
+      internalID: -1905201678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_66
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 575
+        width: 48
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3196afdd15f116644b4029dec16d74a6
+      internalID: -1409748850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_67
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 543
+        width: 53
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e052a0bf014ce81418e33dbdb96b9d6c
+      internalID: -1765993160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_68
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 543
+        width: 33
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 895b6a507f0c1f44cbf5596aca77aa84
+      internalID: 22966559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_69
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 384
+        width: 138
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 11, y: -36}
+        - {x: 30, y: -67}
+        - {x: -9, y: -96}
+        - {x: -28, y: -96}
+        - {x: -36, y: -96}
+        - {x: -69, y: -66}
+        - {x: -55, y: -37}
+        - {x: -54, y: 1}
+        - {x: -37, y: 28}
+        - {x: -36, y: 64}
+        - {x: -27, y: 96}
+        - {x: -11, y: 96}
+        - {x: -2, y: 59}
+        - {x: -3, y: 29}
+        - {x: 11, y: 1}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da6369d3aa7b18b4eb8bdc8373fbce84
+      internalID: 2144900306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_70
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 768
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec07f7c416ac216418dca1b26a046591
+      internalID: -505071996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_71
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 768
+        width: 27
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1536bf46b44b804f85b6e901d86c7f9
+      internalID: -238972089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_72
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 768
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de2e760637e0e7245baa7d8f8761ad5a
+      internalID: -335472477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_73
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 768
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b27fcc412dcefaa4ca6d02b9c69a8dea
+      internalID: -1378048995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_74
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 893
+        width: 93
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7eab4b9c8a977d642bb984dce1235482
+      internalID: 1594378271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_75
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 1024
+        width: 30
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e575dbdcadeb44b4bac3e00e7fda6990
+      internalID: 1640641644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GandalfHardcore Platformer Assets_76
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 959
+        width: 30
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b89a14e5381d3124281357d1080e3e14
+      internalID: 1631444998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: da14b03e73fe31d48b84c70e0b13c6cc
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GandalfHardcore Platformer Assets_0: -1643935683
+      GandalfHardcore Platformer Assets_1: -1809217619
+      GandalfHardcore Platformer Assets_10: -1959822060
+      GandalfHardcore Platformer Assets_11: -1777129922
+      GandalfHardcore Platformer Assets_12: 461864780
+      GandalfHardcore Platformer Assets_13: 893329222
+      GandalfHardcore Platformer Assets_14: 1439058817
+      GandalfHardcore Platformer Assets_15: 679791630
+      GandalfHardcore Platformer Assets_16: -1132465439
+      GandalfHardcore Platformer Assets_17: -951030268
+      GandalfHardcore Platformer Assets_18: 1072177727
+      GandalfHardcore Platformer Assets_19: -1232948792
+      GandalfHardcore Platformer Assets_2: 981318105
+      GandalfHardcore Platformer Assets_20: -1957951881
+      GandalfHardcore Platformer Assets_21: 282073263
+      GandalfHardcore Platformer Assets_22: 620513994
+      GandalfHardcore Platformer Assets_23: -230120168
+      GandalfHardcore Platformer Assets_24: -2055710741
+      GandalfHardcore Platformer Assets_25: 2094290170
+      GandalfHardcore Platformer Assets_26: -1365266771
+      GandalfHardcore Platformer Assets_27: 1863908861
+      GandalfHardcore Platformer Assets_28: 211863682
+      GandalfHardcore Platformer Assets_29: -718708799
+      GandalfHardcore Platformer Assets_3: -1962504930
+      GandalfHardcore Platformer Assets_30: -2086242671
+      GandalfHardcore Platformer Assets_31: -780572373
+      GandalfHardcore Platformer Assets_32: -850334355
+      GandalfHardcore Platformer Assets_33: 999960089
+      GandalfHardcore Platformer Assets_34: 1896399886
+      GandalfHardcore Platformer Assets_35: -987809137
+      GandalfHardcore Platformer Assets_36: 1148904562
+      GandalfHardcore Platformer Assets_37: 859819352
+      GandalfHardcore Platformer Assets_38: 189022793
+      GandalfHardcore Platformer Assets_39: -602439570
+      GandalfHardcore Platformer Assets_4: 594200016
+      GandalfHardcore Platformer Assets_40: -1452915040
+      GandalfHardcore Platformer Assets_41: -325833806
+      GandalfHardcore Platformer Assets_42: -6296538
+      GandalfHardcore Platformer Assets_43: -1759782084
+      GandalfHardcore Platformer Assets_44: -1511247459
+      GandalfHardcore Platformer Assets_45: -388028178
+      GandalfHardcore Platformer Assets_46: -1271345149
+      GandalfHardcore Platformer Assets_47: -1495495267
+      GandalfHardcore Platformer Assets_48: -1078030502
+      GandalfHardcore Platformer Assets_49: -101407148
+      GandalfHardcore Platformer Assets_5: 880526108
+      GandalfHardcore Platformer Assets_50: -1614453374
+      GandalfHardcore Platformer Assets_51: 2039742544
+      GandalfHardcore Platformer Assets_52: 379910248
+      GandalfHardcore Platformer Assets_53: 2068546097
+      GandalfHardcore Platformer Assets_54: -56848516
+      GandalfHardcore Platformer Assets_55: -352500510
+      GandalfHardcore Platformer Assets_56: -1824072405
+      GandalfHardcore Platformer Assets_57: 2018675548
+      GandalfHardcore Platformer Assets_58: -2103030950
+      GandalfHardcore Platformer Assets_59: -868582742
+      GandalfHardcore Platformer Assets_6: 769382311
+      GandalfHardcore Platformer Assets_60: 785386000
+      GandalfHardcore Platformer Assets_61: -116201142
+      GandalfHardcore Platformer Assets_62: 8748407
+      GandalfHardcore Platformer Assets_63: 1794086067
+      GandalfHardcore Platformer Assets_64: -539817411
+      GandalfHardcore Platformer Assets_65: -1905201678
+      GandalfHardcore Platformer Assets_66: -1409748850
+      GandalfHardcore Platformer Assets_67: -1765993160
+      GandalfHardcore Platformer Assets_68: 22966559
+      GandalfHardcore Platformer Assets_69: 2144900306
+      GandalfHardcore Platformer Assets_7: -9060372
+      GandalfHardcore Platformer Assets_70: -505071996
+      GandalfHardcore Platformer Assets_71: -238972089
+      GandalfHardcore Platformer Assets_72: -335472477
+      GandalfHardcore Platformer Assets_73: -1378048995
+      GandalfHardcore Platformer Assets_74: 1594378271
+      GandalfHardcore Platformer Assets_75: 1640641644
+      GandalfHardcore Platformer Assets_76: 1631444998
+      GandalfHardcore Platformer Assets_8: -1863305579
+      GandalfHardcore Platformer Assets_9: -527591605
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -14,7 +14,9 @@ public class UI : MonoBehaviour
 
     [Header("HP")]
     // HP
-    [SerializeField] private Image hpContent;
+    [SerializeField] private Image playerHP;
+    //[SerializeField] private Image bossHP;
+
     private float hpFillAmount;
 
     [SerializeField] private float lerpSpeed;
@@ -66,7 +68,9 @@ public class UI : MonoBehaviour
 
         if (lerpColors)
         {
-            hpContent.color = fullColor;
+            playerHP.color = fullColor;
+            //bossHP.color = fullColor;
+
         }
 
         // 초기화
@@ -94,17 +98,18 @@ public class UI : MonoBehaviour
     void HandleHpBar()
     {
         //content.fillAmount = hpFillAmount;
-        //hpContent.fillAmount = Map(100, 0, 100, 0, 1);
-        if (hpFillAmount != hpContent.fillAmount)
+        //playerHP.fillAmount = Map(100, 0, 100, 0, 1);
+        if (hpFillAmount != playerHP.fillAmount)
         {
-            //hpContent.fillAmount = hpFillAmount;
-            hpContent.fillAmount = Mathf.Lerp(hpContent.fillAmount, hpFillAmount, Time.deltaTime * lerpSpeed);
-
+            //playerHP.fillAmount = hpFillAmount;
+            playerHP.fillAmount = Mathf.Lerp(playerHP.fillAmount, hpFillAmount, Time.deltaTime * lerpSpeed);
+            //bossHP.fillAmount = Mathf.Lerp(bossHP.fillAmount, hpFillAmount, Time.deltaTime * lerpSpeed);
         }
 
         if (lerpColors)
         {
-            hpContent.color = Color.Lerp(lowColor, fullColor, hpFillAmount);
+            playerHP.color = Color.Lerp(lowColor, fullColor, hpFillAmount);
+            //bossHP.color = Color.Lerp(lowColor, fullColor, hpFillAmount);
         }
     }
 
