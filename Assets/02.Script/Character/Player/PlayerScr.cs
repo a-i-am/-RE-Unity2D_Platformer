@@ -75,6 +75,7 @@ namespace Assets
             playerAnimScr = GetComponent<PlayerAnimScr>();
             CastingSpellEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
 
+
         //col2D = GetComponent<CapsuleCollider2D>();
     }
 
@@ -85,7 +86,6 @@ namespace Assets
 
         void Update()
         {
-
             inputHorizontal = Input.GetAxisRaw("Horizontal");
             Jump();
             Launch();
@@ -386,6 +386,7 @@ namespace Assets
         {
             // 1)데스존에 빠짐 2)체력 쓰러짐
             StartCoroutine(DeadJump());
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX;
             // 게임오버 화면 전환
             //Invoke("OnDeath", 1.5f); // 해당 메소드 지연 후 실행
         }
@@ -403,9 +404,11 @@ namespace Assets
 
             if (deadWait)
             {
+                
                 rb.AddForce(new Vector2(0, 1500f));
                 rb.gravityScale = 8;
                 gameObject.GetComponent<Collider2D>().enabled = false;
+
                 // 만약 목숨이 0개라면(GameOverDeath)
             }
         }

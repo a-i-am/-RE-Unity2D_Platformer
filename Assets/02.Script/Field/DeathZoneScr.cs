@@ -18,11 +18,6 @@ public class DeathZoneScr : MonoBehaviour
             // 플레이어가 사망 지역에 진입하면 GameManager의 DeadJump 메소드 호출
             GameManager.Instance.OnDeath();
             Debug.Log("데스존 게임오버!");
-            #region GameManager.Instance.OnDeath();
-
-            // 플레이어가 사망 지역에 진입하면 GameManager의 OnDeath 메소드 호출
-            //GameManager.Instance.OnDeath();
-            #endregion
         }
 
         //GameObject[] gameObjects;
