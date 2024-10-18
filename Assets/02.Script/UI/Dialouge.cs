@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Playables;
 
 [System.Serializable]
 public class DialougeArea 
@@ -10,13 +11,17 @@ public class DialougeArea
     [TextArea]
     public string dialogue;
     public Sprite actorIcon;
+    //public Sprite iconBack;
     public string actorName;   
     public string title;
 }
 
 public class Dialouge : MonoBehaviour
 {
+    [SerializeField] private PlayableDirector director;
+
     [SerializeField] private Image image_ActorIcon;
+    [SerializeField] private Image image_IconBack;
     [SerializeField] private Image image_DialougeBox;
     [SerializeField] private TextMeshProUGUI txt_TitleText;
     [SerializeField] private TextMeshProUGUI txt_ActorName;
@@ -38,6 +43,7 @@ public class Dialouge : MonoBehaviour
     {
         image_DialougeBox.gameObject.SetActive(_flag);
         image_ActorIcon.gameObject.SetActive(_flag);
+        image_IconBack.gameObject.SetActive(_flag);
         txt_Dialogue.gameObject.SetActive(_flag);
         txt_TitleText.gameObject.SetActive(_flag);
         txt_ActorName.gameObject.SetActive(_flag);  
@@ -48,15 +54,41 @@ public class Dialouge : MonoBehaviour
     private void NextDialogue()
     {
         txt_Dialogue.text = dialougeArea[count].dialogue;
-        image_ActorIcon.sprite = dialougeArea[count].actorIcon;
         txt_TitleText.text = dialougeArea[count].title;
         txt_ActorName.text = dialougeArea[count].actorName;
+
+        if (string.IsNullOrEmpty(dialougeArea[count].title))
+        {
+            image_ActorIcon.sprite = dialougeArea[count].actorIcon;
+            image_IconBack.gameObject.SetActive(true);
+            image_ActorIcon.gameObject.SetActive(true);
+        }
+        else
+        {
+            image_ActorIcon.gameObject.SetActive(false);
+            image_IconBack.gameObject.SetActive(false);
+        }
         count++;
     }
 
     void Start()
     {
-        
+        OnOff(false);
+    }
+
+    private void Awake()
+    {
+        director = GetComponent<PlayableDirector>();
+    }
+
+    public void StartTimeline()
+    {
+        director.time = director.time;
+        director.playableGraph.GetRootPlayable(0).SetSpeed(1);
+    }
+    public void StopTimeline()
+    {
+        director.playableGraph.GetRootPlayable(0).SetSpeed(0);
     }
 
     void Update()

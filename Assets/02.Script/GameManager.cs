@@ -9,6 +9,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
+
+    [SerializeField]
+    List<Message> messageList = new List<Message>();
+
     // 싱글톤 인스턴스
     private static GameManager _instance;
     // 델리게이트 선언
@@ -56,10 +60,6 @@ public class GameManager : MonoBehaviour {
     
     void Update() { }
 
-
-
-
-
     // 게임 오버 & 리플레이 로직(델리게이트)
     public void GameOverDeath()
     {
@@ -90,6 +90,18 @@ public class GameManager : MonoBehaviour {
     }
     //public void TabClick(string tabName)
     //{
-
     //}
+
+    public void SendMessageToChat(string text)
+    {
+        Message newMessage = new Message();
+        newMessage.text = text;
+        messageList.Add(newMessage);
+    }
+
+    [System.Serializable]
+    public class Message
+    {
+        public string text;
+    }
 }
