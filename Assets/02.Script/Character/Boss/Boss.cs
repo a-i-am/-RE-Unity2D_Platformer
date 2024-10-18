@@ -204,6 +204,7 @@ public class Boss : MonoBehaviour
     }
     void GushOut()
     {
+        Debug.Log(" GushOut!");
         if (!gushOutEffect.isPlaying && gushOutTimer < 10f)
         {
             // 플레이어의 위치와 보스의 위치를 비교하여 힘을 가할 방향을 계산
