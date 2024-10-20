@@ -17,7 +17,7 @@ public class BlueWitch : MonoBehaviour
     private float inputHorizontal;
     private bool isDash;
 
-    [SerializeField] private Stat health;
+    [SerializeField] private PlayerHPValue health;
 
     //[SerializeField] private Projectile projectilePrefab;
 

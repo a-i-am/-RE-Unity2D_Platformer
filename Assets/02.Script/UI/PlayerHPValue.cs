@@ -4,19 +4,12 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class Stat
+public class PlayerHPValue
 {
     [SerializeField] private UI playerHP;
-    [SerializeField] private BossUI bossHP;
 
-    // Player
     [SerializeField] private float playerMaxVal;
     [SerializeField] private float playerCurrentVal;
-
-    // Boss
-    [SerializeField] private float bossMaxVal;
-    [SerializeField] private float bossCurrentVal;
-
 
     //public float MaxVal { get => maxVal; set => maxVal = value; }
 
@@ -58,41 +51,5 @@ public class Stat
 
     #endregion
 
-    #region Boss HP Stat
 
-    public float BossCurrentVal
-    {
-        get
-        {
-            return bossCurrentVal;
-        }
-
-        set
-        {
-            this.bossCurrentVal = Mathf.Clamp(value, 0, bossMaxVal);
-            bossHP.BossValue = bossCurrentVal;
-        }
-
-    }
-
-    public float BossMaxVal
-    {
-        get
-        {
-            return bossMaxVal;
-        }
-        set
-        {
-            this.bossMaxVal = value;
-            bossHP.BossMaxValue = bossMaxVal;
-        }
-    }
-
-    public void BossHPInitialize()
-    {
-        this.BossMaxVal = bossMaxVal;
-        this.BossCurrentVal = bossCurrentVal;
-    }
-
-    #endregion
 }

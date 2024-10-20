@@ -124,6 +124,9 @@ public class Boss : MonoBehaviour
 
     void Spin()
     {
+        if (isFainted) return;
+
+
         isSpinning = true;
         anim.SetBool("Spin", true);
         if (!isSpinDirectionSet)
@@ -165,16 +168,15 @@ public class Boss : MonoBehaviour
 
     void Follow()
     {
+        if (isFainted) return;
+
         rbBoss.velocity = new Vector2(followDirection * speed, rbBoss.velocity.y);
         anim.SetTrigger("Crawl");
-
-        //Vector2 followDirection = new Vector2(player.position.x, rbBoss.position.y);
-        // newPos =  Vector2.MoveTowards(rbBoss.position, target, speed * Time.deltaTime);
-        //rbBoss.MovePositi//(newPos);
     }
     void GushOut()
     {
-        Debug.Log(" GushOut!");
+        if (isFainted) return;
+
         if (!gushOutEffect.isPlaying && gushOutTimer < 15f)
         {
             // 플레이어의 위치와 보스의 위치를 비교하여 힘을 가할 방향을 계산
@@ -195,6 +197,8 @@ public class Boss : MonoBehaviour
 
     void Chomp()
     {
+        if (isFainted) return;
+
         if (chompTimer < 15f)
         {
             gushOutEffect.Stop();
@@ -205,6 +209,8 @@ public class Boss : MonoBehaviour
 
     void LookAtPlayer()
     {
+        if (isFainted) return;
+
         Vector3 flipped = transform.localScale;
         flipped.z *= -1f;
 

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BossHelath : MonoBehaviour
 {
+    [SerializeField] private BossHPValue bossHealth;
     private Boss boss;
-    [SerializeField] private Stat health;
     private bool bossIsHurted = false;
     private bool bossIsFainted;
     Transform player;
@@ -23,7 +23,7 @@ public class BossHelath : MonoBehaviour
 
     private void Awake()
     {
-        health.BossHPInitialize();
+        bossHealth.BossHPInitialize();
     }
     // Update is called once per frame
     void Update()
@@ -41,10 +41,11 @@ public class BossHelath : MonoBehaviour
 
     public void TakeDamage()
     {
-        //bossIsHurted = true;
+        bossIsHurted = true;
         anim.SetTrigger("Hurt");
-        health.BossCurrentVal -= 50;
-        if (health.BossCurrentVal <= 0)
+
+        bossHealth.BossCurrentVal -= 50;
+        if (bossHealth.BossCurrentVal <= 0)
         {
             Faint(); // 체력이 0 이하일 경우 몬스터 삭제
         }
