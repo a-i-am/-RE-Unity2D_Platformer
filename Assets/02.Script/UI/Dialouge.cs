@@ -95,7 +95,7 @@ public class Dialouge : MonoBehaviour
     {
         if(isDialogue)
         {
-            if(Input.GetKeyDown(KeyCode.Space)) 
+            if(Input.GetKeyDown(KeyCode.D)) 
             {
                 if (count < dialougeArea.Length)
                     NextDialogue();

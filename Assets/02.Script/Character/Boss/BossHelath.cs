@@ -78,12 +78,5 @@ public class BossHelath : MonoBehaviour
         anim.SetTrigger("Sleep");
 
         Debug.Log("Enemy Knock Down-!!");
-
-        void ChangePositionToSleep()
-        {
-            // Sleep Position // 현재 y축 위치에서 2.2만큼 뺀 위치로 이동 
-            transform.position = new Vector3(transform.position.y - 2.2f, transform.position.y, transform.position.z);
-        }
     }
-
 }
