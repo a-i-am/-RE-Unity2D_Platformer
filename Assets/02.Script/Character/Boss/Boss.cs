@@ -7,37 +7,55 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    //[SerializeField] private Stat health;
-
+    public bool isFainted = false;  // Faint 상태를 나타내는 플래그
     public ParticleSystem gushOutEffect;
     public float speed;
     public float followDistance;
     public float gushoutDistance;
-    public float gushOutTimer = 0f;
-    public float chompTimer = 0f;
-    public float spinTimer = 0f;
-    public float turnTimer = 0f;
+    public float gushOutTimer;
+    public float chompTimer;
+    public float spinTimer;
+    public float turnTimer;
     //private float spinCoolDown = 1.5f;
     public float spinSpeed;
     public GameObject gushOutEffectObj;
-    public Transform player;
     public bool isFlipped = false;
-
-    private bool bossIsHurted = false;
-    private bool bossIsFainted;
-
-    private bool isSpinning = false;    
+    private bool isSpinning = false;
     private bool isSpinDirectionSet = false; // 스핀 방향 설정여부 확인
-    //Vector2 followDirection;
     float followDirection;
     float spinDirection;
-
-
-    SpriteRenderer spriteRenderer;
     Animator anim;
+    Transform player;
     Rigidbody2D rbBoss;
-    RaycastHit2D rayHit;
-    bool isTurn = false;
+
+    public void SetFaint(bool faintState)
+    {
+        isFainted = faintState;  // Faint 상태를 설정
+
+        if (isFainted)
+        {
+            // 모든 애니메이션 중지
+            anim.ResetTrigger("Crawl");
+            anim.SetBool("GushOut", false);
+            anim.SetBool("Chomp", false);
+            anim.SetBool("Spin", false);
+
+            // 보스의 속도를 0으로 설정해서 움직임 멈춤
+            rbBoss.velocity = Vector2.zero;
+
+            // 필요하다면 파티클 이펙트도 중지
+            gushOutEffect.Stop();
+            gushOutEffectObj.SetActive(false);
+        }
+
+    }
+
+    // Faint & Sleep 애니메이션 이벤트 함수
+    void ChangePositionToSleep()
+    {
+        // Sleep Position // 현재 y축 위치에서 2.2만큼 뺀 위치로 이동 
+        transform.position = new Vector3(transform.position.x, transform.position.y - 2.2f, transform.position.z);
+    }
 
     void Start()
     {
@@ -45,18 +63,23 @@ public class Boss : MonoBehaviour
         rbBoss = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         gushOutEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isFainted)
+        {
+            // Faint 상태일 때 로직을 멈추거나 제어
+            return;
+        }
+
         if (!isSpinning)
         {
             gushOutTimer += Time.deltaTime;
             chompTimer += Time.deltaTime;
         }
-        else if (gushOutTimer >= 10f && chompTimer >= 10f )
+        else if (gushOutTimer >= 15f && chompTimer >= 15f)
         {
             spinTimer += Time.deltaTime;
         }
@@ -65,12 +88,23 @@ public class Boss : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //GroundCheckRay();
+        if (isFainted)
+        {
+            // Faint 상태일 때 로직을 멈추거나 제어
+            return;
+        }
+
         LookAtPlayer();
-        //followDirection = (player.position - transform.position).normalized;\
         followDirection = player.position.x < transform.position.x ? -1f : 1f;
 
-        if (!isSpinning && Vector3.Distance(player.position, rbBoss.position) >= followDistance)
+        if (gushOutTimer >= 15f && chompTimer >= 15f)
+        {
+            gushOutEffect.Stop();
+            gushOutEffectObj.gameObject.SetActive(false);
+            if (!isFainted) Spin();
+        }
+
+        if (!isFainted && !isSpinning && Vector3.Distance(player.position, rbBoss.position) >= followDistance)
         {
             speed = 8f;
             anim.SetBool("GushOut", false);
@@ -82,57 +116,32 @@ public class Boss : MonoBehaviour
             Vector3.Distance(player.position, rbBoss.position) >= gushoutDistance)
         {
             anim.SetBool("Chomp", false);
-            GushOut();
+            if (!isFainted) GushOut();
         }
 
-        if (gushOutTimer >= 10f && chompTimer >= 10f)
-        {
-            gushOutEffect.Stop();
-            gushOutEffectObj.gameObject.SetActive(false);
-            Spin();
-        }
+
     }
-
-    //void FollowStop()
-    //{
-    //    RaycastHit2D playerDetectHit
-    //        = Physics2D.Raycast(transform.position, transform.forward, 5f, LayerMask.GetMask("Player"));
-
-    //    // Ray 그리기
-    //    Debug.DrawRay(transform.position, transform.forward * 5f, Color.red);
-
-    //    if (playerDetectHit.collider != null)
-    //    {
-    //        isPlayer = true;
-    //    }
-    //    else { isPlayer = false; }
-    //}
-
 
     void Spin()
     {
-        //isTurn = false;
         isSpinning = true;
         anim.SetBool("Spin", true);
         if (!isSpinDirectionSet)
         {
-            //followDirection = (player.position - transform.position).normalized;
-            //followDirection = player.position.x < transform.position.x ? Vector2.left : Vector2.right;
             spinDirection = player.position.x < transform.position.x ? -1f : 1f;
             isSpinDirectionSet = true;
         }
-        
+
         rbBoss.velocity = new Vector2(spinDirection * spinSpeed, rbBoss.position.y);
 
         // 속도 제한
         if (rbBoss.velocity.magnitude > spinSpeed)
             rbBoss.velocity = rbBoss.velocity.normalized * spinSpeed;
 
-        if (spinTimer >= 5f) // Spin 5초 이상 지나면
+        if (spinTimer >= 10f) // Spin 5초 이상 지나면
         {
             anim.SetBool("Spin", false);
             isSpinning = false;
-            //isTurn = false;
 
             // 타이머를 다시 0으로 리셋
             gushOutTimer = 0f;
@@ -152,51 +161,12 @@ public class Boss : MonoBehaviour
             Debug.Log("SpinDirectionReset");
             spinDirection *= -1;
         }
-        //if (collision.gameObject.tag == "Attack")
-        //{
-        //    TakeDamage();
-        //}
     }
-    //void GroundCheckRay()
-    //{
-    //    // 앞에 땅이 있는지 체크
-    //    Vector2 frontCheck = new Vector2(rbBoss.position.x + 3f * spinDirection, rbBoss.position.y);
-
-    //    if(spinDirection == -1f)
-    //    {
-    //        rayHit = Physics2D.Raycast(frontCheck, Vector2.left, 4f, LayerMask.GetMask("groundLayer"));
-    //        Debug.DrawRay(frontCheck, Vector2.left * 4f, Color.blue); // 레이를 시각적으로 표시
-    //    }
-    //    else 
-    //    {
-    //        rayHit = Physics2D.Raycast(frontCheck, Vector2.right, 4f, LayerMask.GetMask("groundLayer"));
-    //        Debug.DrawRay(frontCheck, Vector2.right * 4f, Color.blue); // 레이를 시각적으로 표시
-    //    }
-
-    //    //// 앞에 땅 없으면 방향 전환
-    //    if (rayHit.collider == null)
-    //    {
-    //        spinDirection *= -1;
-    //        //Spin();
-    //        //isTurn = true;
-    //        //StopSpin();
-    //    }
-    //}
-
-    //void StopSpin()
-    //{
-    //    if (isTurn && turnTimer < 1.5f)
-    //    {
-    //        rbBoss.velocity = Vector2.zero;
-    //        Debug.Log("StopSpin!");
-    //        turnTimer += Time.deltaTime;
-    //    }
-    //    else Spin(); 
-    //}
 
     void Follow()
     {
         rbBoss.velocity = new Vector2(followDirection * speed, rbBoss.velocity.y);
+        anim.SetTrigger("Crawl");
 
         //Vector2 followDirection = new Vector2(player.position.x, rbBoss.position.y);
         // newPos =  Vector2.MoveTowards(rbBoss.position, target, speed * Time.deltaTime);
@@ -205,11 +175,10 @@ public class Boss : MonoBehaviour
     void GushOut()
     {
         Debug.Log(" GushOut!");
-        if (!gushOutEffect.isPlaying && gushOutTimer < 10f)
+        if (!gushOutEffect.isPlaying && gushOutTimer < 15f)
         {
             // 플레이어의 위치와 보스의 위치를 비교하여 힘을 가할 방향을 계산
-            //rbBoss.AddForce(followDirection * 500f, ForceMode2D.Impulse);
-            rbBoss.AddForce(new Vector2(followDirection * 500f, 0f), ForceMode2D.Impulse);
+            rbBoss.AddForce(new Vector2(followDirection * 200f, 0f), ForceMode2D.Impulse);
 
             if (rbBoss.velocity.magnitude > 30f)
             {
@@ -226,7 +195,7 @@ public class Boss : MonoBehaviour
 
     void Chomp()
     {
-        if (chompTimer < 10f)
+        if (chompTimer < 15f)
         {
             gushOutEffect.Stop();
             gushOutEffectObj.gameObject.SetActive(false);
@@ -253,41 +222,7 @@ public class Boss : MonoBehaviour
         }
     }
 
-    public void TakeDamage()
-    {
-        //bossIsHurted = true;
-        //anim.SetBool("Hurt", true);
-        //health.CurrentVal -= 10; ;
-        //if (health.CurrentVal <= 0)
-        //{
-        //    Faint(); // 체력이 0 이하일 경우 몬스터 삭제
-        //}
-        //else
-        //{
-        //    rbBoss.velocity = Vector2.zero;
-        //    if (transform.position.x > player.transform.position.x)
-        //    {
-        //        rbBoss.velocity = new Vector2(10f, 0);
-        //    }
-        //    else
-        //    {
-        //        rbBoss.velocity = new Vector2(-10f, 0);
-        //    }
-        //}
-    }
 
-    // Enemy 녹다운
-    void Faint()
-    {
-        // 레이어보단 is trigger 로 온오프 시키는게 나을듯. 추후 변경 예정
-        // 현재 오브젝트의 레이어를 9번(Mob)으로 변경합니다.
-        gameObject.layer = 9;
-        Physics2D.IgnoreLayerCollision(9, 7); // Fainted(9)과 Player(7) 충돌 무시
-        Physics2D.IgnoreLayerCollision(9, 8); // Fainted(9)과 Attack(8) 충돌 무시 
-        Physics2D.IgnoreLayerCollision(9, 6); // Fainted(9)과 Enemy(6)  충돌 무시
-        bossIsFainted = true;
 
-        anim.SetBool("Faint", true);
-        Debug.Log("Enemy Knock Down-!!");
-    }
+
 }

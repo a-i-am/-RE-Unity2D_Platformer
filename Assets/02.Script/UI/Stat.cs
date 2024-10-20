@@ -7,48 +7,92 @@ using System;
 public class Stat
 {
     [SerializeField] private UI playerHP;
-    //[SerializeField] private UI bossHP;
+    [SerializeField] private BossUI bossHP;
 
-    [SerializeField] private float maxVal;
-    [SerializeField] private float currentVal;
+    // Player
+    [SerializeField] private float playerMaxVal;
+    [SerializeField] private float playerCurrentVal;
+
+    // Boss
+    [SerializeField] private float bossMaxVal;
+    [SerializeField] private float bossCurrentVal;
+
+
     //public float MaxVal { get => maxVal; set => maxVal = value; }
-    
-    public float CurrentVal
+
+    #region Player HP Stat
+
+    public float PlayerCurrentVal
     {
         get
         {
-            return currentVal;
+            return playerCurrentVal;
         }
 
         set
         {
-            //this.currentVal = value;
-            this.currentVal = Mathf.Clamp(value, 0, MaxVal);
-            playerHP.Value = currentVal;
-            //bossHP.Value = currentVal;
+            this.playerCurrentVal = Mathf.Clamp(value, 0, playerMaxVal);
+            playerHP.PlayerValue = playerCurrentVal;
         }
 
     }
 
-    public float MaxVal
+    public float PlayerMaxVal
     {
         get
         {
-            return maxVal;
+            return playerMaxVal;
         }
         set
         {
-            this.maxVal = value;
-            playerHP.MaxValue = maxVal;
-            //bossHP.MaxValue = maxVal;
-
-
+            this.playerMaxVal = value;
+            playerHP.PlayerMaxValue = playerMaxVal;
         }
     }
 
-    public void Initialize()
+    public void PlayerHPInitialize()
     {
-        this.MaxVal = maxVal;
-        this.CurrentVal = currentVal;
+        this.PlayerMaxVal = playerMaxVal;
+        this.PlayerCurrentVal = playerCurrentVal;
     }
+
+    #endregion
+
+    #region Boss HP Stat
+
+    public float BossCurrentVal
+    {
+        get
+        {
+            return bossCurrentVal;
+        }
+
+        set
+        {
+            this.bossCurrentVal = Mathf.Clamp(value, 0, bossMaxVal);
+            bossHP.BossValue = bossCurrentVal;
+        }
+
+    }
+
+    public float BossMaxVal
+    {
+        get
+        {
+            return bossMaxVal;
+        }
+        set
+        {
+            this.bossMaxVal = value;
+            bossHP.BossMaxValue = bossMaxVal;
+        }
+    }
+
+    public void BossHPInitialize()
+    {
+        this.BossMaxVal = bossMaxVal;
+        this.BossCurrentVal = bossCurrentVal;
+    }
+
+    #endregion
 }

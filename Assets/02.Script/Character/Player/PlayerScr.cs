@@ -36,8 +36,7 @@ namespace Assets
         [SerializeField] private Transform launchOffsetL;
         [SerializeField] private Transform launchOffsetR;
 
-        private float dashTime;
-        private float defaultSpeed;
+        [SerializeField] private float dashTime;
         [SerializeField] private float defaultTime;
         [SerializeField] private float walkSpeed = 13f;
         [SerializeField] private float dashSpeed;
@@ -81,7 +80,7 @@ namespace Assets
 
         void Awake()
         {
-            health.Initialize();
+            health.PlayerHPInitialize();
         }
 
         void Update()
@@ -155,14 +154,16 @@ namespace Assets
             if (canDash)
             {
                 isDash = true;
-                isDash = true;
             }
             if (dashTime <= 0)
             {
                 ghost.makeGhost = false;
                 rb.velocity = currentVelocity;
                 if (isDash)
+                {
+                    Physics2D.IgnoreLayerCollision(6, 7, true); // 보스 스핀 공격 회피 가능(gush out은 시간차로 못 피함)
                     dashTime = defaultTime;
+                }
             }
             else
             {
@@ -179,6 +180,7 @@ namespace Assets
                     rb.velocity = new Vector2(dashSpeed * 1, rb.velocity.y);
                 }
             }
+            
             isDash = false;
             canDash = false;
         }
@@ -347,7 +349,7 @@ namespace Assets
             
             if (other.gameObject.tag == "Enemy") 
             {
-                health.CurrentVal -= 10;
+                health.PlayerCurrentVal -= 10;
                 isDamaged = true;
 
                 //rb.AddForce(new Vector2(bumpForceDirc, 0) * 50, ForceMode2D.Impulse);
@@ -369,7 +371,7 @@ namespace Assets
                 Debug.Log("파티클 효과와 충돌");
 
                 // 충돌 시 작동할 로직
-                health.CurrentVal -= 10;
+                health.PlayerCurrentVal -= 10;
                 isDamaged = true;
 
                 int bumpForceDirc = transform.position.x - other.transform.position.x > 0 ? 1 : -1;

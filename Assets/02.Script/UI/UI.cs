@@ -15,22 +15,24 @@ public class UI : MonoBehaviour
     [Header("HP")]
     // HP
     [SerializeField] private Image playerHP;
-    //[SerializeField] private Image bossHP;
-
-    private float hpFillAmount;
+    
+    private float playerHPFillAmount;
 
     [SerializeField] private float lerpSpeed;
     [SerializeField] private Color fullColor;
     [SerializeField] private Color lowColor;
     [SerializeField] private bool lerpColors;
 
-    public float MaxValue { get; set; }
 
-    public float Value
+    // Player HP Value
+
+    public float PlayerMaxValue { get; set; }
+
+    public float PlayerValue
     {
         set
         {
-            hpFillAmount = Map(value, 0, MaxValue, 0, 1);
+            playerHPFillAmount = Map(value, 0, PlayerMaxValue, 0, 1);
         }
     }
 
@@ -39,6 +41,7 @@ public class UI : MonoBehaviour
     [SerializeField] TextMeshProUGUI pickupMobCountText;
     [SerializeField] private Image circularSpellGauge;
     [SerializeField] float currentChargeValue = 0;
+    [SerializeField] double canChargeMaxValue = 1.0; // 최대 게이지 값
     [SerializeField] float gaugeChargeSpeed = 25;
 
     // 단계별 스킬 프리팹들
@@ -48,7 +51,6 @@ public class UI : MonoBehaviour
     [SerializeField] private GameObject skillPrefabLevel3;
     [SerializeField] private GameObject skillPrefabLevel4;
 
-    private double canChargeMaxValue = 1.0; // 최대 게이지 값
 
     // Projectile : 발사체
     private GameObject originalProjectilePrefab; // 기본공격용 projectilePrefab
@@ -60,7 +62,6 @@ public class UI : MonoBehaviour
     public float skillDuration = 15f; // 스킬 지속 시간
 
 
-
     void Start()
     {
         inven = Inventory.instance;
@@ -69,8 +70,6 @@ public class UI : MonoBehaviour
         if (lerpColors)
         {
             playerHP.color = fullColor;
-            //bossHP.color = fullColor;
-
         }
 
         // 초기화
@@ -79,9 +78,8 @@ public class UI : MonoBehaviour
 
     void Update()
     {
-        HandleHpBar();
+        HandlePlayerHpBar();
         ChargeSpellGauge();
-
 
         // 스킬 사용 체크
         if (Input.GetKeyUp(KeyCode.X))
@@ -95,21 +93,16 @@ public class UI : MonoBehaviour
         pickupMobCountText.text = string.Format("{0}", inven.pickupMobCount);
     }
 
-    void HandleHpBar()
+    void HandlePlayerHpBar()
     {
-        //content.fillAmount = hpFillAmount;
-        //playerHP.fillAmount = Map(100, 0, 100, 0, 1);
-        if (hpFillAmount != playerHP.fillAmount)
+        if (playerHPFillAmount != playerHP.fillAmount)
         {
-            //playerHP.fillAmount = hpFillAmount;
-            playerHP.fillAmount = Mathf.Lerp(playerHP.fillAmount, hpFillAmount, Time.deltaTime * lerpSpeed);
-            //bossHP.fillAmount = Mathf.Lerp(bossHP.fillAmount, hpFillAmount, Time.deltaTime * lerpSpeed);
+            playerHP.fillAmount = Mathf.Lerp(playerHP.fillAmount, playerHPFillAmount, Time.deltaTime * lerpSpeed);
         }
 
         if (lerpColors)
         {
-            playerHP.color = Color.Lerp(lowColor, fullColor, hpFillAmount);
-            //bossHP.color = Color.Lerp(lowColor, fullColor, hpFillAmount);
+            playerHP.color = Color.Lerp(lowColor, fullColor, playerHPFillAmount);
         }
     }
 
@@ -126,6 +119,7 @@ public class UI : MonoBehaviour
         }
         else
         {
+            if(currentChargeValue > 0)
             currentChargeValue -= gaugeChargeSpeed * Time.deltaTime;
         }
 

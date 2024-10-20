@@ -133,7 +133,6 @@ public class Inventory : MonoBehaviour
                 fieldItems.DestroyItem();
             }
         }
-
     }
 
     private void DetectMob()

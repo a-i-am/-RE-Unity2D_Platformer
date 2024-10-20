@@ -72,7 +72,7 @@ public class BlueWitch : MonoBehaviour
 
     void Awake()
     {
-        health.Initialize();
+        health.PlayerHPInitialize();
     }
 
     void Update()
@@ -339,7 +339,7 @@ public class BlueWitch : MonoBehaviour
 
         if (other.gameObject.tag == "Enemy")
         {
-            health.CurrentVal -= 10;
+            health.PlayerCurrentVal -= 10;
             isDamaged = true;
 
             //rb.AddForce(new Vector2(bumpForceDirc, 0) * 50, ForceMode2D.Impulse);
@@ -361,7 +361,7 @@ public class BlueWitch : MonoBehaviour
             Debug.Log("파티클 효과와 충돌");
 
             // 충돌 시 작동할 로직
-            health.CurrentVal -= 10;
+            health.PlayerCurrentVal -= 10;
             isDamaged = true;
 
             int bumpForceDirc = transform.position.x - other.transform.position.x > 0 ? 1 : -1;
