@@ -10,9 +10,7 @@ public class FollowerSpawn : MonoBehaviour
 
     void Awake()
     {
-<<<<<<< Updated upstream
         //playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-=======
         frontPos = new Queue<Vector2>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -26,7 +24,6 @@ public class FollowerSpawn : MonoBehaviour
 
     void FixedUpdate()
     {
->>>>>>> Stashed changes
     }
 
     public void Spawn(Character.CharacterData characterData)

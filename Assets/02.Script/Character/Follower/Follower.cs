@@ -74,9 +74,7 @@ public class Follower : MonoBehaviour
 
     void Update()
     {
-<<<<<<< Updated upstream
         NearestNeighborFinder(); 
-=======
         inputHorizontal = Input.GetAxis("Horizontal");
         spriteRenderer.flipX = (transform.position.x < player.position.x);
         direction = transform.position.x < player.position.x ? 1 : -1;
@@ -86,16 +84,13 @@ public class Follower : MonoBehaviour
         //if (Mathf.Approximately(inputHorizontal, 0f))
         //{
         //}
->>>>>>> Stashed changes
     }
     void DashAndReturn(GameObject follower, Vector3 targetPosition)
     {
-<<<<<<< Updated upstream
         Vector3 originalPosition = originalPositions[follower];
         originalPosition = gameObject.GetComponent<Follower>().returnPos.position;
         #region domove 창고
         if (!isDashing)
-=======
     }
 
     void Sine()
@@ -116,7 +111,6 @@ public class Follower : MonoBehaviour
         Debug.DrawRay(raycastStart, Vector2.down * 0.2f, Color.magenta); // 레이를 시각적으로 표시
 
         if (hit.collider != null) // && 닿은 오브젝트의 태그가 movingPlatform이 아닌 경우에만!
->>>>>>> Stashed changes
         {
             isDashing = true;
             mobGroupMoving.isSineActive = false;
