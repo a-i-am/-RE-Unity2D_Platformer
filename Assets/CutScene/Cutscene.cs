@@ -135,6 +135,7 @@ public class Cutscene : MonoBehaviour
     public void ShowDialogue()
     {
         OnOff(true);
+        DialogueImageActvieCheck();
         count = 1;
         isDialogue = true;
         Pause();
@@ -145,24 +146,13 @@ public class Cutscene : MonoBehaviour
         ResumeFromClosestClip();
         if (isResumeClip)
         {
-        
             if (count < dialougeArea.Length)
             {
                 txt_Dialogue.text = dialougeArea[count].dialogue;
                 txt_TitleText.text = dialougeArea[count].title;
                 txt_ActorName.text = dialougeArea[count].actorName;
 
-                if (string.IsNullOrEmpty(dialougeArea[count].title))
-                {
-                    image_ActorIcon.sprite = dialougeArea[count].actorIcon;
-                    image_IconBack.gameObject.SetActive(true);
-                    image_ActorIcon.gameObject.SetActive(true);
-                }
-                else
-                {
-                    image_ActorIcon.gameObject.SetActive(false);
-                    image_IconBack.gameObject.SetActive(false);
-                }
+                DialogueImageActvieCheck();
                 count++;
             }
             else
@@ -172,6 +162,35 @@ public class Cutscene : MonoBehaviour
         }
 
     }
+
+
+    private void DialogueImageActvieCheck()
+    {
+        if (string.IsNullOrEmpty(dialougeArea[count].title))
+        {
+            image_ActorIcon.sprite = dialougeArea[count].actorIcon;
+            image_IconBack.gameObject.SetActive(true);
+            image_ActorIcon.gameObject.SetActive(true);
+        }
+        else
+        {
+            image_ActorIcon.gameObject.SetActive(false);
+            image_IconBack.gameObject.SetActive(false);
+        }
+        // actorIcon이 null인 경우와 아닌 경우에 따라 활성화/비활성화 처리
+        if (dialougeArea[count].actorIcon != null)
+        {
+            image_ActorIcon.sprite = dialougeArea[count].actorIcon;
+            image_IconBack.gameObject.SetActive(true);
+            image_ActorIcon.gameObject.SetActive(true);
+        }
+        else
+        {
+            image_ActorIcon.gameObject.SetActive(false);
+            image_IconBack.gameObject.SetActive(false);
+        }
+    }
+
 
     private void OnOff(bool _flag)
     {

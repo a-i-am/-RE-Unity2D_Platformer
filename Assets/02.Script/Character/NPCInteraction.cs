@@ -1,21 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class NPCInteraction : MonoBehaviour
 {
-    bool isAcating = false;
+    Animator anim;
     void Start()
     {
-        if(isAcating)
-        {
-
-        }       
+        anim.SetBool("IsActing", true);
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
         
     }
-
 }
