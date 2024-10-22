@@ -104,13 +104,31 @@ public class MobGroupMoving : MonoBehaviour
     }
     void Update()
     {
+<<<<<<< Updated upstream
         Sine();
         FollowPlayer();
         //NearestNeighborFinder();
+=======
+        inputHorizontal = Input.GetAxis("Horizontal");
+        // 좌우 이동 처리
+        MoveHorizontally();
+        Sine();
+
+        if (canTeleport)
+            TeleportToPlayer();
+        // 좌우 이동 입력이 없을 때만 Sine() 함수 호출
+        //if (Mathf.Approximately(inputHorizontal, 0f))
+        {
+        }
+>>>>>>> Stashed changes
     }
     private void FixedUpdate()
     {
+<<<<<<< Updated upstream
         ResetStartY();
+=======
+
+>>>>>>> Stashed changes
     }
 
     // detect Enemy target
@@ -216,7 +234,18 @@ public class MobGroupMoving : MonoBehaviour
     // y core Idle Moving
     void Sine()
     {
+<<<<<<< Updated upstream
         if (isSineActive)
+=======
+        sineY = startY + Mathf.Sin(Time.time * frequency) * amplitude;
+        //rb.MovePosition(new Vector2(rb.position.x, sineY)); // Sine()에서 계산된 Y축 위치 사용
+        transform.position = new Vector2(transform.position.x, sineY); // Sine()에서 계산된 Y축 위치 사용
+    }
+
+    void TeleportToPlayer()
+    {
+        if (Vector2.Distance(player.position, transform.position) > telDistance)
+>>>>>>> Stashed changes
         {
             sineY = startY + Mathf.Sin(Time.time * frequency) * amplitude;
             transform.position = new Vector2(transform.position.x, sineY);

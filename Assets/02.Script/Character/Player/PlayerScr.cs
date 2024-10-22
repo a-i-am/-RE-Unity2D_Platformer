@@ -90,6 +90,7 @@ namespace Assets
             Launch();
             ResetLaunch();
             CheckGrounded(); // 캐릭터의 땅과의 충돌 여부를 검사하는 메소드 호출
+<<<<<<< Updated upstream
             //OnDamaged();
 
             if (Input.GetKeyDown(KeyCode.C) && Time.time >= lastDashTime + dashCooldown)
@@ -97,13 +98,20 @@ namespace Assets
                 canDash = true;
                 lastDashTime = Time.time; // 현재 시간을 기록
             }
+=======
+            Walk();
+>>>>>>> Stashed changes
         }
 
         void FixedUpdate()
         {
+<<<<<<< Updated upstream
             //KeepPlayerOnGround();
             Walk();
             Dash();
+=======
+            KeepPlayerOnGround();
+>>>>>>> Stashed changes
             UpdateCoyoteTimer();
             CastingSpell();
             UseAOESkill();
