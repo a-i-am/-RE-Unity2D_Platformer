@@ -105,7 +105,6 @@ namespace Assets
             //KeepPlayerOnGround();
             Walk();
             Dash();
-            KeepPlayerOnGround();
             UpdateCoyoteTimer();
             CastingSpell();
             UseAOESkill();

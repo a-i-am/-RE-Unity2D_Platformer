@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
-
 public class Boss : MonoBehaviour
 {
+    // 백업 리포지토리 확인용 테스트
     public bool isFainted = false;  // Faint 상태를 나타내는 플래그
     public ParticleSystem gushOutEffect;
     public float speed;

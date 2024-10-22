@@ -107,17 +107,6 @@ public class MobGroupMoving : MonoBehaviour
         Sine();
         FollowPlayer();
         //NearestNeighborFinder();
-        inputHorizontal = Input.GetAxis("Horizontal");
-        // 좌우 이동 처리
-        MoveHorizontally();
-        Sine();
-
-        if (canTeleport)
-            TeleportToPlayer();
-        // 좌우 이동 입력이 없을 때만 Sine() 함수 호출
-        //if (Mathf.Approximately(inputHorizontal, 0f))
-        {
-        }
     }
     private void FixedUpdate()
     {
@@ -229,19 +218,21 @@ public class MobGroupMoving : MonoBehaviour
     void Sine()
     {
         if (isSineActive)
-        sineY = startY + Mathf.Sin(Time.time * frequency) * amplitude;
-        //rb.MovePosition(new Vector2(rb.position.x, sineY)); // Sine()에서 계산된 Y축 위치 사용
-        transform.position = new Vector2(transform.position.x, sineY); // Sine()에서 계산된 Y축 위치 사용
-    }
-
-    void TeleportToPlayer()
-    {
-        if (Vector2.Distance(player.position, transform.position) > telDistance)
         {
             sineY = startY + Mathf.Sin(Time.time * frequency) * amplitude;
-            transform.position = new Vector2(transform.position.x, sineY);
+            //rb.MovePosition(new Vector2(rb.position.x, sineY)); // Sine()에서 계산된 Y축 위치 사용
+            transform.position = new Vector2(transform.position.x, sineY); // Sine()에서 계산된 Y축 위치 사용
         }
     }
+
+    //void TeleportToPlayer()
+    //{
+    //    if (Vector2.Distance(player.position, transform.position) > telDistance)
+    //    {
+    //        sineY = startY + Mathf.Sin(Time.time * frequency) * amplitude;
+    //        transform.position = new Vector2(transform.position.x, sineY);
+    //    }
+    //}
     void ResetStartY()
     {
         // 캐릭터의 아래에 있는 Collider의 절반 크기만큼의 레이를 쏘아서 땅과 충돌하는지 여부를 검사

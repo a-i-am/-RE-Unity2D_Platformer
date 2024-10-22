@@ -74,12 +74,12 @@ public class Follower : MonoBehaviour
 
     void Update()
     {
-        NearestNeighborFinder(); 
-        inputHorizontal = Input.GetAxis("Horizontal");
-        spriteRenderer.flipX = (transform.position.x < player.position.x);
-        direction = transform.position.x < player.position.x ? 1 : -1;
-            Sine();
-        ResetStartY();
+        NearestNeighborFinder();
+        //inputHorizontal = Input.GetAxis("Horizontal");
+        //spriteRenderer.flipX = (transform.position.x < player.position.x);
+        //direction = transform.position.x < player.position.x ? 1 : -1;
+        //    Sine();
+        //ResetStartY();
 
         //if (Mathf.Approximately(inputHorizontal, 0f))
         //{
@@ -89,49 +89,61 @@ public class Follower : MonoBehaviour
     {
         Vector3 originalPosition = originalPositions[follower];
         originalPosition = gameObject.GetComponent<Follower>().returnPos.position;
-        #region domove 창고
         if (!isDashing)
-    }
-
-    void Sine()
-    {
-        sineY = startY + Mathf.Sin(Time.time * frequency) * amplitude;
-        //rb.MovePosition(targetPosition);
-        transform.position = new Vector2(transform.position.x, sineY); // Sine()에서 계산된 Y축 위치 사용
-
-
-    }
-
-
-    void ResetStartY()
-    {
-        // 캐릭터의 아래에 있는 Collider의 절반 크기만큼의 레이를 쏘아서 땅과 충돌하는지 여부를 검사
-        Vector2 raycastStart = new Vector2(player.transform.position.x, player.transform.position.y - 2f);
-        RaycastHit2D hit = Physics2D.Raycast(raycastStart, Vector2.down, 0.2f, LayerMask.GetMask("groundLayer"));
-        Debug.DrawRay(raycastStart, Vector2.down * 0.2f, Color.magenta); // 레이를 시각적으로 표시
-
-        if (hit.collider != null) // && 닿은 오브젝트의 태그가 movingPlatform이 아닌 경우에만!
         {
             isDashing = true;
             mobGroupMoving.isSineActive = false;
 
             Sequence seq = DOTween.Sequence();
             seq.Append(follower.transform.DOMove(targetPosition, dashDuration))
-                   //.AppendCallback(() =>
-                   //{
-                   //})
-               .AppendInterval(0.5f)
+                               .AppendInterval(0.5f)
                .Append(follower.transform.DOMove(originalPosition, dashDuration))
-               .OnComplete(() =>  
+               .OnComplete(() =>
                {
                    mobGroupMoving.isSineActive = true; // Reset the sine wave movement state
                    isDashing = false;  // Reset the dashing state
                })
                .Play();
-
         }
-        #endregion
     }
+
+    //void Sine()
+    //{
+    //    sineY = startY + Mathf.Sin(Time.time * frequency) * amplitude;
+    //    //rb.MovePosition(targetPosition);
+    //    transform.position = new Vector2(transform.position.x, sineY); // Sine()에서 계산된 Y축 위치 사용
+    //}
+
+
+    //void ResetStartY()
+    //{
+    //    // 캐릭터의 아래에 있는 Collider의 절반 크기만큼의 레이를 쏘아서 땅과 충돌하는지 여부를 검사
+    //    Vector2 raycastStart = new Vector2(player.transform.position.x, player.transform.position.y - 2f);
+    //    RaycastHit2D hit = Physics2D.Raycast(raycastStart, Vector2.down, 0.2f, LayerMask.GetMask("groundLayer"));
+    //    Debug.DrawRay(raycastStart, Vector2.down * 0.2f, Color.magenta); // 레이를 시각적으로 표시
+
+    //    if (hit.collider != null) // && 닿은 오브젝트의 태그가 movingPlatform이 아닌 경우에만!
+    //    {
+    //        isDashing = true;
+    //        mobGroupMoving.isSineActive = false;
+
+    //        Sequence seq = DOTween.Sequence();
+    //        seq.Append(follower.transform.DOMove(targetPosition, dashDuration))
+    //               //.AppendCallback(() =>
+    //               //{
+    //               //})
+    //           .AppendInterval(0.5f)
+    //           .Append(follower.transform.DOMove(originalPosition, dashDuration))
+    //           .OnComplete(() =>  
+    //           {
+    //               mobGroupMoving.isSineActive = true; // Reset the sine wave movement state
+    //               isDashing = false;  // Reset the dashing state
+    //           })
+    //           .Play();
+
+    //    }
+    //    #endregion
+    //}
 
     void OnDrawGizmos()
     {
@@ -200,47 +212,4 @@ public class Follower : MonoBehaviour
 
         return bestTarget;
     }
-
-
-    #region 창고 
-    // Follow To Player
-    //void FollowPlayer()
-    //{
-    //    if (Mathf.Abs(transform.position.x - front.position.x) > moveDistance)
-    //        transform.Translate(new Vector2(-1, 0) * Time.deltaTime * moveSpeed);
-    //    //DirectionFollower();
-    //}
-    //void DirectionFollower()
-    //{
-    //    //  몹 그룹이 플레이어 왼쪽에 있을 때
-    //    // 오브젝트 위치 좌우반전
-    //    if (transform.position.x - front.position.x < 0)
-    //    {
-    //        transform.eulerAngles = new Vector3(0, 180, 0);
-    //    }
-    //    else
-    //    {
-    //        transform.eulerAngles = new Vector3(0, 0, 0);
-    //    }
-    //}
-
-
-    //void Watch()
-    //{
-    //    //위치 입력 // FIFO
-    //    //if (!parentPos.Contains(front.position))   //같은 위치값이면 큐에 저장하지 않음
-    //    frontPos.Enqueue(front.position);
-
-    //    //위치 출력
-    //    if (frontPos.Count > followDelay)
-    //        followPos = frontPos.Dequeue();
-    //    else if (frontPos.Count < followDelay)
-    //        followPos = front.position;
-    //}
-
-    //void Follow()
-    //{
-    //    transform.position = followPos;
-    //}
-    #endregion
 }

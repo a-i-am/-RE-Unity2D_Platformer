@@ -6,12 +6,13 @@ public class FollowerSpawn : MonoBehaviour
 {
     public List<GameObject> spawnObjectList;
     //public CharacterSlot slot;
-    //Transform playerTransform;
+    Transform playerTransform;
 
     void Awake()
     {
         //playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        frontPos = new Queue<Vector2>();
+
+        //frontPos = new Queue<Vector2>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void Start()
