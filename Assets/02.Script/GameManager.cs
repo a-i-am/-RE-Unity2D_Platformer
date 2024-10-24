@@ -10,6 +10,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+    public int maxMessages = 25;
+    public GameObject ChatPanel, textObject;
+
     [SerializeField]
     List<Message> messageList = new List<Message>();
 
@@ -58,7 +61,14 @@ public class GameManager : MonoBehaviour {
     {
     }
     
-    void Update() { }
+    void Update() 
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SendMessageToChat("You Pressed T");
+            Debug.Log("T");
+        }
+    }
 
     // 게임 오버 & 리플레이 로직(델리게이트)
     public void GameOverDeath()
@@ -94,8 +104,13 @@ public class GameManager : MonoBehaviour {
 
     public void SendMessageToChat(string text)
     {
+        if (messageList.Count >= maxMessages)
+            messageList.Remove(messageList[0]);
+
         Message newMessage = new Message();
+
         newMessage.text = text;
+        
         messageList.Add(newMessage);
     }
 
