@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +6,6 @@ using UnityEngine.Playables;
 using System;
 using UltEvents;
 using UnityEngine.Timeline;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Cutscene : MonoBehaviour
 {

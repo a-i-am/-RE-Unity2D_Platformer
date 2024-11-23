@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class EnemyScr : MonoBehaviour
 {
