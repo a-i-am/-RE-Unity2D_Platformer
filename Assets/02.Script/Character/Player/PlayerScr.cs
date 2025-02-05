@@ -246,7 +246,7 @@ namespace Assets
 
         void UseAOESkill()
         {
-            if(playerAOEPrefab != null && !isUseAOE)
+            if(playerAOEPrefab != null && isUseAOE)
             {
                isUseAOE = true;
                Instantiate(playerAOEPrefab, transform.position, transform.rotation);
@@ -353,7 +353,7 @@ namespace Assets
                 health.PlayerCurrentVal -= 10;
                 isDamaged = true;
 
-                //rb.AddForce(new Vector2(bumpForceDirc, 0) * 50, ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(bumpForceDirc, 0) * 50, ForceMode2D.Impulse);
                 rb.velocity = new Vector2(bumpForceDirc * 40, 20);
 
                 spriteRenderer.color = new Color(1, 1, 1, 0.4f);
@@ -384,7 +384,6 @@ namespace Assets
             }
         }
 
-
         public void OnDeath() // OnDeath로 플레이어 죽음 하나로 묶음 => gameOverDele & OnDeath() 불러오기  
         {
             // 1)데스존에 빠짐 2)체력 쓰러짐
@@ -407,14 +406,11 @@ namespace Assets
 
             if (deadWait)
             {
-                
                 rb.AddForce(new Vector2(0, 1500f));
                 rb.gravityScale = 8;
                 gameObject.GetComponent<Collider2D>().enabled = false;
-
                 // 만약 목숨이 0개라면(GameOverDeath)
             }
         }
-
     }
 }

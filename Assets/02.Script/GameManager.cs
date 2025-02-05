@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-    public int maxMessages = 25;
-    public GameObject ChatPanel, textObject;
+    //public int maxMessages = 25;
+    //public GameObject ChatPanel, textObject;
 
     [SerializeField]
-    List<Message> messageList = new List<Message>();
+    //List<Message> messageList = new List<Message>();
 
     // 싱글톤 인스턴스
     private static GameManager _instance;
@@ -43,27 +43,15 @@ public class GameManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         GetComponent<Button>().onClick.AddListener(Replay);
-        // 플레이어 객체를 찾아옴
         PlayerScr player = FindObjectOfType<PlayerScr>();
-        // 플레이어의 OnDeath 메서드를 델리게이트에 등록
         if (gameOverDele != null) {
-            // 게임오버 델리게이트 실행 시 true로 초기화
             // isDead = true;
             isGameOver = true;
         }
     }
-
-    private void Awake()
-    {
-    }
     
     void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            SendMessageToChat("You Pressed T");
-            Debug.Log("T");
-        }
     }
 
     // 게임 오버 & 리플레이 로직(델리게이트)
@@ -98,21 +86,21 @@ public class GameManager : MonoBehaviour {
     //{
     //}
 
-    public void SendMessageToChat(string text)
-    {
-        if (messageList.Count >= maxMessages)
-            messageList.Remove(messageList[0]);
+    //public void SendMessageToChat(string text)
+    //{
+    //    if (messageList.Count >= maxMessages)
+    //        messageList.Remove(messageList[0]);
 
-        Message newMessage = new Message();
+    //    Message newMessage = new Message();
 
-        newMessage.text = text;
+    //    newMessage.text = text;
         
-        messageList.Add(newMessage);
-    }
+    //    messageList.Add(newMessage);
+    //}
 
-    [System.Serializable]
-    public class Message
-    {
-        public string text;
-    }
+    //[System.Serializable]
+    //public class Message
+    //{
+    //    public string text;
+    //}
 }

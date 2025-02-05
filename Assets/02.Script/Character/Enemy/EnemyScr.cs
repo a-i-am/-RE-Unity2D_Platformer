@@ -41,7 +41,7 @@ public class EnemyScr : MonoBehaviour
 
     [SerializeField] private Transform player; // 플레이어의 Transform을 저장하는 변수
     [SerializeField] private LayerMask groundLayer; // 땅을 나타내는 레이어
-    [SerializeField] private ParticleSystem dashHitVFX;
+    //[SerializeField] private ParticleSystem dashHitVFX;
     //private bool enemyIsGrounded;
     private bool enemyIsHurted = false;
     public bool enemyIsFainted;
@@ -51,7 +51,7 @@ public class EnemyScr : MonoBehaviour
     RaycastHit2D rayHit;
     void Start()
     {
-        dashHitVFX = GetComponentInChildren<ParticleSystem>();
+        //dashHitVFX = GetComponentInChildren<ParticleSystem>();
         // Player 오브젝트를 찾아서 player에 할당
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rbEnemy = GetComponent<Rigidbody2D>();
@@ -154,7 +154,7 @@ public class EnemyScr : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Follower") && !enemyIsFainted)
         {
             TakeDamage();
-            dashHitVFX.Play();
+            //dashHitVFX.Play();
 
         }
     }
