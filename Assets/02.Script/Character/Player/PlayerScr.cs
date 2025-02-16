@@ -8,26 +8,30 @@ using UnityEngine;
 //using Unity.Burst.CompilerServices;
 //using UnityEditorInternal;
 
+//[SerializeField] private float bumpRayLength;
+//[SerializeField] private float bumpRayOffset;
+//[SerializeField] private Projectile projectilePrefab;
+//private float keyHoldTime = 0f;
+        //[SerializeField] private float attackDistance;
+
 namespace Assets
 {
     public class PlayerScr : MonoBehaviour
     {
         public ParticleSystem CastingSpellEffect;
-
         public ObjectPoolManager projectilePool;
+
         private Rigidbody2D rb;
         private Vector2 currentVelocity;
         private PlayerAnimScr playerAnimScr;
         private SpriteRenderer spriteRenderer;
         private LayerMask groundLayer; // Ground 레이어를 가진 오브젝트와의 충돌을 감지
-        private float keyHoldTime = 0f;
         private float inputHorizontal;
         private bool isDash;
 
         // Stat 클래스 인스턴스를 health 라는 이름으로 가져옴
         [SerializeField] private PlayerHPValue health;
 
-        //[SerializeField] private Projectile projectilePrefab;
 
         public GameObject projectilePrefab;
         public GameObject playerAOEPrefab;
@@ -43,26 +47,24 @@ namespace Assets
         [SerializeField] private float jumpForce = 45f;
         [SerializeField] private float coyoteTime = 0.1f; // 코요태 점프 타임
         [SerializeField] private float coyoteTimer = 0f; // 코요태 점프 타이머
-        [SerializeField] private float attackDistance;
-        [SerializeField] private float bumpRayLength;
-        [SerializeField] private float bumpRayOffset;
 
-        private bool isLaunch;
-        private bool isDamaged;
-        private bool deadWait; // 사망 시 다음 동작 지연
-        private bool respawnOrDead; // 플레이어 사망 유형(리스폰 or 게임오버) 판정
-        private bool canLaunch = true; // Launch 메서드 호출 가능 여부
+        private float lastDashTime = 0.0f; // 마지막 대시 입력 시간을 기록하는 변수
+        bool isLaunch;
+        bool isDamaged;
+        bool deadWait; // 사망 시 다음 동작 지연
+        bool respawnOrDead; // 플레이어 사망 유형(리스폰 or 게임오버) 판정
+        bool canLaunch = true; // Launch 메서드 호출 가능 여부
+        bool canDash;
+
         internal bool isCastingSpell;
         internal bool isGrounded; // 지면 판정
         internal bool isAttacking;
-        bool canDash;
+
         public Ghost ghost;
         public float dashCooldown; // 대시 후 대시가 다시 가능해지는 시간 (초 단위)
-        private float lastDashTime = 0.0f; // 마지막 대시 입력 시간을 기록하는 변수
 
         //코요태타임점프(코루틴을 사용한 지연 점프)
         private bool isCoroutineActive = false;
-
 
         void Start()
         {
@@ -73,8 +75,6 @@ namespace Assets
             spriteRenderer = GetComponent<SpriteRenderer>();
             playerAnimScr = GetComponent<PlayerAnimScr>();
             CastingSpellEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
-
-
         //col2D = GetComponent<CapsuleCollider2D>();
     }
 
@@ -99,7 +99,6 @@ namespace Assets
             }
             Walk();
         }
-
         void FixedUpdate()
         {
             //KeepPlayerOnGround();
@@ -108,13 +107,11 @@ namespace Assets
             UpdateCoyoteTimer();
             CastingSpell();
             UseAOESkill();
-
         }
         public SpriteRenderer SpriteRenderer
         {
             get { return spriteRenderer; }
         }
-
         void Walk()
         {
             currentVelocity = new Vector2(inputHorizontal * walkSpeed, rb.velocity.y);
@@ -213,7 +210,6 @@ namespace Assets
             }
             else isLaunch = false;
         }
-
         void InstantiateProjectile()
         {
             GameObject projectile;
@@ -232,18 +228,14 @@ namespace Assets
             // 3초 후에 발사체 삭제
             Destroy(projectile, 3.0f);
         }
-
         void LaunchExit()
         {
             isAttacking = false;
         }
-
         void ResetLaunch()
         {
             canLaunch = true; // Launch 메서드 호출 가능하게 설정
         }
-
-
         void UseAOESkill()
         {
             if(playerAOEPrefab != null && isUseAOE)
@@ -253,7 +245,6 @@ namespace Assets
                Debug.Log("스킬 발동 확인");
             }
         }
-
         void CastingSpell()
         {
             if (Input.GetKey(KeyCode.X) && inputHorizontal == 0)
@@ -272,7 +263,6 @@ namespace Assets
                 isCastingSpell = false;
             }
         }
-
         // 코요태타임점프 코루틴
         IEnumerator CoyoteTimeJump()
         {
@@ -286,7 +276,6 @@ namespace Assets
                 StartCoroutine(CoyoteTimeJump());
             }
         }
-
         internal void CheckGrounded()
         {
             // 캐릭터의 아래에 있는 Collider의 절반 크기만큼의 레이를 쏘아서 땅과 충돌하는지 여부를 검사
@@ -333,15 +322,12 @@ namespace Assets
 
         // 플레이어의 죽음
         //GameManager.Instance.gameOverDele += OnDeath;
-
         void OffDamaged()
         {
             Physics2D.IgnoreLayerCollision(6, 7, false); // Enemy 와 Player 충돌 기능 복구
             spriteRenderer.color = new Color(1, 1, 1, 1);
             isDamaged = false;
         }
-
-
         void OnCollisionStay2D(Collision2D other)
         {
             if (isDamaged) return;
@@ -361,7 +347,6 @@ namespace Assets
                 Invoke("OffDamaged", 3f);
             }
         }
-
         void OnTriggerEnter2D(Collider2D other)
         {
             if (isDamaged) return;
@@ -383,7 +368,6 @@ namespace Assets
                 Invoke("OffDamaged", 3f);
             }
         }
-
         public void OnDeath() // OnDeath로 플레이어 죽음 하나로 묶음 => gameOverDele & OnDeath() 불러오기  
         {
             // 1)데스존에 빠짐 2)체력 쓰러짐

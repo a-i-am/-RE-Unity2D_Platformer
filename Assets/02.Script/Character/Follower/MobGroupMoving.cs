@@ -22,7 +22,7 @@ public class MobGroupMoving : MonoBehaviour
     // Sine
     [SerializeField] float amplitude = 2f; // sine 파동의 높이
     [SerializeField] float frequency = 1.0f; // sine 파동의 주기
-    [SerializeField] float sineSpeed = 3.2f;
+    //[SerializeField] float sineSpeed = 3.2f;
     Collider2D lastGroundCollider; // 마지막으로 닿은 땅의 Collider 정보를 저장할 변수
     public bool isSineActive = false; // Sine 애니메이션 활성화 여부
     float sineY;
@@ -54,7 +54,6 @@ public class MobGroupMoving : MonoBehaviour
     //// Color Array for different colors
     //private Color[] colors;
     //private Dictionary<GameObject, Color> objectColorMap;
-
 
     void Start()
     {
@@ -111,7 +110,6 @@ public class MobGroupMoving : MonoBehaviour
     private void FixedUpdate()
     {
         ResetStartY();
-
     }
 
     // detect Enemy target

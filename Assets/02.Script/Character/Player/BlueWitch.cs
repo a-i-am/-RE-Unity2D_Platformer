@@ -61,7 +61,7 @@ public class BlueWitch : MonoBehaviour
     {
         // GameManager의 gameOver 델리게이트에 연결
         // 플레이어의 OnDeath 메서드를 델리게이트에 등록
-        GameManager.Instance.gameOverDele += OnDeath;
+        //GameManager.Instance.gameOverDele += OnDeath;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerAnimScr = GetComponent<PlayerAnimScr>();

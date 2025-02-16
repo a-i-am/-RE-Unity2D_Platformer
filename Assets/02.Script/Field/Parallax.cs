@@ -18,7 +18,7 @@ public class Parallax : MonoBehaviour
 
     void Awake()
     {
-        // 게임 시작 때 카메라 위치 저장(이동 거리 계산용)
+        // 게임 시작 때 카메라 위치 저장(이동 거리 계산용) 
         cameraStartPosition = cameraTransform.position;
 
         // 배경 개수를 구하고, 배경 정보를 저장할 GameObject 배열 선언
