@@ -33,7 +33,15 @@ public class BossHelath : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Attack")
+        if (!bossIsFainted && !bossIsHurted && collision.gameObject.tag == "Attack")
+        {
+            TakeDamage();
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (!bossIsFainted && !bossIsHurted && other.gameObject.CompareTag("Attack"))
         {
             TakeDamage();
         }
@@ -41,6 +49,7 @@ public class BossHelath : MonoBehaviour
 
     public void TakeDamage()
     {
+        Invoke("OffDamagedState", 0.5f);
         bossIsHurted = true;
         anim.SetTrigger("Hurt");
 
@@ -62,6 +71,10 @@ public class BossHelath : MonoBehaviour
             }
         }
     }
+    void OffDamagedState()
+    {
+        bossIsHurted = false;
+    }
 
     // Enemy 녹다운
     void Faint()
@@ -73,8 +86,8 @@ public class BossHelath : MonoBehaviour
         Physics2D.IgnoreLayerCollision(10, 7); // Fainted(9)과 Player(7) 충돌 무시
         Physics2D.IgnoreLayerCollision(10, 8); // Fainted(9)과 Attack(8) 충돌 무시 
         Physics2D.IgnoreLayerCollision(10, 6); // Fainted(9)과 Enemy(6)  충돌 무시
-        
-        //bossIsFainted = true;
+
+        bossIsFainted = true;
         anim.SetTrigger("Faint");
         anim.SetTrigger("Sleep");
 

@@ -238,11 +238,11 @@ namespace Assets
         }
         void UseAOESkill()
         {
-            if(playerAOEPrefab != null && isUseAOE)
+            if(playerAOEPrefab != null && !isUseAOE)
             {
                isUseAOE = true;
                Instantiate(playerAOEPrefab, transform.position, transform.rotation);
-               Debug.Log("스킬 발동 확인");
+
             }
         }
         void CastingSpell()
@@ -300,6 +300,7 @@ namespace Assets
 
             //Debug.Log("isGrounded: " + isGrounded);
         }
+        
         //void KeepPlayerOnGround()
         //{
         //    if (isGrounded)
@@ -308,6 +309,7 @@ namespace Assets
         //        rb.position = new Vector2(rb.position.x, rb.position.y - 0.1f);
         //    }
         //}
+
         void UpdateCoyoteTimer()
         {
             if (isGrounded)

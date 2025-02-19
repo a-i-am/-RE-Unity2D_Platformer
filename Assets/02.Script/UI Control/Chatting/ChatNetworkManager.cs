@@ -48,7 +48,7 @@ public class ChatNetworkManager : Singleton<ChatNetworkManager>
         stream.Write(sendBuffer, 0, sendBuffer.Length);
     }
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
         isConnected = false;
 

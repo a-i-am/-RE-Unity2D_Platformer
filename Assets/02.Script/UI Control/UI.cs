@@ -126,7 +126,6 @@ public class UI : MonoBehaviour
             circularSpellGauge.fillAmount = currentChargeValue / 100;
     }
 
-
     private void CastSpell()
     {
         skillPrefab = null;
@@ -187,7 +186,6 @@ public class UI : MonoBehaviour
         } 
     }
 
-
     private IEnumerator ResetProjectile(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -195,7 +193,6 @@ public class UI : MonoBehaviour
         // 원래 projectilePrefab으로 되돌리기
         playerScr.projectilePrefab = originalProjectilePrefab;
     }
-
 
     private IEnumerator ResetAOE(float delay)
     {
