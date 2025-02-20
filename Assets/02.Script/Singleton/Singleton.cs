@@ -41,19 +41,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     }
 
-    public void Awake()
-    {
-        if (transform.parent != null && transform.root != null)
-        {
-            DontDestroyOnLoad(this.transform.root.gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(this.gameObject);
-        }
-
-    }
-
     protected virtual void OnApplicationQuit()
     {
         _isApplicationQuit = true;

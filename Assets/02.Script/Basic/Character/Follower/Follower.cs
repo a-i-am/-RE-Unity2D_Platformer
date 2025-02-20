@@ -67,23 +67,9 @@ public class Follower : MonoBehaviour
             colorIndex++;
         }
     }
-    void Awake()
-    {
-        //frontPos = new Queue<Vector3>();
-    }
-
     void Update()
     {
         NearestNeighborFinder();
-        //inputHorizontal = Input.GetAxis("Horizontal");
-        //spriteRenderer.flipX = (transform.position.x < player.position.x);
-        //direction = transform.position.x < player.position.x ? 1 : -1;
-        //    Sine();
-        //ResetStartY();
-
-        //if (Mathf.Approximately(inputHorizontal, 0f))
-        //{
-        //}
     }
     void DashAndReturn(GameObject follower, Vector3 targetPosition)
     {
@@ -107,44 +93,6 @@ public class Follower : MonoBehaviour
         }
     }
 
-    //void Sine()
-    //{
-    //    sineY = startY + Mathf.Sin(Time.time * frequency) * amplitude;
-    //    //rb.MovePosition(targetPosition);
-    //    transform.position = new Vector2(transform.position.x, sineY); // Sine()에서 계산된 Y축 위치 사용
-    //}
-
-
-    //void ResetStartY()
-    //{
-    //    // 캐릭터의 아래에 있는 Collider의 절반 크기만큼의 레이를 쏘아서 땅과 충돌하는지 여부를 검사
-    //    Vector2 raycastStart = new Vector2(player.transform.position.x, player.transform.position.y - 2f);
-    //    RaycastHit2D hit = Physics2D.Raycast(raycastStart, Vector2.down, 0.2f, LayerMask.GetMask("groundLayer"));
-    //    Debug.DrawRay(raycastStart, Vector2.down * 0.2f, Color.magenta); // 레이를 시각적으로 표시
-
-    //    if (hit.collider != null) // && 닿은 오브젝트의 태그가 movingPlatform이 아닌 경우에만!
-    //    {
-    //        isDashing = true;
-    //        mobGroupMoving.isSineActive = false;
-
-    //        Sequence seq = DOTween.Sequence();
-    //        seq.Append(follower.transform.DOMove(targetPosition, dashDuration))
-    //               //.AppendCallback(() =>
-    //               //{
-    //               //})
-    //           .AppendInterval(0.5f)
-    //           .Append(follower.transform.DOMove(originalPosition, dashDuration))
-    //           .OnComplete(() =>  
-    //           {
-    //               mobGroupMoving.isSineActive = true; // Reset the sine wave movement state
-    //               isDashing = false;  // Reset the dashing state
-    //           })
-    //           .Play();
-
-    //    }
-    //    #endregion
-    //}
-
     void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
@@ -158,30 +106,58 @@ public class Follower : MonoBehaviour
         // 파괴된 오브젝트를 targetObjects 리스트에서 제거합니다.
         targetObjects.RemoveAll(item => item == null);
 
+        if (targetObjects.Count == 0)
+        {
+            Debug.LogWarning("targetObjects 리스트가 비어 있음");
+            return;
+        }
+
         foreach (var obj in selfObjects)
         {
             Vector2? nearest = FindNearestTargetInRange(obj.transform.position);
-
+            
             if (nearest.HasValue)
             {
-                var nearestObj = targetObjects.Find(o => o.transform.position == (Vector3)nearest.Value);
+                Debug.Log(obj.name + "의 가장 가까운 타겟: " + nearest.Value);
+                var nearestObj = targetObjects.Find(o => Vector3.Distance(o.transform.position, (Vector3)nearest.Value) < 0.5f);
+
+
+                if (nearestObj == null)
+                {
+                    Debug.LogWarning($"{obj.name} -> nearestObj가 null임!");
+                }
+                else
+                {
+                    Debug.Log($"{obj.name} -> nearestObj: {nearestObj.name}");
+                }
+
 
                 if (nearestObj != null && !targetedObjects.Contains(nearestObj))
                 {
+
                     targetedObjects.Add(nearestObj);  // 이 개체를 타겟팅된 개체로 추가
 
-                    // Get the assigned color for this object
-                    Color lineColor = objectColorMap[obj];
+                    Debug.Log($"Follower {obj.name} -> Target {nearestObj.name} 선택됨");
 
                     // 선으로 표시 (개체마다 다른 색상 사용)
-                    Debug.DrawLine(obj.transform.position, nearest.Value, lineColor);
+                    Debug.DrawLine(obj.transform.position, nearest.Value, Color.red);
 
-                    //// Dash towards the nearest target and return
+                    // Dash towards the nearest target and return
                     DashAndReturn(obj, nearestObj.transform.position);
                 }
+                else
+                {
+                    Debug.LogWarning($"{obj.name} -> nearestObj가 null임! (Find() 실패 가능성)");
+                }
+
+            }
+            else
+            {
+                Debug.Log(obj.name + "의 가장 가까운 타겟이 없음");
             }
         }
     }
+
 
 
     Vector2? FindNearestTargetInRange(Vector2 position)
@@ -189,27 +165,60 @@ public class Follower : MonoBehaviour
         Vector2? bestTarget = null;
         float bestDistance = float.MaxValue;
 
+        if (targetObjects.Count == 0)
+        {
+            Debug.LogWarning("🚨 targetObjects 리스트가 비어 있음!");
+            return null;
+        }
+
         foreach (var target in targetObjects)
         {
-            if (target == null) continue; // target이 null인지 확인
+            if (target == null)
+            {
+                Debug.LogWarning("⚠️ targetObjects 리스트에서 null 오브젝트 발견");
+                continue;
+            }
 
             // Enemy의 Fainted 상태를 확인
             EnemyScr enemyScript = target.GetComponent<EnemyScr>();
-            if (enemyScript != null && enemyScript.enemyIsFainted) continue;  // Fainted 상태이면 타겟팅하지 않음
+            if (enemyScript != null && enemyScript.enemyIsFainted)
+            {
+                Debug.Log($"⛔ {target.name}은 Fainted 상태이므로 제외됨");
+                continue;
+            }
 
             float distance = Vector2.Distance(position, target.transform.position);
+            Debug.Log($"🔍 {target.name}과의 거리: {distance} (detectionRange: {detectionRange})");
 
-            // Check if the target is within the detection range
-            if (distance <= detectionRange && !targetedObjects.Contains(target))
+            // detectionRange 내에 있는지 확인
+            if (distance > detectionRange)
             {
-                if (distance < bestDistance)
-                {
-                    bestDistance = distance;
-                    bestTarget = target.transform.position;
-                }
+                Debug.Log($"🚫 {target.name}이 detectionRange 밖임 ({distance} > {detectionRange})");
+                continue;
             }
+
+            // 이미 타겟팅된 개체인지 확인
+            if (targetedObjects.Contains(target))
+            {
+                Debug.Log($"⚠️ {target.name}은 이미 타겟팅됨");
+                continue;
+            }
+
+            // 가장 가까운 타겟을 찾기 위한 조건 확인
+            if (distance < bestDistance)
+            {
+                Debug.Log($"✅ {target.name}이 현재 가장 가까운 적임 ({distance} < {bestDistance})");
+                bestDistance = distance;
+                bestTarget = target.transform.position;
+            }
+        }
+
+        if (!bestTarget.HasValue)
+        {
+            Debug.LogWarning("❌ 적절한 타겟을 찾지 못함 (모든 적이 제외됨)");
         }
 
         return bestTarget;
     }
+
 }

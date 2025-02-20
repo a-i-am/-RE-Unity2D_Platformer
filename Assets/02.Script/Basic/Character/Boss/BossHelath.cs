@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossHelath : MonoBehaviour
 {
     [SerializeField] private BossHPValue bossHealth;
+    [SerializeField] private GameObject SleepingForm;
     private Boss boss;
     private bool bossIsHurted = false;
     private bool bossIsFainted;
@@ -25,7 +26,6 @@ public class BossHelath : MonoBehaviour
     {
         bossHealth.BossHPInitialize();
     }
-    // Update is called once per frame
     void Update()
     {
         
@@ -90,7 +90,7 @@ public class BossHelath : MonoBehaviour
         bossIsFainted = true;
         anim.SetTrigger("Faint");
         anim.SetTrigger("Sleep");
-
+        rbBoss.constraints = RigidbodyConstraints2D.FreezeAll;
         Debug.Log("Enemy Knock Down-!!");
     }
 }

@@ -59,7 +59,7 @@ public class CoyoteTimeJump
     public bool isCoroutineActive = false;
 }
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
     [SerializeField] private PlayerPhysics playerPhysics;
     [SerializeField] private DashTimeSet dashTimeSet;
