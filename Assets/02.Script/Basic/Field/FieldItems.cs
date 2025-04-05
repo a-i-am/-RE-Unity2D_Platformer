@@ -15,7 +15,7 @@ public class FieldItems : MonoBehaviour
 
     public void SetRandomItem()
     {
-        List<Item.ItemData> itemDB = InventoryDatabase.instance.itemDB;
+        List<Item.ItemData> itemDB = InventoryDatabase.Instance.itemDB;
         if (itemDB.Count > 0)
         {
             SetItem(itemDB[UnityEngine.Random.Range(0, itemDB.Count)]);

@@ -12,7 +12,6 @@ public class BlueWitch : MonoBehaviour
     private Vector2 currentVelocity;
     private PlayerAnimScr playerAnimScr;
     private SpriteRenderer spriteRenderer;
-    private LayerMask groundLayer; // Ground 레이어를 가진 오브젝트와의 충돌을 감지
     private float keyHoldTime = 0f;
     private float inputHorizontal;
     private bool isDash;

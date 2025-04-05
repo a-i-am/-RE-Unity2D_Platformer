@@ -5,14 +5,13 @@ using Newtonsoft.Json;
 using System.IO;
 using UnityEngine.UI;
 
-public class InventoryDatabase : MonoBehaviour
+public class InventoryDatabase : Singleton<InventoryDatabase>
 {
     public GameObject characterInvenSlotUI;
     public GameObject itemInvenSlotUI;
     public GameObject characterSlotNumText;
     public GameObject itemSlotNumText;
 
-    public static InventoryDatabase instance;
     public TextAsset itemDBText, characterDBText;
 
     public List<Character.CharacterData> allCharacterList = new List<Character.CharacterData>();
@@ -30,7 +29,6 @@ public class InventoryDatabase : MonoBehaviour
 
     public List<Item.ItemData> itemDB = new List<Item.ItemData>();
     public List<Character.CharacterData> characterDB = new List<Character.CharacterData>();
-
     [Space(25)]
     public GameObject fieldItemPrefab;
     public Vector3[] pos;
@@ -52,7 +50,7 @@ public class InventoryDatabase : MonoBehaviour
         {
             string[] row = characterLine[i].Split('\t');
             Sprite characterImage = Resources.Load<Sprite>(row[5]); // 캐릭터 이미지 경로에서 스프라이트 로드
-            GameObject characterPrefab = Resources.Load<GameObject>(row[6]); // 캐릭터 프리팹 경로에서 로드
+            Follower characterPrefab = Resources.Load<Follower>(row[6]); // 캐릭터 프리팹 경로에서 로드
 
             allCharacterList.Add(new Character.CharacterData(
                 row[0],  // type
@@ -86,12 +84,6 @@ public class InventoryDatabase : MonoBehaviour
         // TabClick 메서드 호출하여 초기 탭 설정
         TabClick("Character");
     }
-
-    private void Awake()
-    {
-        instance = this;
-    }
-
     public void TabClick(string tabName)
     {
         // 현재 아이템 리스트에 클릭한 타입만 추가
@@ -156,13 +148,13 @@ public class InventoryDatabase : MonoBehaviour
     {
         string jdata = JsonConvert.SerializeObject(allCharacterList, Formatting.Indented); // JSON으로 리스트를 string으로 변환
         print(jdata);
-        File.WriteAllText(Application.dataPath + "/06.Resources/MyCharacterText.txt", jdata);
+        File.WriteAllText(Application.dataPath + "/Data/MyCharacterText.txt", jdata);
         //print(Application.dataPath);
     }
 
     void CharacterLoad()
     {
-        string jdata = File.ReadAllText(Application.dataPath + "/06.Resources/MyCharacterText.txt");
+        string jdata = File.ReadAllText(Application.dataPath + "/Data/MyCharacterText.txt");
         myCharacterList = JsonConvert.DeserializeObject<List<Character.CharacterData>>(jdata);
         TabClick(curType); // 맨 처음 선택되어있는 메인 탭(캐릭터탭)
     }
@@ -170,13 +162,13 @@ public class InventoryDatabase : MonoBehaviour
     {
         string jdata = JsonConvert.SerializeObject(allItemList, Formatting.Indented); // JSON으로 리스트를 string으로 변환
         print(jdata);
-        File.WriteAllText(Application.dataPath + "/06.Resources/MyItemText.txt", jdata);
+        File.WriteAllText(Application.dataPath + "/Data/MyItemText.txt", jdata);
         //print(Application.dataPath);
     }
 
     void ItemLoad()
     {
-        string jdata = File.ReadAllText(Application.dataPath + "/06.Resources/MyItemText.txt");
+        string jdata = File.ReadAllText(Application.dataPath + "/Data/MyItemText.txt");
         myItemList = JsonConvert.DeserializeObject<List<Item.ItemData>>(jdata);
     }
 

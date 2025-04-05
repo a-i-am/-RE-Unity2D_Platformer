@@ -1,10 +1,4 @@
 using Assets;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using TMPro;
 using UnityEngine;
 
 public enum ProjectileType
@@ -14,7 +8,6 @@ public enum ProjectileType
     Poisonous
     // 다른 유형 추가 가능
 }
-
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float launchSpeed;
@@ -23,7 +16,6 @@ public class Projectile : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private PlayerScr player;
     private int followerLayer = 9;    // "Follower" 레이어의 번호
-
     public void SetDirection(Vector2 launchDir)
     {
         this.launchDir = launchDir.normalized; // 방향 벡터 정규화
@@ -71,7 +63,7 @@ public class Projectile : MonoBehaviour
         // 적과 충돌했을 때
         if (collision.gameObject.tag == "Enemy")
         {
-            EnemyScr enemy = collidedObject.GetComponent<EnemyScr>();
+            EnemyController enemy = collidedObject.GetComponent<EnemyController>();
             if (enemy != null)
             {
                 enemy.TakeDamage();

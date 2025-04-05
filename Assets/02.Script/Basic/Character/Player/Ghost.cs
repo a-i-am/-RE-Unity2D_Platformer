@@ -28,7 +28,6 @@ public class Ghost : MonoBehaviour
             }
             else
             {
-                //Generate a ghost
                 GameObject currentGhost = Instantiate(ghost, transform.position, transform.rotation);
                 Sprite currentSprite = GetComponent<SpriteRenderer>().sprite;
 
@@ -38,7 +37,13 @@ public class Ghost : MonoBehaviour
                 currentGhost.GetComponent<SpriteRenderer>().sprite = currentSprite;
                 ghostDelaySeconds = ghostDelay;
                 Destroy(currentGhost, 1.5f);
+                Invoke("IgnoreDamage", 0.5f);
             }
         }
+    }
+
+    void IgnoreDamage()
+    {
+        Physics2D.IgnoreLayerCollision(6, 7, false);
     }
 }

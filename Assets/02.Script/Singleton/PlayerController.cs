@@ -67,7 +67,10 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] private PlayerAsset playerAsset;
     [SerializeField] ObjectPoolManager projectilePool;
     [SerializeField] Ghost ghost;
-    EnemyScr enemy;
+
+    EnemyState enemyState;
+
+
     bool isGrounded;
     bool isCastingSpell;
     bool deadWait;
@@ -136,7 +139,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             PickUpItem();
         }
-        if (Input.GetKeyDown(KeyCode.C) && enemy != null && enemy.enemyIsFainted)
+        if (Input.GetKeyDown(KeyCode.C) && enemyState != EnemyState.Fainted)
         {
             PickUpCharacter();
         }
@@ -214,11 +217,6 @@ public class PlayerController : Singleton<PlayerController>
     void PickUpCharacter()
     {
 
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        enemy = collision.GetComponent<EnemyScr>();
     }
 }
 

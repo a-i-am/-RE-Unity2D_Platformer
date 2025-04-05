@@ -9,9 +9,6 @@ public class DeathZoneScr : MonoBehaviour
       //GameManager gameManager = FindObjectOfType<GameManager>();
     }
 
-    void Update(){
-    }
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player")){

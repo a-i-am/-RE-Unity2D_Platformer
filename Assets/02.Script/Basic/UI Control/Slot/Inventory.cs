@@ -5,26 +5,14 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.TextCore.Text;
 using static Inventory;
-
-public class Inventory : MonoBehaviour
+public class Inventory : Singleton<Inventory>
 {
-    #region Singleton
-    public static Inventory instance;
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Debug.LogError("More than one Inventory instance found!");
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-    }
-    #endregion
-
+    EnemyState enemyState;
     public delegate void OnItemSlotCountChange(int val);
     public delegate void OnCharacterSlotCountChange(int val);
-    
+    //public delegate void OnSpawnFollower();
+    //public OnSpawnFollower onSpawnFollower;
+
     public OnItemSlotCountChange onItemSlotCountChange;
     public OnCharacterSlotCountChange onCharacterSlotCountChange;
 
@@ -41,8 +29,10 @@ public class Inventory : MonoBehaviour
     public int pickupMobCount = 0;
 
     public InventoryUI invenUI;
-    private EnemyScr enemy;
     private PlayerScr playerScr;
+    private Enemy enemy;
+
+    public List<FollowerController> activeFollowers;
 
     private int itemSlotCnt;
     private int characterSlotCnt;
@@ -55,7 +45,6 @@ public class Inventory : MonoBehaviour
             onItemSlotCountChange.Invoke(itemSlotCnt);
         }
     }
-
     public int CharacterSlotCnt
     {
         get => characterSlotCnt;
@@ -66,9 +55,15 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    // 팔로워 로직
+    private bool isNotHaveFollower;
+
+    private void Awake()
+    {
+        playerScr = GetComponent<PlayerScr>();
+    }
     void Start()
     {
-        playerScr = GameObject.FindWithTag("Player").GetComponent<PlayerScr>();
         ItemSlotCnt = invenUI.itemSlots.Length;
         CharacterSlotCnt = invenUI.characterSlots.Length;
     }
@@ -116,6 +111,7 @@ public class Inventory : MonoBehaviour
         {
             inventory_characters.RemoveAt(_index);
             onChangeCharacter.Invoke();
+            
         }
         else Debug.LogError("Index out of range: " + _index);
 
@@ -144,25 +140,22 @@ public class Inventory : MonoBehaviour
 
         if (hit.collider != null)
         {
-            enemy = hit.collider.GetComponent<EnemyScr>();
-            if (enemy != null && enemy.enemyIsFainted)
+            enemy = hit.collider.GetComponent<Enemy>();
+            if (enemy != null && enemyState != EnemyState.Fainted)
             {
                 if (Input.GetKeyDown(KeyCode.V)) // Collect
                 {
                     AddCharacter(enemy.GetCharacter());
                     pickupMobCount += 1;
-                    Debug.Log("캐릭터 획득!");
-                    enemy.DestroyCharacter();
-                    acquiredCharacters++;
-                    // 몹 오브젝트를 풀에 반환 후 필드의 Enemy는 삭제
-                    //ObjectPoolManager.instance.ReturnMob(gameObject);
+
+                    if (enemy != null)
+                    {
+                        Destroy(enemy.gameObject);
+                        acquiredCharacters++;
+                        Debug.Log("enemy 획득!");
+                    }
                 }
             }
         }
     }
-
-
-
-
-
 }

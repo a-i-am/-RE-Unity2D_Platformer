@@ -13,10 +13,10 @@ public class Managers : MonoBehaviour
     {
         if (Instance == null)
         {
-            GameObject go = GameObject.Find("@Managers");
+            GameObject go = GameObject.FindWithTag("Managers");
             if ((go == null))
             {
-                go = new GameObject { name = "@Managers" };
+                go = new GameObject { name = "Managers" };
                 go.AddComponent<Managers>();
             }
 

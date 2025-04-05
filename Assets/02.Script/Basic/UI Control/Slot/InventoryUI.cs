@@ -22,7 +22,7 @@ public class InventoryUI : MonoBehaviour
 
     void Start()
     {
-        inven = Inventory.instance;
+        inven = Inventory.Instance;
         itemSlots = itemSlotHolder.GetComponentsInChildren<ItemSlot>();
         characterSlots = characterSlotHolder.GetComponentsInChildren<CharacterSlot>();
 

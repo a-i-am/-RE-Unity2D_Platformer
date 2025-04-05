@@ -1,1 +1,0 @@
-Character	Bub	Bub 설명	1	FALSE	Assets/04.Sprite/Enemy/Bub_Idle (16 x 16).png	Assets/05.Prefabs/Mob_ Bub.prefab	

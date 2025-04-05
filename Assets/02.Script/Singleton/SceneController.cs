@@ -4,23 +4,9 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
-public class SceneController : MonoBehaviour
+public class SceneController : Singleton<SceneController>
 {
-    public static SceneController instance;
     [SerializeField] Animator transitionAnim;
-
-    private void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     // 씬 전환(포탈로 맵 이동)
     public void NextLevel()

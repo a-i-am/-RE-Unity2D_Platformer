@@ -7,7 +7,7 @@ using UnityEngine.UI;
 [System.Serializable] // 데이터 직렬화(리스트 순서대로 Inspector에 표시해줌)
 public class Character
 {
-    public Character.CharacterData characterData; // 몹(캐릭터) 데이터
+    public CharacterData characterData; // 몹(캐릭터) 데이터
     public void Initialize(Character.CharacterData data)
     {
         characterData = data;
@@ -16,7 +16,7 @@ public class Character
     [System.Serializable] // 데이터 직렬화(리스트 순서대로 Inspector에 표시해줌)
     public class CharacterData
     {
-        public CharacterData(string _type, string _name, string _explain, string _number, bool _isUsing, Sprite _characterImage, GameObject _characterPrefab, string _tabName = "Character")
+        public CharacterData(string _type, string _name, string _explain, string _number, bool _isUsing, Sprite _characterImage, Follower _characterPrefab, string _tabName = "Character")
         { tabName = _tabName;
           type = _type;
           name = _name;
@@ -30,12 +30,13 @@ public class Character
         public string tabName, type, name, explain, number; // string이어야 JSON 파싱 시 잘 된다고 함
         public bool isUsing;
         public Sprite characterImage;
-        public GameObject characterPrefab;
+        public Follower characterPrefab;
+
         public List<FollowerEffect> efts;
         public bool UseCharacter()
         {
             isUsing = false;
-            
+
             foreach (FollowerEffect eft in efts)
             {
                 isUsing = eft.ExecuteRole();

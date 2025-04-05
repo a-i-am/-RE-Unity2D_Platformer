@@ -29,8 +29,8 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler
 
         if (itemIsUse)
         {
-            Inventory.instance.RemoveItem(itemSlotnum);
-            Inventory.instance.acquiredItems--;
+            Inventory.Instance.RemoveItem(itemSlotnum);
+            Inventory.Instance.acquiredItems--;
         }
     }
 }

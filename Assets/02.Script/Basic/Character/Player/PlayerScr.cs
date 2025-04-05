@@ -1,18 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-//using Assets;
-//using System;
-//using UnityEngine.WSA;
-//using System.Xml.Serialization;
-//using Unity.Burst.CompilerServices;
-//using UnityEditorInternal;
-
-//[SerializeField] private float bumpRayLength;
-//[SerializeField] private float bumpRayOffset;
-//[SerializeField] private Projectile projectilePrefab;
-//private float keyHoldTime = 0f;
-        //[SerializeField] private float attackDistance;
 
 namespace Assets
 {
@@ -32,7 +20,6 @@ namespace Assets
         // Stat 클래스 인스턴스를 health 라는 이름으로 가져옴
         [SerializeField] private PlayerHPValue health;
 
-
         public GameObject projectilePrefab;
         public GameObject playerAOEPrefab;
         public bool isUseAOE = false;
@@ -49,12 +36,12 @@ namespace Assets
         [SerializeField] private float coyoteTimer = 0f; // 코요태 점프 타이머
 
         private float lastDashTime = 0.0f; // 마지막 대시 입력 시간을 기록하는 변수
-        bool isLaunch;
-        bool isDamaged;
-        bool deadWait; // 사망 시 다음 동작 지연
-        bool respawnOrDead; // 플레이어 사망 유형(리스폰 or 게임오버) 판정
-        bool canLaunch = true; // Launch 메서드 호출 가능 여부
-        bool canDash;
+        private bool isLaunch = false;
+        private bool isDamaged;
+        private bool deadWait; // 사망 시 다음 동작 지연
+        private bool respawnOrDead; // 플레이어 사망 유형(리스폰 or 게임오버) 판정
+        private bool canLaunch = true; // Launch 메서드 호출 가능 여부
+        private bool canDash;
 
         internal bool isCastingSpell;
         internal bool isGrounded; // 지면 판정
@@ -75,8 +62,8 @@ namespace Assets
             spriteRenderer = GetComponent<SpriteRenderer>();
             playerAnimScr = GetComponent<PlayerAnimScr>();
             CastingSpellEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
-        //col2D = GetComponent<CapsuleCollider2D>();
-    }
+            //col2D = GetComponent<CapsuleCollider2D>();
+        }
 
         void Awake()
         {
@@ -178,9 +165,11 @@ namespace Assets
                     rb.velocity = new Vector2(dashSpeed * 1, rb.velocity.y);
                 }
             }
-            
+
             isDash = false;
             canDash = false;
+            
+
         }
         void Launch()
         {
@@ -279,8 +268,9 @@ namespace Assets
         internal void CheckGrounded()
         {
             // 캐릭터의 아래에 있는 Collider의 절반 크기만큼의 레이를 쏘아서 땅과 충돌하는지 여부를 검사
-            Vector2 groundRay = new Vector2(transform.position.x, GetComponent<Collider2D>().bounds.center.y - 1f);
-            RaycastHit2D groundHit = Physics2D.Raycast(groundRay, Vector2.down, 0.2f, LayerMask.GetMask("groundLayer"));
+            Vector2 groundRay = new Vector2(transform.position.x, GetComponent<Collider2D>().bounds.center.y);
+            RaycastHit2D groundHit = Physics2D.Raycast(groundRay, Vector2.down, 1f, LayerMask.GetMask("groundLayer"));
+            Debug.DrawRay(groundRay, Vector2.down * 1f, Color.green); // 레이를 시각적으로 표시
 
             if (groundHit.collider != null)
             {
@@ -296,7 +286,6 @@ namespace Assets
                 isGrounded = false;
             }
 
-            Debug.DrawRay(groundRay, Vector2.down * 0.2f, Color.green); // 레이를 시각적으로 표시
 
             //Debug.Log("isGrounded: " + isGrounded);
         }
@@ -329,6 +318,7 @@ namespace Assets
             Physics2D.IgnoreLayerCollision(6, 7, false); // Enemy 와 Player 충돌 기능 복구
             spriteRenderer.color = new Color(1, 1, 1, 1);
             isDamaged = false;
+ 
         }
         void OnCollisionStay2D(Collision2D other)
         {

@@ -63,7 +63,7 @@ public class UI : MonoBehaviour
 
     void Start()
     {
-        inven = Inventory.instance;
+        inven = Inventory.Instance;
         playerScr = GameObject.FindWithTag("Player").GetComponent<PlayerScr>();
 
         if (lerpColors)

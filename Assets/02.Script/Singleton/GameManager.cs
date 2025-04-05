@@ -4,42 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 public class GameManager : Singleton<GameManager>
 {
+    // 델리게이트
+    // 플레이어 이벤트
     public delegate void GameOverHandler(); // = delegate void = Action 
     public event GameOverHandler gameOverDele;
     private bool isGameOver = false;
 
+    // 키 인풋
     private List<IUpdatable> updatables = new List<IUpdatable>();
     private List<IFixedUpdatable> fixedUpdatables = new List<IFixedUpdatable>();
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        GetComponent<Button>().onClick.AddListener(Replay);
-        PlayerScr player = FindObjectOfType<PlayerScr>();
-        if (gameOverDele != null)
-        {
-            // isDead = true;
-            isGameOver = true;
-        }
-    }
-    private void Update()
-    {
-        foreach (var updatable in updatables)
-        {
-            updatable.OnUpdate();
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        foreach (var fixedUpdatable in fixedUpdatables)
-        {
-            fixedUpdatable.OnFixedUpdate();
-        }
-    }
 
     public Action keyAction = null;
     public void OnUpdate()
@@ -51,17 +26,14 @@ public class GameManager : Singleton<GameManager>
             keyAction.Invoke();
         }
     }
-
     public void RegisterUpdatable(IUpdatable updatable)
     {
         updatables.Add(updatable);
     }
-
     public void RegisterFixedUpdatable(IFixedUpdatable fixedUpdatable)
     {
         fixedUpdatables.Add(fixedUpdatable);
     }
-
 
     // 게임 오버 & 리플레이 로직(델리게이트)
     public void GameOverDeath()
@@ -79,12 +51,10 @@ public class GameManager : Singleton<GameManager>
 
         gameOverDele?.Invoke();
         // GameOverDeath() : 목숨 0, isGameOver true, UI, BGM
-        if (isGameOver)
-        {
-            ///
-        }
+        //if (isGameOver)
+        //{
+        //}
         //else // RespawnDeath() : 리스폰, 목숨 깎임
-        //Time.deltaTime = 0;
     }
     void Replay()
     {
@@ -92,25 +62,55 @@ public class GameManager : Singleton<GameManager>
         // 게임 새 시작시 isGameOver false
         isGameOver = false;
     }
-    //    public void TabClick(string tabName)
-    //    {
-    //    }
 
-    //    public void SendMessageToChat(string text)
-    //    {
-    //        if (messageList.Count >= maxMessages)
-    //            messageList.Remove(messageList[0]);
+    private void Awake()
+    {
+        GetComponent<Button>().onClick.AddListener(Replay);
+    }
+    void Start()
+    {
+        if (gameOverDele != null)
+        {
+            // isDead = true;
+            isGameOver = true;
+        }
+    }
+    private void Update()
+    {
+        foreach (var updatable in updatables)
+        {
+            updatable.OnUpdate();
+        }
+    }
+    private void FixedUpdate()
+    {
+        foreach (var fixedUpdatable in fixedUpdatables)
+        {
+            fixedUpdatable.OnFixedUpdate();
+        }
+    }
 
-    //        Message newMessage = new Message();
+ }
 
-    //        newMessage.text = text;
 
-    //        messageList.Add(newMessage);
-    //    }
+//    public void TabClick(string tabName)
+//    {
+//    }
 
-    //    [System.Serializable]
-    //    public class Message
-    //    {
-    //        public string text;
-    //    }
-}
+//    public void SendMessageToChat(string text)
+//    {
+//        if (messageList.Count >= maxMessages)
+//            messageList.Remove(messageList[0]);
+
+//        Message newMessage = new Message();
+
+//        newMessage.text = text;
+
+//        messageList.Add(newMessage);
+//    }
+
+//    [System.Serializable]
+//    public class Message
+//    {
+//        public string text;
+//    }
