@@ -2,12 +2,15 @@ using System;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
+using System.Buffers.Text;
 
 public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFollowerAttackable
 {
     [Header("외부 참조")]
     [SerializeField] private FollowerGroupMoving followerGroupMoving;
-
+    [HideInInspector]public int followerIndex; 
+    private float spacing = 3f;
     private FollowerState followerState;
 
     [Header("Transform 데이터")]
@@ -15,13 +18,14 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
     [SerializeField] private Transform follower;
     [Header("대시와 리턴")]
     private Vector3 originalPos;
-    private float startY;
+    private Vector3 groupPos;
+    private int dashCount = 0;
+    private float baseY;
+    private float baseX;
     private bool isDashing = false;
     [SerializeField] private float detectionRange;
     [SerializeField] private float dashDuration; // dash 속도 조절
-    [SerializeField] private float followerY;
-    int dashCount = 0;
-
+    
     // 타겟팅
     private Enemy _currentTarget;
     public Enemy CurrentTarget => _currentTarget;
@@ -44,6 +48,7 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
     private void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
+
     }
     private void FixedUpdate()
     {
@@ -77,19 +82,23 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
         #endregion
         isDashing = true; // 동작 종료 전 재실행 불가
 
-        // 타겟팅 정보 설정
+        // 타겟팅 상태 설정
         followerState = FollowerState.Targeting;
         _targetPos = TargetPosition;
 
-        // 팔로워 위치 & 움직임 조정
-        startY = followerGroupMoving.startY;
-        originalPos = transform.parent.position;
         followerGroupMoving.isSineActive = false;
+
+        // 팔로워 위치 & 움직임 조정
+        groupPos = transform.parent.position;
+        baseY = followerGroupMoving.transform.localPosition.y;
+        baseX = groupPos.x + followerIndex * -spacing;
+        originalPos = new Vector3(baseX, baseY, groupPos.z);
 
         Sequence seq = DOTween.Sequence();
         seq.Append(follower.DOMove(_targetPos, dashDuration))
            .AppendInterval(0.5f)
            .Append(follower.DOMove(originalPos, dashDuration))
+           .AppendInterval(0.5f)
            .OnComplete(() =>
            {
                _currentTarget = null;

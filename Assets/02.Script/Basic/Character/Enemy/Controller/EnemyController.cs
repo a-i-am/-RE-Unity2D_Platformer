@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 public class EnemyController : MonoBehaviour
 {
     public EnemyState enemyState;
+    private Enemy enemy;
 
     [Header("몬스터 이동")]
     private int nextMove;
@@ -14,33 +15,28 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float chaseSpeed = 15f; // 몬스터가 플레이어를 빨리 쫓아갈 때 속도
 
     [SerializeField] private int health = 3; // 몬스터의 체력
-
-    [SerializeField] private Transform player; // 플레이어의 Transform을 저장하는 변수
     private bool isHurted = false;
     
+    [SerializeField] private Transform player; // 플레이어의 Transform을 저장하는 변수
+    [SerializeField] private ParticleSystem dashHitVFX;
+
     private EnemyAnimScr enemyAnimScr;
     private SpriteRenderer spriteRenderer;
-    private Rigidbody2D rbEnemy;
+    private Rigidbody2D rb;
     RaycastHit2D rayHit;
-    //[SerializeField] private ParticleSystem dashHitVFX;
-    //private bool enemyIsGrounded;
 
     private void Awake()
     {
         //dashHitVFX = GetComponentInChildren<ParticleSystem>();
         // Player 오브젝트를 찾아서 player에 할당
+        enemy = GetComponent<Enemy>();  
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        rbEnemy = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         enemyAnimScr = GetComponent<EnemyAnimScr>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Start()
     {
-        if (enemyState != EnemyState.Fainted)
-        {
-            //dataHandler.AddActiveEnemy(this);
-            //dataHandler.CachingField();
-        }
         Physics2D.IgnoreLayerCollision(6, 6); // Enemy 끼리 충돌 방지
         Invoke("Think", 5);
     }
@@ -50,7 +46,7 @@ public class EnemyController : MonoBehaviour
         // Move
         if (!isHurted && enemyState != EnemyState.Fainted)
         {
-            rbEnemy.velocity = new Vector2(moveSpeed * nextMove, rbEnemy.velocity.y);
+            rb.velocity = new Vector2(moveSpeed * nextMove, rb.velocity.y);
             GroundCheckRay();
             SpeedUpForChasePlayer();
         }
@@ -59,13 +55,16 @@ public class EnemyController : MonoBehaviour
     // Enemy 녹다운
     void Faint()
     {
+        if (enemyState == EnemyState.Fainted) return;
+        TargetingAI.Instance.RemoveEnemyFromCollections(enemy);
         enemyState = EnemyState.Fainted;
         gameObject.layer = 10; // "Fainted"
         gameObject.tag = "Fainted";
 
+        Physics2D.IgnoreLayerCollision(10, 6); // Fainted(10)과 Enemy(6)  충돌 무시 
         Physics2D.IgnoreLayerCollision(10, 7); // Fainted(10)과 Player(7) 충돌 무시
         Physics2D.IgnoreLayerCollision(10, 8); // Fainted(10)과 Attack(8) 충돌 무시 
-        Physics2D.IgnoreLayerCollision(10, 6); // Fainted(10)과 Enemy(6)  충돌 무시
+        Physics2D.IgnoreLayerCollision(10, 9); // Fainted(10)과 Attack(8) 충돌 무시 
 
         enemyAnimScr.FaintAnimation(true);
     }
@@ -87,11 +86,11 @@ public class EnemyController : MonoBehaviour
 
     void SpeedUpForChasePlayer()
     {
-        if (Vector2.Distance(rbEnemy.position, player.position) < chaseDistance)
+        if (Vector2.Distance(rb.position, player.position) < chaseDistance)
         {
             moveSpeed = chaseSpeed;
 
-            if (Vector2.Distance(rbEnemy.position, player.position) < stopDistance)
+            if (Vector2.Distance(rb.position, player.position) < stopDistance)
             {
                 moveSpeed = 0;
             }
@@ -101,7 +100,7 @@ public class EnemyController : MonoBehaviour
     void GroundCheckRay()
     {
         // 앞에 땅이 있는지 체크
-        Vector2 frontCheck = new Vector2(rbEnemy.position.x + nextMove, rbEnemy.position.y);
+        Vector2 frontCheck = new Vector2(rb.position.x + nextMove, rb.position.y);
         Debug.DrawRay(frontCheck, Vector2.down, Color.red); // 레이를 시각적으로 표시
         rayHit = Physics2D.Raycast(frontCheck, Vector2.down, 1, LayerMask.GetMask("groundLayer"));
 
@@ -123,35 +122,39 @@ public class EnemyController : MonoBehaviour
     {
         isHurted = true;
         enemyAnimScr.HurtAnimation();
-
-
         health--;
+        
         if (health <= 0)
         {
             Faint(); // 체력이 0 이하일 경우 몬스터 삭제
         }
         else
         {
-            rbEnemy.velocity = Vector2.zero;
+            rb.velocity = Vector2.zero;
             if (transform.position.x > player.transform.position.x)
             {
-                rbEnemy.velocity = new Vector2(10f, 0);
+                rb.velocity = new Vector2(10f, 0);
             }
             else
             {
-                rbEnemy.velocity = new Vector2(-10f, 0);
+                rb.velocity = new Vector2(-10f, 0);
             }
         }
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Follower") && enemyState != EnemyState.Fainted)
-        {
-            TakeDamage();
-            //dashHitVFX.Play();
-        }
+        if (enemyState == EnemyState.Fainted ||
+            !other.gameObject.CompareTag("Follower")) return;
+
+        //dashHitVFX.Play();
+        TakeDamage();
     }
 
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (!other.gameObject.CompareTag("Attack")) return;
+        Invoke("TakeDamage", 0.5f);
 
+    }
 }

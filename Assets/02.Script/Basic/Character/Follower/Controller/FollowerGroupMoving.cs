@@ -1,14 +1,16 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using Assets;
 
 public class FollowerGroupMoving : MonoBehaviour
 {
     // Follow
     [SerializeField] private float moveDistance;
     [SerializeField] private float moveSpeed;
-    private Transform player;
+    private PlayerScr player;
     public float startY; // sine 시작 위치
-
+    public float baseY;
     private Animator anim;
     private LayerMask groundLayer;
 
@@ -28,7 +30,7 @@ public class FollowerGroupMoving : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerScr>();
     }
 
     private void Update()
@@ -43,9 +45,9 @@ public class FollowerGroupMoving : MonoBehaviour
 
     private void FollowPlayer()
     {
-        if (Mathf.Abs(transform.position.x - player.position.x) <= moveDistance) return;
+        if (Mathf.Abs(transform.position.x - player.transform.position.x) <= moveDistance) return;
 
-        float direction = (player.position.x - transform.position.x) > 0 ? 1 : -1;
+        float direction = (player.transform.position.x - transform.position.x) > 0 ? 1 : -1;
         transform.Translate(new Vector2(direction, 0) * Time.deltaTime * moveSpeed);
     }
 

@@ -5,14 +5,21 @@ using UnityEngine;
 public class FollowerSpawner : MonoBehaviour
 {
     [Header("외부 참조")]
-    [SerializeField] private FollowerGroupMoving followerGroupMoving;
     private FollowerState followerState;
+    private FollowerController followerController;
+    public FollowerController FollowerController => followerController;
+    [SerializeField] private FollowerGroupMoving followerGroupMoving;
 
     private Follower follower;
     [Header("팔로워 자리")]
     [SerializeField] private List<Transform> followerPositions;
     [SerializeField] private Queue<Transform> emptySpawnQueue = new Queue<Transform>(); // 팔로워 공석 체크
     private Transform spawnPos;
+
+   private void CachingComponent()
+    {
+        followerController = follower.GetComponent<FollowerController>();
+    }
 
     private void Start()
     {
@@ -39,7 +46,14 @@ public class FollowerSpawner : MonoBehaviour
         spawnPos.gameObject.SetActive(true);
 
         follower = Instantiate(characterData.characterPrefab, spawnPos.position, Quaternion.identity, spawnPos);
+        followerController = follower.FollowerController;
         
+        if(followerController != null)
+        {
+            int index = followerPositions.IndexOf(spawnPos);
+            followerController.followerIndex = index;
+        }
+
         if (!followerGroupMoving.enabled && follower != null)
         {
             followerGroupMoving.enabled = true;
