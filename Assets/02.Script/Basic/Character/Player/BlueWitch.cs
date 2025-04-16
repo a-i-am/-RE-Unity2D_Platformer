@@ -332,22 +332,20 @@ public class BlueWitch : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D other)
     {
-        if (isDamaged) return;
+        if (isDamaged || !other.gameObject.CompareTag("Enemy")) return;
+        
         // 적과 충돌했을 때
         int bumpForceDirc = transform.position.x - other.transform.position.x > 0 ? 1 : -1;
 
-        if (other.gameObject.tag == "Enemy")
-        {
-            health.PlayerCurrentVal -= 10;
-            isDamaged = true;
+        health.PlayerCurrentVal -= 10;
+        isDamaged = true;
 
-            //rb.AddForce(new Vector2(bumpForceDirc, 0) * 50, ForceMode2D.Impulse);
-            rb.velocity = new Vector2(bumpForceDirc * 40, 20);
+        //rb.AddForce(new Vector2(bumpForceDirc, 0) * 50, ForceMode2D.Impulse);
+        rb.velocity = new Vector2(bumpForceDirc * 40, 20);
 
-            spriteRenderer.color = new Color(1, 1, 1, 0.4f);
-            Physics2D.IgnoreLayerCollision(6, 7, true); // 충돌하고 3초 동안은 무적
-            Invoke("OffDamaged", 3f);
-        }
+        spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        Physics2D.IgnoreLayerCollision(6, 7, true); // 충돌하고 3초 동안은 무적
+        Invoke("OffDamaged", 3f);
     }
 
     void OnTriggerEnter2D(Collider2D other)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class UI : MonoBehaviour
 {
@@ -24,20 +25,25 @@ public class UI : MonoBehaviour
 
 
     // Player HP Value
-
     public float PlayerMaxValue { get; set; }
 
     public float PlayerValue
     {
+
         set
         {
+            if (PlayerMaxValue <= 0)
+            {
+                Debug.LogWarning("[HP] PlayerMaxValue is 0 or less. Aborting fillAmount calculation.");
+                return;
+            }
             playerHPFillAmount = Map(value, 0, PlayerMaxValue, 0, 1);
         }
     }
 
     [Header("Charge Casting Spell Gauage")]
     // Charge Casting Spell Gauage
-    [SerializeField] TextMeshProUGUI pickupMobCountText;
+    //[SerializeField] TextMeshProUGUI pickupMobCountText;
     [SerializeField] private Image circularSpellGauge;
     [SerializeField] float currentChargeValue = 0;
     [SerializeField] double canChargeMaxValue = 1.0; // 최대 게이지 값
@@ -60,17 +66,20 @@ public class UI : MonoBehaviour
 
     public float skillDuration = 15f; // 스킬 지속 시간
 
+    private void Awake()
+    {
+        playerScr = GameObject.FindWithTag("Player").GetComponent<PlayerScr>();
+    }
 
     void Start()
     {
         inven = Inventory.Instance;
-        playerScr = GameObject.FindWithTag("Player").GetComponent<PlayerScr>();
+        playerHP.fillAmount = playerHPFillAmount;
 
         if (lerpColors)
         {
             playerHP.color = fullColor;
         }
-
         // 초기화
         originalProjectilePrefab = playerScr.projectilePrefab; // 원래 projectilePrefab 초기화
     }
@@ -87,10 +96,10 @@ public class UI : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
-        pickupMobCountText.text = string.Format("{0}", inven.pickupMobCount);
-    }
+    //void FixedUpdate()
+    //{
+    //    //pickupMobCountText.text = string.Format("{0}", inven.pickupMobCount);
+    //}
 
     void HandlePlayerHpBar()
     {

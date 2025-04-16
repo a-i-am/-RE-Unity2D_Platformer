@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossHelath : MonoBehaviour
 {
     [SerializeField] private BossHPValue bossHealth;
-    [SerializeField] private GameObject SleepingForm;
+    //[SerializeField] private GameObject SleepingForm;
     private Boss boss;
     private bool bossIsHurted = false;
     private bool bossIsFainted;
