@@ -13,8 +13,7 @@ public class Follower : MonoBehaviour
 
     // 프리팹
     [SerializeField] private FollowerController followerController;
-    public FollowerController FollowerController => followerController;
-    //[SerializeField] private TargetingAI targetingAI;z
+    //[SerializeField] private TargetingAI targetingAI;
 
     private void Awake()
     {
@@ -48,6 +47,7 @@ public class Follower : MonoBehaviour
         return followerController.IsDashCheck();
     }
 
+
     public void SetTarget(Enemy target)
     {
         followerTargetReceivable?.SetTarget(target);
@@ -57,5 +57,4 @@ public class Follower : MonoBehaviour
     {
         followerAttackable?.DashAndReturn();
     }
-
 }

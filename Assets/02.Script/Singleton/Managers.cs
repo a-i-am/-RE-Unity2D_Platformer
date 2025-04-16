@@ -6,7 +6,8 @@ public class Managers : MonoBehaviour
     static Managers s_Instance;
     public static Managers Instance { get { return s_Instance; } }
 
-    public static InputManager Input { get; private set; }
+    InputManager _input = new InputManager();
+    public static InputManager Input { get { return Instance._input; } }
 
     public static void Init()
     {
@@ -23,5 +24,10 @@ public class Managers : MonoBehaviour
 
             s_Instance = go.GetComponent<Managers>();
         }
+    }
+
+    void Update()
+    {
+        //_input.OnUpdate();
     }
 }

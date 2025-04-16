@@ -5,7 +5,9 @@ public class Enemy : MonoBehaviour
 {
     // 인터페이스 참조
     private IEnemyNumberCheck enemyNumberChecker;
-    private TargetingAI _targetingAI;
+
+    // 프리팹
+    //private TargetingAI targetingAI;
 
     // 몬스터 데이터
     public Character.CharacterData characterData;
@@ -32,18 +34,20 @@ public class Enemy : MonoBehaviour
     {
         return characterData.characterPrefab;
     }
+
     private void Awake()
     {
         enemyNumberChecker = TargetingAI.Instance;
     }
+
     private void OnEnable()
     {
         enemyNumberChecker?.AddActiveEnemy(this);
     }
+
     private void OnDisable()
     {
         enemyNumberChecker?.RemoveActiveEnemy(this);
     }
-
 
 }

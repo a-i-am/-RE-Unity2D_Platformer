@@ -91,8 +91,8 @@ public class TargetingAI : Singleton<TargetingAI>, IFollowerNumberCheck, IEnemyN
     public void RemoveEnemy(Enemy enemy)
     {
         if (!_activeEnemies.Contains(enemy) || !_detectedEnemies.Contains(enemy)) return;
-     
-   
+
+        
 
         _detectedEnemies.Remove(enemy);
         _targetHashSet.Remove(enemy);
@@ -136,13 +136,8 @@ public class TargetingAI : Singleton<TargetingAI>, IFollowerNumberCheck, IEnemyN
             ExitEnemy(enemy);
         }
     }
+   
 
-    public void RemoveEnemyFromCollections(Enemy enemy)
-    {
-        _activeEnemies.Remove(enemy);
-        _detectedEnemies.Remove(enemy);
-        _targetHashSet.Remove(enemy);
-    }
 
 
     // 실시간 거리 기반 타겟 계산

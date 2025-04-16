@@ -1,4 +1,3 @@
-using Assets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,20 +10,21 @@ using static UnityEngine.EventSystems.EventTrigger;
 using static UnityEngine.Mesh;
 #region 플레이어 로직 요약
 //모든 플레이어는
-// 지면 판정이 존재
-// 유형화된 애니메이션 존재
+// 지면 판정이 존재하고,
+
+// 애니메이션이 존재하고 // 애니메이션 유형화
 
 // 죽고(죽지 않고, 키입력이 있으면) // 죽음/데드점프/리스폰 유형화
-// 죽을 때/접속 이상일 때 데드존에 걸리면 데드점프
+// 죽을 때, 접속 이상일 때
+// 데드존에 걸리면 데드점프 되고 
+// 리스폰 되고
 
 // 공격/피격 판정이 있고 // 공격, 피격 유형화
-// 피격 시 데미지 받음
+// 피격 시 데미지를 입어야 하고
 
-// 기를 모아야 함, 기 유형화 필요
-// 4단필(궁) 사용 판정, 궁 유형화 필요
-
-// 이동, 점프&코루틴타임점프
-// 대시&대시쿨다운
+// 기를 모아야 하고 // 기 유형화
+// 4단필(궁) 사용 판정이 있고 // 궁 유형화
+// 이동, 점프&코루틴타임점프, 대시&대시쿨다운하고
 #endregion
 [Serializable]
 public class PlayerAsset
@@ -67,35 +67,39 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] private PlayerAsset playerAsset;
     [SerializeField] ObjectPoolManager projectilePool;
     [SerializeField] Ghost ghost;
-    
-    private EnemyState enemyState;
-    private LayerMask groundLayer; // Ground 레이어를 가진 오브젝트와의 충돌을 감지
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
-    private Rigidbody2D rb;
-    private Vector2 currentVelocity;
-    
-    private bool isGrounded;
-    private bool isCastingSpell;
-    private bool deadWait;
-    private bool respawnOrDead;
-    private bool isDash;
-    private bool canDash;
-    private float inputHorizontal;
 
-    //spriteRenderer = GetComponent<SpriteRenderer>();
-    //rb = GetComponent<Rigidbody2D>();
-    //animator = GetComponent<Animator>();
+    EnemyState enemyState;
+
+
+    bool isGrounded;
+    bool isCastingSpell;
+    bool deadWait;
+    bool respawnOrDead;
+
+    bool isDash;
+    bool canDash;
+
+    float inputHorizontal;
+    LayerMask groundLayer; // Ground 레이어를 가진 오브젝트와의 충돌을 감지
+    Animator animator;
+    SpriteRenderer spriteRenderer;
+    Rigidbody2D rb;
+
+    Vector2 currentVelocity;
 
     void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+
         Managers.Init();  // Managers 초기화 보장
     }
 
     void Start()
     {
-        Managers.Input.KeyAction -= OnKeyboard;
-        Managers.Input.KeyAction += OnKeyboard;
+        //Managers.Input.keyAction -= OnKeyboard;
+        //Managers.Input.keyAction += OnKeyboard;
     }
 
     private void Reset()
@@ -106,21 +110,39 @@ public class PlayerController : Singleton<PlayerController>
 
     void FixedUpdate()
     {
-        //Dash();
+        Dash();
     }
 
     void OnKeyboard()
     {
         inputHorizontal = Input.GetAxis("Horizontal");
-        
-        if (inputHorizontal != 0) Walk();
-        if (Input.GetKeyDown(KeyCode.LeftShift)) Dash();
-        if (Input.GetButton("Jump")) Jump();
+        // 플레이어의 앞 방향으로 레이캐스트를 발사하여 적을 감지합니다.
 
-        if (Input.GetKeyDown(KeyCode.Z)) Launch();
-
-        if (Input.GetKeyDown(KeyCode.X)) PickUpItem();
-        if (Input.GetKeyDown(KeyCode.C) && enemyState != EnemyState.Fainted) PickUpCharacter();
+        if (inputHorizontal != 0)
+        {
+            Walk();
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= dashTimeSet.lastDashTime + dashTimeSet.dashCooldown)
+        {
+            canDash = true;
+            dashTimeSet.lastDashTime = Time.time; // 현재 시간을 기록
+        }
+        if (Input.GetButton("Jump")) //  && isGrounded && !isCastingSpell
+        {
+            Jump();
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Launch();
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            PickUpItem();
+        }
+        if (Input.GetKeyDown(KeyCode.C) && enemyState != EnemyState.Fainted)
+        {
+            PickUpCharacter();
+        }
     }
 
     void Walk()
@@ -140,15 +162,13 @@ public class PlayerController : Singleton<PlayerController>
         // 방향에 맞게 스프라이트 반전
         spriteRenderer.flipX = inputHorizontal < 0;
     }
+
     void Dash()
     {
-        if (Time.time >= dashTimeSet.lastDashTime + dashTimeSet.dashCooldown)
+        if (canDash)
         {
-            canDash = true;
-            dashTimeSet.lastDashTime = Time.time; // 현재 시간을 기록
-            if (canDash) isDash = true;
+            isDash = true;
         }
-        
         if (dashTimeSet.dashTime <= 0)
         {
             ghost.makeGhost = false;
@@ -162,6 +182,7 @@ public class PlayerController : Singleton<PlayerController>
         else
         {
             dashTimeSet.dashTime -= Time.deltaTime;
+
             if (spriteRenderer.flipX)
             {
                 ghost.makeGhost = true;
@@ -177,6 +198,7 @@ public class PlayerController : Singleton<PlayerController>
         isDash = false;
         canDash = false;
     }
+
     void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, playerPhysics.jumpForce);
