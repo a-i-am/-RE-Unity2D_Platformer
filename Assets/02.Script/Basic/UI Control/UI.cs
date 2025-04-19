@@ -121,13 +121,12 @@ public class UI : MonoBehaviour
 
     private void ChargeSpellGauge()
     {
-        if (Input.GetKey(KeyCode.X) && circularSpellGauge.fillAmount <= canChargeMaxValue)
+        if (Input.GetKey(KeyCode.X) && circularSpellGauge.fillAmount < canChargeMaxValue)
         {
             currentChargeValue += gaugeChargeSpeed * Time.deltaTime;
         }
-        else
+        else if(currentChargeValue > 0)
         {
-            if(currentChargeValue > 0)
             currentChargeValue -= gaugeChargeSpeed * Time.deltaTime;
         }
 
@@ -153,7 +152,6 @@ public class UI : MonoBehaviour
         {
             // 3단계 스킬
             skillPrefab = skillPrefabLevel3;
-            Debug.Log("iam 3");
         }
         else if (circularSpellGauge.fillAmount >= 0.1f)
         {
@@ -208,5 +206,6 @@ public class UI : MonoBehaviour
         yield return new WaitForSeconds(delay);
         playerScr.playerAOEPrefab = null;
         playerScr.isUseAOE = false;
+        skillPrefab = null;
     }
 }

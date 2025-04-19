@@ -1,29 +1,26 @@
-using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using TMPro;
+using System;
 using UnityEngine;
 public class Boss : MonoBehaviour
 {
-    // 백업 리포지토리 확인용 테스트
-    public bool isFainted = false;  // Faint 상태를 나타내는 플래그
-    public ParticleSystem gushOutEffect;
-    public float speed;
-    public float followDistance;
-    public float gushoutDistance;
-    public float gushOutTimer;
-    public float chompTimer;
-    public float spinTimer;
-    public float turnTimer;
-    //private float spinCoolDown = 1.5f;
-    public float spinSpeed;
-    public GameObject gushOutEffectObj;
-    public bool isFlipped = false;
+    private bool isFainted = false;  // Faint 상태를 나타내는 플래그
+    [SerializeField] private GameObject nextPortal;
+    [SerializeField] private ParticleSystem gushOutEffect;
+    [SerializeField] private float speed;
+    [SerializeField] private float followDistance;
+    [SerializeField] private float gushoutDistance;
+    [SerializeField] private float gushOutTimer;
+    [SerializeField] private float chompTimer;
+    [SerializeField] private float spinTimer;
+    [SerializeField] private float turnTimer;
+    //[SerializeField] private float spinCoolDown = 1.5f;
+    [SerializeField] private float spinSpeed;
+    [SerializeField] private GameObject gushOutEffectObj;
+    [SerializeField] private bool isFlipped = false;
     private bool isSpinning = false;
     private bool isSpinDirectionSet = false; // 스핀 방향 설정여부 확인
-    float followDirection;
-    float spinDirection;
+    private float followDirection;
+    private float spinDirection;
+
     Animator anim;
     Transform player;
     Rigidbody2D rbBoss;
@@ -42,10 +39,12 @@ public class Boss : MonoBehaviour
 
             // 보스의 속도를 0으로 설정해서 움직임 멈춤
             rbBoss.velocity = Vector2.zero;
-
-            // 필요하다면 파티클 이펙트도 중지
+            // 파티클 이펙트도 중지
             gushOutEffect.Stop();
             gushOutEffectObj.SetActive(false);
+
+            if(nextPortal != null)
+                nextPortal.SetActive(true);
         }
 
     }
@@ -157,7 +156,7 @@ public class Boss : MonoBehaviour
     }
 
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "SpinDirectionReset")
         {

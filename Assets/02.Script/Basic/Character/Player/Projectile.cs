@@ -38,16 +38,6 @@ public class Projectile : MonoBehaviour
         else childTransform.localScale = new Vector3(Mathf.Abs(childTransform.localScale.x), childTransform.localScale.y, childTransform.localScale.z); // 원래 방향 유지
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //Normal();
-    }
-
-    private void FixedUpdate()
-    {
-    }
-
     //private void Normal()
     //{
     //    rbAmmo.velocity = Vector2.right * speed;
@@ -55,10 +45,6 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Physics2D.IgnoreLayerCollision(7, 8); // Player(7)과 Attack(8) 충돌 무시 
-        Physics2D.IgnoreLayerCollision(8, 8); // Attack(8)과 Attack(8) 충돌 무시
-        Physics2D.IgnoreLayerCollision(9, 8); // Follower(9)과 Attack(8) 충돌 무시
-
         GameObject collidedObject = collision.gameObject;
         // 적과 충돌했을 때
         if (collision.gameObject.tag == "Enemy")
@@ -74,12 +60,10 @@ public class Projectile : MonoBehaviour
         {
             case ProjectileType.Standard:
                 // 표준 발사체에 대한 처리
-                Destroy(gameObject); // 그냥 파괴
                 break;
 
             case ProjectileType.Lasting:
                 // 폭발성 발사체에 대한 처리
-                Destroy(gameObject);
                 break;
 
             case ProjectileType.Poisonous:
@@ -87,7 +71,7 @@ public class Projectile : MonoBehaviour
                 //ApplyPoison(); // 독성 적용 메서드 호출
                 break;
 
-            default:
+            default: Destroy(gameObject);
                 break;
         }
     }

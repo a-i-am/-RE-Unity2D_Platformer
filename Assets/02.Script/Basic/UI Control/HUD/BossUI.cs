@@ -7,14 +7,8 @@ public class BossUI : MonoBehaviour
 {
     [Header("HP")]
     [SerializeField] private Image bossHP;
-
     private float bossHPFillAmount;
     [SerializeField] private float lerpSpeed;
-
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -23,13 +17,13 @@ public class BossUI : MonoBehaviour
     }
 
     // Boss HP Value
-    public float BossMaxValue { get; set; }
+    public float BossMaxHP { get; set; }
 
     public float BossValue
     {
         set
         {
-            bossHPFillAmount = Map(value, 0, BossMaxValue, 0, 1);
+            bossHPFillAmount = Map(value, 0, BossMaxHP, 0, 1);
         }
     }
 

@@ -62,7 +62,10 @@ namespace Assets
             spriteRenderer = GetComponent<SpriteRenderer>();
             playerAnimScr = GetComponent<PlayerAnimScr>();
             CastingSpellEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
-            //col2D = GetComponent<CapsuleCollider2D>();
+
+            Physics2D.IgnoreLayerCollision(7, 8); // Player(7)과 Attack(8) 충돌 무시 
+            Physics2D.IgnoreLayerCollision(8, 8); // Attack(8)과 Attack(8) 충돌 무시
+            Physics2D.IgnoreLayerCollision(9, 8); // Follower(9)과 Attack(8) 충돌 무시
         }
 
         void Awake()
@@ -231,7 +234,6 @@ namespace Assets
             {
                isUseAOE = true;
                Instantiate(playerAOEPrefab, transform.position, transform.rotation);
-
             }
         }
         void CastingSpell()
@@ -320,7 +322,7 @@ namespace Assets
             isDamaged = false;
  
         }
-        void OnCollisionStay2D(Collision2D other)
+        void OnTriggerStay2D(Collider2D other)
         {
             if (isDamaged) return;
             // 적과 충돌했을 때

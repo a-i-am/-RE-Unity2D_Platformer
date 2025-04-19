@@ -121,7 +121,67 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 20240709dragonBarA_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 77
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -36.5, y: -5.5}
+        - {x: -36.5, y: -3.5}
+        - {x: -36.5, y: -1.5}
+        - {x: -37.5, y: -1.5}
+        - {x: -37.5, y: -0.5}
+        - {x: -38.5, y: -0.5}
+        - {x: -38.5, y: 1.5}
+        - {x: -37.5, y: 1.5}
+        - {x: -37.5, y: 2.5}
+        - {x: -36.5, y: 2.5}
+        - {x: -36.5, y: 6.5}
+        - {x: 35.5, y: 6.5}
+        - {x: 35.5, y: 2.5}
+        - {x: 36.5, y: 2.5}
+        - {x: 36.5, y: 1.5}
+        - {x: 37.5, y: 1.5}
+        - {x: 37.5, y: -0.5}
+        - {x: 36.5, y: -0.5}
+        - {x: 36.5, y: -1.5}
+        - {x: 35.5, y: -1.5}
+        - {x: 35.5, y: -5.5}
+        - {x: 30.5, y: -1.5}
+        - {x: 30.5, y: -0.5}
+        - {x: 31.5, y: -0.5}
+        - {x: 31.5, y: 1.5}
+        - {x: 30.5, y: 1.5}
+        - {x: 30.5, y: 2.5}
+        - {x: -31.5, y: 2.5}
+        - {x: -31.5, y: 1.5}
+        - {x: -32.5, y: 1.5}
+        - {x: -32.5, y: -0.5}
+        - {x: -31.5, y: -0.5}
+        - {x: -31.5, y: -1.5}
+        - {x: -22.64404, y: -1.5}
+        - {x: 9.5, y: -1.5}
+        - {x: 30.5, y: -1.5}
+        - {x: 35.5, y: -5.5}
+        - {x: -24.5, y: -5.5}
+        - {x: -31.5, y: -5.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f803264706455064ab6c9a7ccced16a6
+      internalID: -1008713195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +192,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      20240709dragonBarA_0: -1008713195
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

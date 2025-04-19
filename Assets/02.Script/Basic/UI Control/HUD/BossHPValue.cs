@@ -37,7 +37,7 @@ public class BossHPValue
         set
         {
             this.bossMaxVal = value;
-            bossHP.BossMaxValue = bossMaxVal;
+            bossHP.BossMaxHP = bossMaxVal;
         }
     }
 

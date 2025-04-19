@@ -8,7 +8,9 @@ public class NextPortal : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            SceneController.Instance.NextLevel();
+            SceneController.Instance.NextLevel();   
         }
     }
+
+
 }
