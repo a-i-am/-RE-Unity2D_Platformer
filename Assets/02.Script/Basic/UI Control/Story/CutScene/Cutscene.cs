@@ -122,7 +122,10 @@ public class Cutscene : MonoBehaviour
                     NextDialogue();
                 }
                 else
+                {
                     OnOff(false);
+                    SceneController.Instance.NextLevel();
+                }
             }
         }
     }

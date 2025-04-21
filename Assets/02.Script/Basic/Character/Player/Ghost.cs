@@ -5,8 +5,9 @@ using UnityEngine;
 public class Ghost : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float ghostDelay;
+    [SerializeField] private float ghostDelay;
     private float ghostDelaySeconds;
+    [SerializeField] private float destroyTime;
     public GameObject ghost;
     public bool makeGhost = false;
     // Use this for initialization
@@ -36,7 +37,7 @@ public class Ghost : MonoBehaviour
 
                 currentGhost.GetComponent<SpriteRenderer>().sprite = currentSprite;
                 ghostDelaySeconds = ghostDelay;
-                Destroy(currentGhost, 1.5f);
+                Destroy(currentGhost, destroyTime);
                 Invoke("IgnoreDamage", 0.5f);
             }
         }

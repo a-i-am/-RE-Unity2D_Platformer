@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rbEnemy;
     RaycastHit2D rayHit;
-    //[SerializeField] private ParticleSystem dashHitVFX;
+    [SerializeField] private ParticleSystem dashHitVFX;
     //private bool enemyIsGrounded;
 
     private void Awake()
@@ -146,12 +146,23 @@ public class EnemyController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Follower") && enemyState != EnemyState.Fainted)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Follower") && enemyState != EnemyState.Fainted
+            || other.gameObject.CompareTag("Attack"))
         {
             TakeDamage();
-            //dashHitVFX.Play();
+            dashHitVFX.Play();
         }
     }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (enemyState != EnemyState.Fainted && other.gameObject.CompareTag("Attack"))
+        {
+            TakeDamage();
+            dashHitVFX.Play();
+        }
+    }
+
 
 
 }

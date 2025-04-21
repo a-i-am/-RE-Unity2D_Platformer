@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 public class Boss : MonoBehaviour
 {
-    private bool isFainted = false;  // Faint 상태를 나타내는 플래그
     [SerializeField] private GameObject nextPortal;
     [SerializeField] private ParticleSystem gushOutEffect;
     [SerializeField] private float speed;
@@ -16,6 +15,8 @@ public class Boss : MonoBehaviour
     [SerializeField] private float spinSpeed;
     [SerializeField] private GameObject gushOutEffectObj;
     [SerializeField] private bool isFlipped = false;
+    private bool isFainted = false;  // Faint 상태를 나타내는 플래그
+    private bool isDamaged = false;
     private bool isSpinning = false;
     private bool isSpinDirectionSet = false; // 스핀 방향 설정여부 확인
     private float followDirection;
@@ -50,24 +51,24 @@ public class Boss : MonoBehaviour
     }
 
     // Faint & Sleep 애니메이션 이벤트 함수
-    void ChangePositionToSleep()
+    private void ChangePositionToSleep()
     {
         // Sleep Position // 현재 y축 위치에서 2.2만큼 뺀 위치로 이동 
         transform.position = new Vector3(transform.position.x, transform.position.y - 2.2f, transform.position.z);
     }
 
-    void Start()
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rbBoss = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         gushOutEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
-    }
+     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (isFainted)
+        if (isFainted || isDamaged)
         {
             // Faint 상태일 때 로직을 멈추거나 제어
             return;
@@ -121,10 +122,19 @@ public class Boss : MonoBehaviour
 
     }
 
-    void Spin()
+    private void StopMoving()
     {
-        if (isFainted) return;
+        isDamaged = true;
+        //rbBoss.velocity = Vector2.zero;
+    }
+    private void ReStartMoving()
+    {
+        isDamaged = false;
+    }
 
+    private void Spin()
+    {
+        if (isFainted || isDamaged) return;
 
         isSpinning = true;
         anim.SetBool("Spin", true);
@@ -156,25 +166,22 @@ public class Boss : MonoBehaviour
     }
 
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "SpinDirectionReset")
-        {
-            Debug.Log("SpinDirectionReset");
-            spinDirection *= -1;
-        }
+
+        if (collision.gameObject.CompareTag("SpinDirectionReset")) spinDirection *= -1;
     }
 
-    void Follow()
+    private void Follow()
     {
-        if (isFainted) return;
+        if (isFainted || isDamaged) return;
 
         rbBoss.velocity = new Vector2(followDirection * speed, rbBoss.velocity.y);
         anim.SetTrigger("Crawl");
     }
-    void GushOut()
+    private void GushOut()
     {
-        if (isFainted) return;
+        if (isFainted || isDamaged) return;
 
         if (!gushOutEffect.isPlaying && gushOutTimer < 15f)
         {
@@ -194,9 +201,9 @@ public class Boss : MonoBehaviour
 
     }
 
-    void Chomp()
+    private void Chomp()
     {
-        if (isFainted) return;
+        if (isFainted || isDamaged) return;
 
         if (chompTimer < 15f)
         {
@@ -206,7 +213,7 @@ public class Boss : MonoBehaviour
         }
     }
 
-    void LookAtPlayer()
+    private void LookAtPlayer()
     {
         if (isFainted) return;
 

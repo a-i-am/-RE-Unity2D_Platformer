@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class BossHelath : MonoBehaviour
@@ -26,11 +25,7 @@ public class BossHelath : MonoBehaviour
     {
         bossHealth.BossHPInitialize();
     }
-    void Update()
-    {
-        
-    }
-
+    
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (!bossIsFainted && !bossIsHurted && collision.gameObject.tag == "Attack")

@@ -10,6 +10,7 @@ public enum ProjectileType
 }
 public class Projectile : MonoBehaviour
 {
+    private GameObject collidedObject;
     [SerializeField] private float launchSpeed;
     [SerializeField] private ProjectileType projectileType; // 프리팹 유형 추가
     private Vector2 launchDir;
@@ -43,11 +44,11 @@ public class Projectile : MonoBehaviour
     //    rbAmmo.velocity = Vector2.right * speed;
     //}
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        GameObject collidedObject = collision.gameObject;
+        collidedObject = other.gameObject;
         // 적과 충돌했을 때
-        if (collision.gameObject.tag == "Enemy")
+        if (other.gameObject.CompareTag("Enemy"))
         {
             EnemyController enemy = collidedObject.GetComponent<EnemyController>();
             if (enemy != null)
@@ -59,16 +60,19 @@ public class Projectile : MonoBehaviour
         switch (projectileType)
         {
             case ProjectileType.Standard:
+                Destroy(gameObject);
                 // 표준 발사체에 대한 처리
                 break;
 
             case ProjectileType.Lasting:
                 // 폭발성 발사체에 대한 처리
+                Destroy(gameObject);
                 break;
 
             case ProjectileType.Poisonous:
                 // 독성 발사체에 대한 처리
                 //ApplyPoison(); // 독성 적용 메서드 호출
+                Destroy(gameObject);
                 break;
 
             default: Destroy(gameObject);

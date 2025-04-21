@@ -341,15 +341,12 @@ namespace Assets
                 Invoke("OffDamaged", 3f);
             }
         }
-        void OnTriggerEnter2D(Collider2D other)
+        void OnCollisionEnter2D(Collision2D other)
         {
             if (isDamaged) return;
 
-            // 파티클의 부모 오브젝트가 플레이어와 충돌했을 때
-            if (other.gameObject.CompareTag("Attack")) // Attack로 태그 설정
+            if (other.gameObject.CompareTag("Attack") || other.gameObject.CompareTag("Enemy"))
             {
-                Debug.Log("파티클 효과와 충돌");
-
                 // 충돌 시 작동할 로직
                 health.PlayerCurrentVal -= 10;
                 isDamaged = true;
@@ -362,6 +359,30 @@ namespace Assets
                 Invoke("OffDamaged", 3f);
             }
         }
+
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (isDamaged) return;
+
+            if (other.gameObject.CompareTag("Attack") || other.gameObject.CompareTag("Enemy"))
+            {
+                // 충돌 시 작동할 로직
+                health.PlayerCurrentVal -= 10;
+                isDamaged = true;
+
+                int bumpForceDirc = transform.position.x - other.transform.position.x > 0 ? 1 : -1;
+                rb.velocity = new Vector2(bumpForceDirc * 40, 20);
+
+                spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+                Physics2D.IgnoreLayerCollision(6, 7, true); // Enemy 와 Player 충돌 기능 복구
+                Invoke("OffDamaged", 3f);
+            }
+        }
+
+       
+
+
+
         public void OnDeath() // OnDeath로 플레이어 죽음 하나로 묶음 => gameOverDele & OnDeath() 불러오기  
         {
             // 1)데스존에 빠짐 2)체력 쓰러짐

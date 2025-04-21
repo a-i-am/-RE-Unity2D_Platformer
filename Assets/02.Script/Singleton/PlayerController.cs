@@ -93,7 +93,7 @@ public class PlayerController : Singleton<PlayerController>
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-        Managers.Init();  // Managers 초기화 보장
+        //Managers.Init();  // Managers 초기화 보장
     }
 
     void Start()
