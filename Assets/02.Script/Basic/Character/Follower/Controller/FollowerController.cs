@@ -8,26 +8,29 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
     [Header("외부 참조")]
     [SerializeField] private FollowerGroupMoving followerGroupMoving;
 
-    private FollowerState followerState;
+    [Header("팔로잉")]
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Vector3 followPos;
+    [SerializeField] private int followDelay;
+    private Transform parent;
+    private Queue<Vector3> parentPos;
+    private Tween followTween;
 
-    [Header("Transform 데이터")]
-    private Transform player;
-    [SerializeField] private Transform follower;
+    
     [Header("대시와 리턴")]
     private Vector3 originalPos;
+    private int dashCount = 0;
     private float startY;
     private bool isDashing = false;
     [SerializeField] private float detectionRange;
     [SerializeField] private float dashDuration; // dash 속도 조절
-    [SerializeField] private float followerY;
-    int dashCount = 0;
 
     // 타겟팅
     private Enemy _currentTarget;
     public Enemy CurrentTarget => _currentTarget;
-
     private Vector2 _targetPos;
     public Vector2 TargetPosition => _currentTarget != null ? _currentTarget.transform.position : Vector2.zero;
+   
     public void SetTarget(Enemy target)
     {
         _currentTarget = target;
@@ -39,34 +42,68 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
     private void Awake()
     {
         TryGetComponent(out spriteRenderer);
+        parentPos = new Queue<Vector3>();
     }
-
     private void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
+        if (playerTransform != null) return;
+            playerTransform = GameObject.FindWithTag("Player").transform;
     }
+
+    private void OnEnable()
+    {
+        if(parent == null)
+        {
+            parent = transform.parent;
+        }
+    }
+    private void Update()
+    {
+        spriteRenderer.flipX = (transform.position.x < playerTransform.position.x) ? true : false;
+    }
+
     private void FixedUpdate()
     {
-        spriteRenderer.flipX = (transform.position.x < player.position.x) ? true : false;
+        if (!isDashing)
+        {
+            Watch();
+            Follow();
+        }
+    }
+
+    private void Watch()
+    {
+        // Input Pos
+        if (!parentPos.Contains(parent.position))
+            parentPos.Enqueue(parent.position);
+
+        // Output Pos
+        if (parentPos.Count > followDelay)
+            followPos = parentPos.Dequeue();
+        else if (parentPos.Count < followDelay)
+            followPos = parent.position;
+    }
+
+    private void Follow()
+    {
+        //transform.position = followPos;
+        if(followTween != null && followTween.IsActive())
+            followTween.Kill();
+
+        followTween = transform.DOMove(followPos, 0.1f).SetEase(Ease.Linear);
     }
 
     public bool IsDashCheck()
     {
-        return !isDashing;
+        return isDashing;
     }
-
     public void DashAndReturn()
     {
-        if (isDashing && _currentTarget == null) return;
+        if (isDashing && _currentTarget == null && _currentTarget.isFainted) return;
         #region 디버깅(null 체크)
         if (_currentTarget == null)
         {
             Debug.LogWarning("DashAndReturn - target이 null!");
-            return;
-        }
-        if (follower == null)
-        {
-            Debug.LogWarning("DashAndReturn - follower가 null!");
             return;
         }
         if (followerGroupMoving == null)
@@ -78,18 +115,16 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
         isDashing = true; // 동작 종료 전 재실행 불가
 
         // 타겟팅 정보 설정
-        followerState = FollowerState.Targeting;
         _targetPos = TargetPosition;
 
         // 팔로워 위치 & 움직임 조정
         startY = followerGroupMoving.startY;
-        originalPos = transform.parent.position;
         followerGroupMoving.isSineActive = false;
 
         Sequence seq = DOTween.Sequence();
-        seq.Append(follower.DOMove(_targetPos, dashDuration))
+        seq.Append(transform.DOMove(_targetPos, dashDuration))
            .AppendInterval(0.5f)
-           .Append(follower.DOMove(originalPos, dashDuration))
+           .Append(transform.DOMove(followPos, dashDuration))
            .OnComplete(() =>
            {
                _currentTarget = null;
@@ -100,7 +135,9 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
            .Play();
 
         ++dashCount;
-        Debug.Log(dashCount);
 
     }
+
+    
+
 }

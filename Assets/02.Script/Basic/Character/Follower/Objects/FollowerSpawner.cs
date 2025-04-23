@@ -6,7 +6,6 @@ public class FollowerSpawner : MonoBehaviour
 {
     [Header("외부 참조")]
     [SerializeField] private FollowerGroupMoving followerGroupMoving;
-    private FollowerState followerState;
 
     private Follower follower;
     [Header("팔로워 자리")]
@@ -39,13 +38,12 @@ public class FollowerSpawner : MonoBehaviour
         spawnPos.gameObject.SetActive(true);
 
         follower = Instantiate(characterData.characterPrefab, spawnPos.position, Quaternion.identity, spawnPos);
-        
+        Debug.Log("팔로워 생성");
+
         if (!followerGroupMoving.enabled && follower != null)
         {
             followerGroupMoving.enabled = true;
         }
-
-        followerState = FollowerState.Spawn;
     }
 
     private void EnqueueSpawnPos(Follower follower)

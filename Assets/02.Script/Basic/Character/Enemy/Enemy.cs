@@ -5,9 +5,9 @@ public class Enemy : MonoBehaviour
 {
     // 인터페이스 참조
     private IEnemyNumberCheck enemyNumberChecker;
-
-    // 프리팹
-    //private TargetingAI targetingAI;
+    [SerializeField] private EnemyController enemyController; 
+    [HideInInspector] public bool isFainted;
+    
 
     // 몬스터 데이터
     public Character.CharacterData characterData;
@@ -38,6 +38,12 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         enemyNumberChecker = TargetingAI.Instance;
+
+        if (enemyNumberChecker != null)
+        {
+            enemyController.FaintedEvent -= Remove;
+            enemyController.FaintedEvent += Remove;
+        }
     }
 
     private void OnEnable()
@@ -47,6 +53,12 @@ public class Enemy : MonoBehaviour
 
     private void OnDisable()
     {
+        Remove();
+    }
+
+    private void Remove()
+    {
+        isFainted = true;
         enemyNumberChecker?.RemoveActiveEnemy(this);
     }
 

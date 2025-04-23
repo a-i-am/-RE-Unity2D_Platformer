@@ -1,10 +1,12 @@
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
+using UnityEditor.TerrainTools;
 
 public class EnemyController : MonoBehaviour
 {
-    public EnemyState enemyState;
+    public event Action FaintedEvent;
+
 
     [Header("몬스터 이동")]
     private int nextMove;
@@ -13,10 +15,15 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float stopDistance = 2f;
     [SerializeField] private float chaseSpeed = 15f; // 몬스터가 플레이어를 빨리 쫓아갈 때 속도
 
+    [Header("몬스터 스탯")]
     [SerializeField] private int health = 3; // 몬스터의 체력
 
+    [Header("외부 참조")]
     [SerializeField] private Transform player; // 플레이어의 Transform을 저장하는 변수
-    private bool isHurted = false;
+    
+    private int dashHitCount;
+    public bool isFainted;
+    private bool isHurted;
     
     private EnemyAnimScr enemyAnimScr;
     private SpriteRenderer spriteRenderer;
@@ -33,14 +40,10 @@ public class EnemyController : MonoBehaviour
         rbEnemy = GetComponent<Rigidbody2D>();
         enemyAnimScr = GetComponent<EnemyAnimScr>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
     private void Start()
     {
-        if (enemyState != EnemyState.Fainted)
-        {
-            //dataHandler.AddActiveEnemy(this);
-            //dataHandler.CachingField();
-        }
         Physics2D.IgnoreLayerCollision(6, 6); // Enemy 끼리 충돌 방지
         Invoke("Think", 5);
     }
@@ -48,7 +51,7 @@ public class EnemyController : MonoBehaviour
     void FixedUpdate()
     {
         // Move
-        if (!isHurted && enemyState != EnemyState.Fainted)
+        if (!isHurted && !isFainted)
         {
             rbEnemy.velocity = new Vector2(moveSpeed * nextMove, rbEnemy.velocity.y);
             GroundCheckRay();
@@ -59,7 +62,7 @@ public class EnemyController : MonoBehaviour
     // Enemy 녹다운
     void Faint()
     {
-        enemyState = EnemyState.Fainted;
+        isFainted = true;
         gameObject.layer = 10; // "Fainted"
         gameObject.tag = "Fainted";
 
@@ -68,6 +71,7 @@ public class EnemyController : MonoBehaviour
         Physics2D.IgnoreLayerCollision(10, 6); // Fainted(10)과 Enemy(6)  충돌 무시
 
         enemyAnimScr.FaintAnimation(true);
+        FaintedEvent.Invoke();
     }
 
     void Think()
@@ -128,7 +132,7 @@ public class EnemyController : MonoBehaviour
         health--;
         if (health <= 0)
         {
-            Faint(); // 체력이 0 이하일 경우 몬스터 삭제
+            Faint();
         }
         else
         {
@@ -146,17 +150,18 @@ public class EnemyController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Follower") && enemyState != EnemyState.Fainted
+        if (other.gameObject.layer == LayerMask.NameToLayer("Follower") && !isFainted
             || other.gameObject.CompareTag("Attack"))
         {
             TakeDamage();
-            dashHitVFX.Play();
+            //dashHitVFX.Play();
         }
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (enemyState != EnemyState.Fainted && other.gameObject.CompareTag("Attack"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Follower") && !isFainted
+            || other.gameObject.CompareTag("Attack"))
         {
             TakeDamage();
             dashHitVFX.Play();

@@ -4,7 +4,6 @@ using UnityEngine;
 public class Follower : MonoBehaviour
 {
     [Header("외부 참조")]
-    private FollowerState followerState;
     
     // 인터페이스 참조
     private IFollowerNumberCheck followerNumChecker;

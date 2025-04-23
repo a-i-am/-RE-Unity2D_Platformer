@@ -5,9 +5,6 @@ using System;
 using static UnityEngine.EventSystems.EventTrigger;
 public class TargetingAI : Singleton<TargetingAI>, IFollowerNumberCheck, IEnemyNumberCheck
 {
-    private EnemyState enemyState;
-    private FollowerState followerState;
-    private EnemyController enemyController;
     /// <summary>
     // 살아있는 모든 followers와 Enemies = Active로 네이밍
     /// </summary>
@@ -26,11 +23,6 @@ public class TargetingAI : Singleton<TargetingAI>, IFollowerNumberCheck, IEnemyN
     private HashSet<Enemy> _targetHashSet = new HashSet<Enemy>();
 
     private Dictionary<Collider2D, Enemy> _enemyCache = new Dictionary<Collider2D, Enemy>();
-
-    private void Awake()
-    {
-        enemyController = FindAnyObjectByType<EnemyController>();
-    }
 
     public bool IsFollowerRegistered(Follower follower)
     {
@@ -88,16 +80,6 @@ public class TargetingAI : Singleton<TargetingAI>, IFollowerNumberCheck, IEnemyN
         _detectedEnemies.Remove(enemy);
         _targetHashSet.Remove(enemy);
     }
-    public void RemoveEnemy(Enemy enemy)
-    {
-        if (!_activeEnemies.Contains(enemy) || !_detectedEnemies.Contains(enemy)) return;
-
-        
-
-        _detectedEnemies.Remove(enemy);
-        _targetHashSet.Remove(enemy);
-
-    }
 
     private Enemy GetEnemyFromCollider(Collider2D collider)
     {
@@ -117,24 +99,35 @@ public class TargetingAI : Singleton<TargetingAI>, IFollowerNumberCheck, IEnemyN
         return null;
     }
 
+    private void PrintDebugState()
+    {
+        Debug.Log($"[TargetingAI] ActiveFollowers: {_activeFollowers.Count}, ActiveEnemies: {_activeEnemies.Count}, DetectedEnemies: {_detectedEnemies.Count}");
+    }
+
     private void OnTriggerStay2D(Collider2D other)
     {
+        //PrintDebugState();
+
+        if (_activeFollowers.Count < 1 || _activeEnemies.Count < 1) return;
+
         Enemy enemy = GetEnemyFromCollider(other);
-        if (enemy != null && _activeFollowers.Count > 0)
-        {
+        // enemy != null && _activeFollowers.Count > 0
+        if (_activeEnemies.Count > 0 && enemy != null && !enemy.isFainted)
             EnterEnemy(enemy);
-        }
 
         if (_detectedEnemies.Count == 0) return;
             CalculateTargets();
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        Enemy enemy = other.GetComponent<Enemy>();
-        if (enemy != null && enemyController.enemyState != EnemyState.Fainted)
-        {
+        if (_activeFollowers.Count < 1 || _activeEnemies.Count < 1) return;
+
+        Enemy enemy = GetEnemyFromCollider(other);
+        
+        // enemy != null && !enemyController.isFainted && 
+            Debug.Log("EnterEnemy 호출");
+        if (_activeEnemies.Count > 0 && enemy != null && !enemy.isFainted)
             ExitEnemy(enemy);
-        }
     }
    
 
@@ -152,7 +145,7 @@ public class TargetingAI : Singleton<TargetingAI>, IFollowerNumberCheck, IEnemyN
             {
                 if (follower == null) continue;
                 float dist = Vector2.Distance(follower.transform.position, enemy.transform.position);
-                if (!_targetHashSet.Contains(enemy))
+                if (!_targetHashSet.Contains(enemy) && !enemy.isFainted)
                 {
                     _targetCandidates.Add((dist, enemy));
                 }
@@ -165,7 +158,8 @@ public class TargetingAI : Singleton<TargetingAI>, IFollowerNumberCheck, IEnemyN
     {
         foreach (Follower follower in _activeFollowers)
         {
-            if (follower == null || !follower.IsDashCheck())
+
+            if (follower == null || follower.IsDashCheck())
                 continue;
 
             foreach (var candidate in _targetCandidates)
@@ -173,8 +167,8 @@ public class TargetingAI : Singleton<TargetingAI>, IFollowerNumberCheck, IEnemyN
                 if (!_targetHashSet.Contains(candidate.Item2))
                 {
                     follower.SetTarget(candidate.Item2);
-                    follower.CallDashAttack();
                     _targetHashSet.Add(candidate.Item2);
+                    follower.CallDashAttack();
                     break;
                 }
             }
