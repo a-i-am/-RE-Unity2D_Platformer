@@ -10,8 +10,6 @@ public class Inventory : Singleton<Inventory>
     EnemyState enemyState;
     public delegate void OnItemSlotCountChange(int val);
     public delegate void OnCharacterSlotCountChange(int val);
-    //public delegate void OnSpawnFollower();
-    //public OnSpawnFollower onSpawnFollower;
 
     public OnItemSlotCountChange onItemSlotCountChange;
     public OnCharacterSlotCountChange onCharacterSlotCountChange;
@@ -64,8 +62,10 @@ public class Inventory : Singleton<Inventory>
     }
     void Start()
     {
-        ItemSlotCnt = invenUI.itemSlots.Length;
-        CharacterSlotCnt = invenUI.characterSlots.Length;
+        //ItemSlotCnt = invenUI.itemSlots.Length;
+        //CharacterSlotCnt = invenUI.characterSlots.Length;
+        ItemSlotCnt = 4;
+        CharacterSlotCnt = 5;
     }
     private void Update()
     {
@@ -103,6 +103,7 @@ public class Inventory : Singleton<Inventory>
     {
         inventory_items.RemoveAt(_index);
         onChangeItem.Invoke();
+        acquiredItems--;
     }
 
     public void RemoveCharacter(int _index)
@@ -111,7 +112,8 @@ public class Inventory : Singleton<Inventory>
         {
             inventory_characters.RemoveAt(_index);
             onChangeCharacter.Invoke();
-            
+            acquiredCharacters--;
+            Debug.Log("RemoveCharacter");
         }
         else Debug.LogError("Index out of range: " + _index);
 

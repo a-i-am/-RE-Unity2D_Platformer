@@ -53,12 +53,10 @@ public class CharacterSlot : MonoBehaviour, IPointerUpHandler, IPointerClickHand
     {
         bool characterIsUse = characterData.UseCharacter();
 
-        if (characterIsUse)
-        {
-            Inventory.Instance.RemoveItem(characterSlotnum);
-            Inventory.Instance.acquiredCharacters--;    
-            
-        }
+        //if (characterIsUse)
+        //{
+        //    Inventory.Instance.RemoveItem(characterSlotnum);  
+        //}
 
     }
     public void OnPointerClick(PointerEventData eventData)

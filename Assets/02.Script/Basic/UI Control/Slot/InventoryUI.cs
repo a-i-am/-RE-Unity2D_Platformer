@@ -7,18 +7,18 @@ using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
-    Inventory inven;
-
-    public GameObject inventoryPanel;
-    public TextMeshProUGUI itemSlotNumText;
-    public TextMeshProUGUI characterSlotNumText;
-    bool activeInventory = false;
+    private Inventory inven;
+    [SerializeField] private GameObject playerUI;
+    [SerializeField] private GameObject inventoryPanel;
+    [SerializeField] private TextMeshProUGUI itemSlotNumText;
+    [SerializeField] private TextMeshProUGUI characterSlotNumText;
+    private bool activeInventory = false;
 
     public ItemSlot[] itemSlots;
     public CharacterSlot[] characterSlots;
     
-    public Transform itemSlotHolder;
-    public Transform characterSlotHolder;
+    [SerializeField] private Transform itemSlotHolder;
+    [SerializeField] private Transform characterSlotHolder;
 
     void Start()
     {
@@ -32,14 +32,17 @@ public class InventoryUI : MonoBehaviour
         inven.onChangeItem += RedrawItemSlotUI;
         inven.onChangeCharacter += RedrawCharacterSlotUI;
 
-
         inventoryPanel.SetActive(activeInventory);
     }
 
     void FixedUpdate()
     {
-        itemSlotNumText.text = string.Format("{0} / {1}", inven.acquiredItems, itemSlots.Length);
-        characterSlotNumText.text = string.Format("{0} / {1}", inven.acquiredCharacters, characterSlots.Length);
+        //itemSlotNumText.text = string.Format("{0} / {1}", inven.acquiredItems, itemSlots.Length);
+        itemSlotNumText.text = string.Format("{0} / {1}", inven.acquiredItems, inven.ItemSlotCnt);
+
+        //characterSlotNumText.text = string.Format("{0} / {1}", inven.acquiredCharacters, characterSlots.Length);
+        characterSlotNumText.text = string.Format("{0} / {1}", inven.acquiredCharacters, inven.CharacterSlotCnt);
+
     }
 
     private void ItemSlotChange(int val)
@@ -73,18 +76,22 @@ public class InventoryUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            activeInventory = !activeInventory;
-            inventoryPanel.SetActive(activeInventory);
+            playerUI.SetActive(activeInventory); // 기본 false
+            activeInventory = !activeInventory; // 기본 false -> true
+            inventoryPanel.SetActive(activeInventory); 
         }
+    }
+
+    public void AddCharacterSlot()
+    {
+        if(inven.CharacterSlotCnt < characterSlots.Length)
+        inven.CharacterSlotCnt++;
     }
 
     public void AddItemSlot()
     {
+        if(inven.ItemSlotCnt < itemSlots.Length)
         inven.ItemSlotCnt++;
-    }
-    public void AddCharacterSlot()
-    {
-        inven.CharacterSlotCnt++;
     }
 
     void RedrawItemSlotUI()

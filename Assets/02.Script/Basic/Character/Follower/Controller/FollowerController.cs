@@ -57,13 +57,12 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
             parent = transform.parent;
         }
     }
-    private void Update()
-    {
-        spriteRenderer.flipX = (transform.position.x < playerTransform.position.x) ? true : false;
-    }
-
+    
     private void FixedUpdate()
     {
+        // 스프라이트 기본 방향 : 오른쪽(기본 FlipX true 상태)
+        spriteRenderer.flipX = (transform.localPosition.x < playerTransform.localPosition.x) ? true : false;
+        
         if (!isDashing)
         {
             Watch();

@@ -127,22 +127,22 @@ public class EnemyController : MonoBehaviour
     {
         isHurted = true;
         enemyAnimScr.HurtAnimation();
+        --health;
 
-
-        health--;
         if (health <= 0)
         {
             Faint();
         }
         else
         {
-            rbEnemy.velocity = Vector2.zero;
             if (transform.position.x > player.transform.position.x)
             {
+                rbEnemy.velocity = Vector2.zero;
                 rbEnemy.velocity = new Vector2(10f, 0);
             }
             else
             {
+                rbEnemy.velocity = Vector2.zero;
                 rbEnemy.velocity = new Vector2(-10f, 0);
             }
         }
@@ -167,7 +167,4 @@ public class EnemyController : MonoBehaviour
             dashHitVFX.Play();
         }
     }
-
-
-
 }
