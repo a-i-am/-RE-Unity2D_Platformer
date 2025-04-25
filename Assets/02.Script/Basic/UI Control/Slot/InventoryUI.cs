@@ -78,7 +78,7 @@ public class InventoryUI : MonoBehaviour
         {
             playerUI.SetActive(activeInventory); // 기본 false
             activeInventory = !activeInventory; // 기본 false -> true
-            inventoryPanel.SetActive(activeInventory); 
+            inventoryPanel.SetActive(activeInventory);
         }
     }
 

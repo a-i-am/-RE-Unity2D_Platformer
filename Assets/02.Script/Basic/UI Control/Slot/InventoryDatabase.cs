@@ -7,31 +7,47 @@ using UnityEngine.UI;
 
 public class InventoryDatabase : Singleton<InventoryDatabase>
 {
-    public GameObject characterInvenSlotUI;
-    public GameObject itemInvenSlotUI;
-    public GameObject characterSlotNumText;
-    public GameObject itemSlotNumText;
+    
+    // 아이템 정보표시용
+    private GameObject[] ItemInfo; 
+    private GameObject[] CharacterInfo;
 
-    public TextAsset itemDBText, characterDBText;
+    [Header("슬롯")]
+    [SerializeField] private GameObject[] InvenSlot; // 일단 슬롯 개수는 캐릭터 & 아이템 동기화
+    [SerializeField] private GameObject characterInvenSlotUI;
+    [SerializeField] private GameObject itemInvenSlotUI;
+    [SerializeField] private GameObject characterSlotNumText;
+    [SerializeField] private GameObject itemSlotNumText;
 
-    public List<Character.CharacterData> allCharacterList = new List<Character.CharacterData>();
-    public List<Character.CharacterData> myCharacterList = new List<Character.CharacterData>();
-    public List<Character.CharacterData> curCharacterList = new List<Character.CharacterData>();
+    [Header("카테고리 및 탭")]
+    [SerializeField] private GameObject characterSubTab;
+    [SerializeField] private GameObject itemSubTab;
+    [SerializeField] private Image[] mainTabImage;
+    [SerializeField] private Image[] characterSubTabImage;
+    [SerializeField] private Image[] itemSubTabImage;
+    [SerializeField] private Sprite mainTabIdleSprite, mainTabSelectSprite;
+    [SerializeField] private Sprite subTabIdleSprite, subTabSelectSprite;
+    [SerializeField] private string curMainTabType = "Character";
+    [SerializeField] private string curSubTabType = "Absorption";
 
-    public List<Item.ItemData> allItemList = new List<Item.ItemData>();
-    public List<Item.ItemData> myItemList = new List<Item.ItemData>();
-    public List<Item.ItemData> curItemList = new List<Item.ItemData>();
-
-    public string curType = "Character";
-    public GameObject[] InvenSlot, ItemInfo, CharacterInfo;
-    public Image[] tabImage;
-    public Sprite tabIdleSprite, tabSelectSprite;
-
+    [Header("텍스트 에셋")]
+    [SerializeField] private TextAsset itemDBText, characterDBText;
+    
+    [Header("캐릭터/아이템 리스트")]
+    private List<Character.CharacterData> curCharacterList = new List<Character.CharacterData>();
+    private List<Item.ItemData> curItemList = new List<Item.ItemData>();
+    private List<Character.CharacterData> allCharacterList = new List<Character.CharacterData>();
+    [SerializeField] private List<Character.CharacterData> myCharacterList = new List<Character.CharacterData>();
+    [SerializeField] private List<Item.ItemData> myItemList = new List<Item.ItemData>();
+    private List<Item.ItemData> allItemList = new List<Item.ItemData>();
+    
+    [Header("캐릭터/아이템 DB")]
     public List<Item.ItemData> itemDB = new List<Item.ItemData>();
     public List<Character.CharacterData> characterDB = new List<Character.CharacterData>();
     [Space(25)]
-    public GameObject fieldItemPrefab;
-    public Vector3[] pos;
+    [Header("필드 아이템 배치")]
+    [SerializeField] private GameObject fieldItemPrefab;
+    [SerializeField] private Vector3[] pos;
 
     void Start()
     {
@@ -58,8 +74,8 @@ public class InventoryDatabase : Singleton<InventoryDatabase>
                 row[2],  // explain
                 row[3],  // number
                 row[4] == "TRUE",  // isUsing
-                characterImage,  // characterImage
-                characterPrefab  // characterPrefab
+                characterImage,  
+                characterPrefab  
             ));
         }
 
@@ -82,13 +98,17 @@ public class InventoryDatabase : Singleton<InventoryDatabase>
         CharacterLoad();
 
         // TabClick 메서드 호출하여 초기 탭 설정
-        TabClick("Character");
+        //MainTabClick(curMainTabType);
+        //SubTabClick(curSubTabType);
+
+        ActiveCharacterList(curMainTabType);
+        ActiveItemList(curMainTabType);
+        ActiveCharacterList(curSubTabType);
+        ActiveItemList(curSubTabType);
     }
-    public void TabClick(string tabName)
+
+    private void ActiveCharacterList(string tabName)
     {
-        // 현재 아이템 리스트에 클릭한 타입만 추가
-        curType = tabName;
-        curItemList = myItemList.FindAll(x => x.type == tabName);
         curCharacterList = myCharacterList.FindAll(x => x.type == tabName);
 
         // Character 리스트 슬롯과 텍스트 보이기
@@ -98,24 +118,40 @@ public class InventoryDatabase : Singleton<InventoryDatabase>
             //ItemInfo[i_Character].GetComponentInChildren<Text>().text = i < curItemList.Count ? curItemList[i].Name : "";
         }
 
+    }
+
+    private void ActiveItemList(string tabName)
+    {
+        curItemList = myItemList.FindAll(x => x.type == tabName);
+
         // Item 리스트 슬롯과 텍스트 보이기
         for (int i_item = 0; i_item < InvenSlot.Length; i_item++)
         {
             InvenSlot[i_item].SetActive(i_item < curCharacterList.Count);
-
             //ItemInfo[i_item].GetComponentInChildren<Text>().text = i < curItemList.Count ? curItemList[i].Name : "";
         }
+
+    }
+
+    public void MainTabClick(string tabName)
+    {
+        // 현재 아이템 리스트에 클릭한 타입만 추가
+        //curMainTabType = ;
+        //ActiveCharacterList(curMainTabType);
+        //ActiveItemList(curMainTabType);
+        ActiveCharacterList(curMainTabType);
+        ActiveItemList(curMainTabType);
 
         int tabNum = 0;
         switch (tabName)
         {
             case "Character": tabNum = 0; break;
             case "Item": tabNum = 1; break;
-            default: tabNum = 2; break; // case조건들에 전부 해당하지 않는 경우
+            default: tabNum = 2; break;
         }
 
-            for (int i = 0; i < tabImage.Length; i++)
-            tabImage[i].sprite = i == tabNum ? tabSelectSprite : tabIdleSprite;
+            for (int i = 0; i < mainTabImage.Length; i++)
+            mainTabImage[i].sprite = i == tabNum ? mainTabSelectSprite : mainTabIdleSprite;
 
         switch (tabNum)
         {
@@ -124,25 +160,112 @@ public class InventoryDatabase : Singleton<InventoryDatabase>
                 itemSlotNumText.SetActive(false);
                 characterInvenSlotUI.SetActive(true);
                 characterSlotNumText.SetActive(true);
-
+                characterSubTab.SetActive(true);
+                itemSubTab.SetActive(false);
                 break;
             case 1:
                 characterInvenSlotUI.SetActive(false);
                 characterSlotNumText.SetActive(false);
                 itemInvenSlotUI.SetActive(true);
                 itemSlotNumText.SetActive(true);
-
+                itemSubTab.SetActive(true);
+                characterSubTab.SetActive(false);
                 break;
             default:
                 characterInvenSlotUI.SetActive(false);
                 itemInvenSlotUI.SetActive(false);
                 characterSlotNumText.SetActive(false);
                 itemSlotNumText.SetActive(false);
-
+                characterSubTab.SetActive(false);
+                itemSubTab.SetActive(false);
                 break;
         }
 
     }
+
+
+    public void CharacterSubTabClick(string tabName)
+    {
+        // 현재 아이템 리스트에 클릭한 타입만 추가
+        //curSubTabType = tabName;
+        ActiveCharacterList(curSubTabType);
+        ActiveItemList(curSubTabType);
+
+        int tabNum = 0;
+        switch (tabName)
+        {
+            case "A": tabNum = 0; break;
+            case "B": tabNum = 1; break;
+            case "C": tabNum = 2; break;
+            case "D": tabNum = 3; break;
+            default: tabNum = 4; break;
+        }
+
+        for (int i = 0; i < characterSubTabImage.Length; i++)
+            characterSubTabImage[i].sprite = i == tabNum ? subTabSelectSprite : subTabIdleSprite;
+
+        characterInvenSlotUI.SetActive(true);
+        characterSlotNumText.SetActive(true);
+        itemInvenSlotUI.SetActive(false);
+        itemSlotNumText.SetActive(false);
+
+        switch (tabNum)
+        {
+            case 0:
+
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ItemSubTabClick(string tabName)
+    {
+        // 현재 아이템 리스트에 클릭한 타입만 추가
+        //curSubTabType = tabName;
+        int tabNum = 0;
+        switch (tabName)
+        {
+            case "Absorption": tabNum = 0; break;
+            case "Equipment": tabNum = 1; break;
+            case "Etc": tabNum = 2; break;
+            case "Mission": tabNum = 3; break;
+            default: tabNum = 4; break;
+        }
+
+        for (int i = 0; i < itemSubTabImage.Length; i++)
+            itemSubTabImage[i].sprite = i == tabNum ? subTabSelectSprite : subTabIdleSprite;
+
+        itemInvenSlotUI.SetActive(true);
+        itemSlotNumText.SetActive(true);
+        characterInvenSlotUI.SetActive(false);
+        characterSlotNumText.SetActive(false);
+
+        switch (tabNum)
+        {
+            case 0:
+
+                break;
+            case 1:
+
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+                break;
+        }
+    }
+
+
+
 
     void CharacterSave()
     {
@@ -156,7 +279,7 @@ public class InventoryDatabase : Singleton<InventoryDatabase>
     {
         string jdata = File.ReadAllText(Application.dataPath + "/Data/MyCharacterText.txt");
         myCharacterList = JsonConvert.DeserializeObject<List<Character.CharacterData>>(jdata);
-        TabClick(curType); // 맨 처음 선택되어있는 메인 탭(캐릭터탭)
+        MainTabClick(curMainTabType); // 맨 처음 선택되어있는 메인 탭(캐릭터탭)
     }
     void ItemSave()
     {

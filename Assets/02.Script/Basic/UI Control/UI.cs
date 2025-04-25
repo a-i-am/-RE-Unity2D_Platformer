@@ -29,7 +29,6 @@ public class UI : MonoBehaviour
 
     public float PlayerValue
     {
-
         set
         {
             if (PlayerMaxValue <= 0)
