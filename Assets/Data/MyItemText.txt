@@ -1,7 +1,7 @@
 [
   {
     "tabName": "Item",
-    "type": "absorption",
+    "type": "Absorption",
     "name": "작은 회복 물약",
     "explain": "(HP +100)",
     "number": "1",
@@ -10,7 +10,7 @@
   },
   {
     "tabName": "Item",
-    "type": "Goods",
+    "type": "Mission",
     "name": "지도",
     "explain": "지도아이템설명",
     "number": "",

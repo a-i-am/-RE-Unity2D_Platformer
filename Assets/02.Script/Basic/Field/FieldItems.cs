@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class FieldItems : MonoBehaviour
 {
-    public Character.CharacterData field_character;
     public Item.ItemData field_item;
     public SpriteRenderer image;
 
@@ -15,7 +14,7 @@ public class FieldItems : MonoBehaviour
 
     public void SetRandomItem()
     {
-        List<Item.ItemData> itemDB = InventoryDatabase.Instance.itemDB;
+        List<Item.ItemData> itemDB = InventoryDatabase.Instance.allItemList;
         if (itemDB.Count > 0)
         {
             SetItem(itemDB[UnityEngine.Random.Range(0, itemDB.Count)]);

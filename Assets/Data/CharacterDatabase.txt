@@ -1,1 +1,1 @@
-Character	Bub	Bub 설명	1	FALSE	Assets/Resources/08.Asset/03.Sprite/Character/Enemy/Animator/Idle/Bub_Idle (16 x 16).png	Assets/03.Prefabs/Follower/Follower_Bub.prefab
+Character	A	Bub 설명	1	FALSE	Assets/Resources/08.Asset/03.Sprite/Character/Enemy/Animator/Idle/Bub_Idle (16 x 16).png	Assets/03.Prefabs/Follower/Follower_Bub.prefab

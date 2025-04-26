@@ -2,7 +2,7 @@
   {
     "tabName": "Character",
     "type": "Character",
-    "name": "Bub",
+    "name": "A",
     "explain": "Bub 설명",
     "number": "1",
     "isUsing": false,

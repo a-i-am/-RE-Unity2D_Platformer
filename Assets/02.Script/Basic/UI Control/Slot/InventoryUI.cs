@@ -7,6 +7,10 @@ using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
+    private List<Character.CharacterData> filteredCharacterList = new List<Character.CharacterData>();
+    private List<Item.ItemData> filteredItemList = new List<Item.ItemData>();
+
+    private InventoryDatabase invenDB;
     private Inventory inven;
     [SerializeField] private GameObject playerUI;
     [SerializeField] private GameObject inventoryPanel;
@@ -23,6 +27,7 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         inven = Inventory.Instance;
+        invenDB = InventoryDatabase.Instance; 
         itemSlots = itemSlotHolder.GetComponentsInChildren<ItemSlot>();
         characterSlots = characterSlotHolder.GetComponentsInChildren<CharacterSlot>();
 
@@ -30,7 +35,9 @@ public class InventoryUI : MonoBehaviour
         inven.onCharacterSlotCountChange += CharacterSlotChange;
 
         inven.onChangeItem += RedrawItemSlotUI;
-        inven.onChangeCharacter += RedrawCharacterSlotUI;
+        inven.onChangeCharacter  += RedrawCharacterSlotUI;
+        invenDB.onCharacterSubTab += RedrawCharacterSlotUI;
+        invenDB.onItemSubTab += RedrawItemSlotUI;
 
         inventoryPanel.SetActive(activeInventory);
     }
@@ -101,13 +108,15 @@ public class InventoryUI : MonoBehaviour
             itemSlots[i].RemoveItemSlot();
         }
 
+        filteredItemList = inven.items.FindAll(item => item.type == invenDB.itemCurSubType);
 
-        for (int i = 0; i < inven.inventory_items.Count; i++) 
+        for (int i = 0; i < filteredItemList.Count && i < itemSlots.Length; i++)
         {
-            itemSlots[i].itemData = inven.inventory_items[i];
-
+            itemSlots[i].itemData = filteredItemList[i];
             itemSlots[i].UpdateItemSlotUI();
         }
+
+
     }
 
     void RedrawCharacterSlotUI()
@@ -117,11 +126,11 @@ public class InventoryUI : MonoBehaviour
             characterSlots[i].RemoveCharacterSlot();
         }
 
+        filteredCharacterList = inven.characters.FindAll(character => character.type == invenDB.characterCurSubType);
 
-        for (int i = 0; i < inven.inventory_characters.Count; i++)
+        for (int i = 0; i < filteredCharacterList.Count && i < characterSlots.Length; i++)
         {
-            characterSlots[i].characterData = inven.inventory_characters[i];
-
+            characterSlots[i].characterData = filteredCharacterList[i];
             characterSlots[i].UpdateCharacterSlotUI();
         }
     }

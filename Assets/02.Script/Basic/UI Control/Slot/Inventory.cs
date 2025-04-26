@@ -18,8 +18,8 @@ public class Inventory : Singleton<Inventory>
     public OnChangeItem onChangeItem;
     public delegate void OnChangeCharacter();
     public OnChangeCharacter onChangeCharacter;
-    public List<Character.CharacterData> inventory_characters = new List<Character.CharacterData>();
-    public List<Item.ItemData> inventory_items = new List<Item.ItemData>();
+    public List<Character.CharacterData> characters = new List<Character.CharacterData>();
+    public List<Item.ItemData> items = new List<Item.ItemData>();
 
     // 인벤토리 캐릭터(몹), 아이템 보유(획득)수량 표시
     public int acquiredCharacters = 0;
@@ -74,9 +74,9 @@ public class Inventory : Singleton<Inventory>
 
     public bool AddItem(Item.ItemData _item) // ItemData _item
     {
-        if (inventory_items.Count < ItemSlotCnt)
+        if (items.Count < ItemSlotCnt)
         {
-            inventory_items.Add(_item);
+            items.Add(_item);
             if (onChangeItem != null)
                 onChangeItem.Invoke();
             return true;
@@ -87,12 +87,13 @@ public class Inventory : Singleton<Inventory>
 
     public bool AddCharacter(Character.CharacterData _character)
     {
-        if (inventory_characters.Count < CharacterSlotCnt)
+        if (characters.Count < CharacterSlotCnt)
         {
-            inventory_characters.Add(_character);
+            characters.Add(_character);
             
             if (onChangeCharacter != null)
                 onChangeCharacter.Invoke();
+
             return true;
         }
         return false;
@@ -101,16 +102,16 @@ public class Inventory : Singleton<Inventory>
 
     public void RemoveItem(int _index)
     {
-        inventory_items.RemoveAt(_index);
+        items.RemoveAt(_index);
         onChangeItem.Invoke();
         acquiredItems--;
     }
 
     public void RemoveCharacter(int _index)
     {
-        if (_index >= 0 && _index < inventory_characters.Count)
+        if (_index >= 0 && _index < characters.Count)
         {
-            inventory_characters.RemoveAt(_index);
+            characters.RemoveAt(_index);
             onChangeCharacter.Invoke();
             acquiredCharacters--;
             Debug.Log("RemoveCharacter");
