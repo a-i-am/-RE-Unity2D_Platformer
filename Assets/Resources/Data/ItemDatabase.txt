@@ -1,0 +1,6 @@
+Absorption	작은 회복 물약	HP를 100 회복하는 작은 물약입니다.	1	FALSE	08.Asset/03.Sprite/Item/absorption/Flicks Pixels(16x16)/potions_16x16_32	Absorption
+Mission	지도	탐험에 필요한 지도 아이템입니다.	1	FALSE	08.Asset/03.Sprite/Item/Set/IconSet_63	Mission
+Equipment	지팡이0	기본 지팡이입니다.	1	FALSE	08.Asset/03.Sprite/Item/equipment/full magic_3	Equipment
+Equipment	지팡이1	향상된 지팡이입니다.	1	FALSE	08.Asset/03.Sprite/Item/equipment/full magic_12	Equipment
+Equipment	지팡이2	강화된 지팡이입니다.	1	FALSE	08.Asset/03.Sprite/Item/equipment/full magic_5	Equipment
+Equipment	지팡이3	최고급 지팡이입니다.	1	FALSE	08.Asset/03.Sprite/Item/equipment/full magic_22	Equipment

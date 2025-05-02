@@ -12,15 +12,6 @@ public class FieldItems : MonoBehaviour
         image.sprite = _item.itemImage;
     }
 
-    public void SetRandomItem()
-    {
-        List<Item.ItemData> itemDB = InventoryDatabase.Instance.allItemList;
-        if (itemDB.Count > 0)
-        {
-            SetItem(itemDB[UnityEngine.Random.Range(0, itemDB.Count)]);
-        }
-    }
-
     public Item.ItemData GetItem()
     {
         return field_item;
@@ -31,3 +22,11 @@ public class FieldItems : MonoBehaviour
         Destroy(gameObject);
     }
 }
+//public void SetRandomItem()
+//{
+//    List<Item.ItemData> itemDB = InventoryDatabase.Instance.allItemList;
+//    if (itemDB.Count > 0)
+//    {
+//        SetItem(itemDB[UnityEngine.Random.Range(0, itemDB.Count)]);
+//    }
+//}

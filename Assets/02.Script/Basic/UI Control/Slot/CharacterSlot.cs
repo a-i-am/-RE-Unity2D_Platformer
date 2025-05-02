@@ -5,21 +5,50 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CharacterSlot : MonoBehaviour, IPointerUpHandler, IPointerClickHandler
+public class CharacterSlot : MonoBehaviour
 {
+    [Header("캐릭터 정보")]
+    public int characterSlotnum;
+    public Image characterIcon;
+    public Character.CharacterData characterData;
+
+    [Header("외부 참조")]
+    private Pointable pointable;
+    private Inventory inven;
     [SerializeField] private FollowerSpawner followerSpawner;
     [SerializeField] private Transform player;
-    
-    public int characterSlotnum;
-    public Character.CharacterData characterData;
-    public Image characterIcon;
 
-
+    //private Coroutine clickFeedbackCoroutine;
 
     //public int spawnsOrder;
     // 소환된 몹들의 위치를 저장할 리스트
     //public List<Vector3> List_spawnPositions = new List<Vector3>();
     //private int lastSpawnedIndex = 0; // 마지막으로 Spawn()이 호출된 오브젝트의 번호를 저장
+    private void Awake()
+    {
+        inven = Inventory.Instance;
+        pointable = GetComponent<Pointable>();
+        if (pointable != null)
+        {
+            pointable.OnClick = OnClick;
+            pointable.OnPointerUpAction = OnPointerUp;
+        }
+    }
+    public void OnPointerUp()
+    {
+        // 드래그 & 드롭
+        if (characterData == null) return;
+    }
+    public void OnClick()
+    {
+        // 슬롯 클릭 트리거
+        if (characterData == null) return;
+        
+            followerSpawner.SpawnFollower(characterData);
+            inven.RemoveCharacter(characterSlotnum);
+    }
+
+
 
     public void UpdateCharacterSlotUI()
     {
@@ -32,35 +61,12 @@ public class CharacterSlot : MonoBehaviour, IPointerUpHandler, IPointerClickHand
 
     public void RemoveCharacterSlot()
     {
-        characterData = null;
-        characterIcon.gameObject.SetActive(false);
-    }
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        bool characterIsUse = characterData.UseCharacter();
-
-        //if (characterIsUse)
-        //{
-        //    Inventory.Instance.RemoveItem(characterSlotnum);  
-        //}
-
-    }
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        CharacterSlot characterSlot = GetComponent<CharacterSlot>();
-        if (characterSlot != null)
+        if (characterData != null)
         {
-            // CharacterSlot 컴포넌트의 characterData에 접근하여 처리
-            Character.CharacterData characterData = characterSlot.characterData;
-            followerSpawner.SpawnFollower(characterData);
-            Inventory.Instance.RemoveCharacter(characterSlotnum);
+            characterData = null;
+            characterIcon.gameObject.SetActive(false);
         }
-
     }
 
-    //void RemoveSpawnSlot()
-    //{
-    //    //lastSpawnedIndex--;
-    //} 
 
 }

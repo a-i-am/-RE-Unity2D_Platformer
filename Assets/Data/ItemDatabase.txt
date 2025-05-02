@@ -1,6 +1,0 @@
-Absorption	작은 회복 물약	(HP +100)	1	FALSE
-Mission	지도	지도아이템설명		1	FALSE
-Equipment	지팡이0	지팡이0 아이템 설명	1	FALSE
-Equipment	지팡이1	지팡이1 아이템 설명	1	FALSE
-Equipment	지팡이2	지팡이2 아이템 설명	1	FALSE
-Equipment	지팡이3	지팡이3 아이템 설명	1	FALSE
