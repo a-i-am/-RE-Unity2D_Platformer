@@ -15,6 +15,7 @@ public class CharacterSlot : MonoBehaviour
     [Header("외부 참조")]
     private Pointable pointable;
     private Inventory inven;
+    private InventoryUI invenUI;
     [SerializeField] private FollowerSpawner followerSpawner;
     [SerializeField] private Transform player;
 
@@ -27,6 +28,7 @@ public class CharacterSlot : MonoBehaviour
     private void Awake()
     {
         inven = Inventory.Instance;
+        invenUI = transform.root.GetComponent<InventoryUI>();
         pointable = GetComponent<Pointable>();
         if (pointable != null)
         {
@@ -46,6 +48,13 @@ public class CharacterSlot : MonoBehaviour
         
             followerSpawner.SpawnFollower(characterData);
             inven.RemoveCharacter(characterSlotnum);
+        // onChangeCharacter.Invoke(); // 이벤트 방식
+        /*
+         * Invoke()를 호출하면, 그 자리에 연결된 메서드들이 즉시 순차적으로 호출됨
+         * 따라서 RedrawCharacterSlotUI()는 OnClick()의 모든 동작이 끝난 후에 실행되는 것이 아니라, RemoveCharacter() 중간에 실행
+        */
+        invenUI.RemoveCharacterSlotAt(characterSlotnum);
+
     }
 
 

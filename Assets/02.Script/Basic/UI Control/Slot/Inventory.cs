@@ -120,6 +120,7 @@ public class Inventory : Singleton<Inventory>
             characters.RemoveAt(_index);
             acquiredCharacters--;
             onChangeCharacter.Invoke();
+            Debug.Log("Inventory.cs - RemoveCharacter");
         }
         else return;
     }

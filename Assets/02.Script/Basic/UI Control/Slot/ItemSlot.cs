@@ -37,7 +37,7 @@ public class ItemSlot : MonoBehaviour
         
         if (inventoryUI != null)
         {
-            inventoryUI.RemoveItemSlotAt(itemSlotnum);
+            //inventoryUI.RemoveItemSlotAt(itemSlotnum);
             //Inventory.Instance.RemoveItem(itemSlotnum);
             //Inventory.Instance.acquiredItems--;
         }
