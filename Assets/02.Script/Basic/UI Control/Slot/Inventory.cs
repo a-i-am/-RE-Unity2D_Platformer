@@ -119,7 +119,8 @@ public class Inventory : Singleton<Inventory>
         {
             characters.RemoveAt(_index);
             acquiredCharacters--;
-            onChangeCharacter.Invoke();
+            //onChangeCharacter.Invoke();
+            Debug.Log("Inventory.cs - RemoveCharacter");
         }
         else return;
     }
@@ -151,6 +152,7 @@ public class Inventory : Singleton<Inventory>
                 if (Input.GetKeyDown(KeyCode.V)) // Collect
                 {
                     AddCharacter(enemy.GetCharacter());
+
                     pickupMobCount += 1;
 
                     if (enemy != null)
