@@ -45,10 +45,12 @@ public class InventoryUI : MonoBehaviour
 
         inven.onItemSlotCountChange += ItemSlotChange;
         inven.onCharacterSlotCountChange += CharacterSlotChange;
-        inven.onChangeCharacter += () => RedrawAllCharacterSlotsUI();
-        invenDB.onCharacterSubTab += () => RedrawAllCharacterSlotsUI();
+
         inven.onChangeItem += RedrawItemSlotUI;
         invenDB.onItemSubTab += RedrawItemSlotUI;
+
+        inven.onChangeCharacter += () => RedrawAllCharacterSlotsUI();
+        invenDB.onCharacterSubTab += () => RedrawAllCharacterSlotsUI();
 
         inventoryPanel.SetActive(activeInventory);
 
@@ -69,6 +71,41 @@ public class InventoryUI : MonoBehaviour
         itemSlotNumText.text = string.Format("{0} / {1}", inven.acquiredItems, inven.ItemSlotCnt);
     }
 
+
+    #region 아이템 인벤토리 UI
+    
+    public void RemoveItemSlotAt(int index)
+    {
+        if (index >= 0 && index < characterSlots.Length)
+        {
+            itemSlots[index].RemoveItemSlot();
+        }
+
+        if (index >= 0 && index < filteredItemList.Count)
+        {
+            var itemSlotToRemove = filteredItemList[index];
+            inven.items.Remove(itemSlotToRemove);
+            RedrawItemSlotUI();
+        }
+    }
+
+    public void RedrawItemSlotUI()
+    {
+        // 이전 슬롯 필터링 데이터 초기화
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            itemSlots[i].RemoveItemSlot();
+        }
+
+        // 슬롯 데이터 필터링
+        filteredItemList = inven.items.FindAll(item => item.type == invenDB.itemCurSubType);
+        for (int i = 0; i < filteredItemList.Count && i < itemSlots.Length; i++)
+        {
+            itemSlots[i].itemData = filteredItemList[i];
+            itemSlots[i].UpdateItemSlotUI();
+        }
+    }
+
     private void ItemSlotChange(int val)
     {
         for (int i = 0; i < itemSlots.Length; i++)
@@ -81,6 +118,10 @@ public class InventoryUI : MonoBehaviour
                 itemSlots[i].GetComponent<Button>().interactable = false;
         }
     }
+
+    #endregion
+
+    #region 캐릭터 인벤토리 UI
     private void CharacterSlotChange(int val)
     {
         for (int i = 0; i < characterSlots.Length; i++)
@@ -101,7 +142,7 @@ public class InventoryUI : MonoBehaviour
             characterSlots[i].RemoveCharacterSlot();
         }
 
-        filteredCharacterList = inven.characters.FindAll(c => c.type == invenDB.characterCurSubType);
+        filteredCharacterList = inven.characters.FindAll(character => character.type == invenDB.characterCurSubType);
 
         for (int i = 0; i < filteredCharacterList.Count && i < characterSlots.Length; i++)
         {
@@ -123,36 +164,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void RedrawItemSlotUI()
-    {
-        // 이전 슬롯 필터링 데이터 초기화
-        for (int i = 0; i < itemSlots.Length; i++)
-        {
-            itemSlots[i].RemoveItemSlot();
-        }
-
-
-        // 슬롯 데이터 필터링
-        filteredItemList = inven.items.FindAll(item => item.type == invenDB.itemCurSubType);
-        for (int i = 0; i < filteredItemList.Count && i < itemSlots.Length; i++)
-        {
-            itemSlots[i].itemData = filteredItemList[i];
-            itemSlots[i].UpdateItemSlotUI();
-        }
-
-
-    }
-
-    public void RemoveItemSlotAt(int index)
-    {
-        if (index >= 0 && index < characterSlots.Length)
-        {
-            itemSlots[index].RemoveItemSlot();
-        }
-    }
-
-
-
+    #endregion
 
     void Update()
     {

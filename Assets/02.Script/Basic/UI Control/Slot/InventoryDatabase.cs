@@ -108,24 +108,6 @@ public class InventoryDatabase : Singleton<InventoryDatabase>
     }
     private void LoadCharactersResources()
     {
-        //foreach (string line in characterLine)
-        //{
-        //    if (string.IsNullOrWhiteSpace(line)) continue;
-        //    string[] tokens = line.Split('\t');
-        //    ItemInfo newItem = new ItemInfo
-        //    {
-        //        category = tokens[0],
-        //        name = tokens[1],
-        //        description = tokens[2],
-        //        maxStack = int.Parse(tokens[3]),
-        //        isUsable = bool.Parse(tokens[4]),
-        //        spritePath = tokens[5].Substring(0, tokens[5].LastIndexOf('/')),  // 파일 경로만
-        //        spriteName = tokens[5].Substring(tokens[5].LastIndexOf('/') + 1)  // 조각 이름만
-        //    };
-        //    newItem.itemSprite = LoadSpriteFromMultiple(newItem.spritePath, newItem.spriteName);
-        //    itemInfos.Add(newItem);
-        //}
-
         string[] characterLine = characterDBText.text.Substring(0, characterDBText.text.Length - 1).Split('\n');
 
         for (int i = 0; i < characterLine.Length; i++)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets
 {
-    public class PlayerScr : MonoBehaviour
+    public class PlayerScr : Singleton<PlayerScr>
     {
         public ParticleSystem CastingSpellEffect;
         public ObjectPoolManager projectilePool;
@@ -18,7 +18,7 @@ namespace Assets
         private bool isDash;
 
         // Stat 클래스 인스턴스를 health 라는 이름으로 가져옴
-        [SerializeField] private PlayerHPValue health;
+        public PlayerHPValue health;
 
         public GameObject projectilePrefab;
         public GameObject playerAOEPrefab;

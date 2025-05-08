@@ -26,9 +26,9 @@ public class UI : MonoBehaviour
 
     // Player HP Value
     public float PlayerMaxValue { get; set; }
-
     public float PlayerValue
     {
+        get { return playerHPFillAmount; }
         set
         {
             if (PlayerMaxValue <= 0)
@@ -39,6 +39,9 @@ public class UI : MonoBehaviour
             playerHPFillAmount = Map(value, 0, PlayerMaxValue, 0, 1);
         }
     }
+
+
+
 
     [Header("Charge Casting Spell Gauage")]
     // Charge Casting Spell Gauage
