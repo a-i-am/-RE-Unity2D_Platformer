@@ -195,7 +195,7 @@ public class InventoryDatabase : Singleton<InventoryDatabase>
         {
             case "Absorption":
                 // 회복 아이템이면, HealingEffect 스크립터블 오브젝트를 찾아서 연결
-                ItemHealingEffect healingEffect = Resources.Load<ItemHealingEffect>("Resources/ScriptableObjects/BigEft");
+                ItemHealingEffect healingEffect = Resources.Load<ItemHealingEffect>("ScriptableObjects/BigEft");
                 if (healingEffect != null)
                     itemData.efts.Add(healingEffect);
                 break;
