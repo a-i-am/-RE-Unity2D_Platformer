@@ -71,11 +71,11 @@ public class FollowerGroupMoving : MonoBehaviour
         {
             if (hit.collider != lastGroundCollider)
             {
-                lastGroundCollider = hit.collider; 
+                lastGroundCollider = hit.collider;
                 startY = hit.point.y + 5f;
             }
         }
     }
 
-   
+
 }

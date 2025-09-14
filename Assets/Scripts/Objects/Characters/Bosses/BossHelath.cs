@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class BossHelath : MonoBehaviour
 {
+    public event Action FaintedEvent;
+
     [SerializeField] private BossHPValue bossHealth;
     //[SerializeField] private GameObject SleepingForm;
     private Boss boss;
@@ -42,6 +44,14 @@ public class BossHelath : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+       if (other.gameObject.CompareTag("Follower") && other.gameObject.layer == LayerMask.NameToLayer("Follower"))
+       {
+            TakeDamage();
+        }
+    }
+
     public void TakeDamage()
     {
         Invoke("OffDamagedState", 0.5f);
@@ -74,6 +84,7 @@ public class BossHelath : MonoBehaviour
     // Enemy 녹다운
     void Faint()
     {
+        FaintedEvent.Invoke();
         boss.SetFaint(true);  // 보스에게 Faint 상태 전달
         // 레이어보단 is trigger 로 온오프 시키는게 나을듯. 추후 변경 예정
         // 현재 오브젝트의 레이어를 9번(Mob)으로 변경합니다.
@@ -81,6 +92,7 @@ public class BossHelath : MonoBehaviour
         Physics2D.IgnoreLayerCollision(10, 7); // Fainted(9)과 Player(7) 충돌 무시
         Physics2D.IgnoreLayerCollision(10, 8); // Fainted(9)과 Attack(8) 충돌 무시 
         Physics2D.IgnoreLayerCollision(10, 6); // Fainted(9)과 Enemy(6)  충돌 무시
+        Physics2D.IgnoreLayerCollision(10, 9); // Fainted(9)과 Follower(9)  충돌 무시
 
         bossIsFainted = true;
         anim.SetTrigger("Faint");

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 public class Boss : MonoBehaviour
 {
+    
     [SerializeField] private GameObject nextPortal;
     [SerializeField] private ParticleSystem gushOutEffect;
     [SerializeField] private float speed;
@@ -63,7 +64,7 @@ public class Boss : MonoBehaviour
         rbBoss = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         gushOutEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
-     }
+    }
 
     // Update is called once per frame
     private void Update()

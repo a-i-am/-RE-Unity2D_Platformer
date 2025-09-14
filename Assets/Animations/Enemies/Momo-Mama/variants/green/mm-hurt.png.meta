@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -34,16 +34,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -52,9 +52,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -121,18 +121,700 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: mm-hurt_0
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 183
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09b354326bde6a14bbf72dfea1d0e4bb
+      internalID: 1734990219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_1
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 182
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a4a08e46883da345893083cc217b277
+      internalID: -1110844869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_2
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 184
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e69550ee50aa5c643941f10f5fa414b2
+      internalID: -1551908383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_3
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 142
+        width: 55
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 828c412e47889df43a16816d282e4c90
+      internalID: -1606820063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_4
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 142
+        width: 55
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73bc3621f283da44dad6dfb667350017
+      internalID: -1632644205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_5
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 142
+        width: 59
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd6c270b4db0c82498b73bb07bba9031
+      internalID: -627819977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_6
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 179
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 613867797c5f8294c9dd25b4c184b573
+      internalID: 1119091673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_7
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 178
+        width: 7
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a14d0912354cda048b3f2b41b4f99832
+      internalID: -1732994182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_8
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 143
+        width: 55
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 636f1cd0fec8aa649b716ffdbbc98ba9
+      internalID: -1652590481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_9
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 142
+        width: 63
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 052d832abfdc4d94ea49ad51df03f5b3
+      internalID: 716414640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_10
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 139
+        width: 59
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8f0beb7b05924f4dbe06b8a2f2164c7
+      internalID: 265412390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_11
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 79
+        width: 57
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e0915345ecc43545831c444518922f6
+      internalID: -803759647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_12
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 120
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1812715ae9f4beb4b9d13d61a86b4284
+      internalID: -1067845130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_13
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 79
+        width: 54
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2afb7185986645a47be46b711ceb0e9b
+      internalID: -1125665183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_14
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 79
+        width: 54
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b67fa34512fabe44485284250a8a01f1
+      internalID: -1105614102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_15
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 79
+        width: 54
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c9319203db3a804392f941dece92183
+      internalID: -1234530773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_16
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 90
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e82381365b65f9345ab2adec07ae0a88
+      internalID: -436505622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_17
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 79
+        width: 57
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b6e9c320d12f324f9246d00ca7d4da4
+      internalID: 1778019845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_18
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 79
+        width: 54
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd49cda4ae064ba4a915f085af5f04d1
+      internalID: -1321209986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_19
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 83
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0865b9654b75e544b5a2cf1ae45a657
+      internalID: 80051988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_20
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 55
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d4fba9102b4e8847b58f2da565f1639
+      internalID: 407224568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_21
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 54
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 456e095490458f14eb8ebf728ace543c
+      internalID: 2085107907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_22
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 56
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17ed6c741eada2640bad281fbce1ef85
+      internalID: -1991412441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_23
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 14
+        width: 55
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8d87ac4f943e6e47ae0880c85f21eff
+      internalID: 443051475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_24
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 14
+        width: 55
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5762c55822c208c40bae91d27fdca8fc
+      internalID: 1712116268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_25
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 14
+        width: 59
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 278e5d27c36a25d4ab161572f39a66ec
+      internalID: 103268555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_26
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 51
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f31bf7e1309ff834b9f2c4ac00a4773f
+      internalID: 421704687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_27
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 50
+        width: 7
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf441969a5cca864f8d84081e882831e
+      internalID: -2144423976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_28
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 15
+        width: 55
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc7f171c320caaa41a4902c8f378528f
+      internalID: 2122383794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_29
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 14
+        width: 63
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 170d8f452f1a07d48b8bc3c65f11c34b
+      internalID: -1704098550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mm-hurt_30
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 11
+        width: 59
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea63a85874c9e2140abeb4830f4ea1ac
+      internalID: 585925929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0b9c8b14228ed7344a22c34438d8ffd0
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mm-hurt_0: 1734990219
+      mm-hurt_1: -1110844869
+      mm-hurt_10: 265412390
+      mm-hurt_11: -803759647
+      mm-hurt_12: -1067845130
+      mm-hurt_13: -1125665183
+      mm-hurt_14: -1105614102
+      mm-hurt_15: -1234530773
+      mm-hurt_16: -436505622
+      mm-hurt_17: 1778019845
+      mm-hurt_18: -1321209986
+      mm-hurt_19: 80051988
+      mm-hurt_2: -1551908383
+      mm-hurt_20: 407224568
+      mm-hurt_21: 2085107907
+      mm-hurt_22: -1991412441
+      mm-hurt_23: 443051475
+      mm-hurt_24: 1712116268
+      mm-hurt_25: 103268555
+      mm-hurt_26: 421704687
+      mm-hurt_27: -2144423976
+      mm-hurt_28: 2122383794
+      mm-hurt_29: -1704098550
+      mm-hurt_3: -1606820063
+      mm-hurt_30: 585925929
+      mm-hurt_4: -1632644205
+      mm-hurt_5: -627819977
+      mm-hurt_6: 1119091673
+      mm-hurt_7: -1732994182
+      mm-hurt_8: -1652590481
+      mm-hurt_9: 716414640
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

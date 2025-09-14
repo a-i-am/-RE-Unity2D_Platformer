@@ -21,12 +21,14 @@ public class FieldItems : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    //public void SetRandomItem()
+    //{
+    //    List<Item.ItemData> itemDB = InventoryDatabase.Instance.allItemList;
+    //    if (itemDB.Count > 0)
+    //    {
+    //        SetItem(itemDB[UnityEngine.Random.Range(0, itemDB.Count)]);
+    //    }
+    //}
 }
-//public void SetRandomItem()
-//{
-//    List<Item.ItemData> itemDB = InventoryDatabase.Instance.allItemList;
-//    if (itemDB.Count > 0)
-//    {
-//        SetItem(itemDB[UnityEngine.Random.Range(0, itemDB.Count)]);
-//    }
-//}
+

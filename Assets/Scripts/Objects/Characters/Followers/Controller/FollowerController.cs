@@ -8,6 +8,7 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
     [Header("외부 참조")]
     [SerializeField] private FollowerGroupMoving followerGroupMoving;
 
+
     [Header("팔로잉")]
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Vector3 followPos;
@@ -16,7 +17,8 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
     private Queue<Vector3> parentPos;
     private Tween followTween;
 
-    
+    [SerializeField] private Ghost ghost;
+
     [Header("대시와 리턴")]
     private Vector3 originalPos;
     private int dashCount = 0;
@@ -26,14 +28,14 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
     [SerializeField] private float dashDuration; // dash 속도 조절
 
     // 타겟팅
-    private Enemy _currentTarget;
-    public Enemy CurrentTarget => _currentTarget;
-    private Vector2 _targetPos;
-    public Vector2 TargetPosition => _currentTarget != null ? _currentTarget.transform.position : Vector2.zero;
+    private Enemy currentTarget;
+    public Enemy CurrentTarget => currentTarget;
+    private Vector2 targetPos;
+    public Vector2 TargetPosition => currentTarget != null ? currentTarget.transform.position : Vector2.zero;
    
     public void SetTarget(Enemy target)
     {
-        _currentTarget = target;
+        currentTarget = target;
     }
 
     // 렌더링
@@ -74,7 +76,9 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
     {
         // Input Pos
         if (!parentPos.Contains(parent.position))
+        {
             parentPos.Enqueue(parent.position);
+        }
 
         // Output Pos
         if (parentPos.Count > followDelay)
@@ -90,6 +94,7 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
             followTween.Kill();
 
         followTween = transform.DOMove(followPos, 0.1f).SetEase(Ease.Linear);
+
     }
 
     public bool IsDashCheck()
@@ -98,9 +103,9 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
     }
     public void DashAndReturn()
     {
-        if (isDashing && _currentTarget == null && _currentTarget.isFainted) return;
+        if (isDashing && currentTarget == null && currentTarget.isFainted) return;
         #region 디버깅(null 체크)
-        if (_currentTarget == null)
+        if (currentTarget == null)
         {
             Debug.LogWarning("DashAndReturn - target이 null!");
             return;
@@ -114,29 +119,29 @@ public class FollowerController : MonoBehaviour, IFollowerTargetReceivable, IFol
         isDashing = true; // 동작 종료 전 재실행 불가
 
         // 타겟팅 정보 설정
-        _targetPos = TargetPosition;
+        targetPos = TargetPosition;
 
         // 팔로워 위치 & 움직임 조정
         startY = followerGroupMoving.startY;
         followerGroupMoving.isSineActive = false;
 
         Sequence seq = DOTween.Sequence();
-        seq.Append(transform.DOMove(_targetPos, dashDuration))
+        ghost.makeGhost = true;
+        seq.Append(transform.DOMove(targetPos, dashDuration))
            .AppendInterval(0.5f)
            .Append(transform.DOMove(followPos, dashDuration))
            .OnComplete(() =>
            {
-               _currentTarget = null;
+               currentTarget = null;
                followerGroupMoving.isSineActive = true;
                isDashing = false;
                TargetingAI.Instance.ClearTargetHashSet();
+               ghost.makeGhost = false;
            })
            .Play();
 
         ++dashCount;
 
     }
-
-    
 
 }

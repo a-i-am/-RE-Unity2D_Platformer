@@ -21,11 +21,13 @@ public class Inventory : Singleton<Inventory>
     public delegate void OnCharacterSlotCountChange(int val);
     public OnChangeCharacter onChangeCharacter;
     public OnCharacterSlotCountChange onCharacterSlotCountChange;
+
     // 아이템
     public delegate void OnChangeItem();
     public delegate void OnItemSlotCountChange(int val);
     public OnChangeItem onChangeItem;
     public OnItemSlotCountChange onItemSlotCountChange;
+
     // 리스트
     public List<Character.CharacterData> characters = new List<Character.CharacterData>();
     public List<Item.ItemData> items = new List<Item.ItemData>();
@@ -38,6 +40,7 @@ public class Inventory : Singleton<Inventory>
     [HideInInspector] public int pickupMobCount = 0;
     [SerializeField] private int characterSlotCnt;
     [SerializeField] private int itemSlotCnt;
+
     public int CharacterSlotCnt
     {
         get => characterSlotCnt;

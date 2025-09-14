@@ -80,17 +80,17 @@ public class InventoryDatabase : Singleton<InventoryDatabase>
     void SerializeCharactersDB()
     {
         string jdata = JsonConvert.SerializeObject(allCharacterList, Formatting.Indented); // JSON으로 리스트를 string으로 변환
-        File.WriteAllText(Application.dataPath + "/Data/Text/MyCharacterText.txt", jdata);
+        File.WriteAllText(Application.dataPath + "/Resources/Text/MyCharacterText.txt", jdata);
     }
     void SerializeItemsDB()
     {
         string jdata = JsonConvert.SerializeObject(allItemList, Formatting.Indented); // JSON으로 리스트를 string으로 변환
-        File.WriteAllText(Application.dataPath + "/Data/Text/MyItemText.txt", jdata);
+        File.WriteAllText(Application.dataPath + "/Resources/Text/MyItemText.txt", jdata);
     }
     void DeserializeCharactersDB()
     {
         // JSON파일 로드
-        string path = Application.dataPath + "/Data/Text/MyCharacterText.txt";
+        string path = Application.dataPath + "/Resources/Text/MyCharacterText.txt";
         if (File.Exists(path))
         {
             string data = File.ReadAllText(path);
@@ -99,7 +99,7 @@ public class InventoryDatabase : Singleton<InventoryDatabase>
     }
     void DeserializeItemsDB()
     {
-        string path = Application.dataPath + "/Data/Text/MyItemText.txt";
+        string path = Application.dataPath + "/Resources/Text/MyItemText.txt";
         if (File.Exists(path))
         {
             string data = File.ReadAllText(path);
@@ -131,7 +131,7 @@ public class InventoryDatabase : Singleton<InventoryDatabase>
     private void LoadItemsResources()
     {
         // 텍스트 파일 읽기
-        //itemDBText = Resources.Load<TextAsset>("Assets/Data/Text/ItemDatabase.txt");
+        itemDBText = Resources.Load<TextAsset>("Text/ItemDatabase");
 
         // 텍스트를 줄 단위로 파싱
         string[] itemLines = itemDBText.text.Substring(0, itemDBText.text.Length - 1).Split('\n');
@@ -195,7 +195,7 @@ public class InventoryDatabase : Singleton<InventoryDatabase>
         {
             case "Absorption":
                 // 회복 아이템이면, HealingEffect 스크립터블 오브젝트를 찾아서 연결
-                ItemHealingEffect healingEffect = Resources.Load<ItemHealingEffect>("08.Asset/Scriptable/BigEft");
+                ItemHealingEffect healingEffect = Resources.Load<ItemHealingEffect>("Resources/ScriptableObjects/BigEft");
                 if (healingEffect != null)
                     itemData.efts.Add(healingEffect);
                 break;

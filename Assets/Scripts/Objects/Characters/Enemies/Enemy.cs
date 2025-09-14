@@ -5,16 +5,18 @@ public class Enemy : MonoBehaviour
 {
     // 인터페이스 참조
     private IEnemyNumberCheck enemyNumberChecker;
-    [SerializeField] private EnemyController enemyController; 
+    [SerializeField] private EnemyController enemyController;
+    [SerializeField] private BossHelath bossHealth;
+    
     [HideInInspector] public bool isFainted;
     
 
     // 몬스터 데이터
     public Character.CharacterData characterData;
-    public void SetCharacter(Character.CharacterData _character)
+    public void SetCharacter(Character.CharacterData character)
     {
-        characterData = _character;
-        //image.sprite = _character.characterImage;
+        characterData = character;
+        //image.sprite = character.characterImage;
     }
     public Character.CharacterData GetCharacter()
     {
@@ -39,10 +41,15 @@ public class Enemy : MonoBehaviour
     {
         enemyNumberChecker = TargetingAI.Instance;
 
-        if (enemyNumberChecker != null)
+        if (enemyNumberChecker != null && enemyController != null)
         {
             enemyController.FaintedEvent -= Remove;
             enemyController.FaintedEvent += Remove;
+        }
+        else if (bossHealth != null)
+        {
+            bossHealth.FaintedEvent -= Remove;
+            bossHealth.FaintedEvent += Remove;
         }
     }
 

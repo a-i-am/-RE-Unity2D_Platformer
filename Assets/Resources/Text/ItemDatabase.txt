@@ -1,0 +1,6 @@
+Absorption	작은 회복 물약	HP를 100 회복하는 작은 물약입니다.	1	FALSE	Art/Environments/Item/absorption/Flicks Pixels(16x16)/potions_16x16_32	Absorption
+Absorption	작은 회복 물약	HP를 100 회복하는 작은 물약입니다.	1	FALSE	Art/Environments/Item/absorption/Flicks Pixels(16x16)/potions_16x16_32	Absorption
+Absorption	작은 회복 물약	HP를 100 회복하는 작은 물약입니다.	1	FALSE	Art/Environments/Item/absorption/Flicks Pixels(16x16)/potions_16x16_32	Absorption
+Absorption	작은 회복 물약	HP를 100 회복하는 작은 물약입니다.	1	FALSE	Art/Environments/Item/absorption/Flicks Pixels(16x16)/potions_16x16_32	Absorption
+Absorption	작은 회복 물약	HP를 100 회복하는 작은 물약입니다.	1	FALSE	Art/Environments/Item/absorption/Flicks Pixels(16x16)/potions_16x16_32	Absorption
+Absorption	작은 회복 물약	HP를 100 회복하는 작은 물약입니다.	1	FALSE	Art/Environments/Item/absorption/Flicks Pixels(16x16)/potions_16x16_32	Absorption
